@@ -29,7 +29,7 @@
             %a.dropdown-item{:href => "#"}
               / Message Start
               .media
-                %img.img-size-50.mr-3.img-circle{:alt => "User Avatar", :src => "images/user1-128x128.jpg"}/
+                %img.img-size-50.mr-3.img-circle{:src => "#{ asset_pack_path 'packs/images/user1-128x128.jpg' }"}/
                 .media-body
                   %h3.dropdown-item-title
                     Brad Diesel
@@ -44,7 +44,7 @@
             %a.dropdown-item{:href => "#"}
               / Message Start
               .media
-                %img.img-size-50.img-circle.mr-3{:alt => "User Avatar", :src => "images/user8-128x128.jpg"}/
+                %img.img-size-50.img-circle.mr-3{:src => "#{ asset_pack_path 'packs/images/user8-128x128.jpg' }"}/
                 .media-body
                   %h3.dropdown-item-title
                     John Pierce
@@ -59,7 +59,7 @@
             %a.dropdown-item{:href => "#"}
               / Message Start
               .media
-                %img.img-size-50.img-circle.mr-3{:alt => "User Avatar", :src => "images/user3-128x128.jpg"}/
+                %img.img-size-50.img-circle.mr-3{:src => "#{ asset_pack_path 'packs/images/user3-128x128.jpg' }"}/
                 .media-body
                   %h3.dropdown-item-title
                     Nora Silvester
@@ -104,14 +104,14 @@
     %aside.main-sidebar.sidebar-dark-primary.elevation-4
       / Brand Logo
       %a.brand-link{:href => "index3.html"}
-        %img.brand-image.img-circle.elevation-3{:alt => "AdminLTE Logo", :src => "images/AdminLTELogo.png", :style => "opacity: .8"}/
+        %img.brand-image.img-circle.elevation-3{:src => "#{asset_pack_path('packs/images/AdminLTELogo.png')}", :style => "opacity: .8"}/
         %span.brand-text.font-weight-light AdminLTE 3
       / Sidebar
       .sidebar
         / Sidebar user panel (optional)
         .user-panel.mt-3.pb-3.mb-3.d-flex
           .image
-            %img.img-circle.elevation-2{:alt => "User Image", :src => "#{asset_pack_path 'images/user2-160x160.jpg'}"}/
+            %img.img-circle.elevation-2{:src => "#{asset_pack_path('packs/images/user2-160x160.jpg')}"}
           .info
             %a.d-block{:href => "#"} Alexander Pierce
         / Sidebar Menu
