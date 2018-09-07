@@ -2,10 +2,21 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Sigma
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name: "viewport"}
+    %meta{content: "IE=edge,chrome=1", "http-equiv": "X-UA-Compatible"}
+    %title SIGMA
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_pack_tag 'stylesheets', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    = yield
+  %body.hold-transition.sidebar-mini
+    .wrapper
+      = render 'layouts/partials/navbar'
+      = render 'layouts/partials/sidebar'
+      .content-wrapper
+        = render 'layouts/partials/content_header'
+        .content
+          .content-fluid
+            .row
+              = yield
+      = render 'layouts/partials/footer'
