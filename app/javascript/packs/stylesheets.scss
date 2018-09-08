@@ -1,7 +1,3 @@
-@import '~bootstrap/scss/bootstrap';
+@import '../src/css/custom';
 @import '~adminlte/build/scss/AdminLTE-raw';
 @import '~font-awesome/scss/font-awesome';
-
-.bg-danger .sidebar-dark-danger .card-danger {
-  background-color: #AF272F !important
-}
