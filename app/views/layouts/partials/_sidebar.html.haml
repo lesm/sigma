@@ -1,5 +1,5 @@
 %aside.main-sidebar.sidebar-dark-danger.elevation-4
-  %a.brand-link.bg-light.text-center{:href => "#{root_path}"}
+  %a.brand-link.bg-light.text-center{:href => "#{dashboard_index_path}"}
     %strong.brand-text.text-danger
       SIGMA
       %sup &Sigma;
@@ -87,7 +87,6 @@
                 %i.fa.fa-circle-o.nav-icon
                 %p Cuentas
         %li.nav-item
-          %a.nav-link{:href => "#"}
+          = link_to destroy_usuario_session_path, class: 'nav-link', method: :delete, data: { confirm: '¿Desea cerrar sesión?' } do
             %i.fa.fa-sign-out.nav-icon
-            %p
-              Cerrar sesión
+            %p Cerrar Sessión
