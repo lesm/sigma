@@ -1,0 +1,17 @@
+.login-box
+  .login-logo
+    %b> SIGMA
+    %sup &Sigma;
+  .card
+    .card-body.login-card-body
+      %p.login-box-msg Inicio de sesión
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .input-group.mb-3
+          = f.input_field :username, required: true, autofocus: true, class: "form-control"
+          .input-group-append
+            %span.fa.fa-user.input-group-text
+        .input-group.mb-3
+          = f.input_field :password, required: true, class: "form-control"
+          .input-group-append
+            %span.fa.fa-lock.input-group-text
+        = f.button :submit, "Iniciar Sesión", class: 'btn btn-block btn-primary'
