@@ -86,6 +86,8 @@ GEM
       ruby_parser (~> 3.5)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
+    identificamex (0.0.5)
+      activemodel
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -232,6 +234,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   factory_bot_rails (~> 4.8, >= 4.8.2)
   haml-rails (~> 1.0)
+  identificamex
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)

@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails', '~> 1.0'
 gem 'webpacker', '~> 3.5', '>= 3.5.5'
 gem 'simple_form'
+gem 'identificamex'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

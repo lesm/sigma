@@ -14,9 +14,19 @@
       = render 'layouts/partials/navbar'
       = render 'layouts/partials/sidebar'
       .content-wrapper
-        = render 'layouts/partials/content_header'
-        .content
-          .content-fluid
-            .row
-              = yield
-      = render 'layouts/partials/footer'
+        .content-header
+          .container-fluid
+            .content
+              .content-fluid
+                = yield
+      %footer.main-footer
+        .float-right.d-none.d-sm-inline
+          .small
+            Made by: 
+            = link_to "@lesm", "https://github.com/lesm"
+            = link_to "@juanvqz", "https://github.com/juanvqz"
+        %strong
+          .small
+            Copyright © 2018-2018
+            = succeed "." do
+              %a{:href => "https://adminlte.io"} AdminLTE.io
