@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_08_184328) do
+ActiveRecord::Schema.define(version: 2018_09_09_031437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contribuyentes", force: :cascade do |t|
+    t.string "nombre_o_razon_social"
+    t.string "primer_apellido"
+    t.string "segundo_apellido"
+    t.boolean "persona_fisica", default: true
+    t.string "email"
+    t.string "rfc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "direcciones", force: :cascade do |t|
     t.string "calle"
@@ -26,6 +37,9 @@ ActiveRecord::Schema.define(version: 2018_09_08_184328) do
     t.string "pais", default: "México"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "contribuyente_id"
+    t.index ["contribuyente_id"], name: "index_direcciones_on_contribuyente_id"
   end
 
+  add_foreign_key "direcciones", "contribuyentes"
 end

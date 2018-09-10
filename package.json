@@ -3,7 +3,9 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
-    "adminlte": "almasaeed2010/AdminLTE#v3-dev"
+    "adminlte": "almasaeed2010/AdminLTE#v3-dev",
+    "rails-ujs": "^5.2.1",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"

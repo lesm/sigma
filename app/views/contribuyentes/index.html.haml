@@ -1,0 +1,38 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger
+      .card-header
+        .card-title Listado de Contribuyentes
+        .card-tools
+          = link_to 'Agregar contribuyente', new_contribuyente_path, class: 'btn btn-sm btn-primary'
+      .card-body
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Nombre o Razón Social
+              %th Persona Física
+              %th Email
+              %th RFC
+              %th
+              %th
+              %th
+
+          %tbody
+            - @contribuyentes.each do |contribuyente|
+              %tr
+                %td= contribuyente.nombre_completo
+                %td= contribuyente.persona_fisica
+                %td= contribuyente.email
+                %td= contribuyente.rfc
+                %td
+                  = link_to contribuyente, class: 'btn btn-sm btn-info' do
+                    %i.fa.fa-eye
+                    Ver
+                %td
+                  = link_to edit_contribuyente_path(contribuyente), class: 'btn btn-sm btn-warning' do
+                    %i.fa.fa-pencil
+                    Editar
+                %td
+                  = link_to contribuyente, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'btn btn-sm btn-danger' do
+                    %i.fa.fa-trash
+                    Eliminar

@@ -1,0 +1,34 @@
+-# frozen_string_literal: true
+= simple_form_for(@contribuyente) do |f|
+  .row
+    .col-md-6
+      .form-inputs
+        = f.input :nombre_o_razon_social
+        = f.input :primer_apellido
+        = f.input :segundo_apellido
+        = f.input :persona_fisica
+        = f.input :email
+        = f.input :rfc
+
+    .col-md-6
+      = f.simple_fields_for :direccion do |df|
+        .row
+          .col-md-8
+            = df.input :calle
+          .col-md-4
+            = df.input :numero
+        = df.input :colonia
+        = df.input :codigo_postal
+        = df.input :localidad
+        = df.input :municipio
+        .row
+          .col-md-6
+            = df.input :estado
+          .col-md-6
+            = df.input :pais
+
+  .btn-group.float-right
+    = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do
+      %i.fa.fa-arrow-left
+      Regresar
+    = f.button :submit, class: 'btn btn-sm btn-primary'
