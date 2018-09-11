@@ -1,38 +1,37 @@
 .row.justify-content-center
   .col-md-11
-    .card.card-danger
+    .card.card-danger.card-outline
       .card-header
         .card-title Listado de Contribuyentes
         .card-tools
-          = link_to 'Agregar contribuyente', new_contribuyente_path, class: 'btn btn-sm btn-primary'
+          = link_to new_contribuyente_path, class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar contribuyente
       .card-body
-        %table.table.table-hover
+        %table.table.table-hover.text-center
           %thead
             %tr
               %th Nombre o Razón Social
-              %th Persona Física
+              %th Tipo
               %th Email
               %th RFC
-              %th
-              %th
-              %th
+              %th Acciones
 
           %tbody
             - @contribuyentes.each do |contribuyente|
               %tr
                 %td= contribuyente.nombre_completo
-                %td= contribuyente.persona_fisica
+                %td= contribuyente.tipo
                 %td= contribuyente.email
                 %td= contribuyente.rfc
                 %td
-                  = link_to contribuyente, class: 'btn btn-sm btn-info' do
-                    %i.fa.fa-eye
-                    Ver
-                %td
-                  = link_to edit_contribuyente_path(contribuyente), class: 'btn btn-sm btn-warning' do
-                    %i.fa.fa-pencil
-                    Editar
-                %td
-                  = link_to contribuyente, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'btn btn-sm btn-danger' do
-                    %i.fa.fa-trash
-                    Eliminar
+                  .btn-group
+                    = link_to contribuyente, class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-eye
+                      Ver
+                    = link_to edit_contribuyente_path(contribuyente), class: 'btn btn-sm btn-warning' do
+                      %i.fa.fa-pencil
+                      Editar
+                    = link_to contribuyente, method: :delete, data: { confirm_swal: "Se perderá toda la información de: #{contribuyente.nombre_completo}" }, class: 'btn btn-sm btn-danger' do
+                      %i.fa.fa-trash
+                      Eliminar

@@ -10,6 +10,11 @@ es-MX:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Por favor, revise los siguientes problemas:"
+    labels:
+      defaults:
+        numero: 'Número'
+        codigo_postal: 'Código Postal'
+        rfc: 'RFC'
     # Examples
     # labels:
     #   defaults:

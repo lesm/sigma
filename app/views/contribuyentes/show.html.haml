@@ -1,54 +1,27 @@
 .row.justify-content-center
   .col-md-11
-    .card.card-danger
+    .card.card-danger.card-outline
       .card-header
         .card-title Detalle Contribuyente
       .card-body
         .row
           .col-md-6
-            %p
-              %b Nombre:
-              = @contribuyente.nombre_o_razon_social
-            %p
-              %b Primer apellido:
-              = @contribuyente.primer_apellido
-            %p
-              %b Segundo apellido:
-              = @contribuyente.segundo_apellido
-            %p
-              %b Persona fisica:
-              = @contribuyente.persona_fisica
-            %p
-              %b Email:
-              = @contribuyente.email
-            %p
-              %b RFC:
-              = @contribuyente.rfc
+            %fieldset
+              %legend
+                %i.fa.fa-user
+                &nbsp;
+                Información Personal
+            %h6
+              = @contribuyente
+            %h6
+              = @contribuyente.tipo
           .col-md-6
-            %p
-              %b calle:
-              = @contribuyente.direccion.calle
-            %p
-              %b Numero:
-              = @contribuyente.direccion.numero
-            %p
-              %b Colonia:
-              = @contribuyente.direccion.colonia
-            %p
-              %b Código Postal:
-              = @contribuyente.direccion.codigo_postal
-            %p
-              %b Localidad:
-              = @contribuyente.direccion.localidad
-            %p
-              %b Municipio:
-              = @contribuyente.direccion.municipio
-            %p
-              %b Estado:
-              = @contribuyente.direccion.estado
-            %p
-              %b País:
-              = @contribuyente.direccion.pais
+            %legend
+              %i.fa.fa-home
+              &nbsp;
+              Dirección
+            %h6
+              = @contribuyente.direccion
 
         .btn-group.float-right
           = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do
