@@ -6,4 +6,8 @@ class Usuario < ApplicationRecord
          :trackable
 
   validates :nombre, :username, presence: true
+
+  def email_required?
+    false
+  end
 end

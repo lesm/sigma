@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_10_182615) do
+ActiveRecord::Schema.define(version: 2018_09_11_023000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cierre_cajas", force: :cascade do |t|
+    t.decimal "monto"
+    t.text "observacion"
+    t.bigint "usuario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_cierre_cajas_on_usuario_id"
+  end
 
   create_table "contribuyentes", force: :cascade do |t|
     t.string "nombre_o_razon_social"
@@ -62,5 +71,6 @@ ActiveRecord::Schema.define(version: 2018_09_10_182615) do
     t.index ["username"], name: "index_usuarios_on_username", unique: true
   end
 
+  add_foreign_key "cierre_cajas", "usuarios"
   add_foreign_key "direcciones", "contribuyentes"
 end
