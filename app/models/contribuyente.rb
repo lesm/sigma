@@ -9,7 +9,15 @@ class Contribuyente < ApplicationRecord
   validates :rfc, rfc_format: { force_homoclave: true }, allow_blank: true
 
   def nombre_completo
-    "#{nombre_o_razon_social} #{primer_apellido} #{segundo_apellido}".strip
+    "#{nombre_o_razon_social} #{primer_apellido} #{segundo_apellido}".strip.titleize
+  end
+
+  def to_s
+    "#{nombre_completo} - #{rfc}"
+  end
+
+  def tipo
+    persona_fisica? ? "Persona Física" : "Persona Moral"
   end
 
   private

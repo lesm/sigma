@@ -18,8 +18,11 @@
           .col-md-4
             = df.input :numero
         = df.input :colonia
-        = df.input :codigo_postal
-        = df.input :localidad
+        .row
+          .col-md-4
+            = df.input :codigo_postal
+          .col-md-8
+            = df.input :localidad
         = df.input :municipio
         .row
           .col-md-6
