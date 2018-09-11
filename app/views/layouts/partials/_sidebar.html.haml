@@ -87,6 +87,6 @@
                 %i.fa.fa-circle-o.nav-icon
                 %p Cuentas
         %li.nav-item
-          = link_to destroy_usuario_session_path, class: 'nav-link', method: :delete, data: { confirm: '¿Desea cerrar sesión?' } do
+          = link_to destroy_usuario_session_path, class: 'nav-link', method: :delete, data: { confirm_swal: "Cerrar Sesión" } do
             %i.fa.fa-sign-out.nav-icon
             %p Cerrar Sessión
