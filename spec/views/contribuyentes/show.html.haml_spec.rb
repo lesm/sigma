@@ -26,14 +26,13 @@ RSpec.describe "contribuyentes/show", type: :view do
     render
     expect(rendered).to match(/Pedro/)
     expect(rendered).to match(/Pérez/)
-    expect(rendered).to match(/true/)
-    expect(rendered).to match(/pedro@gmail.com/)
+    expect(rendered).to match(/Persona Física/)
     expect(rendered).to match(/AAAA111111AAA/)
-    expect(rendered).to match(/Independencia/)
+    expect(rendered).to match(/INDEPENDENCIA/)
     expect(rendered).to match(/1/)
-    expect(rendered).to match(/Centro/)
+    expect(rendered).to match(/CENTRO/)
     expect(rendered).to match(/68000/)
-    expect(rendered).to match(/Oaxaca/)
-    expect(rendered).to match(/México/)
+    expect(rendered).to match(/OAXACA/)
+    expect(rendered).to match(/MÉXICO/)
   end
 end

@@ -1,0 +1,29 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Listado de Contribuyentes
+        .card-tools
+          = link_to new_cierre_caja_path, class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Cierre de Caja
+      .card-body
+        %table.table.table-hover.text-center
+          %thead
+            %tr
+              %th Monto
+              %th Observacion
+              %th Usuario
+              %th Acciones
+
+          %tbody
+            - @cierre_cajas.each do |cierre_caja|
+              %tr
+                %td= cierre_caja.monto
+                %td= cierre_caja.observacion
+                %td= cierre_caja.usuario.nombre
+                %td
+                  .btn-group
+                    = link_to cierre_caja, class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-eye
+                      Ver

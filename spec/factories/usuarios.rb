@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :usuario do
     nombre "Pedro"
-    username Sequence(lambda n: 'pedro%s' % n)
+    sequence(:username) { |n| "pedrito#{n}" }
     activo true
     rol 0
   end
