@@ -1,0 +1,35 @@
+-# frozen_string_literal: true
+= simple_form_for(@emisor) do |f|
+  .row
+    .col-md-6
+      = f.input :nombre
+      = f.input :rfc
+      = f.input :eslogan
+      = f.input :regimen_fiscal
+      = f.input :registro_patronal
+      = f.input :logotipo
+    .col-md-6
+      = f.simple_fields_for :direccion do |df|
+        .row
+          .col-md-8
+            = df.input :calle
+          .col-md-4
+            = df.input :numero
+        = df.input :colonia
+        .row
+          .col-md-4
+            = df.input :codigo_postal
+          .col-md-8
+            = df.input :localidad
+        = df.input :municipio
+        .row
+          .col-md-6
+            = df.input :estado
+          .col-md-6
+            = df.input :pais
+
+  .btn-group.float-right
+    = link_to emisores_path, class: 'btn btn-sm btn-secondary' do
+      %i.fa.fa-arrow-left
+      Regresar
+    = f.submit "#{@emisor.persisted? ? 'Editar' : 'Crear'} Crear Municipio", class: 'btn btn-sm btn-primary'

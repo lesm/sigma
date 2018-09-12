@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Direccion, type: :model do
+  it { should belong_to :direccionable }
   it { should validate_presence_of(:calle) }
   it { should validate_presence_of(:colonia) }
   it { should validate_presence_of(:codigo_postal) }

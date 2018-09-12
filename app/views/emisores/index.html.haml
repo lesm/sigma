@@ -1,0 +1,33 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Municipio
+        .card-tools
+          - if no_exite_emisor?
+            = link_to new_emisor_path, class: 'btn btn-sm btn-primary' do
+              %i.fa.fa-plus
+              Agregar municipio
+      .card-body
+        %table.table.table-hover.text-center
+          %thead
+            %tr
+              %th Nombre
+              %th RFC
+              %th Regimen fiscal
+              %th Acciones
+
+          %tbody
+            - @emisores.each do |emisor|
+              %tr
+                %td= emisor.nombre
+                %td= emisor.rfc
+                %td= emisor.regimen_fiscal
+                %td
+                  .btn-group
+                    = link_to emisor, class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-eye
+                      Ver
+                    = link_to edit_emisor_path(emisor), class: 'btn btn-sm btn-warning' do
+                      %i.fa.fa-pencil
+                      Editar
