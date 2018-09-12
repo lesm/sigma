@@ -1,6 +1,5 @@
 class Contribuyente < ApplicationRecord
-  has_one :direccion, dependent: :destroy
-  accepts_nested_attributes_for :direccion
+  include Direccionable
 
   validates :nombre_o_razon_social, presence: true
   validates :primer_apellido, presence: true, if: :persona_fisica?
