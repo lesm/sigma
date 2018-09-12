@@ -5,10 +5,10 @@ RSpec.describe "emisores/show", type: :view do
     @emisor = assign(:emisor, Emisor.create!(
       :nombre => "Nombre",
       :rfc => "AAA111111AAA",
-      :logo => "Logo",
+      :logotipo => "Logo",
       :regimen_fiscal => "Regimen Fiscal",
       :registro_patronal => "Registro Patronal",
-      :lugar_expedicion => "Lugar Expedicion"
+      :eslogan => "Mi eslogan"
     ))
   end
 
@@ -19,6 +19,6 @@ RSpec.describe "emisores/show", type: :view do
     expect(rendered).to match(/Logo/)
     expect(rendered).to match(/Regimen Fiscal/)
     expect(rendered).to match(/Registro Patronal/)
-    expect(rendered).to match(/Lugar Expedicion/)
+    expect(rendered).to match(/Mi eslogan/)
   end
 end

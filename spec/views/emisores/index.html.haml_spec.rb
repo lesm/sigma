@@ -6,18 +6,18 @@ RSpec.describe "emisores/index", type: :view do
       Emisor.create!(
         :nombre => "Nombre",
         :rfc => "AAA111111AAA",
-        :logo => "Logo",
+        :logotipo => "Logo",
         :regimen_fiscal => "Regimen Fiscal",
         :registro_patronal => "Registro Patronal",
-        :lugar_expedicion => "Lugar Expedicion"
+        :eslogan => "Lugar Expedicion"
       ),
       Emisor.create!(
         :nombre => "Nombre",
         :rfc => "AAA111111AAA",
-        :logo => "Logo",
+        :logotipo => "Logo",
         :regimen_fiscal => "Regimen Fiscal",
         :registro_patronal => "Registro Patronal",
-        :lugar_expedicion => "Lugar Expedicion"
+        :eslogan => "Lugar Expedicion"
       )
     ])
   end

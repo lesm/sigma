@@ -2,14 +2,28 @@ require 'rails_helper'
 
 RSpec.describe EmisoresController, type: :controller do
 
+  let(:direccion) do
+    {
+      calle: "una calee",
+      numero: "s/n",
+      colonia: "una colonia",
+      codigo_postal: "68300",
+      localidad: "una localida",
+      municipio: "un municipio",
+      estado: "Oaxaca",
+      pais: "México"
+    }
+  end
+
   let(:valid_attributes) do
     {
       nombre: "Municipio",
       rfc: "AAA111111AAA",
-      logo: "Logo",
+      logotipo: "Logo",
       regimen_fiscal: "Regimen Fiscal",
       registro_patronal: "Registro Patronal",
-      lugar_expedicion: "Lugar Expedición"
+      eslogan: "Lugar Expedición",
+      direccion_attributes: direccion
     }
   end
 
@@ -17,10 +31,10 @@ RSpec.describe EmisoresController, type: :controller do
     {
       nombre: nil,
       rfc: nil,
-      logo: "Logo",
+      logotipo: "Logo",
       regimen_fiscal: "Regimen Fiscal",
       registro_patronal: "Registro Patronal",
-      lugar_expedicion: "Lugar Expedición"
+      eslogan: "Lugar Expedición"
     }
   end
 
@@ -61,6 +75,12 @@ RSpec.describe EmisoresController, type: :controller do
         expect {
           post :create, params: {emisor: valid_attributes}
         }.to change(Emisor, :count).by(1)
+      end
+
+      it "creates a new Dirección" do
+        expect {
+          post :create, params: {emisor: valid_attributes}
+        }.to change(Direccion, :count).by(1)
       end
 
       it "redirects to the created emisor" do

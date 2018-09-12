@@ -71,7 +71,7 @@ class ContribuyentesController < ApplicationController
     def contribuyente_params
       params.require(:contribuyente).permit(
         :nombre_o_razon_social, :primer_apellido, :segundo_apellido, :persona_fisica, :email, :rfc,
-        direccion_attributes: [:calle, :numero, :colonia, :codigo_postal, :localidad,
+        direccion_attributes: [:id, :calle, :numero, :colonia, :codigo_postal, :localidad,
                                :municipio, :estado, :pais]
       )
     end

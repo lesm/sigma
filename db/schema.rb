@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_12_200653) do
+ActiveRecord::Schema.define(version: 2018_09_12_211130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(version: 2018_09_12_200653) do
   create_table "emisores", force: :cascade do |t|
     t.string "nombre"
     t.string "rfc"
-    t.string "logo"
+    t.string "logotipo"
     t.string "regimen_fiscal"
     t.string "registro_patronal"
-    t.string "lugar_expedicion"
+    t.string "eslogan"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -14,7 +14,7 @@ class EmisoresController < ApplicationController
 
   # GET /emisores/new
   def new
-    @emisor = Emisor.new
+    @emisor = Emisor.new direccion: Direccion.new
   end
 
   # GET /emisores/1/edit
@@ -69,6 +69,11 @@ class EmisoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def emisor_params
-      params.require(:emisor).permit(:nombre, :rfc, :logo, :regimen_fiscal, :registro_patronal, :lugar_expedicion)
+      params.require(:emisor).permit(
+        :nombre, :rfc, :logotipo, :regimen_fiscal,
+        :registro_patronal, :eslogan,
+        direccion_attributes: [:id, :calle, :numero, :colonia, :codigo_postal, :localidad,
+                               :municipio, :estado, :pais]
+      )
     end
 end

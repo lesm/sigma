@@ -5,10 +5,10 @@ RSpec.describe "emisores/edit", type: :view do
     @emisor = assign(:emisor, Emisor.create!(
       :nombre => "MyString",
       :rfc => "AAA111111AAA",
-      :logo => "MyString",
+      :logotipo => "MyString",
       :regimen_fiscal => "MyString",
       :registro_patronal => "MyString",
-      :lugar_expedicion => "MyString"
+      :eslogan => "MyString"
     ))
   end
 
@@ -16,18 +16,12 @@ RSpec.describe "emisores/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", emisor_path(@emisor), "post" do
-
       assert_select "input[name=?]", "emisor[nombre]"
-
       assert_select "input[name=?]", "emisor[rfc]"
-
-      assert_select "input[name=?]", "emisor[logo]"
-
+      assert_select "input[name=?]", "emisor[logotipo]"
       assert_select "input[name=?]", "emisor[regimen_fiscal]"
-
       assert_select "input[name=?]", "emisor[registro_patronal]"
-
-      assert_select "input[name=?]", "emisor[lugar_expedicion]"
+      assert_select "input[name=?]", "emisor[eslogan]"
     end
   end
 end

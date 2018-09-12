@@ -2,7 +2,7 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Detalle del Municipio
+        .card-title Detalle del Municipio "#{@emisor.eslogan}"
       .card-body
         .row
           .col-md-4
@@ -12,9 +12,7 @@
                 &nbsp;
                 Información Principal
                 %h6
-                  = @emisor.nombre
-                %h6
-                  = @emisor.rfc
+                  = @emisor.nombre_con_rfc
                 %h6
                   = @emisor.regimen_fiscal
                 %h6
@@ -26,7 +24,7 @@
                 &nbsp;
                 Dirección
                 %h6
-                  = @emisor.lugar_expedicion
+                  = @emisor.direccion
           .col-md-4
             %fieldset
               %legend
@@ -34,7 +32,7 @@
                 &nbsp;
                 Logo
                 %h6
-                  = @emisor.logo
+                  = @emisor.logotipo
 
         .btn-group.float-right
           = link_to emisores_path, class: 'btn btn-sm btn-secondary' do

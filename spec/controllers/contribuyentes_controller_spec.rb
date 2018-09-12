@@ -2,6 +2,19 @@ require 'rails_helper'
 
 RSpec.describe ContribuyentesController, type: :controller do
 
+  let(:direccion) do
+    {
+      calle: "una calee",
+      numero: "s/n",
+      colonia: "una colonia",
+      codigo_postal: "68300",
+      localidad: "una localida",
+      municipio: "un municipio",
+      estado: "Oaxaca",
+      pais: "México"
+    }
+  end
+
   let(:valid_attributes) do
     {
       nombre_o_razon_social: "Pedro",
@@ -9,7 +22,8 @@ RSpec.describe ContribuyentesController, type: :controller do
       segundo_apellido: "Pérez",
       persona_fisica: true,
       email: "pedro@gmail.com",
-      rfc: "AAAA111111AAA"
+      rfc: "AAAA111111AAA",
+      direccion_attributes: direccion
     }
   end
 
@@ -61,6 +75,12 @@ RSpec.describe ContribuyentesController, type: :controller do
         expect {
           post :create, params: {contribuyente: valid_attributes}
         }.to change(Contribuyente, :count).by(1)
+      end
+
+      it "creates a new Dirección" do
+        expect {
+          post :create, params: {contribuyente: valid_attributes}
+        }.to change(Direccion, :count).by(1)
       end
 
       it "redirects to the created contribuyente" do

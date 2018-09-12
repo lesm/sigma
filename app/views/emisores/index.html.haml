@@ -4,9 +4,10 @@
       .card-header
         .card-title Municipio
         .card-tools
-          = link_to new_emisor_path, class: 'btn btn-sm btn-primary' do
-            %i.fa.fa-plus
-            Agregar municipio
+          - if no_exite_emisor?
+            = link_to new_emisor_path, class: 'btn btn-sm btn-primary' do
+              %i.fa.fa-plus
+              Agregar municipio
       .card-body
         %table.table.table-hover.text-center
           %thead

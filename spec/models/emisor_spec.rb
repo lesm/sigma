@@ -5,7 +5,6 @@ RSpec.describe Emisor, type: :model do
   it { should validate_presence_of(:rfc) }
   it { should validate_presence_of(:regimen_fiscal) }
   it { should validate_presence_of(:registro_patronal) }
-  it { should validate_presence_of(:lugar_expedicion) }
   it { should have_one(:direccion).dependent(:destroy)}
   it { should accept_nested_attributes_for(:direccion).allow_destroy(true)}
 
