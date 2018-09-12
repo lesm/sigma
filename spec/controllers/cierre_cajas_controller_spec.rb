@@ -46,14 +46,6 @@ RSpec.describe CierreCajasController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    it "returns a success response" do
-      cierre_caja = CierreCaja.create! valid_attributes
-      get :edit, params: {id: cierre_caja.to_param}
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new CierreCaja" do
