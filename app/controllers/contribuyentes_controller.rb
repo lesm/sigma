@@ -14,7 +14,7 @@ class ContribuyentesController < ApplicationController
 
   # GET /contribuyentes/new
   def new
-    @contribuyente = Contribuyente.new direccion: Direccion.new
+    @contribuyente = Contribuyente.new
   end
 
   # GET /contribuyentes/1/edit

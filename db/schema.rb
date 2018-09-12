@@ -46,8 +46,6 @@ ActiveRecord::Schema.define(version: 2018_09_11_023000) do
     t.string "pais", default: "México"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "contribuyente_id"
-    t.index ["contribuyente_id"], name: "index_direcciones_on_contribuyente_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -72,5 +70,4 @@ ActiveRecord::Schema.define(version: 2018_09_11_023000) do
   end
 
   add_foreign_key "cierre_cajas", "usuarios"
-  add_foreign_key "direcciones", "contribuyentes"
 end

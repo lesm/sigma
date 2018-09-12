@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Contribuyente, type: :model do
   it { should validate_presence_of(:nombre_o_razon_social) }
   it { should validate_presence_of(:primer_apellido) }
-  it { should accept_nested_attributes_for(:direccion) }
-  it { should have_one(:direccion) }
 
   describe "#nombre_completo" do
     subject do
