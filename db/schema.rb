@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_11_023000) do
+ActiveRecord::Schema.define(version: 2018_09_12_200653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(version: 2018_09_11_023000) do
     t.string "pais", default: "México"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "direccionable_type"
+    t.bigint "direccionable_id"
+    t.index ["direccionable_type", "direccionable_id"], name: "index_direcciones_on_direccionable_type_and_direccionable_id"
   end
 
   create_table "usuarios", force: :cascade do |t|

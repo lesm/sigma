@@ -1,4 +1,6 @@
 class Contribuyente < ApplicationRecord
+  include Direccionable
+
   validates :nombre_o_razon_social, presence: true
   validates :primer_apellido, presence: true, if: :persona_fisica?
   validates :rfc, length: { is: 13 }, if: :persona_fisica_con_rfc?

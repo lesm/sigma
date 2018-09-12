@@ -1,4 +1,6 @@
 class Direccion < ApplicationRecord
+  belongs_to :direccionable, polymorphic: true
+
   validates :calle, :colonia, :codigo_postal, :localidad,
     :municipio, :estado, :pais, presence: true
 
