@@ -1,0 +1,45 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle del Municipio
+      .card-body
+        .row
+          .col-md-4
+            %fieldset
+              %legend
+                %i.fa.fa-info
+                &nbsp;
+                Información Principal
+                %h6
+                  = @emisor.nombre
+                %h6
+                  = @emisor.rfc
+                %h6
+                  = @emisor.regimen_fiscal
+                %h6
+                  = @emisor.registro_patronal
+          .col-md-4
+            %fieldset
+              %legend
+                %i.fa.fa-home
+                &nbsp;
+                Dirección
+                %h6
+                  = @emisor.lugar_expedicion
+          .col-md-4
+            %fieldset
+              %legend
+                %i.fa.fa-image
+                &nbsp;
+                Logo
+                %h6
+                  = @emisor.logo
+
+        .btn-group.float-right
+          = link_to emisores_path, class: 'btn btn-sm btn-secondary' do
+            %i.fa.fa-arrow-left
+            Regresar
+          = link_to edit_emisor_path(@emisor), class: 'btn btn-sm btn-warning' do
+            %i.fa.fa-pencil
+            Editar

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_11_023000) do
+ActiveRecord::Schema.define(version: 2018_09_12_023947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2018_09_11_023000) do
     t.datetime "updated_at", null: false
     t.bigint "contribuyente_id"
     t.index ["contribuyente_id"], name: "index_direcciones_on_contribuyente_id"
+  end
+
+  create_table "emisores", force: :cascade do |t|
+    t.string "nombre"
+    t.string "rfc"
+    t.string "logo"
+    t.string "regimen_fiscal"
+    t.string "registro_patronal"
+    t.string "lugar_expedicion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "usuarios", force: :cascade do |t|
