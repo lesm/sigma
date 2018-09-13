@@ -1,0 +1,94 @@
+require 'rails_helper'
+
+RSpec.describe ArqueosController, type: :controller do
+
+  let(:usuario) { FactoryBot.create :usuario }
+
+  let(:cierre_caja) do 
+    FactoryBot.create :cierre_caja,
+      monto: 300,
+      usuario: usuario
+  end
+
+  let(:valid_attributes) do
+    {
+      monto: 250.56,
+      observacion: "Primer arqueo del día",
+      cierre_caja_id: cierre_caja.id
+    }
+  end
+
+  let(:invalid_attributes) do
+    {
+      monto: 0,
+      observacion: "Primer arqueo del día",
+      cierre_caja_id: cierre_caja.id
+    }
+  end
+
+  before :each do
+    sign_in usuario 
+  end
+
+  describe "GET #index" do
+    it "returns a success response" do
+      Arqueo.create! valid_attributes
+      get :index, params: {}
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET #show" do
+    it "returns a success response" do
+      arqueo = Arqueo.create! valid_attributes
+      get :show, params: { id: arqueo.to_param }
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET #new" do
+    it "returns a success response" do
+      get :new, params: {}
+      expect(response).to be_successful
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new Arqueo" do
+        expect {
+          post :create, params: { arqueo: valid_attributes }
+        }.to change(Arqueo, :count).by(1)
+      end
+
+      it "redirects to the created arqueo" do
+        post :create, params: { arqueo: valid_attributes }
+        expect(response).to redirect_to(Arqueo.last)
+      end
+
+      context "when cierre_caja does not exist" do
+        it "creates a cierre_caja" do
+          expect {
+            post :create, params: { arqueo: valid_attributes }
+          }.to change(CierreCaja, :count).by(1)
+        end
+      end
+
+      context "when cierre_caja exists" do
+        it "does not create a cierre_caja" do
+          cierre_caja
+          expect {
+            post :create, params: { arqueo: valid_attributes }
+          }.to change(CierreCaja, :count).by(0)
+        end
+      end
+    end
+
+    context "with invalid params" do
+      it "returns a success response (i.e. to display the 'new' template)" do
+        post :create, params: { arqueo: invalid_attributes }
+        expect(response).to be_successful
+      end
+    end
+  end
+end

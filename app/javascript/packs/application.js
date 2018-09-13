@@ -1,4 +1,6 @@
 console.log('Hello World from Webpacker')
+import jQuery from 'jquery'
+window.$ = jQuery
 import 'adminlte'
 import 'sweetalert'
 import 'bootstrap'

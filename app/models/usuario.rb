@@ -4,6 +4,7 @@ class Usuario < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable
+  has_many :cierre_cajas
 
   validates :nombre, :username, presence: true
 

@@ -1,0 +1,23 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle del Arqueo
+      .card-body
+        %p
+          %b Monto:
+          = @arqueo.monto
+        %p
+          %b Observacion:
+          = @arqueo.observacion
+        %p
+          %b Fecha de creación:
+          = l @arqueo.created_at, format: :short
+        %p
+          %b Total Cierre caja:
+          = number_to_currency @arqueo.cierre_caja.monto
+
+        .btn-group.float-right
+          = link_to cierre_cajas_path, class: 'btn btn-sm btn-secondary' do
+            %i.fa.fa-arrow-left
+            Regresar

@@ -14,7 +14,7 @@
               %th Monto
               %th Observacion
               %th Usuario
-              %th Acciones
+              %th Acción
 
           %tbody
             - @cierre_cajas.each do |cierre_caja|
@@ -23,7 +23,6 @@
                 %td= cierre_caja.observacion
                 %td= cierre_caja.usuario.nombre
                 %td
-                  .btn-group
-                    = link_to cierre_caja, class: 'btn btn-sm btn-info' do
-                      %i.fa.fa-eye
-                      Ver
+                  = link_to cierre_caja, class: 'btn btn-sm btn-info' do
+                    %i.fa.fa-eye
+                    Ver
