@@ -5,6 +5,7 @@ class Usuario < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable
   has_many :cierre_cajas
+  has_many :arqueos, through: :cierre_cajas
 
   validates :nombre, :username, presence: true
 

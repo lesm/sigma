@@ -4,7 +4,7 @@ class CierreCajasController < ApplicationController
   # GET /cierre_cajas
   # GET /cierre_cajas.json
   def index
-    @cierre_cajas = CierreCaja.all
+    @cierre_cajas = current_usuario.cierre_cajas
   end
 
   # GET /cierre_cajas/1

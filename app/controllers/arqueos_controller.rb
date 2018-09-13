@@ -5,7 +5,7 @@ class ArqueosController < ApplicationController
   # GET /arqueos
   # GET /arqueos.json
   def index
-    @arqueos = Arqueo.all
+    @arqueos = current_usuario.arqueos
   end
 
   # GET /arqueos/1
