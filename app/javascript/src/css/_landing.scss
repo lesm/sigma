@@ -1,0 +1,67 @@
+.bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  opacity: 0.65;
+  position: relative;
+}
+
+.one {
+  background-image: url("../images/img_parallax.jpg");
+}
+
+.two {
+  background-image: url("../images/img_parallax2.jpg");
+}
+
+.three {
+  background-image: url("../images/img_parallax3.jpg");
+}
+
+.caption {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.border {
+  background-color: white;
+  border: 1px solid #ad2624 !important;
+  color: #ad2624;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 10px;
+  padding: 18px;
+}
+
+h3 {
+  color: #111;
+  font: 20px "Lato", sans-serif;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.paragraph {
+  padding: 50px 80px;
+}
+
+.primary {
+  background-color: white;
+  color: #777;
+}
+
+.secondary {
+  background-color: #ad2624;
+  color: #FFF;
+}
+
+@media only screen and (max-device-width: 1024px) {
+    .bg.one, .bg.two, .bg.three {
+        background-attachment: scroll;
+    }
+}
