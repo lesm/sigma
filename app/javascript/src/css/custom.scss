@@ -5,10 +5,15 @@
 @import 'landing';
 
 .btn-primary {
-  color: $gray-800 !important;
+  color: $white !important;
+}
+
+.btn-login {
+  @extend .btn;
+  color: $white !important;
+  background-color: $red !important;
 }
 
 .navbar-expand {
   justify-content: space-between !important;
 }
-

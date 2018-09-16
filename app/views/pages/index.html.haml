@@ -3,14 +3,12 @@
     .col-md-6
       %strong SIGMA
       %sup &Sigma;
-    .col-md-6
-      = link_to new_usuario_session_path, class: "btn btn-sm btn-primary float-right" do
-        %i.fa.fa-sign-in
-        Iniciar Sesión
 
 .bg.one
   .caption
-    %span.border RESPONSABILIDAD
+    = link_to new_usuario_session_path, class: "btn btn-lg btn-login" do
+      %i.fa.fa-sign-in
+      Iniciar Sesión
 .paragraph
   %h3 Sistema de Ingresos y Gestión Municipal Aplicada
   %p Algo que decir acerca de las funcionalidades del sistema o por que es importante la gestión municipal. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

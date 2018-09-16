@@ -4,7 +4,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
-  opacity: 0.65;
   position: relative;
 }
 
@@ -29,9 +28,9 @@
 }
 
 .border {
-  background-color: white;
-  border: 1px solid #ad2624 !important;
-  color: #ad2624;
+  background-color: $red;
+  border: 1px solid $red !important;
+  color: $white;
   font-size: 25px;
   font-weight: 900;
   letter-spacing: 10px;
@@ -51,17 +50,21 @@ h3 {
 }
 
 .primary {
-  background-color: white;
+  background-color: $white;
   color: #777;
 }
 
 .secondary {
-  background-color: #ad2624;
-  color: #FFF;
+  background-color: $red;
+  color: $white;
+}
+
+footer.landing {
+  margin-left: 0px !important;
 }
 
 @media only screen and (max-device-width: 1024px) {
-    .bg.one, .bg.two, .bg.three {
-        background-attachment: scroll;
-    }
+  .bg.one, .bg.two, .bg.three {
+      background-attachment: scroll;
+  }
 }
