@@ -87,4 +87,28 @@ RSpec.describe Contribuyente, type: :model do
       end
     end
   end # describe "Persona moral"
+
+  describe "#rfc" do
+    let(:contribuyente) { create :contribuyente, persona_fisica: true, rfc: "AAAA111111AAA" }
+    let(:contribuyente_dos) { build :contribuyente, persona_fisica: true, rfc: "AAAA111111AAA" }
+    let(:contribuyente_tres) { create :contribuyente, persona_fisica: true, rfc: nil }
+    let(:contribuyente_cuatro) { create :contribuyente, persona_fisica: true, rfc: "XAXX010101000" }
+    let(:contribuyente_cinco) { create :contribuyente, persona_fisica: true, rfc: "XAXX010101000" }
+
+    it "must be uniq" do
+      expect(contribuyente).to be_valid
+      expect(contribuyente_dos).to_not be_valid
+    end # context must bu uniq
+
+    it "can be blank" do
+      expect(contribuyente_tres).to be_valid
+    end
+
+    context "rfc generico" do
+      it "is not necessary to be uniq" do
+        expect(contribuyente_cuatro).to be_valid
+        expect(contribuyente_cinco).to be_valid
+      end # context must bu uniq
+    end
+  end # describe "#rfc"
 end
