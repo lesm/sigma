@@ -136,10 +136,10 @@ es-MX:
         one: ! '%{model} no pudo guardarse debido a 1 error'
         other: ! '%{model} no pudo guardarse debido a %{count} errores'
     models:
-      factura:
+      arqueo:
         attributes:
-          estado:
-            invalid_transition: "Can't change state from %{value} via %{event}"
+          cierre_caja:
+            required: "Debe estar presente"
   helpers:
     select:
       prompt: Por favor selecciona

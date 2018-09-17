@@ -27,8 +27,8 @@
               = link_to contribuyentes_path, class: "nav-link #{ controller_name == 'contribuyentes' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Contribuyentes
-        %li.nav-item.has-treeview{ class: "#{ controller_name == 'cierre_cajas' && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ controller_name == 'cierre_cajas' && 'active' }" do
+        %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos).include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-bank
             %p
               Recaudación
@@ -43,7 +43,7 @@
                 %i.fa.fa-circle-o.nav-icon
                 %p Facturas
             %li.nav-item
-              %a.nav-link{:href => "#"}
+              = link_to arqueos_path, class: "nav-link #{ controller_name == 'arqueos' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Arqueos
             %li.nav-item
