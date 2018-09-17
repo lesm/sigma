@@ -11,4 +11,11 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ContribuyentesHelper, type: :helper do
+   describe ContribuyentesHelper do
+     describe "#estados_para_select" do
+       it "debe ser de 32 elementos" do
+         expect(helper.estados_para_select.size).to eq 32
+       end
+     end
+   end
 end

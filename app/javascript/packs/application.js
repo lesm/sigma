@@ -4,13 +4,25 @@ window.$ = jQuery
 import 'adminlte'
 import 'sweetalert'
 import 'bootstrap'
+import 'select2'
 import '../src/js/notify_alert_confirm'
 
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 
-function resizeContentWrapperHeight(){
+function ready() {
+  resizeContentWrapperHeight()
+  startSelect2()
+}
+
+function resizeContentWrapperHeight() {
   $(document).trigger("resize");
 }
 
-$(document).on("turbolinks:load", resizeContentWrapperHeight)
+function startSelect2() {
+  $(".select2").select2({
+    width: '100%'
+  })
+}
+
+$(document).on("turbolinks:load", ready)

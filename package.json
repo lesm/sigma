@@ -6,6 +6,7 @@
     "adminlte": "almasaeed2010/AdminLTE#v3-dev",
     "jquery": "^3.3.1",
     "rails-ujs": "^5.2.1",
+    "select2": "^4.0.6-rc.1",
     "sweetalert": "^2.1.0",
     "turbolinks": "^5.2.0"
   },

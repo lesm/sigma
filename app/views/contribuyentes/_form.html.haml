@@ -26,7 +26,8 @@
         = df.input :municipio
         .row
           .col-md-6
-            = df.input :estado
+            = df.input :estado, collection: estados_para_select,
+              input_html: { class: "select2" }
           .col-md-6
             = df.input :pais
 
