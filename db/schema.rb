@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_143613) do
+ActiveRecord::Schema.define(version: 2018_09_17_220715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2018_09_13_143613) do
     t.string "nombre"
     t.string "rfc"
     t.string "logotipo"
-    t.string "regimen_fiscal"
+    t.string "regimen_fiscal", default: "Personas morales con fines no lucrativos"
     t.string "registro_patronal"
     t.string "eslogan"
     t.datetime "created_at", null: false
