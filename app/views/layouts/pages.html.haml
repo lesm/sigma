@@ -13,15 +13,12 @@
     = flash_messages
     = yield
   - unless controller_name == 'sessions'
-    %footer.main-footer
+    %footer.main-footer.landing
       .float-right.d-none.d-sm-inline
         .small
-          Made by:
-          = link_to "@lesm", "https://github.com/lesm"
-          = link_to "@juanvqz", "https://github.com/juanvqz"
+          MADE BY:
+          = link_to "@lesm", "https://github.com/lesm", target: "_blank"
+          = link_to "@juanvqz", "https://github.com/juanvqz", target: "_blank"
       %strong
         .small
-          Copyright © 2018-2018
-          = succeed "." do
-            %a{:href => "https://adminlte.io"} AdminLTE.io
-
+          SIGMA © 2018-2019.
