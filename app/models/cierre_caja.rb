@@ -1,6 +1,6 @@
 class CierreCaja < ApplicationRecord
   belongs_to :usuario
-  has_many :arqueos, inverse_of: :cierre_caja
+  has_many :arqueos, inverse_of: :cierre_caja, dependent: :destroy
 
   validates :monto, presence: true
 

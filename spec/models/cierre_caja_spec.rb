@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CierreCaja, type: :model do
   it { should validate_presence_of(:monto) }
   it { should belong_to(:usuario) }
-  it { should have_many(:arqueos) }
+  it { should have_many(:arqueos).dependent :destroy }
 
   describe "#monto" do
     context "actualiza monto despues de agregar un arqueo" do

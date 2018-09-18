@@ -71,7 +71,7 @@ class EmisoresController < ApplicationController
     def emisor_params
       params.require(:emisor).permit(
         :nombre, :rfc, :logotipo, :regimen_fiscal,
-        :registro_patronal, :eslogan,
+        :registro_patronal, :eslogan, :escudo,
         direccion_attributes: [:id, :calle, :numero, :colonia, :codigo_postal, :localidad,
                                :municipio, :estado, :pais]
       )

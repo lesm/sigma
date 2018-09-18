@@ -7,7 +7,11 @@
       = f.input :eslogan
       = f.input :regimen_fiscal
       = f.input :registro_patronal
-      = f.input :logotipo
+      .row
+        .col-md-6
+          = f.input :logotipo
+        .col-md-6
+          = f.input :escudo
     .col-md-6
       = f.simple_fields_for :direccion do |df|
         .row

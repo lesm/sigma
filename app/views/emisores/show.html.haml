@@ -5,7 +5,7 @@
         .card-title Detalle del Municipio "#{@emisor.eslogan}"
       .card-body
         .row
-          .col-md-4
+          .col-md-6
             %fieldset
               %legend
                 %i.fa.fa-info
@@ -17,7 +17,7 @@
                   = @emisor.regimen_fiscal
                 %h6
                   = @emisor.registro_patronal
-          .col-md-4
+          .col-md-6
             %fieldset
               %legend
                 %i.fa.fa-home
@@ -25,15 +25,27 @@
                 Dirección
                 %h6
                   = @emisor.direccion
-          .col-md-4
+        .row
+          .col-md-6
+            %p
             %fieldset
-              %legend
-                %i.fa.fa-image
-                &nbsp;
-                Logo
-                %h6
-                  = @emisor.logotipo
+              .text-center
+                = image_tag(@emisor.escudo.medium.url, class: "img-thumbnail") if @emisor.escudo?
+                %legend
+                  %i.fa.fa-image
+                  &nbsp;
+                  Escudo
+          .col-md-6
+            %p
+            %fieldset
+              .text-center
+                = image_tag(@emisor.logotipo.medium.url, class: "img-thumbnail") if @emisor.logotipo?
+                %legend
+                  %i.fa.fa-image
+                  &nbsp;
+                  Logotipo
 
+        %br
         .btn-group.float-right
           = link_to emisores_path, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
