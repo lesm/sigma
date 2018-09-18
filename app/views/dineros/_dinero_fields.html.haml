@@ -1,0 +1,24 @@
+.row
+  .col-md-4
+    %h3 Billetes
+    %p
+    = f.input :veinte_pesos, as: :integer
+    = f.input :cincuenta_pesos, as: :integer
+    = f.input :cien_pesos, as: :integer
+    = f.input :doscientos_pesos, as: :integer
+    = f.input :quinientos_pesos, as: :integer
+    = f.input :mil_pesos, as: :integer
+    = f.input :dos_mil_pesos, as: :integer
+  .col-md-8
+    %h3 Monedas
+    %p
+    .row
+      .col-md-6
+        = f.input :un_peso, as: :integer
+        = f.input :dos_pesos, as: :integer
+        = f.input :cinco_pesos, as: :integer
+        = f.input :diez_pesos, as: :integer
+      .col-md-6
+        = f.input :diez_centavos, as: :integer
+        = f.input :veinte_centavos, as: :integer
+        = f.input :cincuenta_centavos, as: :integer

@@ -15,7 +15,7 @@ class ArqueosController < ApplicationController
 
   # GET /arqueos/new
   def new
-    @arqueo = Arqueo.new
+    @arqueo = Arqueo.new dinero: Dinero.new
   end
 
   def current_cierre_caja
@@ -36,6 +36,7 @@ class ArqueosController < ApplicationController
     @cierre_caja = current_cierre_caja
     @arqueo = Arqueo.new(arqueo_params)
 
+    #require "pry"; binding.pry
     respond_to do |format|
       if @cierre_caja.arqueos << @arqueo
         format.html { redirect_to @arqueo, notice: 'Arqueo was successfully created.' }
@@ -56,6 +57,15 @@ class ArqueosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def arqueo_params
-      params.require(:arqueo).permit(:monto_sistema, :monto_cajero, :observacion, :cierre_caja_id)
+      params.require(:arqueo).permit(
+        :monto_sistema, :monto_cajero, :observacion, :cierre_caja_id,
+        dinero_attributes: [
+          :diez_centavos, :veinte_centavos, :cincuenta_centavos,
+          :un_peso, :dos_pesos, :cinco_pesos, :diez_pesos,
+          :veinte_pesos, :cincuenta_pesos, :cien_pesos,
+          :doscientos_pesos, :quinientos_pesos, :mil_pesos,
+          :dos_mil_pesos, :total
+        ]
+      )
     end
 end

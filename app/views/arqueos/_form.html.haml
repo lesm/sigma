@@ -1,7 +1,16 @@
 -# frozen_string_literal: true
 = simple_form_for(@arqueo) do |f|
-  = f.input :monto_cajero
-  = f.input :observacion
+  .row
+    .col-md-4
+      %h3 Totales
+      %p
+      = f.input :monto_sistema, readonly: true
+      = f.input :monto_cajero
+      = f.input :observacion
+
+    .col-md-8
+      = f.simple_fields_for :dinero do |df|
+        = render "dineros/dinero_fields", f: df
 
   .btn-group.float-right
     = link_to arqueos_path, class: 'btn btn-sm btn-secondary' do

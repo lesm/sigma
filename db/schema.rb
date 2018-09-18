@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_133419) do
+ActiveRecord::Schema.define(version: 2018_09_18_150052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,28 @@ ActiveRecord::Schema.define(version: 2018_09_18_133419) do
     t.string "rfc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dineros", force: :cascade do |t|
+    t.integer "diez_centavos", default: 0
+    t.integer "veinte_centavos", default: 0
+    t.integer "cincuenta_centavos", default: 0
+    t.integer "un_peso", default: 0
+    t.integer "dos_pesos", default: 0
+    t.integer "cinco_pesos", default: 0
+    t.integer "diez_pesos", default: 0
+    t.integer "veinte_pesos", default: 0
+    t.integer "cincuenta_pesos", default: 0
+    t.integer "cien_pesos", default: 0
+    t.integer "doscientos_pesos", default: 0
+    t.integer "quinientos_pesos", default: 0
+    t.integer "mil_pesos", default: 0
+    t.integer "dos_mil_pesos", default: 0
+    t.decimal "total"
+    t.bigint "arqueo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["arqueo_id"], name: "index_dineros_on_arqueo_id"
   end
 
   create_table "direcciones", force: :cascade do |t|
@@ -98,4 +120,5 @@ ActiveRecord::Schema.define(version: 2018_09_18_133419) do
 
   add_foreign_key "arqueos", "cierre_cajas"
   add_foreign_key "cierre_cajas", "usuarios"
+  add_foreign_key "dineros", "arqueos"
 end

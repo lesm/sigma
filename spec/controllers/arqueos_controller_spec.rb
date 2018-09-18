@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe ArqueosController, type: :controller do
 
   let(:usuario) { FactoryBot.create :usuario }
+  let(:dinero_attributes) { FactoryBot.attributes_for :dinero }
 
-  let(:cierre_caja) do 
+  let(:cierre_caja) do
     FactoryBot.create :cierre_caja,
       monto_sistema: 300,
       monto_cajero: 300,
@@ -16,7 +17,8 @@ RSpec.describe ArqueosController, type: :controller do
       monto_sistema: 250.56,
       monto_cajero: 250.56,
       observacion: "Primer arqueo del día",
-      cierre_caja_id: cierre_caja.id
+      cierre_caja_id: cierre_caja.id,
+      dinero_attributes: dinero_attributes
     }
   end
 
@@ -62,6 +64,12 @@ RSpec.describe ArqueosController, type: :controller do
         expect {
           post :create, params: { arqueo: valid_attributes }
         }.to change(Arqueo, :count).by(1)
+      end
+
+      it "creates a new Dinero" do
+        expect {
+          post :create, params: { arqueo: valid_attributes }
+        }.to change(Dinero, :count).by(1)
       end
 
       it "redirects to the created arqueo" do

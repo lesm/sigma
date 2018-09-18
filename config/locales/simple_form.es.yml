@@ -15,6 +15,20 @@ es-MX:
         numero: 'Número'
         codigo_postal: 'Código Postal'
         rfc: 'RFC'
+        diez_centavos: "Diez Centavos"
+        veinte_centavos: "Veinte Centavos"
+        cincuenta_centavos: "Cincuenta Centavos"
+        un_peso: "Un Peso"
+        dos_pesos: "Dos Pesos"
+        cinco_pesos: "Cinco Pesos"
+        diez_pesos: "Diez Pesos"
+        veinte_pesos: "Veinte Pesos"
+        cincuenta_pesos: "Cincuenta Pesos"
+        cien_pesos: "Cien Pesos"
+        doscientos_pesos: "Doscientos Pesos"
+        quinientos_pesos: "Quinientos Pesos"
+        mil_pesos: "Mil Pesos"
+        dos_mil_pesos: "Dos Mil Pesos"
     # Examples
     # labels:
     #   defaults:

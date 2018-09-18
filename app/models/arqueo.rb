@@ -1,5 +1,7 @@
 class Arqueo < ApplicationRecord
   belongs_to :cierre_caja, inverse_of: :arqueos
+  has_one :dinero, dependent: :destroy
+  accepts_nested_attributes_for :dinero, allow_destroy: true
   validates :monto_sistema, :monto_cajero, presence: true
   validates :monto_sistema, :monto_cajero, numericality: { greater_than: 0 }
   after_save :update_monto_cajero_cierre_caja
