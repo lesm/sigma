@@ -56,6 +56,6 @@ class ArqueosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def arqueo_params
-      params.require(:arqueo).permit(:monto, :observacion, :cierre_caja_id)
+      params.require(:arqueo).permit(:monto_sistema, :monto_cajero, :observacion, :cierre_caja_id)
     end
 end

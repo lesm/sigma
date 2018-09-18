@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "cierre_cajas/new", type: :view do
   before(:each) do
     assign(:cierre_caja, CierreCaja.new(
-      :monto => "9.99",
+      :monto_sistema => "9.99",
+      :monto_cajero => "9.99",
       :observacion => "MyText",
       :usuario => nil
     ))
@@ -14,7 +15,7 @@ RSpec.describe "cierre_cajas/new", type: :view do
 
     assert_select "form[action=?][method=?]", cierre_cajas_path, "post" do
 
-      assert_select "input[name=?]", "cierre_caja[monto]"
+      assert_select "input[name=?]", "cierre_caja[monto_cajero]"
 
       assert_select "textarea[name=?]", "cierre_caja[observacion]"
 

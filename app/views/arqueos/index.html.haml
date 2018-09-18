@@ -11,7 +11,8 @@
         %table.table.table-hover.text-center
           %thead
             %tr
-              %th Monto
+              %th Monto Sistema
+              %th Monto Cajero
               %th Observacion
               %th Fecha de creación
               %th Acción
@@ -19,7 +20,8 @@
           %tbody
             - @arqueos.each do |arqueo|
               %tr
-                %td= arqueo.monto
+                %td= arqueo.monto_sistema
+                %td= arqueo.monto_cajero
                 %td= arqueo.observacion
                 %td= arqueo.created_at
                 %td

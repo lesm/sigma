@@ -69,6 +69,6 @@ class CierreCajasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cierre_caja_params
-      params.require(:cierre_caja).permit(:monto, :observacion, :usuario_id)
+      params.require(:cierre_caja).permit(:monto_sistema, :monto_cajero, :observacion, :usuario_id)
     end
 end

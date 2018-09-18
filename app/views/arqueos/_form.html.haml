@@ -1,8 +1,7 @@
 -# frozen_string_literal: true
 = simple_form_for(@arqueo) do |f|
-  = f.input :monto
+  = f.input :monto_cajero
   = f.input :observacion
-  -#= f.hidden_field :cierre_caja_id, value: @cierre_caja.id
 
   .btn-group.float-right
     = link_to arqueos_path, class: 'btn btn-sm btn-secondary' do

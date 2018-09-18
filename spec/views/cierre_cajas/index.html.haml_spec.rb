@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "cierre_cajas/index", type: :view do
   let(:usuario) { FactoryBot.create :usuario, nombre: "Pedro", password: "qwerty" }
-  let(:arqueo) { FactoryBot.build :arqueo, monto: 9.99 }
+  let(:arqueo) { FactoryBot.build :arqueo, monto_sistema: 9.99, monto_cajero: 9.99 }
   before(:each) do
     assign(:cierre_cajas, [
       CierreCaja.create!(

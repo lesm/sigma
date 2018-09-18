@@ -5,7 +5,8 @@ RSpec.describe CierreCajasController, type: :controller do
   let(:usuario) { FactoryBot.create :usuario, nombre: "Pedro", password: "qwerty" }
   let(:valid_attributes) do
     {
-      monto: 100.00,
+      monto_sistema: 100.00,
+      monto_cajero: 100.00,
       observacion: "Alguna observación",
       usuario_id: usuario.id
     }
@@ -13,7 +14,8 @@ RSpec.describe CierreCajasController, type: :controller do
 
   let(:invalid_attributes) do
     {
-      monto: nil,
+      monto_sistema: 0,
+      monto_cajero: 0,
       observacion: "",
       usuario_id: nil
     }

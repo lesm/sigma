@@ -11,7 +11,8 @@
         %table.table.table-hover.text-center
           %thead
             %tr
-              %th Monto
+              %th Monto Sistema
+              %th Monto Cajero
               %th Observacion
               %th Usuario
               %th Acción
@@ -19,7 +20,8 @@
           %tbody
             - @cierre_cajas.each do |cierre_caja|
               %tr
-                %td= cierre_caja.monto
+                %td= cierre_caja.monto_sistema
+                %td= cierre_caja.monto_cajero
                 %td= cierre_caja.observacion
                 %td= cierre_caja.usuario.nombre
                 %td

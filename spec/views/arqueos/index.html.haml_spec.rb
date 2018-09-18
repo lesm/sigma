@@ -6,12 +6,14 @@ RSpec.describe "arqueos/index", type: :view do
   before(:each) do
     assign(:arqueos, [
       Arqueo.create!(
-        :monto => "9.99",
+        :monto_sistema => "9.99",
+        :monto_cajero => "9.99",
         :observacion => "MyText",
         :cierre_caja => cierre_caja
       ),
       Arqueo.create!(
-        :monto => "9.99",
+        :monto_sistema => "9.99",
+        :monto_cajero => "9.99",
         :observacion => "MyText",
         :cierre_caja => cierre_caja
       )
@@ -20,7 +22,7 @@ RSpec.describe "arqueos/index", type: :view do
 
   it "renders a list of arqueos" do
     render
-    assert_select "tr>td", :text => "9.99".to_s, :count => 2
+    assert_select "tr>td", :text => "9.99".to_s, :count => 4
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
   end
 end

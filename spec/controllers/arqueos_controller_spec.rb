@@ -6,13 +6,15 @@ RSpec.describe ArqueosController, type: :controller do
 
   let(:cierre_caja) do 
     FactoryBot.create :cierre_caja,
-      monto: 300,
+      monto_sistema: 300,
+      monto_cajero: 300,
       usuario: usuario
   end
 
   let(:valid_attributes) do
     {
-      monto: 250.56,
+      monto_sistema: 250.56,
+      monto_cajero: 250.56,
       observacion: "Primer arqueo del día",
       cierre_caja_id: cierre_caja.id
     }
@@ -20,7 +22,8 @@ RSpec.describe ArqueosController, type: :controller do
 
   let(:invalid_attributes) do
     {
-      monto: 0,
+      monto_sistema: 0,
+      monto_cajero: 0,
       observacion: "Primer arqueo del día",
       cierre_caja_id: cierre_caja.id
     }
