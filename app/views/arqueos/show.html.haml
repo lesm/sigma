@@ -4,24 +4,46 @@
       .card-header
         .card-title Detalle del Arqueo
       .card-body
-        %p
-          %b Monto Sistema:
-          = number_to_currency @arqueo.monto_sistema
-        %p
-          %b Monto Cajero
-          = number_to_currency @arqueo.monto_cajero
-        %p
-          %b Observacion:
-          = @arqueo.observacion
-        %p
-          %b Fecha de creación:
-          = l @arqueo.created_at, format: :short
-        %p
-          %b Total Cierre caja sistema:
-          = number_to_currency @arqueo.cierre_caja.monto_sistema
-        %p
-          %b Total Cierre caja cajero:
-          = number_to_currency @arqueo.cierre_caja.monto_cajero
+        .row
+          .col-md-6
+            %p
+              %b Monto Sistema:
+              %span{style: "color:green"}
+                = number_to_currency @arqueo.monto_sistema
+            %p
+              %b Monto Cajero
+              %span{style: "color:green"}
+                = number_to_currency @arqueo.monto_cajero
+            %p
+              %b Observacion:
+              = @arqueo.observacion
+          .col-md-6
+            %p
+              %b Total Cierre caja sistema:
+              %span{style: "color:green"}
+                = number_to_currency @arqueo.cierre_caja.monto_sistema
+            %p
+              %b Total Cierre caja cajero:
+              %span{style: "color:green"}
+                = number_to_currency @arqueo.cierre_caja.monto_cajero
+            %p
+              %b Fecha de creación:
+              = l @arqueo.created_at, format: :short
+          .col-md-12
+            - if @dinero
+              %table.table.table-hover.text-center.table-sm
+                %thead
+                  %tr
+                    - labels_header.each do |title|
+                      %th= title
+                    %th Total
+                %tbody
+                  %tr
+                    - values_body.each do |value|
+                      %td= value
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency @dinero.total
 
         .btn-group.float-right
           = link_to cierre_cajas_path, class: 'btn btn-sm btn-secondary' do

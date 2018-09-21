@@ -1,14 +1,14 @@
 -# frozen_string_literal: true
 = simple_form_for(@arqueo) do |f|
   .row
-    .col-md-4
+    .col-md-3
       %h3 Totales
       %p
       = f.input :monto_sistema, readonly: true
-      = f.input :monto_cajero
-      = f.input :observacion
+      = f.input :monto_cajero, input_html: { class: "dinero" }
+      = f.input :observacion, input_html: { rows: 8 }
 
-    .col-md-8
+    .col-md-9
       = f.simple_fields_for :dinero do |df|
         = render "dineros/dinero_fields", f: df
 
@@ -16,4 +16,4 @@
     = link_to arqueos_path, class: 'btn btn-sm btn-secondary' do
       %i.fa.fa-arrow-left
       Regresar
-    = f.button :submit, class: 'btn btn-sm btn-primary'
+    = f.button :submit, class: 'btn btn-sm btn-primary', id: "newArqueo", disabled: true

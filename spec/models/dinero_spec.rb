@@ -10,7 +10,7 @@ RSpec.describe Dinero, type: :model do
   it { should_not allow_value(-1).for :cinco_pesos }
   it { should_not allow_value(-1).for :diez_pesos }
   it { should_not allow_value(-1).for :veinte_pesos }
-  it { should_not allow_value(-1).for :cinco_pesos }
+  it { should_not allow_value(-1).for :cincuenta_pesos }
   it { should_not allow_value(-1).for :cien_pesos }
   it { should_not allow_value(-1).for :doscientos_pesos }
   it { should_not allow_value(-1).for :quinientos_pesos }

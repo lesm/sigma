@@ -11,6 +11,7 @@ class ArqueosController < ApplicationController
   # GET /arqueos/1
   # GET /arqueos/1.json
   def show
+    @dinero = @arqueo.dinero
   end
 
   # GET /arqueos/new
@@ -36,7 +37,6 @@ class ArqueosController < ApplicationController
     @cierre_caja = current_cierre_caja
     @arqueo = Arqueo.new(arqueo_params)
 
-    #require "pry"; binding.pry
     respond_to do |format|
       if @cierre_caja.arqueos << @arqueo
         format.html { redirect_to @arqueo, notice: 'Arqueo was successfully created.' }

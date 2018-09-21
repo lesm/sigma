@@ -2,6 +2,11 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Agregar Arqueo
+        .card-title
+          .float-left Agregar Arqueo
+          .float-right
+            %h4
+              %span.badge.badge-success
+                #suma_monto $0.0
       .card-body
         = render 'form'
