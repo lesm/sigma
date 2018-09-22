@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_133407) do
+ActiveRecord::Schema.define(version: 2018_09_22_142429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 2018_09_20_133407) do
   create_table "cierre_cajas", force: :cascade do |t|
     t.decimal "monto_sistema", default: "0.0"
     t.text "observacion"
-    t.bigint "usuario_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "abierta", default: true
     t.decimal "monto_cajero", default: "0.0"
-    t.index ["usuario_id"], name: "index_cierre_cajas_on_usuario_id"
+    t.bigint "cajero_id"
+    t.index ["cajero_id"], name: "index_cierre_cajas_on_cajero_id"
   end
 
   create_table "contribuyentes", force: :cascade do |t|
@@ -121,11 +121,12 @@ ActiveRecord::Schema.define(version: 2018_09_20_133407) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
     t.index ["username"], name: "index_usuarios_on_username", unique: true
   end
 
   add_foreign_key "arqueos", "cierre_cajas"
-  add_foreign_key "cierre_cajas", "usuarios"
+  add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "dineros", "arqueos"
 end

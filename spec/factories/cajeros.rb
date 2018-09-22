@@ -1,10 +1,10 @@
 FactoryBot.define do
-  factory :usuario do
+  factory :cajero do
     nombre { "Pedro" }
     sequence(:username) { |n| "pedrito#{n}" }
     activo { true }
     password { "1qaz2wsx" }
-    rol { 0 }
-    type { "usuario" }
+    rol { 1 }
   end
 end
+

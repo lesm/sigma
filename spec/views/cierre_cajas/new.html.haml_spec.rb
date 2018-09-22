@@ -6,7 +6,7 @@ RSpec.describe "cierre_cajas/new", type: :view do
       :monto_sistema => "9.99",
       :monto_cajero => "9.99",
       :observacion => "MyText",
-      :usuario => nil
+      :cajero => nil
     ))
   end
 
@@ -19,7 +19,7 @@ RSpec.describe "cierre_cajas/new", type: :view do
 
       assert_select "textarea[name=?]", "cierre_caja[observacion]"
 
-      assert_select "input[name=?]", "cierre_caja[usuario_id]"
+      assert_select "input[name=?]", "cierre_caja[cajero_id]"
     end
   end
 end

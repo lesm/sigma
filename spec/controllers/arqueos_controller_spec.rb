@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe ArqueosController, type: :controller do
 
-  let(:usuario) { FactoryBot.create :usuario }
+  let(:cajero) { FactoryBot.create :cajero }
   let(:dinero_attributes) { FactoryBot.attributes_for :dinero }
 
   let(:cierre_caja) do
     FactoryBot.create :cierre_caja,
       monto_sistema: 300,
       monto_cajero: 300,
-      usuario: usuario
+      cajero: cajero
   end
 
   let(:valid_attributes) do
@@ -32,7 +32,7 @@ RSpec.describe ArqueosController, type: :controller do
   end
 
   before :each do
-    sign_in usuario 
+    sign_in cajero
   end
 
   describe "GET #index" do

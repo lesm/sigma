@@ -3,19 +3,19 @@ require 'rails_helper'
 RSpec.describe CierreCaja, type: :model do
   it { should validate_presence_of(:monto_sistema) }
   it { should validate_presence_of(:monto_cajero) }
-  it { should belong_to(:usuario) }
+  it { should belong_to(:cajero) }
   it { should have_many(:arqueos).dependent :destroy }
 
   describe "#monto" do
     context "actualiza monto despues de agregar un arqueo" do
-      let(:usuario) { FactoryBot.create :usuario }
+      let(:cajero) { FactoryBot.create :cajero }
       let(:arqueo) { FactoryBot.build :arqueo, monto_sistema:10, monto_cajero: 10 }
       let(:arqueo_2) { FactoryBot.build :arqueo, monto_sistema: 40, monto_cajero: 40 }
       let(:cierre_caja) do
-        FactoryBot.create :cierre_caja, usuario: usuario, arqueos: [arqueo]
+        FactoryBot.create :cierre_caja, cajero: cajero, arqueos: [arqueo]
       end
       let(:cierre_caja_2) do
-        FactoryBot.create :cierre_caja, usuario: usuario,
+        FactoryBot.create :cierre_caja, cajero: cajero,
           arqueos: [arqueo, arqueo_2]
       end
 

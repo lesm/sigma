@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe CierreCajasController, type: :controller do
 
-  let(:usuario) { FactoryBot.create :usuario, nombre: "Pedro", password: "qwerty" }
+  let(:cajero) { FactoryBot.create :cajero, nombre: "Pedro", password: "qwerty" }
   let(:valid_attributes) do
     {
       monto_sistema: 100.00,
       monto_cajero: 100.00,
       observacion: "Alguna observación",
-      usuario_id: usuario.id
+      cajero_id: cajero.id
     }
   end
 
@@ -17,12 +17,12 @@ RSpec.describe CierreCajasController, type: :controller do
       monto_sistema: 0,
       monto_cajero: 0,
       observacion: "",
-      usuario_id: nil
+      cajero_id: nil
     }
   end
 
   before :each do
-    sign_in usuario
+    sign_in cajero
   end
 
   describe "GET #index" do

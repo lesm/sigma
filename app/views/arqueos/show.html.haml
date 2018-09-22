@@ -46,6 +46,6 @@
                         = number_to_currency @dinero.total
 
         .btn-group.float-right
-          = link_to request.referer.present? ? request.referer : arqueos_path, class: 'btn btn-sm btn-secondary' do
+          = link_to referer_url_cierre_caja, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
             Regresar

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "CierreCajas", type: :request do
   before :each do
-    sign_in FactoryBot.create :usuario
+    sign_in FactoryBot.create :cajero
   end
 
   describe "GET /cierre_cajas" do

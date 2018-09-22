@@ -2,6 +2,22 @@ require 'rails_helper'
 
 RSpec.describe ArqueosHelper, type: :helper do
 
+  describe "#referer_url_cierre_caja" do
+    context "request.referer is arqueos" do
+      it "returns arqueos" do
+        allow(helper.request).to receive(:referer).and_return ("http://localhost:3000/arqueos")
+        expect(helper.referer_url_cierre_caja).to match /arqueos/
+      end
+    end
+
+    context "request.referer is cierre_cajas" do
+      it "returns cierre_cajas" do
+        allow(helper.request).to receive(:referer).and_return ("http://localhost:3000/cierre_cajas/1")
+        expect(helper.referer_url_cierre_caja).to match /cierre_cajas/
+      end
+    end
+  end
+
   describe "#values_body" do
     context "When values are greater than 0" do
       context "diez_centavos, veinte_centavos, cincuenta_centavos" do

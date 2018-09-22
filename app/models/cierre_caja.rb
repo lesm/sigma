@@ -1,5 +1,5 @@
 class CierreCaja < ApplicationRecord
-  belongs_to :usuario
+  belongs_to :cajero
   has_many :arqueos, inverse_of: :cierre_caja, dependent: :destroy
 
   validates :monto_sistema, :monto_cajero, presence: true

@@ -5,7 +5,7 @@
       = f.input :monto_cajero, disabled: true
     .col-md-6
       = f.input :observacion
-    = f.association :usuario, as: :hidden
+    = f.association :cajero, as: :hidden
 
   .btn-group.float-right
     = link_to cierre_cajas_path, class: 'btn btn-sm btn-secondary' do

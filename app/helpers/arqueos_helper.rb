@@ -11,6 +11,10 @@ module ArqueosHelper
     end
   end
 
+  def referer_url_cierre_caja
+    (request.referer =~ /cierre_cajas/) ?  request.referer : arqueos_path
+  end
+
   private
 
   def attributes_dinero

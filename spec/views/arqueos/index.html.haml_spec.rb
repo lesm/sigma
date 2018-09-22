@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "arqueos/index", type: :view do
-  let(:usuario) { FactoryBot.create :usuario }
-  let(:cierre_caja) { FactoryBot.create :cierre_caja, usuario: usuario }
+  let(:cajero) { FactoryBot.create :cajero }
+  let(:cierre_caja) { FactoryBot.create :cierre_caja, cajero: cajero }
   before(:each) do
     assign(:arqueos, [
       Arqueo.create!(

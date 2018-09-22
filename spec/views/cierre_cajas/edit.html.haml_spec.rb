@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "cierre_cajas/edit", type: :view do
-  let(:usuario) { FactoryBot.create :usuario, nombre: "Pedro", password: "qwerty" }
+  let(:cajero) { FactoryBot.create :cajero, nombre: "Pedro", password: "qwerty" }
   before(:each) do
     @cierre_caja = assign(:cierre_caja, CierreCaja.create!(
       :monto_sistema => "9.99",
       :monto_cajero => "9.99",
       :observacion => "MyText",
-      :usuario => usuario
+      :cajero => cajero
     ))
   end
 
@@ -20,7 +20,7 @@ RSpec.describe "cierre_cajas/edit", type: :view do
 
       assert_select "textarea[name=?]", "cierre_caja[observacion]"
 
-      assert_select "input[name=?]", "cierre_caja[usuario_id]"
+      assert_select "input[name=?]", "cierre_caja[cajero_id]"
     end
   end
 end

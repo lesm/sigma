@@ -28,7 +28,7 @@ class ArqueosController < ApplicationController
   end
 
   def crea_cierre_caja
-    CierreCaja.create usuario: current_usuario
+    CierreCaja.create cajero: current_usuario
   end
 
   # POST /arqueos
