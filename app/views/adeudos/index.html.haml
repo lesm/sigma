@@ -1,0 +1,29 @@
+%h1 Listing adeudos
+
+%table
+  %thead
+    %tr
+      %th Anticipo
+      %th Monto
+      %th Liquidado
+      %th Cajero
+      %th Arqueo
+      %th
+      %th
+      %th
+
+  %tbody
+    - @adeudos.each do |adeudo|
+      %tr
+        %td= adeudo.anticipo
+        %td= adeudo.monto
+        %td= adeudo.liquidado
+        %td= adeudo.cajero
+        %td= adeudo.arqueo
+        %td= link_to 'Show', adeudo
+        %td= link_to 'Edit', edit_adeudo_path(adeudo)
+        %td= link_to 'Destroy', adeudo, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Adeudo', new_adeudo_path

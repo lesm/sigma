@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Anticipo:
+  = @adeudo.anticipo
+%p
+  %b Monto:
+  = @adeudo.monto
+%p
+  %b Liquidado:
+  = @adeudo.liquidado
+%p
+  %b Cajero:
+  = @adeudo.cajero
+%p
+  %b Arqueo:
+  = @adeudo.arqueo
+
+= link_to 'Edit', edit_adeudo_path(@adeudo)
+\|
+= link_to 'Back', adeudos_path

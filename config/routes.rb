@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :usuarios
   get 'dashboard/index'
+  resources :adeudos
   resources :emisores
   resources :contribuyentes
   resources :cierre_cajas, except: [:new, :destroy] do

@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_142429) do
+ActiveRecord::Schema.define(version: 2018_09_22_193617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adeudos", force: :cascade do |t|
+    t.decimal "anticipo", default: "0.0"
+    t.decimal "monto", default: "0.0"
+    t.boolean "liquidado", default: false
+    t.bigint "cajero_id"
+    t.bigint "arqueo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["arqueo_id"], name: "index_adeudos_on_arqueo_id"
+    t.index ["cajero_id"], name: "index_adeudos_on_cajero_id"
+  end
 
   create_table "arqueos", force: :cascade do |t|
     t.decimal "monto_sistema", default: "0.0"
@@ -126,6 +138,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_142429) do
     t.index ["username"], name: "index_usuarios_on_username", unique: true
   end
 
+  add_foreign_key "adeudos", "arqueos"
+  add_foreign_key "adeudos", "usuarios", column: "cajero_id"
   add_foreign_key "arqueos", "cierre_cajas"
   add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "dineros", "arqueos"
