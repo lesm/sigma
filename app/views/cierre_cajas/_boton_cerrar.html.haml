@@ -1,0 +1,4 @@
+- if @cierre_caja.abierta?
+  = link_to cerrar_cierre_caja_path(@cierre_caja), method: :post, remote: true, data: { confirm_swal: "Una vez cerrada la caja ya no se puede abrir." }, class: 'btn btn-sm btn-danger' do
+    %i.fa.fa-warning
+    Cerrar caja

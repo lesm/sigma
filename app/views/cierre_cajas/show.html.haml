@@ -2,29 +2,57 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Detalle del Cierre de Caja
+        .card-title
+          %i.fa.fa-key
+          Detalle del Cierre de Caja
       .card-body
         .row
-          .col-md-6
-            %fieldset
-              %legend
-                %i.fa.fa-user
-                &nbsp;
-                Información
-            %h6
-              Monto sistema:
-              = @cierre_caja.monto_sistema
-            %h6
-              Monto cajero:
-              = @cierre_caja.monto_cajero
-            %h6
-              Observación:
-              = @cierre_caja.observacion
+          .col-md-4
             %h6
               Usuario:
               = @cierre_caja.usuario.nombre
-
+          .col-md-8
+            %h6
+              Observación:
+              = @cierre_caja.observacion
+        .row
+          .col-md-12
+            %p
+            %h4 #{@cierre_caja.arqueos.count} #{"arqueo".pluralize(@cierre_caja.arqueos.count).capitalize}
+            %table.table.table-hover.table-sm
+              %thead.text-right
+                %tr
+                  %th Monto Sistema
+                  %th Monto Cajero
+                  %th Observación
+                  %th Fecha de Creación
+                  %th Acción
+              %tbody.text-right
+                - @cierre_caja.arqueos.each do |arqueo|
+                  %tr
+                    %td= number_to_currency arqueo.monto_sistema
+                    %td= number_to_currency arqueo.monto_cajero
+                    %td= arqueo.observacion
+                    %td= l arqueo.created_at, format: :short
+                    %td
+                      = link_to arqueo, class: "btn btn-sm btn-info" do
+                        %i.fa.fa-eye
+                        Ver
+              %tfoot.text-right
+                %tr
+                  %td
+                    %strong
+                      %span{style: "color:green"}
+                        = number_to_currency @cierre_caja.monto_sistema
+                  %td
+                    %strong
+                      %span{style: "color:green"}
+                        = number_to_currency @cierre_caja.monto_cajero
+                  %td
+                  %td
         .btn-group.float-right
           = link_to cierre_cajas_path, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
             Regresar
+          #botonCerrar
+            = render "boton_cerrar"

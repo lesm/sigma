@@ -29,6 +29,7 @@ es-MX:
         quinientos_pesos: "Quinientos Pesos"
         mil_pesos: "Mil Pesos"
         dos_mil_pesos: "Dos Mil Pesos"
+        observacion: "Observación"
     # Examples
     # labels:
     #   defaults:

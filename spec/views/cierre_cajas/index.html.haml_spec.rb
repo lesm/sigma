@@ -20,8 +20,7 @@ RSpec.describe "cierre_cajas/index", type: :view do
 
   it "renders a list of cierre_cajas" do
     render
-    assert_select "tr>td", :text => "9.99".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => usuario.nombre.to_s, :count => 2
+    assert_select "tr>td", :text => "Abierta".to_s, :count => 2
+    assert_select "tr>td", :text => "$0.00".to_s, :count => 2
   end
 end

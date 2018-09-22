@@ -8,8 +8,8 @@
             %i.fa.fa-plus
             Agregar Arqueo
       .card-body
-        %table.table.table-hover.text-center
-          %thead
+        %table.table.table-hover.table-sm
+          %thead.text-right
             %tr
               %th Monto Sistema
               %th Monto Cajero
@@ -17,13 +17,13 @@
               %th Fecha de creación
               %th Acción
 
-          %tbody
+          %tbody.text-right
             - @arqueos.each do |arqueo|
               %tr
-                %td= arqueo.monto_sistema
-                %td= arqueo.monto_cajero
+                %td= number_to_currency arqueo.monto_sistema
+                %td= number_to_currency arqueo.monto_cajero
                 %td= arqueo.observacion
-                %td= arqueo.created_at
+                %td= l arqueo.created_at, format: :short
                 %td
                   = link_to arqueo, class: 'btn btn-sm btn-info' do
                     %i.fa.fa-eye

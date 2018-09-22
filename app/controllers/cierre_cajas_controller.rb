@@ -1,5 +1,5 @@
 class CierreCajasController < ApplicationController
-  before_action :set_cierre_caja, only: [:show, :edit, :update, :destroy]
+  before_action :set_cierre_caja, only: [:show, :edit, :update, :destroy, :cerrar]
 
   # GET /cierre_cajas
   # GET /cierre_cajas.json
@@ -59,6 +59,10 @@ class CierreCajasController < ApplicationController
       format.html { redirect_to cierre_cajas_url, notice: 'Cierre caja was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def cerrar
+    @cierre_caja.update_column(:abierta, false)
   end
 
   private

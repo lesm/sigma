@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'dashboard/index'
   resources :emisores
   resources :contribuyentes
-  resources :cierre_cajas, except: [:edit, :update, :destroy]
+  resources :cierre_cajas, except: [:new, :destroy] do
+    post :cerrar, on: :member
+  end
   resources :arqueos, except: [:edit, :update, :destroy]
   root 'pages#index'
 end

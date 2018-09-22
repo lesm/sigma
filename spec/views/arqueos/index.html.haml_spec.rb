@@ -22,7 +22,7 @@ RSpec.describe "arqueos/index", type: :view do
 
   it "renders a list of arqueos" do
     render
-    assert_select "tr>td", :text => "9.99".to_s, :count => 4
+    assert_select "tr>td", :text => "$9.99".to_s, :count => 4
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
   end
 end

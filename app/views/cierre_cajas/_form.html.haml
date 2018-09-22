@@ -2,7 +2,7 @@
 = simple_form_for(@cierre_caja) do |f|
   .row
     .col-md-6
-      = f.input :monto_cajero
+      = f.input :monto_cajero, disabled: true
     .col-md-6
       = f.input :observacion
     = f.association :usuario, as: :hidden

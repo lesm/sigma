@@ -2,29 +2,30 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Contribuyentes
-        .card-tools
-          = link_to new_cierre_caja_path, class: 'btn btn-sm btn-primary' do
-            %i.fa.fa-plus
-            Agregar Cierre de Caja
+        .card-title Listado de Cierres de caja
       .card-body
-        %table.table.table-hover.text-center
-          %thead
+        %table.table.table-hover.table-sm
+          %thead.text-right
             %tr
+              %th Estado
               %th Monto Sistema
               %th Monto Cajero
-              %th Observacion
-              %th Usuario
-              %th Acción
+              %th Fecha de Cierre
+              %th Acciones
 
-          %tbody
+          %tbody.text-right
             - @cierre_cajas.each do |cierre_caja|
               %tr
-                %td= cierre_caja.monto_sistema
-                %td= cierre_caja.monto_cajero
-                %td= cierre_caja.observacion
-                %td= cierre_caja.usuario.nombre
+                %td= estado(cierre_caja)
+                %td= number_to_currency cierre_caja.monto_sistema
+                %td= number_to_currency cierre_caja.monto_cajero
+                %td= l cierre_caja.updated_at, format: :short
                 %td
-                  = link_to cierre_caja, class: 'btn btn-sm btn-info' do
-                    %i.fa.fa-eye
-                    Ver
+                  .btn-group
+                    = link_to cierre_caja, class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-eye
+                      Ver
+                    - if cierre_caja.abierta?
+                      = link_to edit_cierre_caja_path(cierre_caja), class: 'btn btn-sm btn-warning' do
+                        %i.fa.fa-edit
+                        Editar
