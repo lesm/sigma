@@ -13,14 +13,14 @@ RSpec.describe "adeudos/index", type: :view do
     cierre_caja_dos
     assign(:adeudos, [
       Adeudo.create!(
-        :anticipo => "9.99",
+        :anticipo => "0",
         :monto => "9.99",
         :liquidado => false,
         :cajero => cajero,
         :arqueo => arqueo
       ),
       Adeudo.create!(
-        :anticipo => "9.99",
+        :anticipo => "0",
         :monto => "9.99",
         :liquidado => false,
         :cajero => cajero,
@@ -31,6 +31,7 @@ RSpec.describe "adeudos/index", type: :view do
 
   it "renders a list of adeudos" do
     render
-    assert_select "tr>td", :text => "9.99".to_s, :count => 4
+    assert_select "tr>td", :text => "$9.99".to_s, :count => 2
+    assert_select "tr>td", :text => "Pendiente".to_s, :count => 2
   end
 end

@@ -4,8 +4,8 @@
     .col-md-3
       %h3 Totales
       %p
-      = f.input :monto_sistema, readonly: true
-      = f.input :monto_cajero, input_html: { class: "dinero" }
+      = f.input :monto_sistema
+      = f.input :monto_cajero, input_html: { class: "dinero", min: 0 }
       = f.input :observacion, input_html: { rows: 8 }
 
     .col-md-9

@@ -4,7 +4,7 @@ class CierreCajasController < ApplicationController
   # GET /cierre_cajas
   # GET /cierre_cajas.json
   def index
-    @cierre_cajas = current_usuario.cierre_cajas
+    @cierre_cajas = current_usuario.cierre_cajas.order(created_at: :desc)
   end
 
   # GET /cierre_cajas/1

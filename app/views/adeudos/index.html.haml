@@ -1,29 +1,23 @@
-%h1 Listing adeudos
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Listado de Adeudos
+      .card-body
+        %table.table.table-hover.text-center
+          %thead
+            %tr
+              %th Anticipo
+              %th Monto
+              %th Estado
+              %th Cajero
+              %th Fecha de arqueo
 
-%table
-  %thead
-    %tr
-      %th Anticipo
-      %th Monto
-      %th Liquidado
-      %th Cajero
-      %th Arqueo
-      %th
-      %th
-      %th
-
-  %tbody
-    - @adeudos.each do |adeudo|
-      %tr
-        %td= adeudo.anticipo
-        %td= adeudo.monto
-        %td= adeudo.liquidado
-        %td= adeudo.cajero
-        %td= adeudo.arqueo
-        %td= link_to 'Show', adeudo
-        %td= link_to 'Edit', edit_adeudo_path(adeudo)
-        %td= link_to 'Destroy', adeudo, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Adeudo', new_adeudo_path
+          %tbody
+            - @adeudos.each do |adeudo|
+              %tr
+                %td= number_to_currency adeudo.anticipo
+                %td= number_to_currency adeudo.monto
+                %td= liquidado(adeudo)
+                %td= adeudo.cajero
+                %td= l adeudo.arqueo.created_at, format: :short

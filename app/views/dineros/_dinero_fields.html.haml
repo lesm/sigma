@@ -4,25 +4,25 @@
     %p
     .row
       .col-md-6
-        = f.input :veinte_pesos, as: :integer, hint: "Cantidad de billetes"
-        = f.input :cincuenta_pesos, as: :integer, hint: "Cantidad de billetes"
-        = f.input :cien_pesos, as: :integer, hint: "Cantidad de billetes"
-        = f.input :doscientos_pesos, as: :integer, hint: "Cantidad de billetes"
+        = f.input :veinte_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+        = f.input :cincuenta_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+        = f.input :cien_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+        = f.input :doscientos_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
       .col-md-6
-        = f.input :quinientos_pesos, as: :integer, hint: "Cantidad de billetes"
-        = f.input :mil_pesos, as: :integer, hint: "Cantidad de billetes"
-        = f.input :dos_mil_pesos, as: :integer, hint: "Cantidad de billetes"
+        = f.input :quinientos_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+        = f.input :mil_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+        = f.input :dos_mil_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
   .col-md-6
     %h3 Monedas
     %p
     .row
       .col-md-6
-        = f.input :un_peso, as: :integer, hint: "Cantidad de monedas"
-        = f.input :dos_pesos, as: :integer, hint: "Cantidad de monedas"
-        = f.input :cinco_pesos, as: :integer, hint: "Cantidad de monedas"
-        = f.input :diez_pesos, as: :integer, hint: "Cantidad de monedas"
+        = f.input :un_peso, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
+        = f.input :dos_pesos, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
+        = f.input :cinco_pesos, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
+        = f.input :diez_pesos, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
       .col-md-6
-        = f.input :diez_centavos, as: :integer, hint: "Cantidad de monedas"
-        = f.input :veinte_centavos, as: :integer, hint: "Cantidad de monedas"
-        = f.input :cincuenta_centavos, as: :integer, hint: "Cantidad de monedas"
+        = f.input :diez_centavos, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
+        = f.input :veinte_centavos, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
+        = f.input :cincuenta_centavos, as: :integer, hint: "Cantidad de monedas", input_html: { min: 0 }
         = f.hidden_field :total, as: :integer

@@ -49,3 +49,7 @@
           = link_to referer_url_cierre_caja, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
             Regresar
+          - if @arqueo.adeudo
+            = link_to adeudo_path(@arqueo.adeudo), class: "btn btn-sm btn-info" do
+              %i.fa.fa-dollar
+              Adeudo

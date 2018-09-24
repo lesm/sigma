@@ -15,7 +15,7 @@ RSpec.describe ArqueosController, type: :controller do
   let(:valid_attributes) do
     {
       monto_sistema: 250.56,
-      monto_cajero: 250.56,
+      monto_cajero: 200.56,
       observacion: "Primer arqueo del día",
       cierre_caja_id: cierre_caja.id,
       dinero_attributes: dinero_attributes
@@ -75,6 +75,19 @@ RSpec.describe ArqueosController, type: :controller do
       it "redirects to the created arqueo" do
         post :create, params: { arqueo: valid_attributes }
         expect(response).to redirect_to(Arqueo.last)
+      end
+
+      context "when monto_sistema is different of monto_cajero" do
+        it "creates a new Adeudo" do
+          expect {
+            post :create, params: { arqueo: valid_attributes }
+          }.to change(Adeudo, :count).by(1)
+        end
+
+        it "monto Adeudo must be $50.00" do
+          post :create, params: { arqueo: valid_attributes }
+          expect(Adeudo.last.monto).to eq 50.00
+        end
       end
 
       context "when cierre_caja does not exist" do

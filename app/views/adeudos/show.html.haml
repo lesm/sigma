@@ -1,21 +1,29 @@
-%p#notice= notice
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle Adeudo
+      .card-body
+        .row
+          .col-md-6
+            %p
+              %b Anticipo:
+              = number_to_currency @adeudo.anticipo
+            %p
+              %b Monto:
+              = number_to_currency @adeudo.monto
+            %p
+              %b Liquidado:
+              = liquidado @adeudo
+          .col-md-6
+            %p
+              %b Cajero:
+              = @adeudo.cajero
+            %p
+              %b Arqueo:
+              = l @adeudo.arqueo.created_at, format: :short
 
-%p
-  %b Anticipo:
-  = @adeudo.anticipo
-%p
-  %b Monto:
-  = @adeudo.monto
-%p
-  %b Liquidado:
-  = @adeudo.liquidado
-%p
-  %b Cajero:
-  = @adeudo.cajero
-%p
-  %b Arqueo:
-  = @adeudo.arqueo
-
-= link_to 'Edit', edit_adeudo_path(@adeudo)
-\|
-= link_to 'Back', adeudos_path
+        .btn-group.float-right
+          = link_to referer_url_arqueo, class: 'btn btn-sm btn-secondary' do
+            %i.fa.fa-arrow-left
+            Regresar

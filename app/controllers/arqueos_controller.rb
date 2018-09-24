@@ -5,7 +5,7 @@ class ArqueosController < ApplicationController
   # GET /arqueos
   # GET /arqueos.json
   def index
-    @arqueos = current_usuario.arqueos
+    @arqueos = current_usuario.arqueos.order(created_at: :desc)
   end
 
   # GET /arqueos/1
