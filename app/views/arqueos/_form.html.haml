@@ -5,7 +5,7 @@
       %h3 Totales
       %p
       = f.input :monto_sistema
-      = f.input :monto_cajero, input_html: { class: "dinero", min: 0 }
+      = f.input :monto_cajero, input_html: { class: "dinero", min: 0 }, readonly: true
       = f.input :observacion, input_html: { rows: 8 }
 
     .col-md-9
@@ -16,4 +16,4 @@
     = link_to arqueos_path, class: 'btn btn-sm btn-secondary' do
       %i.fa.fa-arrow-left
       Regresar
-    = f.button :submit, class: 'btn btn-sm btn-primary', id: "newArqueo", disabled: true
+    = f.button :submit, class: 'btn btn-sm btn-primary'

@@ -1,10 +1,10 @@
 class DineroPresenter < SimpleDelegator
   def diez_centavos
-    super * 0.1 
+    super * 0.1
   end
 
   def veinte_centavos
-    super * 0.2 
+    super * 0.2
   end
 
   def cincuenta_centavos
@@ -12,7 +12,7 @@ class DineroPresenter < SimpleDelegator
   end
 
   def un_peso
-    super * 1.0 
+    super * 1.0
   end
 
   def dos_pesos
@@ -28,38 +28,41 @@ class DineroPresenter < SimpleDelegator
   end
 
   def veinte_pesos
-    super * 20.0 
+    super * 20.0
+  end
+
+  def veinte_m_pesos
+    super * 20.0
   end
 
   def cincuenta_pesos
-    super * 50.0 
+    super * 50.0
   end
 
   def cien_pesos
-    super * 100.0 
+    super * 100.0
   end
 
   def doscientos_pesos
-    super * 200.0 
+    super * 200.0
   end
 
   def quinientos_pesos
-    super * 500.0 
+    super * 500.0
   end
 
   def mil_pesos
-    super * 1000.0 
+    super * 1000.0
   end
 
   def dos_mil_pesos
-    super * 2000.0 
+    super * 2000.0
   end
 
   def total
     diez_centavos + veinte_centavos + cincuenta_centavos +
       un_peso + dos_pesos + cinco_pesos + diez_pesos +
-      veinte_pesos + cincuenta_pesos + cien_pesos + 
-      doscientos_pesos + quinientos_pesos + mil_pesos + 
-      dos_mil_pesos
+      veinte_pesos + veinte_m_pesos + cincuenta_pesos + cien_pesos +
+      doscientos_pesos + quinientos_pesos + mil_pesos + dos_mil_pesos
   end
 end

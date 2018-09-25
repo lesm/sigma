@@ -75,13 +75,14 @@ ActiveRecord::Schema.define(version: 2018_09_22_193617) do
     t.integer "cinco_pesos", default: 0
     t.integer "diez_pesos", default: 0
     t.integer "veinte_pesos", default: 0
+    t.integer "veinte_m_pesos", default: 0
     t.integer "cincuenta_pesos", default: 0
     t.integer "cien_pesos", default: 0
     t.integer "doscientos_pesos", default: 0
     t.integer "quinientos_pesos", default: 0
     t.integer "mil_pesos", default: 0
     t.integer "dos_mil_pesos", default: 0
-    t.decimal "total"
+    t.money "total", scale: 2, default: "0.0"
     t.bigint "arqueo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

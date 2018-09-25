@@ -14,6 +14,7 @@ RSpec.describe DineroPresenter do
         cinco_pesos: 1,
         diez_pesos: 1,
         veinte_pesos: 1,
+        veinte_m_pesos: 1,
         cincuenta_pesos: 1,
         cien_pesos: 1,
         doscientos_pesos: 1,
@@ -30,6 +31,7 @@ RSpec.describe DineroPresenter do
     it { expect(dinero_presenter.cinco_pesos).to eq 5.0 }
     it { expect(dinero_presenter.diez_pesos).to eq 10.0 }
     it { expect(dinero_presenter.veinte_pesos).to eq 20.0 }
+    it { expect(dinero_presenter.veinte_m_pesos).to eq 20.0 }
     it { expect(dinero_presenter.cincuenta_pesos).to eq 50.0 }
     it { expect(dinero_presenter.cien_pesos).to eq 100.0 }
     it { expect(dinero_presenter.doscientos_pesos).to eq 200.0 }
@@ -38,7 +40,7 @@ RSpec.describe DineroPresenter do
     it { expect(dinero_presenter.dos_mil_pesos).to eq 2000.0 }
 
     it "#total" do
-      expect(dinero_presenter.total).to eq 3888.8
+      expect(dinero_presenter.total).to eq 3908.8
     end
   end
 
@@ -53,6 +55,7 @@ RSpec.describe DineroPresenter do
         cinco_pesos: 2,
         diez_pesos: 2,
         veinte_pesos: 2,
+        veinte_m_pesos: 2,
         cincuenta_pesos: 2,
         cien_pesos: 2,
         doscientos_pesos: 2,
@@ -69,6 +72,7 @@ RSpec.describe DineroPresenter do
     it { expect(dinero_presenter.cinco_pesos).to eq 10.0 }
     it { expect(dinero_presenter.diez_pesos).to eq 20.0 }
     it { expect(dinero_presenter.veinte_pesos).to eq 40.0 }
+    it { expect(dinero_presenter.veinte_m_pesos).to eq 40.0 }
     it { expect(dinero_presenter.cincuenta_pesos).to eq 100.0 }
     it { expect(dinero_presenter.cien_pesos).to eq 200.0 }
     it { expect(dinero_presenter.doscientos_pesos).to eq 400.0 }
@@ -77,7 +81,7 @@ RSpec.describe DineroPresenter do
     it { expect(dinero_presenter.dos_mil_pesos).to eq 4000.0 }
 
     it "#total" do
-      expect(dinero_presenter.total).to eq 7777.6 
+      expect(dinero_presenter.total).to eq 7817.6
     end
   end
 end

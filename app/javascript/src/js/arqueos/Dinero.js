@@ -48,6 +48,12 @@ class Dinero {
     return parseFloat((cantidad * 20).toFixed(2))
   }
 
+  veinte_m_pesos() {
+    let cantidad = parseInt($("input[id$='_veinte_m_pesos']").val())
+    if (isNaN(cantidad)) return 0
+    return parseFloat((cantidad * 20).toFixed(2))
+  }
+
   cincuenta_pesos() {
     let cantidad = parseInt($("input[id$='_cincuenta_pesos']").val())
     if (isNaN(cantidad)) return 0
@@ -73,7 +79,7 @@ class Dinero {
   }
 
   mil_pesos() {
-    let cantidad = parseInt($("input[id$='_mil_pesos']").val())
+    let cantidad = parseInt($("input[id$='attributes_mil_pesos']").val())
     if (isNaN(cantidad)) return 0
     return parseFloat((cantidad * 1000).toFixed(2))
   }
@@ -89,7 +95,7 @@ class Dinero {
       this.un_peso() + this.dos_pesos() + this.cinco_pesos() + this.diez_pesos() +
       this.veinte_pesos() + this.cincuenta_pesos() + this.cien_pesos() +
       this.doscientos_pesos() + this.quinientos_pesos() + this.mil_pesos() +
-      this.dos_mil_pesos()
+      this.veinte_m_pesos() + this.dos_mil_pesos()
   }
 
   suma_vista() {
@@ -105,37 +111,13 @@ class Dinero {
 
     return formatter.format(amount)
   }
-
-  monto_valido() {
-    if (this.monto_cajero == 0 || this.monto_diferente())
-      return false
-    return true
-  }
-
-  monto_diferente() {
-    return (this.monto_cajero() != this.suma())
-  }
-
-  monto_cajero() {
-    let monto = parseFloat($("input[id$='_monto_cajero']").val())
-    if (isNaN(monto)) return 0
-    return monto
-  }
-}
-
-function valida_boton_crear_arqueo(dinero) {
-  if (dinero.monto_valido()) {
-    $("#newArqueo").attr("disabled", false)
-  } else {
-    $("#newArqueo").attr("disabled", true)
-  }
 }
 
 function calculateAmount() {
   let dinero = new Dinero()
   $("#suma_monto").html(dinero.suma_vista())
   $("input[id$='_total']").val(dinero.suma())
-  valida_boton_crear_arqueo(dinero)
+  $("input[id$='_cajero']").val(dinero.suma())
 }
 
 $(document).on("change", ".dinero", calculateAmount)
