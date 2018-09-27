@@ -5,32 +5,44 @@
         .card-title Detalle del Arqueo
       .card-body
         .row
-          .col-md-6
+          .col-md-4
             %p
-              %b Monto Sistema:
+              %b Monto (SISTEMA):
               %span{style: "color:green"}
                 = number_to_currency @arqueo.monto_sistema
             %p
-              %b Monto Cajero
+              %b Monto (CAJERO)
               %span{style: "color:green"}
                 = number_to_currency @arqueo.monto_cajero
-            %p
-              %b Observacion:
-              = @arqueo.observacion
-          .col-md-6
-            %p
-              %b Total Cierre caja sistema:
-              %span{style: "color:green"}
-                = number_to_currency @arqueo.cierre_caja.monto_sistema
-            %p
-              %b Total Cierre caja cajero:
-              %span{style: "color:green"}
-                = number_to_currency @arqueo.cierre_caja.monto_cajero
+          .col-md-8
             %p
               %b Fecha de creación:
               = l @arqueo.created_at, format: :short
-          .col-md-12
-            - if @dinero
+            %p
+              %b Observación:
+              = @arqueo.observacion
+        - if @arqueo.adeudo.present?
+          .row
+            .col-md-12
+              %h5 Adeudo
+            .col-md-4
+              %p
+                %b Monto:
+                %span{style: "color:green"}
+                  = number_to_currency @arqueo.adeudo.monto
+            .col-md-4
+              %p
+                %b Estado:
+                = liquidado @arqueo.adeudo
+            .col-md-4
+              %p
+                %b Cajero:
+                = @arqueo.cierre_caja.cajero
+        - if @dinero
+          %p
+          .row
+            .col-md-12
+              %h5 Dinero
               %table.table.table-hover.text-center.table-sm
                 %thead
                   %tr
@@ -46,10 +58,6 @@
                         = number_to_currency @dinero.total
 
         .btn-group.float-right
-          = link_to referer_url_cierre_caja, class: 'btn btn-sm btn-secondary' do
+          = link_to cierre_caja_path(@arqueo.cierre_caja), class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
             Regresar
-          - if @arqueo.adeudo
-            = link_to adeudo_path(@arqueo.adeudo), class: "btn btn-sm btn-info" do
-              %i.fa.fa-dollar
-              Adeudo

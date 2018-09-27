@@ -6,9 +6,10 @@
   .sidebar
     .user-panel.mt-3.pb-3.mb-3.d-flex
       .image
-        %img.img-circle.elevation-2{:src => "#{asset_pack_path('images/user2-160x160.jpg')}"}
+        %img.img-circle.elevation-2{:src => "#{asset_pack_path('images/sigma_avatar.png')}"}
       .info
-        %a.d-block{:href => "#"} Alexander Pierce
+        %a.d-block{:href => "#"}
+          = current_usuario
     %nav.mt-2
       %ul.nav.nav-pills.nav-sidebar.flex-column{"data-accordion" => "false", "data-widget" => "treeview", :role => "menu"}
         %li.nav-item
@@ -43,9 +44,9 @@
                 %i.fa.fa-circle-o.nav-icon
                 %p Facturas
             %li.nav-item
-              = link_to arqueos_path, class: "nav-link #{ controller_name == 'arqueos' && 'active' }" do
+              = link_to new_arqueo_path, class: "nav-link #{ (controller_name == 'arqueos' && action_name == 'new') && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
-                %p Arqueos
+                %p Crear Arqueo
             %li.nav-item
               = link_to cierre_cajas_path, class: "nav-link #{ controller_name == 'cierre_cajas' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
@@ -75,8 +76,8 @@
               %a.nav-link{:href => "#"}
                 %i.fa.fa-circle-o.nav-icon
                 %p Arqueos
-        %li.nav-item.has-treeview{ class: "#{ controller_name == 'emisores' && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ controller_name == 'emisores' && 'active' }" do
+        %li.nav-item.has-treeview{ class: "#{ (%w(emisores cajeros).include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (%w(emisores cajeros).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-dashboard
             %p
               Administrador
@@ -87,9 +88,9 @@
                 %i.fa.fa-circle-o.nav-icon
                 %p Municipio
             %li.nav-item
-              %a.nav-link{:href => "#"}
+              = link_to cajeros_path, class: "nav-link #{ controller_name == 'cajeros' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
-                %p Usuarios
+                %p Cajeros
             %li.nav-item
               %a.nav-link{:href => "#"}
                 %i.fa.fa-circle-o.nav-icon

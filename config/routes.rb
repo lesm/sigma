@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :adeudos
   resources :emisores
   resources :contribuyentes
+  resources :cajeros
   resources :cierre_cajas, except: [:new, :destroy] do
     post :cerrar, on: :member
   end

@@ -2,34 +2,21 @@
 = simple_form_for(@contribuyente) do |f|
   .row
     .col-md-6
-      .form-inputs
-        = f.input :nombre_o_razon_social
-        = f.input :primer_apellido
-        = f.input :segundo_apellido
-        = f.input :persona_fisica
-        = f.input :email
-        = f.input :rfc
-
+      = render "contribuyente_fields", f: f
     .col-md-6
-      = f.simple_fields_for :direccion do |df|
+      = render "direcciones/direccion_fields", f: f
+    .col-md-12
+      %h5 Agregar Cuentas de Cobro
+      #conceptos
         .row
-          .col-md-8
-            = df.input :calle
-          .col-md-4
-            = df.input :numero
-        = df.input :colonia
+          %p
+          = f.simple_fields_for :conceptos do |cf|
+            = render "conceptos/concepto_fields", f: cf
         .row
-          .col-md-4
-            = df.input :codigo_postal
-          .col-md-8
-            = df.input :localidad
-        = df.input :municipio
-        .row
-          .col-md-6
-            = df.input :estado, collection: estados_para_select,
-              input_html: { class: "select2" }
-          .col-md-6
-            = df.input :pais
+          .links.col-md-12
+            = link_to_add_association f, :conceptos, partial: 'conceptos/concepto_fields', class: "btn btn-sm btn-default" do
+              %i.fa.fa-plus
+              Agregar cuenta
 
   .btn-group.float-right
     = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do

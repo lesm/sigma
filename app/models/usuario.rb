@@ -10,4 +10,12 @@ class Usuario < ApplicationRecord
   def email_required?
     false
   end
+
+  def active_for_authentication?
+    super && activo?
+  end
+
+  def inactive_message
+    activo? ? super : :account_inactive
+  end
 end

@@ -16,17 +16,11 @@ RSpec.describe "contribuyentes/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", contribuyente_path(@contribuyente), "post" do
-
       assert_select "input[name=?]", "contribuyente[nombre_o_razon_social]"
-
       assert_select "input[name=?]", "contribuyente[primer_apellido]"
-
       assert_select "input[name=?]", "contribuyente[segundo_apellido]"
-
       assert_select "input[name=?]", "contribuyente[persona_fisica]"
-
       assert_select "input[name=?]", "contribuyente[email]"
-
       assert_select "input[name=?]", "contribuyente[rfc]"
     end
   end

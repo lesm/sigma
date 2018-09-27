@@ -7,6 +7,7 @@ import 'bootstrap'
 import 'select2'
 import '../src/js/notify_alert_confirm'
 import '../src/js/arqueos/Dinero'
+import '../src/js/cajeros/cajero'
 
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)

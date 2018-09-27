@@ -90,6 +90,10 @@ class Dinero {
     return parseFloat((cantidad * 2000).toFixed(2))
   }
 
+  monto_sistema() {
+    return parseFloat($("input[id$='_monto_sistema']").val())
+  }
+
   suma() {
     return this.diez_centavos() + this.veinte_centavos() + this.cincuenta_centavos() +
       this.un_peso() + this.dos_pesos() + this.cinco_pesos() + this.diez_pesos() +
@@ -98,7 +102,7 @@ class Dinero {
       this.veinte_m_pesos() + this.dos_mil_pesos()
   }
 
-  suma_vista() {
+  suma_currency() {
     return this.currency(this.suma())
   }
 
@@ -111,13 +115,51 @@ class Dinero {
 
     return formatter.format(amount)
   }
+
+  diferencia_monto() {
+    return (this.monto_sistema() - this.suma())
+  }
+
+  diferencia_monto_currency() {
+    return this.currency(Math.abs(this.monto_sistema() - this.suma()))
+  }
+}
+
+function diferenciaMonto(dinero) {
+  $("#diferencia_monto").html(dinero.diferencia_monto_currency())
+  if (dinero.diferencia_monto() > 0) {
+    update_text_label("Adeudo por pagar", "badge-success", "badge-danger")
+  } else if (dinero.diferencia_monto() < 0) {
+    update_text_label("Ingreso por clasificar", "badge-success", "badge-danger")
+  } else if (dinero.diferencia_monto() == 0){
+    update_text_label("Monto correcto", "badge-danger", "badge-success")
+  }
+}
+
+function update_text_label(text, badge_remove, badge_add) {
+  $("#diferencia_monto").closest("span")
+    .removeClass(badge_remove)
+    .addClass(badge_add)
+    .closest("h4")
+    .prev("label")
+    .html(text)
 }
 
 function calculateAmount() {
   let dinero = new Dinero()
-  $("#suma_monto").html(dinero.suma_vista())
+  diferenciaMonto(dinero)
+
+  actualiza_monto_cajero(dinero)
+  actualiza_total_dinero(dinero)
+}
+
+function actualiza_total_dinero(dinero) {
   $("input[id$='_total']").val(dinero.suma())
+}
+
+function actualiza_monto_cajero(dinero) {
   $("input[id$='_cajero']").val(dinero.suma())
+  $("#monto_cajero_span").html(dinero.suma_currency())
 }
 
 $(document).on("change", ".dinero", calculateAmount)

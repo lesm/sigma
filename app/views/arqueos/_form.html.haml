@@ -5,8 +5,16 @@
       %h3 Totales
       %p
       = f.input :monto_sistema
-      = f.input :monto_cajero, input_html: { class: "dinero", min: 0 }, readonly: true
-      = f.input :observacion, input_html: { rows: 8 }
+      = f.input :monto_cajero, as: :hidden
+      %label Monto Cajero
+      %h4
+        %span.badge.badge-success.btn-block
+          #monto_cajero_span $0.0
+      %label Difierencia Monto Sistema
+      %h4
+        %span.badge.badge-danger.btn-block
+          #diferencia_monto $0.0
+      = f.input :observacion, input_html: { rows: 6 }
 
     .col-md-9
       = f.simple_fields_for :dinero do |df|

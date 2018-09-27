@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Contribuyente, type: :model do
   it { should validate_presence_of(:nombre_o_razon_social) }
   it { should validate_presence_of(:primer_apellido) }
+  it { should accept_nested_attributes_for(:direccion).allow_destroy(true) }
+  it { should belong_to(:cajero) }
   it { should have_one(:direccion).dependent(:destroy) }
   it { should accept_nested_attributes_for(:direccion).allow_destroy(true) }
 
