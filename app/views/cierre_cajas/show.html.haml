@@ -4,7 +4,7 @@
       .card-header
         .card-title
           %i.fa.fa-key
-          Detalle del Cierre de Caja
+          Detalle del Cierre de Caja (Folio #{@cierre_caja.id})
       .card-body
         .row
           .col-md-4
@@ -22,6 +22,7 @@
             %table.table.table-hover.table-sm
               %thead.text-right
                 %tr
+                  %th Folio
                   %th Monto Sistema
                   %th Monto Cajero
                   %th Observación
@@ -30,6 +31,7 @@
               %tbody.text-right
                 - @cierre_caja.arqueos.each do |arqueo|
                   %tr
+                    %td= arqueo.id
                     %td= number_to_currency arqueo.monto_sistema
                     %td= number_to_currency arqueo.monto_cajero
                     %td= arqueo.observacion
@@ -40,6 +42,7 @@
                         Ver
               %tfoot.text-right
                 %tr
+                  %td
                   %td
                     %strong
                       %span{style: "color:green"}

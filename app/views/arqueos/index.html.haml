@@ -11,6 +11,7 @@
         %table.table.table-hover.table-sm
           %thead.text-right
             %tr
+              %th Folio
               %th Monto Sistema
               %th Monto Cajero
               %th Observacion
@@ -20,6 +21,7 @@
           %tbody.text-right
             - @arqueos.each do |arqueo|
               %tr
+                %td= arqueo.id
                 %td= number_to_currency arqueo.monto_sistema
                 %td= number_to_currency arqueo.monto_cajero
                 %td= arqueo.observacion

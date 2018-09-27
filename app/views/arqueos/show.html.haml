@@ -2,7 +2,7 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Detalle del Arqueo
+        .card-title Detalle del Arqueo (Folio #{@arqueo.id})
       .card-body
         .row
           .col-md-4
@@ -11,7 +11,7 @@
               %span{style: "color:green"}
                 = number_to_currency @arqueo.monto_sistema
             %p
-              %b Monto (CAJERO)
+              %b Monto (CAJERO):
               %span{style: "color:green"}
                 = number_to_currency @arqueo.monto_cajero
           .col-md-8

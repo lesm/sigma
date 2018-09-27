@@ -7,6 +7,7 @@
         %table.table.table-hover.table-sm
           %thead.text-right
             %tr
+              %th Folio
               %th Estado
               %th Monto Sistema
               %th Monto Cajero
@@ -16,6 +17,7 @@
           %tbody.text-right
             - @cierre_cajas.each do |cierre_caja|
               %tr
+                %td= cierre_caja.id
                 %td= estado(cierre_caja)
                 %td= number_to_currency cierre_caja.monto_sistema
                 %td= number_to_currency cierre_caja.monto_cajero
