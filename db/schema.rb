@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_132546) do
+ActiveRecord::Schema.define(version: 2018_10_04_193954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,38 @@ ActiveRecord::Schema.define(version: 2018_09_25_132546) do
     t.decimal "monto_cajero", default: "0.0"
     t.bigint "cajero_id"
     t.index ["cajero_id"], name: "index_cierre_cajas_on_cajero_id"
+  end
+
+  create_table "comprobantes", force: :cascade do |t|
+    t.string "serie"
+    t.string "folio"
+    t.string "moneda", default: "MXN"
+    t.string "tipo_comprobante"
+    t.string "lugar_expedicion"
+    t.string "metodo_pago", default: "Pago en una sola exhibición"
+    t.string "forma_pago"
+    t.money "subtotal", scale: 2, default: "0.0"
+    t.money "descuento", scale: 2, default: "0.0"
+    t.money "total", scale: 2, default: "0.0"
+    t.string "type"
+    t.string "cbb"
+    t.string "xml"
+    t.string "pdf"
+    t.string "estado"
+    t.text "respuesta_timbrado"
+    t.string "motivo_descuento"
+    t.datetime "fecha_emision"
+    t.text "observaciones"
+    t.bigint "cajero_id"
+    t.bigint "contribuyente_id"
+    t.bigint "emisor_id"
+    t.bigint "arqueo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["arqueo_id"], name: "index_comprobantes_on_arqueo_id"
+    t.index ["cajero_id"], name: "index_comprobantes_on_cajero_id"
+    t.index ["contribuyente_id"], name: "index_comprobantes_on_contribuyente_id"
+    t.index ["emisor_id"], name: "index_comprobantes_on_emisor_id"
   end
 
   create_table "contribuyentes", force: :cascade do |t|
@@ -145,6 +177,10 @@ ActiveRecord::Schema.define(version: 2018_09_25_132546) do
   add_foreign_key "adeudos", "usuarios", column: "cajero_id"
   add_foreign_key "arqueos", "cierre_cajas"
   add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
+  add_foreign_key "comprobantes", "arqueos"
+  add_foreign_key "comprobantes", "contribuyentes"
+  add_foreign_key "comprobantes", "emisores"
+  add_foreign_key "comprobantes", "usuarios", column: "cajero_id"
   add_foreign_key "contribuyentes", "usuarios", column: "cajero_id"
   add_foreign_key "dineros", "arqueos"
 end

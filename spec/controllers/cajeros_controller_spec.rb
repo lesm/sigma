@@ -1,21 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CajerosController, type: :controller do
-  let(:cuenta) do
-    FactoryBot.create :cuenta, codigo: "121212", descripcion: "predrial urbano"
-  end
-
-  let(:cuenta_dos) do
-    FactoryBot.create :cuenta, codigo: "131313", descripcion: "predrial rezagos"
-  end
-
-  let(:conceptos) do
-    [
-      { cuenta_id: cuenta.id },
-      { cuenta_id: cuenta_dos.id },
-    ]
-  end
-
   let(:direccion) do
     {
       calle: "una calee",
@@ -38,7 +23,6 @@ RSpec.describe CajerosController, type: :controller do
       email: "pedro@gmail.com",
       rfc: "AAAA111111AAA",
       direccion_attributes: direccion,
-      conceptos_attributes: conceptos
     }
   end
 
@@ -113,12 +97,6 @@ RSpec.describe CajerosController, type: :controller do
         expect {
           post :create, params: {cajero: valid_attributes}
         }.to change(Direccion, :count).by(1)
-      end
-
-      it "creates two new Conceptos" do
-        expect {
-          post :create, params: {cajero: valid_attributes}
-        }.to change(Concepto, :count).by(2)
       end
 
       it "redirects to the created cajero" do

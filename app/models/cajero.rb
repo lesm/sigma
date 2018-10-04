@@ -3,6 +3,8 @@ class Cajero < Usuario
   has_many :cierre_cajas, dependent: :destroy
   has_many :arqueos, through: :cierre_cajas, dependent: :destroy
   has_many :adeudos, dependent: :destroy
+  has_many :recibos
+  has_many :facturas
 
   accepts_nested_attributes_for :contribuyente, allow_destroy: true
 

@@ -1,21 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "cajeros/show", type: :view do
-  let(:cuenta) do
-    FactoryBot.create :cuenta, codigo: "121212", descripcion: "predrial urbano"
-  end
-
-  let(:cuenta_dos) do
-    FactoryBot.create :cuenta, codigo: "131313", descripcion: "predrial rezagos"
-  end
-
-  let(:conceptos) do
-    [
-      { cuenta_id: cuenta.id },
-      { cuenta_id: cuenta_dos.id },
-    ]
-  end
-
   let(:direccion) do
     {
       calle: "una calee",
@@ -37,7 +22,6 @@ RSpec.describe "cajeros/show", type: :view do
       email: "pedro@gmail.com",
       rfc: "AAAA111111AAA",
       direccion_attributes: direccion,
-      conceptos_attributes: conceptos
     }
   end
 

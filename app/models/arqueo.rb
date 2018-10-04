@@ -1,5 +1,7 @@
 class Arqueo < ApplicationRecord
   belongs_to :cierre_caja, inverse_of: :arqueos
+  has_many :recibos
+  has_many :facturas
   has_one :dinero, dependent: :destroy
   has_one :adeudo, dependent: :destroy
 

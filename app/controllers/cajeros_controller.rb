@@ -15,9 +15,7 @@ class CajerosController < ApplicationController
   # GET /cajeros/new
   def new
     atributos = {
-      contribuyente: Contribuyente.new(
-        direccion: Direccion.new, conceptos: [Concepto.new, Concepto.new]
-      )
+      contribuyente: Contribuyente.new(direccion: Direccion.new)
     }
     @cajero = Cajero.new atributos
   end

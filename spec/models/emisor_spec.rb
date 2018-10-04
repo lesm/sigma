@@ -4,7 +4,9 @@ RSpec.describe Emisor, type: :model do
   it { should validate_presence_of(:nombre) }
   it { should validate_presence_of(:rfc) }
   it { should validate_presence_of(:regimen_fiscal) }
-  it { should have_one(:direccion).dependent(:destroy)}
+  it { should have_one(:direccion).dependent(:destroy) }
+  it { should have_many(:recibos) }
+  it { should have_many(:facturas) }
   it { should accept_nested_attributes_for(:direccion).allow_destroy(true)}
 
   describe "rfc valido" do

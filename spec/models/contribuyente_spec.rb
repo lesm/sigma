@@ -7,6 +7,8 @@ RSpec.describe Contribuyente, type: :model do
   it { should belong_to(:cajero) }
   it { should have_one(:direccion).dependent(:destroy) }
   it { should accept_nested_attributes_for(:direccion).allow_destroy(true) }
+  it { should have_many(:recibos) }
+  it { should have_many(:facturas) }
 
   describe "#nombre_completo" do
     subject do

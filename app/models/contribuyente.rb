@@ -1,5 +1,7 @@
 class Contribuyente < ApplicationRecord
   include Direccionable
+  has_many :facturas
+  has_many :recibos
 
   belongs_to :cajero, optional: true
   validates :nombre_o_razon_social, presence: true

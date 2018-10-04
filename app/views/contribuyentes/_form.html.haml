@@ -5,18 +5,6 @@
       = render "contribuyente_fields", f: f
     .col-md-6
       = render "direcciones/direccion_fields", f: f
-    .col-md-12
-      %h5 Agregar Cuentas de Cobro
-      #conceptos
-        .row
-          %p
-          = f.simple_fields_for :conceptos do |cf|
-            = render "conceptos/concepto_fields", f: cf
-        .row
-          .links.col-md-12
-            = link_to_add_association f, :conceptos, partial: 'conceptos/concepto_fields', class: "btn btn-sm btn-default" do
-              %i.fa.fa-plus
-              Agregar cuenta
 
   .btn-group.float-right
     = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do

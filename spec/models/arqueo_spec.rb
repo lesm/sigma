@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Arqueo, type: :model do
   it { should belong_to :cierre_caja }
+  it { should have_many(:recibos) }
+  it { should have_many(:facturas) }
   it { should have_one(:dinero).dependent(:destroy) }
   it { should have_one(:adeudo).dependent(:destroy) }
   it { should accept_nested_attributes_for(:dinero).allow_destroy(true) }

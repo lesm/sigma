@@ -1,5 +1,7 @@
 class Emisor < ApplicationRecord
   include Direccionable
+  has_many :recibos
+  has_many :facturas
 
   validates :nombre, :rfc, :regimen_fiscal, presence: true
   validates :rfc, length: { is: 12 }
