@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_04_193954) do
+ActiveRecord::Schema.define(version: 2018_10_04_220343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,20 @@ ActiveRecord::Schema.define(version: 2018_10_04_193954) do
     t.index ["cajero_id"], name: "index_comprobantes_on_cajero_id"
     t.index ["contribuyente_id"], name: "index_comprobantes_on_contribuyente_id"
     t.index ["emisor_id"], name: "index_comprobantes_on_emisor_id"
+  end
+
+  create_table "conceptos", force: :cascade do |t|
+    t.string "clave"
+    t.string "clave_unidad"
+    t.string "unidad"
+    t.decimal "cantidad", default: "1.0"
+    t.string "descripcion"
+    t.money "valor_unitario", scale: 2
+    t.money "importe", scale: 2
+    t.bigint "cuenta_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_conceptos_on_cuenta_id"
   end
 
   create_table "contribuyentes", force: :cascade do |t|
@@ -181,6 +195,7 @@ ActiveRecord::Schema.define(version: 2018_10_04_193954) do
   add_foreign_key "comprobantes", "contribuyentes"
   add_foreign_key "comprobantes", "emisores"
   add_foreign_key "comprobantes", "usuarios", column: "cajero_id"
+  add_foreign_key "conceptos", "cuentas"
   add_foreign_key "contribuyentes", "usuarios", column: "cajero_id"
   add_foreign_key "dineros", "arqueos"
 end

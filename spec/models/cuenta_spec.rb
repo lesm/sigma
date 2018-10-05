@@ -8,4 +8,5 @@ RSpec.describe Cuenta, type: :model do
     it { should validate_uniqueness_of(:codigo).case_insensitive }
   end
   it { should validate_length_of(:codigo).is_equal_to(6) }
+  it { should have_many :conceptos }
 end
