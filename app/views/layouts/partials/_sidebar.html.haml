@@ -13,7 +13,7 @@
     %nav.mt-2
       %ul.nav.nav-pills.nav-sidebar.flex-column{"data-accordion" => "false", "data-widget" => "treeview", :role => "menu"}
         %li.nav-item
-          %a.nav-link{:href => "#"}
+          = link_to recibo_step_path(:set_cuenta), class: "nav-link #{ controller_name == 'recibo_steps' && 'active' }" do
             %i.fa.fa-money.nav-icon
             %p
               Caja
@@ -28,15 +28,15 @@
               = link_to contribuyentes_path, class: "nav-link #{ controller_name == 'contribuyentes' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Contribuyentes
-        %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos adeudos).include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos adeudos).include? controller_name) && 'active' }" do
+        %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-bank
             %p
               Recaudación
               %i.right.fa.fa-angle-left
           %ul.nav.nav-treeview
             %li.nav-item
-              %a.nav-link{:href => "#"}
+              = link_to recibos_path, class: "nav-link #{ (controller_name == 'recibos') && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Recibos
             %li.nav-item

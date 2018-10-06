@@ -21,5 +21,6 @@ FactoryBot.define do
     cajero { nil }
     contribuyente { nil }
     emisor { nil }
+    arqueo { nil }
   end
 end

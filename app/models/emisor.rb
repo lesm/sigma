@@ -6,6 +6,8 @@ class Emisor < ApplicationRecord
   validates :nombre, :rfc, :regimen_fiscal, presence: true
   validates :rfc, length: { is: 12 }
 
+  delegate :codigo_postal, to: :direccion, prefix: true
+
   mount_uploader :logotipo, LogotipoUploader
   mount_uploader :escudo, EscudoUploader
 

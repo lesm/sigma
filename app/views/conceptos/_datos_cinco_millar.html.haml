@@ -1,0 +1,23 @@
+%tr{ class: color }
+  %th Cuenta de Cobro
+  %td= concepto.cuenta
+%tr{ class: color }
+  %th Estimación
+  %td= concepto.estimacion
+%tr{ class: color }
+  %th Nombre de la Obra
+  %td= concepto.nombre_obra
+%tr{ class: color }
+  %th Localidad
+  %td= concepto.localidad
+%tr{ class: color }
+  %th Fecha
+  %td= l concepto.fecha, format: :complete
+%tr{ class: color }
+  %th Observaciones
+  %td= concepto.observaciones
+%tr{ class: color }
+  %th Monto
+  %td
+    %span{ style: "color:green" }
+      %strong= number_to_currency concepto.importe

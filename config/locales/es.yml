@@ -140,6 +140,12 @@ es-MX:
         attributes:
           cierre_caja:
             required: "Debe estar presente"
+      recibo:
+        attributes:
+          emisor:
+            required: "Debe estar presente"
+          cajero:
+            required: "Debe estar presente"
   helpers:
     select:
       prompt: Por favor selecciona

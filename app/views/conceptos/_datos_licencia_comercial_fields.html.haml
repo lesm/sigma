@@ -1,0 +1,10 @@
+.row
+  .col-md-4
+    = f.input :folio
+    = f.input :fecha_refrendo, as: :string
+  .col-md-4
+    = f.input :serie
+    = f.input :fecha, as: :string
+  .col-md-4
+    = f.input :observaciones, input_html: { rows: 4 }
+    = f.input :type, as: :hidden, value: "DatosLicenciaComercial"

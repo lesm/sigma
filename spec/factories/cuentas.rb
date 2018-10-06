@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :cuenta do
-    codigo { "XXXXXX" }
-    descripcion { "MyString" }
+    codigo { "110101" }
+    descripcion { "RIFAS" }
   end
 end

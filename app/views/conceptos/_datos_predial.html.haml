@@ -1,0 +1,32 @@
+%tr{class: color }
+  %th Cuenta de Cobro
+  %td= concepto.cuenta
+%tr{class: color }
+  %th Emisión
+  %td= concepto.fecha.year
+%tr{class: color}
+  %th Folio
+  %td= concepto.folio
+%tr{class: color}
+  %th Clave Catastral
+  %td= concepto.clave_catastral
+%tr{class: color}
+  %th Número Cuenta
+  %td= concepto.numero_cuenta
+%tr{class: color}
+  %th Base Catastral
+  %td= concepto.base_catastral
+%tr{class: color}
+  %th Impuesto Predial
+  %td= number_to_currency concepto.impuesto_predial
+%tr{class: color}
+  %th Ubicación
+  %td= concepto.ubicacion
+%tr{class: color}
+  %th Observaciones
+  %td= concepto.observaciones
+%tr{class: color }
+  %th Monto
+  %td
+    %span{style: "color:green"}
+      %strong= number_to_currency concepto.importe

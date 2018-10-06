@@ -1,0 +1,16 @@
+%tr{ class: color }
+  %th Cuenta de Cobro
+  %td= concepto.cuenta
+%tr{ class: color }
+  %th Nombre Contratista
+  %td= concepto.nombre_contratista
+%tr{ class: color }
+  %th Observaciones
+  %td= concepto.observaciones
+%tr{ class: color }
+  %th Monto
+  %td
+    %span{ style: "color:green" }
+      %strong= number_to_currency concepto.importe
+
+

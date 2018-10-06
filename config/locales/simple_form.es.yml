@@ -31,6 +31,22 @@ es-MX:
         mil_pesos: "$1000.00"
         dos_mil_pesos: "$2000.00"
         observacion: "Observación"
+        descripcion: "Descripción"
+        fecha_emision: "Fecha Emisión"
+        numero_cuenta: "Número Cuenta"
+        ubicacion: "Ubicación"
+        cantidad_folios_cinco: "Cantidad de Folios ($5.00)"
+        cantidad_folios_diez: "Cantidad de Folios ($10.00)"
+        mes_pago: "Mes que Cubre"
+        numero_contrato: "Número Contrato"
+        numero_medidor: "Número Medidor"
+        fecha_corte: "Fecha de Corte"
+        lectura_actual: "Lectura Actual"
+        lectura_anterior: "Lectura Anterior"
+        impuesto_predial: "Impuesto Predial"
+        base_catastral: "Base Catastral"
+        clave_catastral: "Clave Catastral"
+        forma_pago: "Forma de Pago"
     # Examples
     # labels:
     #   defaults:

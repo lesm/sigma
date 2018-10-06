@@ -1,0 +1,47 @@
+.row.justify-content-center
+  .col-md-10
+    .card.card-danger.card-outline
+      .card-header
+        .card-title
+          %strong
+            Pagar recibo a nombre de:
+          = @recibo.contribuyente
+      .card-body
+        = simple_form_for(@recibo) do |f|
+          .row
+            .col-md-6
+              = f.association :contribuyente, collection: Contribuyente.all, selected: @recibo.contribuyente.id, disabled: true
+              = f.input :contribuyente_id, as: :hidden, input_html: { value: @recibo.contribuyente.id }
+              = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
+              = f.input :subtotal, as: :numeric, as: :hidden
+              = f.input :moneda, as: :hidden
+              = f.input :tipo_comprobante, as: :hidden, input_html: { value: "Recibo" }
+              = f.input :metodo_pago, as: :hidden
+              = f.input :serie, as: :hidden
+              = f.input :descuento, as: :numeric, as: :hidden
+            .col-md-6
+              = f.input :folio
+              = f.input :fecha_emision, as: :string
+              = f.input :total, as: :numeric, readonly: true
+              = f.input :motivo_descuento, as: :hidden #por qué lo agregamos?
+              = f.input :observaciones, as: :hidden #posible para borrar
+              = f.input :emisor_id, as: :hidden, input_html: { value: Emisor.first.id }
+              = f.input :lugar_expedicion, as: :hidden, input_html: { value: Emisor.first.direccion_codigo_postal }
+              = f.input :cajero_id, as: :hidden, input_html: { value: current_usuario.id }
+
+              = f.input :cuenta_ids, as: :hidden, input_html: { value: params["cuenta_ids"], name: "cuenta_ids[]" }
+
+          .row.justify-content-center
+            = f.simple_fields_for :conceptos, @recibo.conceptos do |cf|
+              = render "conceptos/concepto_fields", f: cf
+          = label_tag nil, class: "badge badge-warning" do
+            %h6
+              = f.check_box :timbrado_automatico
+              Timbrar Recibo
+          .btn-group.float-right
+            = link_to recibo_step_path(:set_cuenta, @cuenta_params), class: "btn btn-warning btn-sm" do
+              %i.fa.fa-arrow-left
+              Regresar
+            = button_tag :submit, class: "btn btn-sm btn-primary" do
+              %i.fa.fa-money
+              Pagar

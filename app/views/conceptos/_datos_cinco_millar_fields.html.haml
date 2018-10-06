@@ -1,0 +1,12 @@
+.row
+  .col-md-4
+    = f.input :estimacion
+  .col-md-4
+    = f.input :nombre_obra
+  .col-md-4
+    = f.input :localidad
+  .col-md-6
+    = f.input :fecha, as: :string
+  .col-md-6
+    = f.input :observaciones
+    = f.input :type, as: :hidden, input_html: { value: "DatosCincoMillar" }

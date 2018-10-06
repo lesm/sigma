@@ -1,0 +1,54 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle Recibo
+      .card-body
+        .row
+          .col-md-6
+            %fieldset
+              %legend
+                %i.fa.fa-archive
+                &nbsp;
+                Datos Recibo
+              %table.table
+                %tbody
+                  %tr
+                    %th Serie
+                    %td= @recibo.serie
+                  %tr
+                    %th Folio
+                    %td= @recibo.folio
+                  %tr
+                    %th Contribuyente
+                    %td= @recibo.contribuyente
+                  %tr
+                    %th Forma de Pago
+                    %td= @recibo.forma_pago
+                  %tr
+                    %th Método de Pago
+                    %td= @recibo.metodo_pago
+                  %tr
+                    %th Total
+                    %td
+                      %span{style: "color:green"}
+                        %strong= number_to_currency(@recibo.total)
+                  %tr
+                    %th Observaciones
+                    %td= @recibo.observaciones
+                  %tr
+                    %th Fecha Emisión
+                    %td= l @recibo.fecha_emision, format: :short
+                  %tr
+                    %th Cajero
+                    %td= @recibo.cajero
+          .col-md-6
+            %fieldset
+              %legend
+                %i.fa.fa-archive
+                &nbsp;
+                Datos Conceptos
+              %table.table.table-sm
+                %tbody
+                  - @recibo.conceptos.each_with_index do |concepto, index|
+                    = render "conceptos/#{concepto.cuenta.formato.underscore}", concepto: concepto, color: color_name(index)

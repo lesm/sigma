@@ -1,0 +1,21 @@
+%tr{class: color }
+  %th Cuenta de Cobro
+  %td= concepto.cuenta
+%tr{class: color }
+  %th Folio
+  %td= concepto.folio
+%tr{class: color }
+  %th Serie
+  %td= concepto.serie
+%tr{class: color }
+  %th Fecha
+  %td= l concepto.fecha, format: :short
+%tr{class: color }
+  %th Observaciones
+  %td= concepto.observaciones
+%tr{class: color }
+  %th Monto
+  %td
+    %span{style: "color:green"}
+      %strong= number_to_currency concepto.importe
+

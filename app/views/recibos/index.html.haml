@@ -1,0 +1,30 @@
+.row
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Listado de Recibos
+        .card-tools
+          = link_to recibo_step_path(:set_cuenta), class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Recibo
+      .card-body
+        %table.table.table-hover
+          %thead.text-center
+            %tr
+              %th Folio
+              %th Contribuyente
+              %th Total
+              %th Fecha emisión
+              %th Acción
+
+          %tbody.text-right
+            - @recibos.each do |recibo|
+              %tr
+                %td= recibo.folio
+                %td.text-center= recibo.contribuyente
+                %td= number_to_currency(recibo.total)
+                %td= l recibo.fecha_emision, format: :short
+                %td
+                  = link_to recibo, class: "btn btn-sm btn-info" do
+                    %i.fa.fa-eye
+                    Ver

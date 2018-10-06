@@ -1,0 +1,16 @@
+.row
+  .col-md-4
+    = f.input :folio
+    = f.input :base_catastral
+  .col-md-4
+    = f.input :fecha, as: :string
+    = f.input :impuesto_predial
+  .col-md-4
+    = f.input :clave_catastral
+    = f.input :numero_cuenta
+  .col-md-6
+    = f.input :ubicacion
+    -#= f.association :contribuyente #referencia nuevo dueño
+  .col-md-6
+    = f.input :observaciones
+    = f.input :type, as: :hidden, value: "DatosTrasladoDominio"

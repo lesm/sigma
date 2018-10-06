@@ -1,0 +1,38 @@
+%tr{class: color }
+  %th Cuenta de Cobro
+  %td= concepto.cuenta
+%tr{class: color }
+  %th Mes de Pago
+  %td= concepto.mes_pago.month
+%tr{class: color }
+  %th Fecha de Corte
+  %td= l concepto.fecha_corte, format: :short
+%tr{class: color }
+  %th Número de Contrato
+  %td= concepto.numero_contrato
+%tr{class: color }
+  %th Número de Medidor
+  %td= concepto.numero_medidor
+%tr{class: color }
+  %th Lectura Actual
+  %td= concepto.lectura_actual
+%tr{class: color }
+  %th Lectura Anterior
+  %td= concepto.lectura_anterior
+%tr{class: color }
+  %th Consumo
+  %td= concepto.consumo
+%tr{class: color }
+  %th Ruta
+  %td= concepto.ruta
+%tr{class: color }
+  %th Lecturista
+  %td= concepto.lecturista
+%tr{class: color }
+  %th Observaciones
+  %td= concepto.observaciones
+%tr{class: color }
+  %th Monto
+  %td
+    %span{style: "color:green"}
+      %strong= number_to_currency concepto.importe

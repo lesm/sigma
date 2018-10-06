@@ -1,0 +1,10 @@
+.row
+  .col-md-6
+    = f.input :folio
+    = f.input :serie
+  .col-md-6
+    = f.input :fecha, as: :string
+    = f.input :observaciones
+    = f.input :type, as: :hidden, value: "DatosLicenciaFusion"
+
+

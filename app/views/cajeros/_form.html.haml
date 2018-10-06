@@ -2,7 +2,7 @@
 = simple_form_for(@cajero) do |f|
   .row
     .col-md-12
-      %h5 Datos de inicio de sesión
+      %h3 Datos de inicio de sesión
     .col-md-5
       = f.input :username
       = f.input :nombre, as: :hidden
@@ -14,25 +14,12 @@
   .row
     = f.simple_fields_for :contribuyente do |cf|
       .col-md-6
-        %h5 Datos de contribuyente
+        %h3 Datos de contribuyente
         = render "contribuyentes/contribuyente_fields", f: cf
 
       .col-md-6
-        %h5 Datos de dirección
+        %h3 Datos de dirección
         = render "direcciones/direccion_fields", f: cf
-
-      .col-md-12
-        %h5 Agregar Cuentas de Cobro
-        #conceptos
-          .row
-            %p
-            = cf.simple_fields_for :conceptos do |cof|
-              = render "conceptos/concepto_fields", f: cof
-          .row
-            .links.col-md-12
-              = link_to_add_association cf, :conceptos, partial: 'conceptos/concepto_fields', class: "btn btn-sm btn-default" do
-                %i.fa.fa-plus
-                Agregar cuenta
 
   .btn-group.float-right
     = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do

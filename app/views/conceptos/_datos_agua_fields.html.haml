@@ -1,0 +1,16 @@
+.row
+  .col-md-4
+    = f.input :mes_pago, as: :string
+    = f.input :numero_contrato
+    = f.input :lectura_actual
+  .col-md-4
+    = f.input :fecha_corte, as: :string
+    = f.input :numero_medidor
+    = f.input :lectura_anterior
+  .col-md-4
+    = f.input :ruta
+    = f.input :consumo
+    = f.input :lecturista
+  .col-md-12
+    = f.input :observaciones
+    = f.input :type, as: :hidden, value: "DatosAgua"

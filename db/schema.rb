@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_04_220343) do
+ActiveRecord::Schema.define(version: 2018_10_21_215634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2018_10_04_220343) do
     t.bigint "cuenta_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "comprobante_id"
+    t.index ["comprobante_id"], name: "index_conceptos_on_comprobante_id"
     t.index ["cuenta_id"], name: "index_conceptos_on_cuenta_id"
   end
 
@@ -112,6 +114,42 @@ ActiveRecord::Schema.define(version: 2018_10_04_220343) do
     t.string "descripcion", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "formato"
+  end
+
+  create_table "datos_conceptos", force: :cascade do |t|
+    t.string "folio"
+    t.string "clave_catastral"
+    t.string "numero_cuenta"
+    t.text "ubicacion"
+    t.string "base_catastral"
+    t.string "impuesto_predial"
+    t.text "observaciones"
+    t.date "fecha"
+    t.string "serie"
+    t.string "placa"
+    t.string "estimacion"
+    t.string "nombre_obra"
+    t.string "localidad"
+    t.string "nombre_contratista"
+    t.date "fecha_refrendo"
+    t.string "type"
+    t.bigint "concepto_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cantidad_folios_cinco", default: 0
+    t.integer "cantidad_folios_diez", default: 0
+    t.string "responsable"
+    t.string "numero_contrato"
+    t.string "numero_medidor"
+    t.decimal "lectura_actual", precision: 8, scale: 2, default: "0.0"
+    t.decimal "lectura_anterior", precision: 8, scale: 2, default: "0.0"
+    t.decimal "consumo", precision: 8, scale: 2, default: "0.0"
+    t.string "ruta"
+    t.string "lecturista"
+    t.date "fecha_corte"
+    t.date "mes_pago"
+    t.index ["concepto_id"], name: "index_datos_conceptos_on_concepto_id"
   end
 
   create_table "dineros", force: :cascade do |t|
@@ -195,7 +233,9 @@ ActiveRecord::Schema.define(version: 2018_10_04_220343) do
   add_foreign_key "comprobantes", "contribuyentes"
   add_foreign_key "comprobantes", "emisores"
   add_foreign_key "comprobantes", "usuarios", column: "cajero_id"
+  add_foreign_key "conceptos", "comprobantes"
   add_foreign_key "conceptos", "cuentas"
   add_foreign_key "contribuyentes", "usuarios", column: "cajero_id"
+  add_foreign_key "datos_conceptos", "conceptos"
   add_foreign_key "dineros", "arqueos"
 end
