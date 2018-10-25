@@ -12,8 +12,8 @@ RSpec.describe RecibosController, type: :controller do
   end
 
   let(:emisor) { create :emisor }
-  let(:contribuyente) { create :contribuyente }
-  let(:cajero) { create :cajero }
+  let(:contribuyente) { create :contribuyente, :con_direccion }
+  let(:cajero) { create :cajero, contribuyente: contribuyente }
   let(:cuenta) { create :cuenta }
   let(:cuenta_ids) { [cuenta_rifas.id, cuenta_sorteos.id] }
 

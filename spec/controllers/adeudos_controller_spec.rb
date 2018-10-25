@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe AdeudosController, type: :controller do
 
-  let(:cajero) { FactoryBot.build :cajero }
+  let(:contribuyente) do
+    FactoryBot.create :contribuyente, :con_direccion
+  end
+  let(:cajero) do
+    FactoryBot.build :cajero, contribuyente: contribuyente
+  end
   let(:arqueo) { FactoryBot.build :arqueo }
   let(:cierre_caja) { FactoryBot.create :cierre_caja, arqueos: [arqueo], cajero: cajero }
 

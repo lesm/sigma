@@ -7,6 +7,7 @@ class ReciboStepsController < ApplicationController
     case step
     when :set_cuenta
       @cuenta_form = CuentaForm.new
+      @contribuyente = Contribuyente.new(direccion: Direccion.new)
     when :set_conceptos
       set_recibo
 

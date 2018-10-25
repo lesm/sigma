@@ -1,10 +1,20 @@
-puts "Creando Contributentes"
+puts "Creando Contribuyentes"
+
+Emisor.where(nombre: "Municipio de Huajuapan de León", rfc: "AAAA111111AAA", regimen_fiscal: "Personas morales con fines no lucrativos", registro_patronal: "sin registro", eslogan: "Por una mejor mixteca...").first_or_create
+
 Contribuyente.where(nombre_o_razon_social: "Carlos", primer_apellido: "José", segundo_apellido: "Pérez", persona_fisica: true, email: "jose@mail.com", rfc: "AAAA111111AAA").first_or_create
 Contribuyente.where(nombre_o_razon_social: "Jose", primer_apellido: "Cruz", segundo_apellido: "Hernández", persona_fisica: true, email: "carlos@mail.com", rfc: "AAAA111111AAB").first_or_create
 Contribuyente.where(nombre_o_razon_social: "Miguel", primer_apellido: "Díaz", segundo_apellido: "Cruz", persona_fisica: true, email: "miguel@mail.com", rfc: "AAAA111111AAC").first_or_create
 Contribuyente.where(nombre_o_razon_social: "Ruben", primer_apellido: "Luis", segundo_apellido: "Santiago", persona_fisica: true, email: "ruben@mail.com", rfc: "AAAA111111AAD").first_or_create
 Contribuyente.where(nombre_o_razon_social: "Rodrigo", primer_apellido: "Bautista", segundo_apellido: "Nose", persona_fisica: true, email: "rodrigo@mail.com", rfc: "AAAA111111AAE").first_or_create
 Contribuyente.where(nombre_o_razon_social: "andrea", primer_apellido: "Jeronimo", segundo_apellido: "Nose", persona_fisica: true, email: "andrea@mail.com", rfc: "AAAA111111AAF").first_or_create
+
+Contribuyente.ids.each do |id|
+  Direccion.where(calle: "Independencia", numero: "8", colonia: "Azteca", codigo_postal: "68000", localidad: "Oaxaca", municipio: "Centro", estado: "Oaxaca", pais: "México", direccionable_type: "Contribuyente", direccionable_id: id).first_or_create
+end
+
+
+Cajero.create(nombre: "cajero de prueba", username: "cajero", password: "1qaz2wsx", rol: 1, contribuyente_id: Contribuyente.first.id) rescue nil
 
 puts "Creando Cuentas..."
 

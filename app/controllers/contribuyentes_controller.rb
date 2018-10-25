@@ -30,9 +30,11 @@ class ContribuyentesController < ApplicationController
       if @contribuyente.save
         format.html { redirect_to @contribuyente, notice: 'Contribuyente was successfully created.' }
         format.json { render :show, status: :created, location: @contribuyente }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @contribuyente.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

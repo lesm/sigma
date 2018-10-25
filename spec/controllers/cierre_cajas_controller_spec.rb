@@ -2,7 +2,15 @@ require 'rails_helper'
 
 RSpec.describe CierreCajasController, type: :controller do
 
-  let(:cajero) { FactoryBot.create :cajero, nombre: "Pedro", password: "qwerty" }
+  let(:contribuyente) do
+    FactoryBot.create :contribuyente, :con_direccion
+  end
+  let(:cajero) do
+    FactoryBot.create :cajero,
+      nombre: "Pedro",
+      password: "qwerty",
+      contribuyente: contribuyente
+  end
   let(:valid_attributes) do
     {
       monto_sistema: 100.00,

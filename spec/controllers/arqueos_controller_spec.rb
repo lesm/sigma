@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe ArqueosController, type: :controller do
 
-  let(:cajero) { FactoryBot.create :cajero }
+  let(:contribuyente) do
+    FactoryBot.create :contribuyente, :con_direccion
+  end
+  let(:cajero) do
+    FactoryBot.create :cajero, contribuyente: contribuyente
+  end
   let(:dinero_attributes) { FactoryBot.attributes_for :dinero }
 
   let(:cierre_caja) do

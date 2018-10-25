@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "cierre_cajas/edit", type: :view do
-  let(:cajero) { FactoryBot.create :cajero, nombre: "Pedro", password: "qwerty" }
+  let(:contribuyente) { create :contribuyente, :con_direccion }
+  let(:cajero) do
+    create :cajero,
+      nombre: "Pedro",
+      password: "qwerty",
+      contribuyente: contribuyente
+  end
   before(:each) do
     @cierre_caja = assign(:cierre_caja, CierreCaja.create!(
       :monto_sistema => "9.99",

@@ -5,6 +5,10 @@ module CajerosHelper
     end
   end
 
+  def para_registro?
+    ["new", "create"].include? action_name
+  end
+
   private
 
   def badge_class cajero

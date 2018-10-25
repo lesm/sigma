@@ -1,6 +1,7 @@
 function asignar_nombre_cajero() {
-  let nombre_o_razon_social = $("input[id$='_nombre_o_razon_social']").val()
-  $("input[id$='_nombre']").val(nombre_o_razon_social)
+  let text_selected = $("select#cajero_contribuyente_id option:selected").text()
+  let nombre = text_selected.split("-")[0].trim()
+  $("input[id$='_nombre']").val(nombre)
 }
 
-$(document).on("change", "input[id$='_nombre_o_razon_social']", asignar_nombre_cajero)
+$(document).on("change", "select#cajero_contribuyente_id", asignar_nombre_cajero)

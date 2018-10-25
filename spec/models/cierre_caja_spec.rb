@@ -8,14 +8,17 @@ RSpec.describe CierreCaja, type: :model do
 
   describe "#monto" do
     context "actualiza monto despues de agregar un arqueo" do
-      let(:cajero) { FactoryBot.create :cajero }
-      let(:arqueo) { FactoryBot.build :arqueo, monto_sistema:10, monto_cajero: 10 }
-      let(:arqueo_2) { FactoryBot.build :arqueo, monto_sistema: 40, monto_cajero: 40 }
+      let(:contribuyente) { create :contribuyente, :con_direccion }
+      let(:cajero) { create :cajero, contribuyente: contribuyente }
+      let(:arqueo) do
+        build :arqueo, monto_sistema:10, monto_cajero: 10
+      end
+      let(:arqueo_2) { build :arqueo, monto_sistema: 40, monto_cajero: 40 }
       let(:cierre_caja) do
-        FactoryBot.create :cierre_caja, cajero: cajero, arqueos: [arqueo]
+        create :cierre_caja, cajero: cajero, arqueos: [arqueo]
       end
       let(:cierre_caja_2) do
-        FactoryBot.create :cierre_caja, cajero: cajero,
+        create :cierre_caja, cajero: cajero,
           arqueos: [arqueo, arqueo_2]
       end
 

@@ -14,10 +14,8 @@ class CajerosController < ApplicationController
 
   # GET /cajeros/new
   def new
-    atributos = {
-      contribuyente: Contribuyente.new(direccion: Direccion.new)
-    }
-    @cajero = Cajero.new atributos
+    @cajero = Cajero.new
+    build_contribuyente
   end
 
   # GET /cajeros/1/edit
@@ -34,6 +32,7 @@ class CajerosController < ApplicationController
         format.html { redirect_to @cajero, notice: 'Cajero was successfully created.' }
         format.json { render :show, status: :created, location: @cajero }
       else
+        build_contribuyente
         format.html { render :new }
         format.json { render json: @cajero.errors, status: :unprocessable_entity }
       end
@@ -71,27 +70,21 @@ class CajerosController < ApplicationController
     end
 
     def override_cajero_params
-      new_cajero_params = cajero_params  
+      new_cajero_params = cajero_params
       if cajero_params[:password].blank?
         new_cajero_params.delete(:password)
       end
       new_cajero_params
     end
 
+    def build_contribuyente
+      @contribuyente = Contribuyente.new(direccion: Direccion.new)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def cajero_params
       params.require(:cajero).permit(
-        :id, :nombre, :username, :password, :activo, :rol, :email,
-        contribuyente_attributes: [
-          :id, :nombre_o_razon_social, :primer_apellido, :segundo_apellido,
-          :persona_fisica, :email, :rfc,
-          direccion_attributes: [
-            :id, :calle, :numero, :colonia, :codigo_postal, :localidad,
-            :municipio, :estado, :pais
-          ],
-          conceptos_attributes: [:id, :cuenta_id, :_destroy]
-        ]
-
+        :id, :nombre, :username, :password, :activo, :contribuyente_id
       )
     end
 end

@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "cajeros/index", type: :view do
+  let(:contribuyente_uno) do
+    create :contribuyente, :con_direccion, rfc: "AAAA111111AAB"
+  end
+  let(:contribuyente_dos) do
+    create :contribuyente, :con_direccion, rfc: "AAAA111111AAC"
+  end
   before(:each) do
     assign(:cajeros, [
       Cajero.create!(
@@ -9,6 +15,7 @@ RSpec.describe "cajeros/index", type: :view do
         password: "1qaz2wsx",
         activo: true,
         rol: 1,
+        contribuyente_id: contribuyente_uno.id
       ),
       Cajero.create!(
         nombre: "Cajero",
@@ -16,6 +23,7 @@ RSpec.describe "cajeros/index", type: :view do
         password: "1qaz2wsx",
         activo: true,
         rol: 1,
+        contribuyente_id: contribuyente_dos.id
       ),
     ])
   end

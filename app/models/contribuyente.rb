@@ -3,7 +3,7 @@ class Contribuyente < ApplicationRecord
   has_many :facturas
   has_many :recibos
 
-  belongs_to :cajero, optional: true
+  has_one :cajero
   validates :nombre_o_razon_social, presence: true
   validates :primer_apellido, presence: true, if: :persona_fisica?
   validates :rfc, length: { is: 13 }, if: :persona_fisica_con_rfc?
@@ -16,7 +16,7 @@ class Contribuyente < ApplicationRecord
   end
 
   def to_s
-    "#{nombre_completo} - #{rfc}"
+    rfc.present? ? "#{nombre_completo} - #{rfc}" : nombre_completo
   end
 
   def tipo

@@ -3,6 +3,8 @@ function ready() {
   startSelect2()
   startSelect2Multiple()
   startDateTimePicker()
+  startSelect2WithLink()
+  hideSelect2WithLink()
 }
 
 function resizeContentWrapperHeight() {
@@ -20,6 +22,26 @@ function startSelect2Multiple() {
     width: '100%',
     multiple: true,
     text: "Selecciona al menos cuenta"
+  })
+}
+
+function startSelect2WithLink() {
+  $(".select2.with-link").select2({
+    width: '100%',
+    escapeMarkup: function (markup) { return markup; },
+    language: {
+      noResults() {
+        return `<button type='button' id='btnCerrarSelect2' data-toggle='modal' data-target='#contribuyente_nuevo' class='btn btn-sm btn-primary'>
+                  Agregar contribuyente
+                </button>`
+      }
+    }
+  })
+}
+
+function hideSelect2WithLink() {
+  $(document).on("click", "#btnCerrarSelect2", function() {
+    $(".select2.with-link").select2("close")
   })
 }
 

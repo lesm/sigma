@@ -1,29 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CajerosController, type: :controller do
-  let(:direccion) do
-    {
-      calle: "una calee",
-      numero: "s/n",
-      colonia: "una colonia",
-      codigo_postal: "68300",
-      localidad: "una localida",
-      municipio: "un municipio",
-      estado: "Oaxaca",
-      pais: "México"
-    }
-  end
-
   let(:contribuyente) do
-    {
-      nombre_o_razon_social: "Pedro",
-      primer_apellido: "Pérez",
-      segundo_apellido: "Pérez",
-      persona_fisica: true,
-      email: "pedro@gmail.com",
-      rfc: "AAAA111111AAA",
-      direccion_attributes: direccion,
-    }
+    FactoryBot.create :contribuyente, :con_direccion
   end
 
   let(:valid_attributes) do
@@ -33,7 +12,7 @@ RSpec.describe CajerosController, type: :controller do
       password: "1qaz2wsx",
       activo: true,
       rol: 1,
-      contribuyente_attributes: contribuyente
+      contribuyente_id: contribuyente.id
     }
   end
 

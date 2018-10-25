@@ -9,6 +9,7 @@ RSpec.describe "cajeros/new", type: :view do
       activo: true,
       rol: 1,
     ))
+    assign(:contribuyente, Contribuyente.new)
   end
 
   it "renders new cajero form" do

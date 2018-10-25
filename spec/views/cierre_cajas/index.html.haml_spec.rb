@@ -1,8 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "cierre_cajas/index", type: :view do
-  let(:cajero) { FactoryBot.create :cajero, nombre: "Pedro", password: "qwerty" }
-  let(:arqueo) { FactoryBot.build :arqueo, monto_sistema: 9.99, monto_cajero: 9.99 }
+  let(:contribuyente) { create :contribuyente, :con_direccion }
+  let(:cajero) do
+    create :cajero,
+      nombre: "Pedro",
+      password: "qwerty",
+      contribuyente: contribuyente
+  end
+  let(:arqueo) do
+    build :arqueo, monto_sistema: 9.99, monto_cajero: 9.99
+  end
   before(:each) do
     assign(:cierre_cajas, [
       CierreCaja.create!(

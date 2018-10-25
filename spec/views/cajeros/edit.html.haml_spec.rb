@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "cajeros/edit", type: :view do
+  let(:contribuyente) { create :contribuyente, :con_direccion }
   before(:each) do
     @cajero = assign(:cajero, Cajero.create!(
-      nombre: "Carlos", username: "carlos", password: "1qaz2wsx"
+      nombre: "Carlos", username: "carlos", password: "1qaz2wsx",
+      contribuyente_id: contribuyente.id
     ))
+    assign(:contribuyente, Contribuyente.new)
   end
 
   it "renders the edit cajero form" do
