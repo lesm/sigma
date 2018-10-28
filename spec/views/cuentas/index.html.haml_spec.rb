@@ -1,0 +1,25 @@
+require 'rails_helper'
+
+RSpec.describe "cuentas/index", type: :view do
+  before(:each) do
+    assign(:cuentas, [
+      Cuenta.create!(
+        codigo: "110101",
+        formato: "DatosComun",
+        descripcion: "RIFAS",
+        importe: 10.00
+      ),
+      Cuenta.create!(
+        codigo: "110101",
+        formato: "DatosComun",
+        descripcion: "RIFAS DEL MUNICIPIO",
+        importe: 10.00
+      )
+    ])
+  end
+
+  it "renders a list of cuentas" do
+    render
+    assert_select "tr>td", :text => "110101".to_s, :count => 2
+  end
+end

@@ -76,12 +76,17 @@
               %a.nav-link{:href => "#"}
                 %i.fa.fa-circle-o.nav-icon
                 %p Arqueos
-        %li.nav-item.has-treeview{ class: "#{ (%w(emisores cajeros).include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (%w(emisores cajeros).include? controller_name) && 'active' }" do
+        %li.nav-item.has-treeview{ class: "#{ (%w(emisores cajeros cuentas).include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (%w(emisores cajeros cuentas).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-dashboard
             %p
               Administrador
               %i.right.fa.fa-angle-left
+          %ul.nav.nav-treeview
+            %li.nav-item
+              = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
+                %i.fa.fa-circle-o.nav-icon
+                %p Conceptos de cobro
           %ul.nav.nav-treeview
             %li.nav-item
               = link_to emisores_path, class: "nav-link #{ controller_name == 'emisores' && 'active' }" do

@@ -1,0 +1,33 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Listado de Conceptos de Cobro
+        .card-tools
+          = link_to new_cuenta_path, class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Concepto de Cobro
+      .card-body
+        .table-responsive
+          %table.table.table-hover.table-sm
+            %thead
+              %tr.d-flex
+                %th.col-2 Código
+                %th.col-6 Descripción
+                %th.col-2 Importe
+                %th.col-2 Acciones
+
+            %tbody
+              - @cuentas.each do |cuenta|
+                %tr.d-flex
+                  %td.col-md-2= cuenta.codigo
+                  %td.col-md-6= cuenta.descripcion
+                  %td.col-md-2= cuenta.importe
+                  %td.col-md-2
+                    .btn-group
+                      = link_to cuenta, class: "btn btn-sm btn-info" do
+                        %i.fa.fa-eye
+                        Ver
+                      = link_to edit_cuenta_path(cuenta), class: "btn btn-ms btn-warning" do
+                        %i.fa.fa-edit
+                        Editar

@@ -6,4 +6,8 @@ module ApplicationHelper
   def contribuyente_ids
     Contribuyente.all.map { |c| [c, c.id] }
   end
+
+  def cuenta_codigos
+    Cuenta.all.map { |c| [c, c.codigo] }
+  end
 end

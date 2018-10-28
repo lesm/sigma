@@ -14,11 +14,9 @@
       = f.input :activo
     .col-md-6
       - if f.object.new_record?
-        %label Seleccionar Contribuyente
-        = f.select :contribuyente_id, options_for_select(contribuyente_ids), {}, class: "select2 with-link"
+        = f.input :contribuyente_id, collection: Contribuyente.all, input_html: { class: "select2 with-link" }
       - else
-        %label Contribuyente
-        %p= f.object.contribuyente
+        = f.input :contribuyente_id, collection: Contribuyente.all, readonly: true
 
   .btn-group.float-right
     = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do

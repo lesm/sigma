@@ -1,0 +1,26 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle Concepto de Cobro
+      .card-body
+        .col-md-12
+          %fieldset
+            %legend
+              %i.fa.fa-user
+              &nbsp;
+              Información Concepto de Cobro
+          %h6
+            = @cuenta
+            %strong
+              Importe base: 
+            %span{ style: "color:green"}
+              = number_to_currency @cuenta.importe
+
+        .btn-group.float-right
+          = link_to :back, class: 'btn btn-sm btn-secondary' do
+            %i.fa.fa-arrow-left
+            Regresar
+          = link_to edit_cuenta_path(@cuenta), class: 'btn btn-sm btn-warning' do
+            %i.fa.fa-pencil
+            Editar
