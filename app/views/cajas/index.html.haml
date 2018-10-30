@@ -1,0 +1,32 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Listado de Cajas
+        .card-tools
+          = link_to new_caja_path, class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Caja
+      .card-body
+        %table.table.table-hover.text-center
+          %thead
+            %tr
+              %th Nombre
+              %th Descripción
+              %th Disponible
+              %th{ colspan: 2 } Acciones
+
+          %tbody
+            - @cajas.each do |caja|
+              %tr
+                %td= caja.nombre
+                %td= caja.descripcion
+                %td= disponible? caja
+                %td
+                  .btn-group
+                    = link_to caja_path(caja), class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-eye
+                      Ver
+                    = link_to edit_caja_path(caja), class: 'btn btn-sm btn-warning' do
+                      %i.fa.fa-pencil
+                      Editar

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_201843) do
+ActiveRecord::Schema.define(version: 2018_10_28_152549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2018_10_27_201843) do
     t.datetime "updated_at", null: false
     t.decimal "monto_cajero", default: "0.0"
     t.index ["cierre_caja_id"], name: "index_arqueos_on_cierre_caja_id"
+  end
+
+  create_table "cajas", force: :cascade do |t|
+    t.string "nombre"
+    t.text "descripcion"
+    t.boolean "disponible", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cierre_cajas", force: :cascade do |t|

@@ -1,0 +1,13 @@
+-# frozen_string_literal: true
+= simple_form_for(@caja) do |f|
+  .row
+    .col-md-6
+      = f.input :nombre
+    .col-md-6
+      = f.input :descripcion
+
+  .btn-group.float-right
+    = link_to :back, class: 'btn btn-sm btn-secondary' do
+      %i.fa.fa-arrow-left
+      Regresar
+    = f.button :submit, class: 'btn btn-sm btn-primary'
