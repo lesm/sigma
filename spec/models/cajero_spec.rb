@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Cajero, type: :model do
   it { should belong_to(:contribuyente) }
+  it { should have_one(:caja) }
   it { should have_many(:cierre_cajas).dependent :destroy }
   it { should have_many(:arqueos).dependent :destroy }
   it { should have_many(:adeudos).dependent :destroy }
@@ -18,8 +19,8 @@ RSpec.describe Cajero, type: :model do
         contribuyente: contribuyente,
         rol: nil
     end
-    it "after create must be 1" do
-      expect(cajero.rol).to eq 1
+    it "after create must be cajero rol" do
+      expect(cajero).to be_cajero
     end
   end
 end
