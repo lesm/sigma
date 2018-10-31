@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  resources :cajas
-  devise_for :usuarios
-  get 'dashboard/index'
+  devise_for :usuarios, controllers: {
+    sessions: 'usuarios/sessions'
+  }
+  get 'dashboard/index', as: :dashboard
 
   resources :adeudos
   resources :emisores
+  resources :cajas
+  resources :historial_cajas, except: [:edit, :show, :destroy]
   resources :contribuyentes
   resources :cajeros
   resources :cuentas

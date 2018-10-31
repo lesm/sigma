@@ -1,5 +1,7 @@
 class Cajero < Usuario
   belongs_to :contribuyente
+  has_one :caja
+
   has_many :cierre_cajas, dependent: :destroy
   has_many :arqueos, through: :cierre_cajas, dependent: :destroy
   has_many :adeudos, dependent: :destroy

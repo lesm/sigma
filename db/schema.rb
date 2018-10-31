@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_152549) do
+ActiveRecord::Schema.define(version: 2018_10_31_125611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2018_10_28_152549) do
     t.boolean "disponible", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cajero_id"
+    t.index ["cajero_id"], name: "index_cajas_on_cajero_id"
   end
 
   create_table "cierre_cajas", force: :cascade do |t|
@@ -210,6 +212,16 @@ ActiveRecord::Schema.define(version: 2018_10_28_152549) do
     t.string "escudo"
   end
 
+  create_table "historial_cajas", force: :cascade do |t|
+    t.bigint "caja_id"
+    t.bigint "cajero_id"
+    t.datetime "fecha_cierre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["caja_id"], name: "index_historial_cajas_on_caja_id"
+    t.index ["cajero_id"], name: "index_historial_cajas_on_cajero_id"
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "username", null: false
@@ -237,6 +249,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_152549) do
   add_foreign_key "adeudos", "arqueos"
   add_foreign_key "adeudos", "usuarios", column: "cajero_id"
   add_foreign_key "arqueos", "cierre_cajas"
+  add_foreign_key "cajas", "usuarios", column: "cajero_id"
   add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "comprobantes", "arqueos"
   add_foreign_key "comprobantes", "contribuyentes"
@@ -246,5 +259,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_152549) do
   add_foreign_key "conceptos", "cuentas"
   add_foreign_key "datos_conceptos", "conceptos"
   add_foreign_key "dineros", "arqueos"
+  add_foreign_key "historial_cajas", "cajas"
+  add_foreign_key "historial_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "usuarios", "contribuyentes"
 end
