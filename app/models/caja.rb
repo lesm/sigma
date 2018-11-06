@@ -12,8 +12,7 @@ class Caja < ApplicationRecord
   end
 
   def abrir!
-    update_columns(cajero_id: nil, disponible: true)
-    reload
+    Caja.find(id).update_columns(cajero_id: nil, disponible: true)
   end
 
   def to_s
