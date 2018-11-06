@@ -48,6 +48,7 @@ es-MX:
         clave_catastral: "Clave Catastral"
         forma_pago: "Forma de Pago"
         codigo: "Código"
+        numero_municipio: "Número Municipio"
     # Examples
     # labels:
     #   defaults:

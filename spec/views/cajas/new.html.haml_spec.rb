@@ -4,6 +4,7 @@ RSpec.describe "cajas/new", type: :view do
   before(:each) do
     assign(:caja, Caja.new(
       :nombre => "MyString",
+      :numero => 303,
       :descripcion => "MyText",
       :disponible => false
     ))

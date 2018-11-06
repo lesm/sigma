@@ -1,5 +1,5 @@
 puts "Creando Emisor..."
-Emisor.where(nombre: "Municipio de Huajuapan de León", rfc: "AAAA111111AA", regimen_fiscal: "Personas morales con fines no lucrativos", registro_patronal: "sin registro", eslogan: "Por una mejor mixteca...").first_or_create
+Emisor.where(nombre: "Municipio de Huajuapan de León", numero_municipio: "482", rfc: "AAAA111111AA", regimen_fiscal: "Personas morales con fines no lucrativos", registro_patronal: "sin registro", eslogan: "Por una mejor mixteca...").first_or_create
 Direccion.where(calle: "Independencia", numero: "8", colonia: "Azteca", codigo_postal: "68000", localidad: "Oaxaca", municipio: "Centro", estado: "Oaxaca", pais: "México", direccionable_type: "Emisor", direccionable_id: Emisor.first.id).first_or_create
 
 puts "Creando Contribuyentes..."

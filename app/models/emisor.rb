@@ -3,7 +3,9 @@ class Emisor < ApplicationRecord
   has_many :recibos
   has_many :facturas
 
-  validates :nombre, :rfc, :regimen_fiscal, presence: true
+  validates :nombre, :numero_municipio, :rfc, :regimen_fiscal, presence: true
+  validates :numero_municipio, uniqueness: true
+  validates :numero_municipio, format: { with: /\A\d+\z/ }
   validates :rfc, length: { is: 12 }
 
   delegate :codigo_postal, to: :direccion, prefix: true
