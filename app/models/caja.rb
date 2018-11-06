@@ -1,7 +1,8 @@
 class Caja < ApplicationRecord
   belongs_to :cajero, optional: true
-  validates :nombre, presence: true
-  validates :nombre, uniqueness: true
+  validates :nombre, :numero, presence: true
+  validates :nombre, :numero, uniqueness: true
+  validates :numero, numericality: { greater_than_or_equal_to: 1 }
 
   def self.cajas_disponibles?
     Caja.where(disponible: true).count > 0

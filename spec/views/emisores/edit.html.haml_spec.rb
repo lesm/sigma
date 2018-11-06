@@ -4,6 +4,7 @@ RSpec.describe "emisores/edit", type: :view do
   before(:each) do
     @emisor = assign(:emisor, Emisor.create!(
       :nombre => "MyString",
+      :numero_municipio => "482",
       :rfc => "AAA111111AAA",
       :logotipo => "MyString",
       :regimen_fiscal => "MyString",

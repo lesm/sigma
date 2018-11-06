@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Caja, type: :model do
+  it { should belong_to(:cajero) }
+
+  it { should validate_presence_of(:numero) }
+  it { should validate_uniqueness_of :numero }
+  it { should_not allow_value(0).for(:numero) }
   it { should validate_presence_of :nombre }
   it { should validate_uniqueness_of :nombre }
-  it { should belong_to(:cajero) }
 
   describe "cajas_disponibles?" do
     let(:caja) { create :caja, disponible: true }

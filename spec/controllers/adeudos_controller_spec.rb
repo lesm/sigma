@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe AdeudosController, type: :controller do
 
   let(:contribuyente) do
-    FactoryBot.create :contribuyente, :con_direccion
+    create :contribuyente, :con_direccion
   end
   let(:cajero) do
-    FactoryBot.build :cajero, contribuyente: contribuyente
+    create :cajero, contribuyente: contribuyente
   end
-  let(:arqueo) { FactoryBot.build :arqueo }
-  let(:cierre_caja) { FactoryBot.create :cierre_caja, arqueos: [arqueo], cajero: cajero }
+  let(:arqueo) { build :arqueo }
+  let(:cierre_caja) { create :cierre_caja, arqueos: [arqueo], cajero: cajero }
 
   let(:valid_attributes) do
     {
@@ -90,6 +90,7 @@ RSpec.describe AdeudosController, type: :controller do
   end
 
   describe "PUT #update" do
+    let(:adeudo) { Adeudo.create! valid_attributes }
     context "with valid params" do
       let(:new_attributes) do
         {
@@ -102,14 +103,12 @@ RSpec.describe AdeudosController, type: :controller do
       end
 
       it "updates the requested adeudo" do
-        adeudo = Adeudo.create! valid_attributes
         put :update, params: {id: adeudo.to_param, adeudo: new_attributes}
         adeudo.reload
         expect(adeudo).to be_liquidado
       end
 
       it "redirects to the adeudo" do
-        adeudo = Adeudo.create! valid_attributes
         put :update, params: {id: adeudo.to_param, adeudo: valid_attributes}
         expect(response).to redirect_to(adeudo)
       end

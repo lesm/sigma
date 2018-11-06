@@ -11,6 +11,7 @@
         %table.table.table-hover.text-center
           %thead
             %tr
+              %th Número
               %th Nombre
               %th Descripción
               %th Disponible
@@ -19,6 +20,7 @@
           %tbody
             - @cajas.each do |caja|
               %tr
+                %td= caja.numero
                 %td= caja.nombre
                 %td= caja.descripcion
                 %td= disponible? caja

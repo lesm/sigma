@@ -5,6 +5,7 @@ RSpec.describe "emisores/index", type: :view do
     assign(:emisores, [
       Emisor.create!(
         :nombre => "Nombre",
+        :numero_municipio => "482",
         :rfc => "AAA111111AAA",
         :logotipo => "Logo",
         :regimen_fiscal => "Regimen Fiscal",
@@ -13,6 +14,7 @@ RSpec.describe "emisores/index", type: :view do
       ),
       Emisor.create!(
         :nombre => "Nombre",
+        :numero_municipio => "481",
         :rfc => "AAA111111AAA",
         :logotipo => "Logo",
         :regimen_fiscal => "Regimen Fiscal",

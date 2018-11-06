@@ -5,11 +5,13 @@ RSpec.describe "cajas/index", type: :view do
     assign(:cajas, [
       Caja.create!(
         :nombre => "Nombre Uno",
+        :numero => 301,
         :descripcion => "MyText",
         :disponible => true
       ),
       Caja.create!(
         :nombre => "Nombre Dos",
+        :numero => 302,
         :descripcion => "MyText",
         :disponible => true
       )

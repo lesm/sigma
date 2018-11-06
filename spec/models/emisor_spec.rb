@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Emisor, type: :model do
   it { should validate_presence_of(:nombre) }
+  it { should validate_uniqueness_of(:numero_municipio) }
+  it { should validate_presence_of(:numero_municipio) }
+  it { should_not allow_value("hola").for(:numero_municipio) }
   it { should validate_presence_of(:rfc) }
   it { should validate_presence_of(:regimen_fiscal) }
   it { should have_one(:direccion).dependent(:destroy) }

@@ -8,6 +8,7 @@ RSpec.describe CajasController, type: :controller do
   let(:valid_attributes) do
     {
       nombre: "Primer caja",
+      numero: "2",
       descripcion: "Caja del mercado",
     }
   end
@@ -15,6 +16,7 @@ RSpec.describe CajasController, type: :controller do
   let(:invalid_attributes) do
     {
       nombre: nil,
+      numero: "3",
       descripcion: "Caja del mercado",
     }
   end

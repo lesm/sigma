@@ -4,6 +4,8 @@
     .col-md-6
       = f.input :nombre
     .col-md-6
+      = f.input :numero, input_html: { min: "1", max: "10" }
+    .col-md-12
       = f.input :descripcion
 
   .btn-group.float-right

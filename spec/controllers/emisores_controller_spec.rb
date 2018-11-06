@@ -18,6 +18,7 @@ RSpec.describe EmisoresController, type: :controller do
   let(:valid_attributes) do
     {
       nombre: "Municipio",
+      numero_municipio: "482",
       rfc: "AAA111111AAA",
       logotipo: "Logo",
       regimen_fiscal: "Regimen Fiscal",
@@ -30,6 +31,7 @@ RSpec.describe EmisoresController, type: :controller do
   let(:invalid_attributes) do
     {
       nombre: nil,
+      numero_municipio: "482",
       rfc: nil,
       logotipo: "Logo",
       regimen_fiscal: "Regimen Fiscal",
