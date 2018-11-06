@@ -5,6 +5,6 @@ FactoryBot.define do
     activo { true }
     password { "1qaz2wsx" }
     rol { 1 }
+    caja
   end
 end
-

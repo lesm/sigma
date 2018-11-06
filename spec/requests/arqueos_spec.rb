@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Arqueos", type: :request do
-  let(:contribuyente) { create :contribuyente, :con_direccion }
   before :each do
-    sign_in create :cajero, contribuyente: contribuyente
+    sign_in_cajero
   end
 
   describe "GET /arqueos" do

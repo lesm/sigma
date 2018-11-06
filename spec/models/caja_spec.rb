@@ -19,9 +19,19 @@ RSpec.describe Caja, type: :model do
   end
 
   describe "#cerrar!" do
+    let(:contribuyente) do
+      create :contribuyente, :con_direccion
+    end
+    let(:cajero) do
+      create :cajero,
+        contribuyente: contribuyente,
+        caja: caja
+    end
     let(:caja) { create :caja, disponible: true }
+
     it "must be false" do
-      caja.cerrar!
+      cajero
+      caja.cerrar!(cajero.id)
       expect(caja).to_not be_disponible
     end
   end # describe "#cerrar!"

@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Cuentas", type: :request do
+  before :each do
+    sign_in_cajero
+  end
+
   describe "GET /cuentas" do
     it "works! (now write some real specs)" do
       get cuentas_path
