@@ -20,14 +20,15 @@
               = f.input :serie, as: :hidden
               = f.input :descuento, as: :numeric, as: :hidden
             .col-md-6
-              = f.input :folio
-              = f.input :fecha_emision, as: :string
+              = f.input :folio, input_html: { value: Comprobante::Sugeridor.folio(current_usuario.caja) }, readonly: true
+              = f.input :fecha_emision, as: :string, input_html: { value: Time.current }
               = f.input :total, as: :numeric, readonly: true
               = f.input :motivo_descuento, as: :hidden #por qué lo agregamos?
               = f.input :observaciones, as: :hidden #posible para borrar
               = f.input :emisor_id, as: :hidden, input_html: { value: Emisor.first.id }
               = f.input :lugar_expedicion, as: :hidden, input_html: { value: Emisor.first.direccion_codigo_postal }
               = f.input :cajero_id, as: :hidden, input_html: { value: current_usuario.id }
+              = f.input :caja_id, as: :hidden, input_html: { value: current_usuario.caja.id }
 
               = f.input :cuenta_ids, as: :hidden, input_html: { value: params["cuenta_ids"], name: "cuenta_ids[]" }
 

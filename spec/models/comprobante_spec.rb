@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Comprobante, type: :model do
+  it { should belong_to :caja }
   it { should belong_to :arqueo }
   it { should belong_to :cajero }
   it { should belong_to :contribuyente }

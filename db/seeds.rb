@@ -20,7 +20,7 @@ puts "Creando Cajero..."
 Cajero.create(nombre: "cajero de prueba", username: "cajero", password: "1qaz2wsx", rol: 1, contribuyente_id: Contribuyente.first.id) rescue nil
 
 puts "Creando Caja..."
-Caja.where(nombre: "Principal", descripcion: "Se localiza en el municipio").first_or_create
+Caja.where(nombre: "Principal", descripcion: "Se localiza en el municipio", numero: 1).first_or_create
 
 puts "Creando Cuentas..."
 Cuenta.where(codigo: "110101", formato: "DatosComun", descripcion: "RIFAS").first_or_create

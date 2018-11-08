@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_195425) do
+ActiveRecord::Schema.define(version: 2018_11_07_212804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,9 @@ ActiveRecord::Schema.define(version: 2018_11_06_195425) do
     t.bigint "arqueo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "caja_id"
     t.index ["arqueo_id"], name: "index_comprobantes_on_arqueo_id"
+    t.index ["caja_id"], name: "index_comprobantes_on_caja_id"
     t.index ["cajero_id"], name: "index_comprobantes_on_cajero_id"
     t.index ["contribuyente_id"], name: "index_comprobantes_on_contribuyente_id"
     t.index ["emisor_id"], name: "index_comprobantes_on_emisor_id"
@@ -253,6 +255,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_195425) do
   add_foreign_key "cajas", "usuarios", column: "cajero_id"
   add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "comprobantes", "arqueos"
+  add_foreign_key "comprobantes", "cajas"
   add_foreign_key "comprobantes", "contribuyentes"
   add_foreign_key "comprobantes", "emisores"
   add_foreign_key "comprobantes", "usuarios", column: "cajero_id"

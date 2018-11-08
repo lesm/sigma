@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Caja, type: :model do
+  it { should have_many(:comprobantes) }
   it { should belong_to(:cajero) }
 
   it { should validate_presence_of(:numero) }

@@ -24,7 +24,6 @@ class ReciboStepsController < ApplicationController
     render_wizard
   end
 
-
   def update
     contribuyente_id = params["cuenta_form"]["contribuyente_id"]
     @cuenta_form = CuentaForm.new(
@@ -33,11 +32,11 @@ class ReciboStepsController < ApplicationController
     )
     render_wizard(@cuenta_form, {}, @cuenta_form.instance_values)
   end
-  
+
   private
 
   def cuenta_ids
-    params["cuenta_ids"] 
+    params["cuenta_ids"]
   end
 
   def set_recibo

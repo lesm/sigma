@@ -1,4 +1,4 @@
 = simple_form_for (@historial_caja) do |f|
   = f.input :cajero_id, as: :hidden, input_html: { value: current_usuario.id }
-  = f.input :caja_id, label: "Seleccionar Caja", collection: @cajas, input_html: { class: "select2" }
+  = f.input :caja_id, label: "Seleccionar Caja", collection: Caja.disponibles, input_html: { class: "select2" }
   = f.button :submit, "Seleccionar Caja", class: "btn btn-sm btn-primary"

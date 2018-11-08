@@ -55,7 +55,7 @@ class RecibosController < ApplicationController
         :lugar_expedicion, :metodo_pago, :forma_pago, :subtotal,
         :total, :descuento, :motivo_descuento, :fecha_emision,
         :observaciones, :cajero_id, :contribuyente_id, :emisor_id,
-        :timbrado_automatico,
+        :timbrado_automatico, :caja_id,
         conceptos_attributes: [
           :id, :clave, :clave_unidad, :unidad,
           :cantidad, :descripcion, :valor_unitario, :importe, :cuenta_id,

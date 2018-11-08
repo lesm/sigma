@@ -1,5 +1,6 @@
 class Comprobante < ApplicationRecord
   attr_accessor :timbrado_automatico
+  belongs_to :caja
 
   FORMA_PAGO = {
     "01" => "Efectivo",

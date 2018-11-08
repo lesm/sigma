@@ -54,8 +54,8 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'capybara'
   gem 'selenium-webdriver', '~> 3.14', '>= 3.14.1'
-  #gem "geckodriver-helper"
   gem 'chromedriver-helper'
+  gem 'database_cleaner'
 end
 
 group :development do
