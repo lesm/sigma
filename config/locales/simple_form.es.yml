@@ -32,7 +32,7 @@ es-MX:
         dos_mil_pesos: "$2000.00"
         observacion: "Observación"
         descripcion: "Descripción"
-        fecha_emision: "Fecha Emisión"
+        fecha_emision: "Fecha Cobro"
         numero_cuenta: "Número Cuenta"
         ubicacion: "Ubicación"
         cantidad_folios_cinco: "Cantidad de Folios ($5.00)"
@@ -49,6 +49,7 @@ es-MX:
         forma_pago: "Forma de Pago"
         codigo: "Código"
         numero_municipio: "Número Municipio"
+        fecha: "Fecha de Evento"
     # Examples
     # labels:
     #   defaults:

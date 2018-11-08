@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "recibos/index", type: :view do
-  let(:recibo) { create :recibo, :con_datos, folio: "1" }
-  let(:recibo_dos) { create :recibo, :con_datos, folio: "2" }
+  let(:caja) { create :caja }
+  let(:recibo) { create :recibo, :con_datos, folio: "1", caja: caja }
+  let(:recibo_dos) { create :recibo, :con_datos, folio: "2", caja: caja }
 
   before(:each) do
     assign(:recibos, [

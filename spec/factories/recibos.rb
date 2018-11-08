@@ -27,9 +27,8 @@ FactoryBot.define do
 
   trait :con_datos do
     after(:build) do |recibo|
-      emisor = build :emisor
-      recibo.emisor = emisor
-      recibo.cajero = build :cajero
+      recibo.emisor = build :emisor
+      recibo.cajero = build :cajero, caja: nil
       recibo.contribuyente = build :contribuyente
     end
   end

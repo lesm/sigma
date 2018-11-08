@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RecibosController, type: :controller do
+  let(:caja) { create :caja }
   let(:cuenta_rifas) do
     create :cuenta, codigo: "110101", formato: "DatosComun",
       descripcion: "RIFAS"
@@ -13,7 +14,11 @@ RSpec.describe RecibosController, type: :controller do
 
   let(:emisor) { create :emisor }
   let(:contribuyente) { create :contribuyente, :con_direccion }
-  let(:cajero) { create :cajero, contribuyente: contribuyente }
+  let(:cajero) do
+    create :cajero,
+      contribuyente: contribuyente,
+      caja: caja
+  end
   let(:cuenta) { create :cuenta }
   let(:cuenta_ids) { [cuenta_rifas.id, cuenta_sorteos.id] }
 
@@ -48,6 +53,7 @@ RSpec.describe RecibosController, type: :controller do
       cajero_id:  cajero.id,
       contribuyente_id:  contribuyente.id,
       emisor_id:  emisor.id,
+      caja_id: caja.id,
       conceptos_attributes: conceptos_attributes
     }
   end
@@ -70,6 +76,7 @@ RSpec.describe RecibosController, type: :controller do
       cajero_id:  cajero.id,
       contribuyente_id:  contribuyente.id,
       emisor_id:  emisor.id,
+      caja_id: caja.id
     }
   end
 

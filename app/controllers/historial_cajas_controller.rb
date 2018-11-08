@@ -4,7 +4,6 @@ class HistorialCajasController < ApplicationController
 
   def new
     @historial_caja = HistorialCaja.new
-    @cajas = Caja.where(disponible: true)
   end
 
   def create
@@ -21,7 +20,7 @@ class HistorialCajasController < ApplicationController
   private
 
   def set_caja
-    @caja = Caja.find(historial_caja_params[:caja_id])
+    @caja = Caja.find_by_id(historial_caja_params[:caja_id])
   end
 
   def historial_caja_params

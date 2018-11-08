@@ -14,8 +14,6 @@
             - if f.object.errors[:cuenta_ids].any?
               .form-text.invalid-feedback= f.object.errors[:cuenta_ids].to_sentence
 
-          = f.submit class: "btn btn-primary" do
-            %i.fa.fa-arrow-right
-            Siguiente
+          = f.submit "Siguiente", class: "btn btn-primary"
 
 = render "contribuyentes/modal_contribuyente"
