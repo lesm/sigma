@@ -21,6 +21,7 @@
           = link_to :back, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
             Regresar
-          = link_to edit_cuenta_path(@cuenta), class: 'btn btn-sm btn-warning' do
-            %i.fa.fa-pencil
-            Editar
+          - if current_usuario.admin?
+            = link_to edit_cuenta_path(@cuenta), class: 'btn btn-sm btn-warning' do
+              %i.fa.fa-pencil
+              Editar

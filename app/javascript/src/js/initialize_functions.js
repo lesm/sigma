@@ -51,9 +51,15 @@ function startDateTimePicker() {
     format: 'YYYY-MM-DD HH:mm a'
   })
 
-  $("input[id$='_fecha']").datetimepicker({
+  $("input[id$='_fecha'].fecha-comun").datetimepicker({
     locale: 'es',
     format: 'YYYY-MM-DD'
+  })
+
+  $("input[id$='_fecha'].fecha-predial").datetimepicker({
+    locale: 'es',
+    format: "YYYY",
+    viewMode: 'years',
   })
 
   // DatosAgua

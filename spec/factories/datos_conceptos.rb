@@ -16,14 +16,14 @@ FactoryBot.define do
     end
 
     trait :datos_predial do
-      folio { "MyString" }
-      base_catastral { "MyString" }
+      sequence(:folio) { |n| "482181-#{n}" }
+      base_catastral { "01020101020921" }
       fecha { Date.current }
-      impuesto_predial { "MyString" }
-      clave_catastral { "MyString" }
-      numero_cuenta { "MyString" }
-      ubicacion { "MyText" }
-      observaciones { "MyText" }
+      impuesto_predial { 250 }
+      clave_catastral { "233223" }
+      numero_cuenta { "23322213" }
+      ubicacion { "A lada de mi casa" }
+      observaciones { "Terreno grande" }
       type { "DatosPredial" }
     end
   end

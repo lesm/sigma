@@ -11,4 +11,11 @@ function setCuentasIds(){
   }
 }
 
+function convertir_fecha() {
+  let year = $(this).val()
+  $(this).val(`${year}-01-01`)
+}
+
+$(document).on("dp.hide", ".fecha-predial", convertir_fecha)
+
 $(document).on("turbolinks:load", setCuentasIds)

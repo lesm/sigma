@@ -8,7 +8,7 @@ class Caja < ApplicationRecord
   scope :disponibles, -> { where(disponible: true) }
 
   def self.cajas_disponibles?
-    Caja.disponible.count > 0
+    Caja.disponibles.count > 0
   end
 
   def cerrar!(cajero_id)

@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    = f.input :fecha, as: :string
+    = f.input :fecha, as: :string, input_html: { class: "fecha-comun" }
   .col-md-6
     = f.input :observaciones
     = f.input :type, as: :hidden, value: "DatosPermisoPublicidad"

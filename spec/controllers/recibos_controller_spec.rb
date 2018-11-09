@@ -12,6 +12,11 @@ RSpec.describe RecibosController, type: :controller do
       descripcion: "SORTEOS"
   end
 
+  let(:cuenta_predial_urbano) do
+    create :cuenta, codigo: "120101", formato: "DatosPredial",
+      descripcion: "PREDIAL URBANOS"
+  end
+
   let(:emisor) { create :emisor }
   let(:contribuyente) { create :contribuyente, :con_direccion }
   let(:cajero) do
@@ -31,6 +36,10 @@ RSpec.describe RecibosController, type: :controller do
       attributes_for(:concepto).merge!(
         cuenta_id: cuenta_sorteos.id,
         datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
+      ),
+      attributes_for(:concepto).merge!(
+        cuenta_id: cuenta_predial_urbano.id,
+        datos_concepto_attributes: attributes_for(:datos_concepto, :datos_predial)
       )
     ]
   end
@@ -108,13 +117,13 @@ RSpec.describe RecibosController, type: :controller do
         it "creates two new Conceptos" do
           expect {
             post :create, params: { recibo: valid_attributes, cuenta_ids: cuenta_ids, contribuyente_id: contribuyente.id }
-          }.to change(Concepto, :count).by(2)
+          }.to change(Concepto, :count).by(3)
         end
 
         it "creates two new DatosConcepto" do
           expect {
             post :create, params: { recibo: valid_attributes, cuenta_ids: cuenta_ids, contribuyente_id: contribuyente.id }
-          }.to change(DatosConcepto, :count).by(2)
+          }.to change(DatosConcepto, :count).by(3)
         end
       end
 
