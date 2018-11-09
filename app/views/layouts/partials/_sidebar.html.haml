@@ -17,8 +17,8 @@
             %i.fa.fa-money.nav-icon
             %p
               Caja
-        %li.nav-item.has-treeview{ class: "#{ controller_name == 'contribuyentes' && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ controller_name == 'contribuyentes' && 'active' }" do
+        %li.nav-item.has-treeview{ class: "#{ (%w(contribuyentes cuentas).include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (%w(contribuyentes cuentas).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-globe
             %p
               General
@@ -28,6 +28,11 @@
               = link_to contribuyentes_path, class: "nav-link #{ controller_name == 'contribuyentes' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Contribuyentes
+          %ul.nav.nav-treeview
+            %li.nav-item
+              = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
+                %i.fa.fa-circle-o.nav-icon
+                %p Conceptos de cobro
         %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'menu-open' }" }
           = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-bank
@@ -76,17 +81,12 @@
               %a.nav-link{:href => "#"}
                 %i.fa.fa-circle-o.nav-icon
                 %p Arqueos
-        %li.nav-item.has-treeview{ class: "#{ (%w(emisores cajeros cuentas cajas).include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (%w(emisores cajeros cuentas cajas).include? controller_name) && 'active' }" do
+        %li.nav-item.has-treeview{ class: "#{ (%w(emisores cajeros cajas).include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (%w(emisores cajeros cajas).include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-dashboard
             %p
               Administrador
               %i.right.fa.fa-angle-left
-          %ul.nav.nav-treeview
-            %li.nav-item
-              = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Conceptos de cobro
           %ul.nav.nav-treeview
             %li.nav-item
               = link_to emisores_path, class: "nav-link #{ controller_name == 'emisores' && 'active' }" do
@@ -100,10 +100,6 @@
               = link_to cajas_path, class: "nav-link #{ controller_name == 'cajas' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Cajas
-            %li.nav-item
-              %a.nav-link{:href => "#"}
-                %i.fa.fa-circle-o.nav-icon
-                %p Cuentas
         %li.nav-item
           = link_to destroy_usuario_session_path, class: 'nav-link', method: :delete, data: { confirm_swal: "Cerrar Sesión" } do
             %i.fa.fa-sign-out.nav-icon

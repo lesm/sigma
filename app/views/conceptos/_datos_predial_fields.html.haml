@@ -3,7 +3,7 @@
     = f.input :folio
     = f.input :base_catastral
   .col-md-4
-    = f.input :fecha, as: :string
+    = f.input :fecha, as: :string, input_html: { class: "fecha-predial" }
     = f.input :impuesto_predial
   .col-md-4
     = f.input :clave_catastral

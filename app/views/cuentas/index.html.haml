@@ -28,6 +28,7 @@
                       = link_to cuenta, class: "btn btn-sm btn-info" do
                         %i.fa.fa-eye
                         Ver
-                      = link_to edit_cuenta_path(cuenta), class: "btn btn-ms btn-warning" do
-                        %i.fa.fa-edit
-                        Editar
+                      - if current_usuario.admin?
+                        = link_to edit_cuenta_path(cuenta), class: "btn btn-sm btn-warning" do
+                          %i.fa.fa-edit
+                          Editar

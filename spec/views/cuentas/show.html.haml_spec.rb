@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "cuentas/show", type: :view do
   before(:each) do
+    sign_in_cajero
     @cuenta = assign(:cuenta, Cuenta.create!(
       codigo: "110101",
       formato: "DatosComun",
