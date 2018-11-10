@@ -30,6 +30,7 @@ class ReciboStepsController < ApplicationController
       contribuyente_id: Contribuyente.find_by_id(contribuyente_id),
       cuenta_ids: params["cuenta_form"]["cuenta_ids"]
     )
+    @contribuyente = Contribuyente.new(direccion: Direccion.new)
     render_wizard(@cuenta_form, {}, @cuenta_form.instance_values)
   end
 
