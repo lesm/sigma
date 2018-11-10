@@ -34,7 +34,16 @@
 
           .row.justify-content-center
             = f.simple_fields_for :conceptos, @recibo.conceptos do |cf|
-              = render "conceptos/concepto_fields", f: cf
+              %div.col-md-12{ class: "borde-#{color_name(cf.index.to_i)}" }
+                .row.concepto{style: "padding: 10px"}
+                  .col-md-10.text-center
+                    %h6 CONCEPTO DE COBRO #{ cf.index + 1 }
+                  .col-md-2
+                    = button_tag type: :button, id: "eliminarConcepto", class: "btn btn-sm btn-danger float-right" do
+                      %i.fa.fa-trash
+                      Eliminar
+                  = render "conceptos/concepto_fields", f: cf
+          %br
           = label_tag nil, class: "badge badge-warning" do
             %h6
               = f.check_box :timbrado_automatico
