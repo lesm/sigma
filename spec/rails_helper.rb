@@ -59,6 +59,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Features::SessionHelpers, type: :feature
+  config.include Features::MethodsHelpers, type: :feature
   config.include Helper::SessionHelpers, type: :request
   config.include Helper::SessionHelpers, type: :view
 

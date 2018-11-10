@@ -10,7 +10,7 @@
       = f.input :clave_unidad, as: :hidden
       = f.input :unidad, as: :hidden #preguntar valor
       = f.input :cantidad, as: :hidden, value: 1
-      = f.input :valor_unitario, as: :numeric, as: :hidden
+      = f.input :valor_unitario, as: :hidden
   .row
     .col-md-12
       = f.simple_fields_for :datos_concepto, f.object.datos_concepto do |cf|

@@ -13,12 +13,12 @@
               = f.association :contribuyente, collection: Contribuyente.all, selected: @recibo.contribuyente.id, disabled: true
               = f.input :contribuyente_id, as: :hidden, input_html: { value: @recibo.contribuyente.id }
               = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
-              = f.input :subtotal, as: :numeric, as: :hidden
+              = f.input :subtotal, as: :hidden
               = f.input :moneda, as: :hidden
               = f.input :tipo_comprobante, as: :hidden, input_html: { value: "Recibo" }
               = f.input :metodo_pago, as: :hidden
               = f.input :serie, as: :hidden
-              = f.input :descuento, as: :numeric, as: :hidden
+              = f.input :descuento, as: :hidden
             .col-md-6
               = f.input :folio, input_html: { value: Comprobante::Sugeridor.folio(current_usuario.caja) }, readonly: true
               = f.input :fecha_emision, as: :string, input_html: { value: Time.current }
