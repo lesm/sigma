@@ -1,16 +1,18 @@
 .col-md-12
   .row
-    .col-md-9
-      = f.association :cuenta, collection: Cuenta.all, selected: f.object.cuenta_id, disabled: true
-      = f.input :cuenta_id, as: :hidden, input_html: { value: f.object.cuenta_id }
+    .col-md-12
+      = f.input :descripcion, readonly: true, input_html: { value: f.object.cuenta.descripcion }
     .col-md-3
-      = f.input :importe, as: :numeric, input_html: { min: 0 }
-      = f.input :descripcion, as: :hidden, input_html: { value: f.object.cuenta.descripcion }
-      = f.input :clave, as: :hidden
+      = f.input :clave, readonly: true, input_html: { value: f.object.cuenta.codigo }
+    .col-md-3
+      = f.input :cantidad, as: :numeric, input_html: { value: 1, pattern: "\d*", min: "1" }
+    .col-md-3
+      = f.input :valor_unitario, as: :numeric, input_html: { min: "1" }
+    .col-md-3
+      = f.input :importe, as: :numeric, readonly: true, input_html: { min: 0 }
+      = f.input :unidad, as: :hidden #preguntar
       = f.input :clave_unidad, as: :hidden
-      = f.input :unidad, as: :hidden #preguntar valor
-      = f.input :cantidad, as: :hidden, value: 1
-      = f.input :valor_unitario, as: :hidden
+      = f.input :cuenta_id, as: :hidden, input_html: { value: f.object.cuenta_id }
   .row
     .col-md-12
       = f.simple_fields_for :datos_concepto, f.object.datos_concepto do |cf|
