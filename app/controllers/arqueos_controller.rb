@@ -39,6 +39,7 @@ class ArqueosController < ApplicationController
 
     respond_to do |format|
       if @cierre_caja.arqueos << @arqueo
+        update_comprobantes_sin_arqueo
         format.html { redirect_to @arqueo, notice: 'Arqueo was successfully created.' }
         format.json { render :show, status: :created, location: @arqueo }
       else
@@ -50,6 +51,14 @@ class ArqueosController < ApplicationController
   end
 
   private
+
+    def update_comprobantes_sin_arqueo
+      @comprobantes = Comprobante.where(arqueo_id: nil).
+        where(caja_id: current_usuario.caja.id).
+        where(created_at: Date.current.beginning_of_day..Date.current.end_of_day)
+      @comprobantes.update_all(arqueo_id: @arqueo.id)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_arqueo
       @arqueo = Arqueo.find(params[:id])

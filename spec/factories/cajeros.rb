@@ -7,4 +7,10 @@ FactoryBot.define do
     rol { 1 }
     caja
   end
+
+  trait :con_contribuyente do
+    after :build do |cajero|
+      cajero.contribuyente = build :contribuyente, :con_direccion
+    end
+  end
 end

@@ -111,6 +111,19 @@ RSpec.describe ArqueosController, type: :controller do
           }.to change(CierreCaja, :count).by(0)
         end
       end
+
+      context "when exist a comprobante" do
+        context "where comprobante.arqueo_id is nil" do
+          let(:conceptos) { build :concepto, :con_datos }
+          let(:comprobante) { create :comprobante, :con_datos, caja: cajero.caja, arqueo_id: nil }
+          it "comprobante must belong to the new arqueo" do
+            comprobante
+            allow_any_instance_of(ApplicationController).to receive(:current_usuario).and_return(cajero)
+            post :create, params: { arqueo: valid_attributes }
+            expect(comprobante.reload.arqueo).to eq Arqueo.last
+          end
+        end
+      end
     end
 
     context "with invalid params" do
