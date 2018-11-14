@@ -2,6 +2,99 @@ require 'rails_helper'
 
 RSpec.describe ArqueosHelper, type: :helper do
 
+  describe "#monto_sistema" do
+    context "must be the sum of comprobantes' total" do
+      let(:caja) { create :caja }
+      let(:cajero) { create :cajero, :con_contribuyente, nombre: "Pedro", caja: caja  }
+      let(:comprobante) do
+        create :comprobante, :con_datos, caja: caja, cajero: cajero
+      end
+      let(:comprobante_dos) do
+        create :comprobante, :con_datos, caja: caja, cajero: cajero
+      end
+      let(:comprobante_tres) do
+        create :comprobante, :con_datos, caja: caja, cajero: cajero
+      end
+
+      context "when arqueo_id is nil and there is a caja" do
+        context "when exist a comprobante" do
+          it "is 400" do
+            comprobante
+            expect(helper.monto_sistema(cajero)).to eq 400
+          end
+        end
+        context "when exist two comprobantes" do
+          it "is 800" do
+            [comprobante, comprobante_dos]
+            expect(helper.monto_sistema(cajero)).to eq 800
+          end
+        end
+        context "when exist three comprobantes" do
+          it "is 1200" do
+            [comprobante, comprobante_dos, comprobante_tres]
+            expect(helper.monto_sistema(cajero)).to eq 1200
+          end
+        end
+
+        context "monto_sistema is calculating with comprobantes that were created today" do
+          it "is 0" do
+            create :comprobante, :con_datos, caja: caja, cajero: cajero, created_at: 2.days.ago
+            expect(Comprobante.count).to eq 1
+            expect(helper.monto_sistema(cajero)).to eq 0
+          end
+        end
+      end
+
+      context "when arqueo_id is nil and there is a caja and cajero" do
+        let(:cajero) { create :cajero, :con_contribuyente, nombre: "Pedro", caja: caja  }
+        let(:cajero_dos) { create :cajero, :con_contribuyente, nombre: "José", caja: caja  }
+        let(:cajero_tres) { create :cajero, :con_contribuyente, nombre: "Juan", caja: caja  }
+
+        let(:caja) { create :caja }
+        context "when a comprobante belong to cajero Pedro" do
+          let(:comprobante) do
+            create :comprobante, :con_datos, caja: caja, cajero: cajero
+          end
+          let(:comprobante_dos) do
+            create :comprobante, :con_datos, caja: caja, cajero: cajero_dos
+          end
+          let(:comprobante_tres) do
+            create :comprobante, :con_datos, caja: caja, cajero: cajero_tres
+          end
+
+          it "is 400" do
+            [comprobante, comprobante_dos, comprobante_tres]
+            expect(helper.monto_sistema(cajero)).to eq 400
+          end
+        end
+
+        context "when two comprobantes belong to cajero Pedro" do
+          let(:comprobantes) do
+            create_list :comprobante, 2, :con_datos, caja: caja, cajero: cajero
+          end
+          let(:comprobante_tres) do
+            create :comprobante, :con_datos, caja: caja, cajero: cajero_tres
+          end
+          it "is 800" do
+            [comprobantes, comprobante_tres]
+            expect(helper.monto_sistema(cajero)).to eq 800
+          end
+        end
+
+        context "when three comprobantes belong to cajero Pedro" do
+          let(:comprobantes) do
+            create_list :comprobante, 3, :con_datos, caja: caja, cajero: cajero
+          end
+
+          it "is 1200" do
+            comprobantes
+            expect(helper.monto_sistema(cajero)).to eq 1200
+          end
+        end
+      end
+    end
+  end
+
   describe "#referer_url_cierre_caja" do
     context "request.referer is arqueos" do
       it "returns arqueos" do

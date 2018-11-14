@@ -1,4 +1,9 @@
 module ArqueosHelper
+
+  def monto_sistema(cajero)
+    Comprobante.total_monto_sistema(cajero)
+  end
+
   def values_body
     attributes_dinero.each_with_object([]) do |(val, attr), array|
       array << @dinero.send(attr) if @dinero.send(attr) > 0

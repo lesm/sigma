@@ -30,6 +30,12 @@ class Comprobante < ApplicationRecord
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)
   end
 
+  def self.total_monto_sistema(cajero)
+    Comprobante.where(arqueo_id: nil, caja_id: cajero.caja.id, cajero_id: cajero.id)
+      .where(created_at: Date.current.beginning_of_day..Date.current.end_of_day)
+      .sum(:total)
+  end
+
   private
 
   def valida_total

@@ -23,4 +23,15 @@ FactoryBot.define do
     emisor { nil }
     arqueo { nil }
   end
+
+  trait :con_datos do
+    after(:build) do |recibo|
+      recibo.emisor = build :emisor
+      recibo.cajero = build :cajero, caja: nil unless recibo.cajero
+      recibo.contribuyente = build :contribuyente
+      recibo.conceptos = build_list :concepto, 1, :con_cuenta, cantidad: 1, valor_unitario: 400, importe: 400
+      recibo.subtotal = 400
+      recibo.total = 400
+    end
+  end
 end
