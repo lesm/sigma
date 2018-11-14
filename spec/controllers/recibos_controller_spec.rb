@@ -29,15 +29,15 @@ RSpec.describe RecibosController, type: :controller do
 
   let(:conceptos_attributes) do
     [
-      attributes_for(:concepto).merge!(
+      attributes_for(:concepto, cantidad: 2, valor_unitario: 100, importe: 200).merge!(
         cuenta_id: cuenta_rifas.id,
         datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
       ),
-      attributes_for(:concepto).merge!(
+      attributes_for(:concepto, cantidad: 2, valor_unitario: 100, importe: 200).merge!(
         cuenta_id: cuenta_sorteos.id,
         datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
       ),
-      attributes_for(:concepto).merge!(
+      attributes_for(:concepto, cantidad: 2, valor_unitario: 100, importe: 200).merge!(
         cuenta_id: cuenta_predial_urbano.id,
         datos_concepto_attributes: attributes_for(:datos_concepto, :datos_predial)
       )
@@ -53,9 +53,9 @@ RSpec.describe RecibosController, type: :controller do
       lugar_expedicion:  "68300",
       metodo_pago: "Pago en una sola exhibición",
       forma_pago: "Efectivo",
-      subtotal: 2500,
+      subtotal: 600,
       descuento: 0,
-      total: 2500,
+      total: 600,
       motivo_descuento: "por pago puntual",
       fecha_emision: Date.current,
       observaciones: "pago puntual",
@@ -76,8 +76,8 @@ RSpec.describe RecibosController, type: :controller do
       lugar_expedicion:  "68300",
       metodo_pago: "Pago en una sola exhibición",
       forma_pago: "Efectivo",
-      subtotal: 0,
-      descuento: 0,
+      subtotal: 600,
+      descuento: 600,
       total: 0,
       motivo_descuento: "por pago puntual",
       fecha_emision: Date.current,

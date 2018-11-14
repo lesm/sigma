@@ -8,5 +8,11 @@ FactoryBot.define do
     valor_unitario { 100 }
     importe { 200 }
     cuenta { nil }
+
+    trait :con_cuenta do
+      after(:build) do |concepto|
+        concepto.cuenta = build :cuenta
+      end
+    end
   end
 end
