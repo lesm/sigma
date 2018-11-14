@@ -3,10 +3,10 @@ FactoryBot.define do
     clave { "MyString" }
     clave_unidad { "MyString" }
     unidad { "Metros" }
-    cantidad { "1.0" }
+    cantidad { 2 }
     descripcion { "Pago puntual" }
-    valor_unitario { "" }
-    importe { 100 }
+    valor_unitario { 100 }
+    importe { 200 }
     cuenta { nil }
   end
 end

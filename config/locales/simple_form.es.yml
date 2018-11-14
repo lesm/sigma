@@ -50,6 +50,7 @@ es-MX:
         codigo: "Código"
         numero_municipio: "Número Municipio"
         fecha: "Fecha de Evento"
+        valor_unitario: "Precio Unitario"
     # Examples
     # labels:
     #   defaults:
