@@ -28,6 +28,10 @@ class Comprobante < ApplicationRecord
   scope :del_dia, -> { where(created_at: self.rango_fecha) }
   scope :para_arqueo_actual, -> (cajero) { sin_arqueo.where(caja_id: cajero.caja.id, cajero_id: cajero.id).del_dia }
   scope :monto_cheque, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Cheque nominativo").sum(:total) }
+  scope :monto_efectivo, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Efectivo").sum(:total) }
+  scope :monto_transferencia, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Transferencia electrónica de fondos").sum(:total) }
+  scope :monto_tarjeta_credito, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Tarjeta de crédito").sum(:total) }
+  scope :monto_tarjeta_debito, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Tarjeta de débito").sum(:total) }
 
   def timbrado_automatico?
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)
