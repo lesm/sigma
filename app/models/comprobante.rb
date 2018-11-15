@@ -33,6 +33,9 @@ class Comprobante < ApplicationRecord
   scope :monto_tarjeta_credito, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Tarjeta de crédito").sum(:total) }
   scope :monto_tarjeta_debito, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Tarjeta de débito").sum(:total) }
 
+  scope :monto_no_efectivo, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: self.formas_pago_no_efectivo ).sum(:total) }
+  scope :monto_total, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: FORMA_PAGO.values).sum(:total) }
+
   def timbrado_automatico?
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)
   end
@@ -69,5 +72,9 @@ class Comprobante < ApplicationRecord
 
   def self.rango_fecha
     Date.current.beginning_of_day..Date.current.end_of_day
+  end
+
+  def self.formas_pago_no_efectivo
+    FORMA_PAGO.values - ["Efectivo"]
   end
 end
