@@ -53,9 +53,7 @@ class ArqueosController < ApplicationController
   private
 
     def update_comprobantes_sin_arqueo
-      @comprobantes = Comprobante.where(arqueo_id: nil).
-        where(caja_id: current_usuario.caja.id).
-        where(created_at: Date.current.beginning_of_day..Date.current.end_of_day)
+      @comprobantes = Comprobante.para_arqueo_actual current_usuario
       @comprobantes.update_all(arqueo_id: @arqueo.id)
     end
 

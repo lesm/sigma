@@ -1,10 +1,4 @@
 class Comprobante < ApplicationRecord
-  attr_accessor :timbrado_automatico
-  belongs_to :caja
-
-  validate :valida_subtotal
-  validate :valida_total
-
   FORMA_PAGO = {
     "01" => "Efectivo",
     "02" => "Cheque nominativo",
@@ -13,6 +7,9 @@ class Comprobante < ApplicationRecord
     "28" => "Tarjeta de débito",
   }
 
+  attr_accessor :timbrado_automatico
+
+  belongs_to :caja
   belongs_to :contribuyente
   belongs_to :emisor
   belongs_to :cajero
@@ -24,16 +21,20 @@ class Comprobante < ApplicationRecord
     :fecha_emision, :metodo_pago, :forma_pago, :subtotal, :descuento,
     :total, presence: true
   validates :total, :subtotal, numericality: { greater_than: 0 }
+  validate :valida_subtotal
+  validate :valida_total
 
+  scope :sin_arqueo, -> { where(arqueo_id: nil) }
+  scope :del_dia, -> { where(created_at: self.rango_fecha) }
+  scope :para_arqueo_actual, -> (cajero) { sin_arqueo.where(caja_id: cajero.caja.id, cajero_id: cajero.id).del_dia }
+  scope :monto_cheque, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Cheque nominativo").sum(:total) }
 
   def timbrado_automatico?
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)
   end
 
   def self.total_monto_sistema(cajero)
-    Comprobante.where(arqueo_id: nil, caja_id: cajero.caja.id, cajero_id: cajero.id)
-      .where(created_at: Date.current.beginning_of_day..Date.current.end_of_day)
-      .sum(:total)
+    Comprobante.para_arqueo_actual(cajero).sum(:total)
   end
 
   private
@@ -60,5 +61,9 @@ class Comprobante < ApplicationRecord
 
   def total_diferente_suma_importe_conceptos?
     total != suma_importe_conceptos
+  end
+
+  def self.rango_fecha
+    Date.current.beginning_of_day..Date.current.end_of_day
   end
 end

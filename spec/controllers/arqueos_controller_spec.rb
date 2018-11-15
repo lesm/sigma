@@ -113,14 +113,30 @@ RSpec.describe ArqueosController, type: :controller do
       end
 
       context "when exist a comprobante" do
-        context "where comprobante.arqueo_id is nil" do
-          let(:conceptos) { build :concepto, :con_datos }
-          let(:comprobante) { create :comprobante, :con_datos, caja: cajero.caja, arqueo_id: nil }
-          it "comprobante must belong to the new arqueo" do
-            comprobante
-            allow_any_instance_of(ApplicationController).to receive(:current_usuario).and_return(cajero)
-            post :create, params: { arqueo: valid_attributes }
-            expect(comprobante.reload.arqueo).to eq Arqueo.last
+        context "when comprobante belong to current cajero" do
+          context "where comprobante.arqueo_id is nil" do
+            let(:comprobante) { create :comprobante, :con_datos, caja: cajero.caja, cajero: cajero, arqueo_id: nil }
+            it "comprobante must belong to the new arqueo" do
+              comprobante
+              allow_any_instance_of(ApplicationController).to receive(:current_usuario).and_return(cajero)
+              post :create, params: { arqueo: valid_attributes }
+              expect(comprobante.reload.arqueo).to eq Arqueo.last
+            end
+          end
+        end
+
+        context "when comprobante does not belong to current cajero" do
+          let(:cajero_dos) do
+            FactoryBot.create :cajero, contribuyente: contribuyente
+          end
+          context "where comprobante.arqueo_id is nil" do
+            let(:comprobante) { create :comprobante, :con_datos, caja: cajero.caja, cajero: cajero_dos, arqueo_id: nil }
+            it "comprobante must belong to the new arqueo" do
+              comprobante
+              allow_any_instance_of(ApplicationController).to receive(:current_usuario).and_return(cajero)
+              post :create, params: { arqueo: valid_attributes }
+              expect(comprobante.reload.arqueo).to be_nil
+            end
           end
         end
       end
