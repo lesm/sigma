@@ -14,5 +14,13 @@ FactoryBot.define do
         concepto.cuenta = build :cuenta
       end
     end
+
+    trait :con_datos do
+      after(:build) do |concepto|
+        concepto.cantidad = 2
+        concepto.valor_unitario = 200
+        concepto.importe = 400
+      end
+    end
   end
 end
