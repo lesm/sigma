@@ -94,16 +94,28 @@ class Dinero {
     return parseFloat($("input[id$='_monto_sistema']").val())
   }
 
+  monto_banco() {
+    return parseFloat($("#monto_banco").val())
+  }
+
   suma() {
     return this.diez_centavos() + this.veinte_centavos() + this.cincuenta_centavos() +
       this.un_peso() + this.dos_pesos() + this.cinco_pesos() + this.diez_pesos() +
       this.veinte_pesos() + this.cincuenta_pesos() + this.cien_pesos() +
       this.doscientos_pesos() + this.quinientos_pesos() + this.mil_pesos() +
-      this.veinte_m_pesos() + this.dos_mil_pesos()
+      this.veinte_m_pesos() + this.dos_mil_pesos() + this.monto_banco()
+  }
+
+  suma_sin_monto_banco() {
+    return this.suma() - this.monto_banco()
   }
 
   suma_currency() {
     return this.currency(this.suma())
+  }
+
+  suma_sin_monto_banco_currency() {
+    return this.currency(this.suma_sin_monto_banco())
   }
 
   currency(amount) {
@@ -149,17 +161,23 @@ function calculateAmount() {
   let dinero = new Dinero()
   diferenciaMonto(dinero)
 
-  actualiza_monto_cajero(dinero)
+  actualiza_monto_efectivo(dinero)
+  actualiza_monto_total(dinero)
   actualiza_total_dinero(dinero)
+}
+
+function actualiza_monto_total(dinero) {
+  $("#monto_total_span").html(dinero.suma_currency())
 }
 
 function actualiza_total_dinero(dinero) {
   $("input[id$='_total']").val(dinero.suma())
 }
 
-function actualiza_monto_cajero(dinero) {
-  $("input[id$='_cajero']").val(dinero.suma())
-  $("#monto_cajero_span").html(dinero.suma_currency())
+function actualiza_monto_efectivo(dinero) {
+  $("input[id$='_cajero']").val(dinero.suma_sin_monto_banco())
+  $("#monto_cajero_span").html(dinero.suma_sin_monto_banco_currency())
 }
 
 $(document).on("change", ".dinero", calculateAmount)
+$(document).on("turbolinks:load", calculateAmount)

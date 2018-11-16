@@ -1,5 +1,9 @@
 module ArqueosHelper
 
+  def monto_no_efectivo(cajero)
+    Comprobante.monto_no_efectivo(cajero)
+  end
+
   def monto_sistema(cajero)
     Comprobante.total_monto_sistema(cajero)
   end
