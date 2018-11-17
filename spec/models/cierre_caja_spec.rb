@@ -6,28 +6,37 @@ RSpec.describe CierreCaja, type: :model do
   it { should belong_to(:cajero) }
   it { should have_many(:arqueos).dependent :destroy }
 
-  describe "#monto" do
-    context "actualiza monto despues de agregar un arqueo" do
-      let(:contribuyente) { create :contribuyente, :con_direccion }
-      let(:cajero) { create :cajero, contribuyente: contribuyente }
-      let(:arqueo) do
-        build :arqueo, monto_sistema:10, monto_cajero: 10
-      end
-      let(:arqueo_2) { build :arqueo, monto_sistema: 40, monto_cajero: 40 }
-      let(:cierre_caja) do
-        create :cierre_caja, cajero: cajero, arqueos: [arqueo]
-      end
-      let(:cierre_caja_2) do
-        create :cierre_caja, cajero: cajero,
-          arqueos: [arqueo, arqueo_2]
-      end
+  describe "Actualiza montos" do
+    let(:cajero) { create :cajero, :con_contribuyente }
+    let(:arqueo) { build :arqueo, monto_sistema: 100, monto_cajero: 10 }
+    let(:arqueo_2) { build :arqueo, monto_sistema: 40, monto_cajero: 40 }
+    let(:cierre_caja) do
+      create :cierre_caja, cajero: cajero, arqueos: [arqueo]
+    end
 
-      it 'debe ser 10' do
-        expect(cierre_caja.monto_cajero).to eq 10
-      end
+    describe "#monto_sistema" do
+      context "actualiza monto_sistema después de agregar un arqueo" do
+        it 'debe ser 10' do
+          expect(cierre_caja.monto_sistema).to eq 100
+        end
 
-      it 'debe ser 50' do
-        expect(cierre_caja_2.monto_cajero).to eq 50
+        it 'debe ser 50' do
+          cierre_caja.arqueos << arqueo_2
+          expect(cierre_caja.monto_sistema).to eq 140
+        end
+      end
+    end
+
+    describe "#monto_cajero" do
+      context "actualiza monto_cajero después de agregar un arqueo" do
+        it 'debe ser 10' do
+          expect(cierre_caja.monto_cajero).to eq 10
+        end
+
+        it 'debe ser 50' do
+          cierre_caja.arqueos << arqueo_2
+          expect(cierre_caja.monto_cajero).to eq 50
+        end
       end
     end
   end

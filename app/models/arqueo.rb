@@ -10,14 +10,14 @@ class Arqueo < ApplicationRecord
   validates :monto_sistema, :monto_cajero, presence: true
   validates :monto_sistema, :monto_cajero, numericality: { greater_than: 0 }
 
-  after_save :update_monto_cajero_cierre_caja
+  after_save :update_montos_cierre_caja
   after_create :crear_adeudo
 
-  def update_monto_cajero_cierre_caja
-    cierre_caja.update_monto_cajero
-  end
-
   private
+
+  def update_montos_cierre_caja
+    cierre_caja.update_montos
+  end
 
   def crear_adeudo
     if monto_cajero_menor_a_monto_sistema?
