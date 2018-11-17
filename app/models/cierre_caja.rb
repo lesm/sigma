@@ -4,8 +4,19 @@ class CierreCaja < ApplicationRecord
 
   validates :monto_sistema, :monto_cajero, presence: true
 
-  def update_monto_cajero
-    self.monto_cajero = arqueos.map(&:monto_cajero).reduce(:+)
+  def update_montos
+    update_monto_cajero
+    update_monto_sistema
     save!
+  end
+
+  private
+
+  def update_monto_cajero
+    self.monto_cajero = arqueos.reload.map(&:monto_cajero).reduce(:+)
+  end
+
+  def update_monto_sistema
+    self.monto_sistema = arqueos.reload.map(&:monto_sistema).reduce(:+)
   end
 end
