@@ -40,7 +40,7 @@ class ArqueosController < ApplicationController
     respond_to do |format|
       if @cierre_caja.arqueos << @arqueo
         update_comprobantes_sin_arqueo
-        format.html { redirect_to @arqueo, notice: 'Arqueo was successfully created.' }
+        format.html { redirect_to @arqueo, notice: 'Arqueo se creo correctamente.' }
         format.json { render :show, status: :created, location: @arqueo }
       else
         current_cierre_caja

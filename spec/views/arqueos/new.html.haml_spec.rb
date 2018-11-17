@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "arqueos/new", type: :view do
   before(:each) do
+    sign_in_cajero
     assign(:arqueo, Arqueo.new(
       :monto_sistema => "9.99",
       :monto_cajero => "9.99",

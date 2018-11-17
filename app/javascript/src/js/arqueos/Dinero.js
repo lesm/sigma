@@ -161,22 +161,27 @@ function calculateAmount() {
   let dinero = new Dinero()
   diferenciaMonto(dinero)
 
-  actualiza_monto_efectivo(dinero)
-  actualiza_monto_total(dinero)
-  actualiza_total_dinero(dinero)
+  actualiza_monto_efectivo_span(dinero)
+  actualiza_monto_total_span(dinero)
+
+  actualiza_total_dinero_input(dinero)
+  actualiza_monto_cajero_input(dinero)
 }
 
-function actualiza_monto_total(dinero) {
+function actualiza_monto_total_span(dinero) {
   $("#monto_total_span").html(dinero.suma_currency())
 }
 
-function actualiza_total_dinero(dinero) {
-  $("input[id$='_total']").val(dinero.suma())
+function actualiza_monto_efectivo_span(dinero) {
+  $("#monto_cajero_span").html(dinero.suma_sin_monto_banco_currency())
 }
 
-function actualiza_monto_efectivo(dinero) {
-  $("input[id$='_cajero']").val(dinero.suma_sin_monto_banco())
-  $("#monto_cajero_span").html(dinero.suma_sin_monto_banco_currency())
+function actualiza_monto_cajero_input(dinero) {
+  $("input[id$='_cajero']").val(dinero.suma())
+}
+
+function actualiza_total_dinero_input(dinero) {
+  $("input[id$='_total']").val(dinero.suma())
 }
 
 $(document).on("change", ".dinero", calculateAmount)
