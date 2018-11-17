@@ -24,12 +24,14 @@
       %h4
         %span.badge.badge-danger.btn-block
           #diferencia_monto $0.0
-      = f.input :observacion, input_html: { rows: 6 }
       = hidden_field :monto_banco, nil, name: "monto_banco", id: "monto_banco", value: monto_no_efectivo(current_usuario)
 
     .col-md-9
       = f.simple_fields_for :dinero do |df|
         = render "dineros/dinero_fields", f: df
+
+    .col-md-12
+      = f.input :observacion, input_html: { rows: 2 }
 
   .btn-group.float-right
     = link_to arqueos_path, class: 'btn btn-sm btn-secondary' do

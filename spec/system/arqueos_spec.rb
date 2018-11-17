@@ -14,11 +14,22 @@ RSpec.describe "New Arqueo", type: :system do
       monto_total_debe_ser_400
       monto_adeudo_por_pagar_debe_ser_1600
 
-      cuando_cajero_agrega_una_moneda_de_10_una_moneda_de_20
-      cuando_cajero_agrega_un_billete_de_100_un_billete_de_200
+      cuando_cajero_agrega_1_moneda_de_10_y_1_moneda_de_20
+      cuando_cajero_agrega_1_billete_de_100_y_1_billete_de_200
       monto_efectivo_debe_ser_330
       monto_total_debe_ser_730
-      monto_adeudo_por_pagar_debe_ser_870
+      monto_adeudo_por_pagar_debe_ser_1270
+
+      cuando_cajero_agrega_2_billetes_de_500_y_5_billetes_de_50
+      cuando_cajero_agrega_1_billete_de_20
+      monto_efectivo_debe_ser_1600
+      monto_total_debe_ser_2000
+      debe_haber_una_leyenda_de_monto_correcto
+
+      cuando_cajero_da_click_en_crear_arqueo
+      debe_mostrar_mensaje_de_arqueo_creado_correctamente
+      debe_haber_una_leyenda_de_monto_sistema
+      debe_haber_una_leyenda_de_monto_cajero
     end
   end
 
@@ -47,17 +58,17 @@ RSpec.describe "New Arqueo", type: :system do
 
   def monto_efectivo_debe_ser_0
     expect(page).to have_content "Monto Efectivo"
-    expect(page).to have_content "$0.0"
+    expect(page).to have_content "$0.00"
   end
 
   def monto_banco_debe_ser_400
     expect(page).to have_content "Monto Banco"
-    expect(page).to have_content "$400.0"
+    expect(page).to have_content "$400.00"
   end
 
   def monto_total_debe_ser_400
     expect(page).to have_content "Monto Total"
-    expect(page).to have_content "$400.0"
+    expect(page).to have_content "$400.00"
   end
 
   def monto_adeudo_por_pagar_debe_ser_1600
@@ -65,30 +76,69 @@ RSpec.describe "New Arqueo", type: :system do
     expect(page).to have_content "$1,600.00"
   end
 
-  def cuando_cajero_agrega_una_moneda_de_10_una_moneda_de_20
+  def cuando_cajero_agrega_1_moneda_de_10_y_1_moneda_de_20
     fill_in("$10.00", with: 1)
     find(:css, "input[id$='_veinte_m_pesos']").set(1)
   end
 
-  def cuando_cajero_agrega_un_billete_de_100_un_billete_de_200
+  def cuando_cajero_agrega_1_billete_de_100_y_1_billete_de_200
     fill_in("$100.00", with: 1)
     fill_in("$200.00", with: 1)
-    fill_in "Observación", with: "Alguna observación"
+    fill_in "Observación", with: "Para lanzar evento javascript.."
   end
 
   def monto_efectivo_debe_ser_330
     expect(page).to have_content "Monto Efectivo"
-    expect(page).to have_content "$330.0"
+    expect(page).to have_content "$330.00"
   end
 
   def monto_total_debe_ser_730
     expect(page).to have_content "Monto Total"
-    expect(page).to have_content "$730.0"
+    expect(page).to have_content "$730.00"
   end
 
-  def monto_adeudo_por_pagar_debe_ser_870
+  def monto_adeudo_por_pagar_debe_ser_1270
     expect(page).to have_content "Adeudo por pagar"
     expect(page).to have_content "$1,270.00"
   end
 
+  def cuando_cajero_agrega_2_billetes_de_500_y_5_billetes_de_50
+    fill_in("$500.00", with: 2)
+    fill_in("$50.00", with: 5)
+  end
+
+  def cuando_cajero_agrega_1_billete_de_20
+    find(:css, "input[id$='_veinte_pesos']").set(1)
+    fill_in "Observación", with: "Para lanzar evento javascript.."
+  end
+
+  def monto_efectivo_debe_ser_1600
+    expect(page).to have_content "Monto Efectivo"
+    expect(page).to have_content "$1,600.00"
+  end
+
+  def monto_total_debe_ser_2000
+    expect(page).to have_content "Monto Total"
+    expect(page).to have_content "$2,000.00"
+  end
+
+  def debe_haber_una_leyenda_de_monto_correcto
+    expect(page).to have_content "Monto correcto"
+  end
+
+  def cuando_cajero_da_click_en_crear_arqueo
+    click_button("Crear Arqueo")
+  end
+
+  def debe_mostrar_mensaje_de_arqueo_creado_correctamente
+    expect(page).to have_content "Arqueo se creo correctamente."
+  end
+
+  def debe_haber_una_leyenda_de_monto_sistema
+    expect(page).to have_content "Monto (SISTEMA): $2,000.00"
+  end
+
+  def debe_haber_una_leyenda_de_monto_cajero
+    expect(page).to have_content "Monto (CAJERO): $2,000.00"
+  end
 end
