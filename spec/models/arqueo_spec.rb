@@ -11,4 +11,71 @@ RSpec.describe Arqueo, type: :model do
   it { should_not allow_value(-1).for :monto_cajero }
   it { should_not allow_value(0).for :monto_cajero }
   it { should allow_value(10.5).for :monto_cajero }
+
+  describe "montos" do
+    let(:emisor) { create :emisor, :con_direccion }
+    let(:cajero) { create :cajero, :con_contribuyente }
+    let(:cierre_caja) { create :cierre_caja, cajero: cajero }
+    let(:dinero) { build :dinero, doscientos_pesos: 2, total: 2000 }
+    let(:arqueo) do
+      create :arqueo, monto_sistema: 2000,
+        monto_cajero: 2000,
+        dinero: dinero,
+        cierre_caja: cierre_caja
+    end
+
+    let(:formas_pago) do
+      ["Efectivo", "Cheque nominativo",
+       "Tarjeta de crédito", "Tarjeta de débito",
+       "Transferencia electrónica de fondos"]
+    end
+
+    before :each do
+      formas_pago.each do |forma_pago|
+        create :recibo, :con_datos,
+          forma_pago: forma_pago,
+          emisor: emisor,
+          cajero: cajero,
+          caja: cajero.caja,
+          arqueo: arqueo
+      end
+    end
+
+    describe "#monto_cheque" do
+      it "is 400" do
+        expect(arqueo.monto_cheque).to eq 400
+      end
+    end
+
+    describe "#monto_debito" do
+      it "is 400" do
+        expect(arqueo.monto_debito).to eq 400
+      end
+    end
+
+    describe "#monto_crédito" do
+      it "is 400" do
+        expect(arqueo.monto_credito).to eq 400
+      end
+    end
+
+    describe "#monto_transferencia" do
+      it "is 400" do
+        expect(arqueo.monto_transferencia).to eq 400
+      end
+    end
+
+    describe "#monto_efectivo" do
+      it "is 400" do
+        expect(arqueo.monto_efectivo).to eq 400
+      end
+    end
+
+    describe "#monto_no_efectivo" do
+      it "is 1600" do
+        expect(arqueo.monto_no_efectivo).to eq 1600
+      end
+    end
+
+  end
 end

@@ -42,20 +42,39 @@
           %p
           .row
             .col-md-12
-              %h5 Dinero
-              %table.table.table-hover.text-center.table-sm
+              %h5 Monto efectivo
+              %table.table.table-hover.text-center.table-sm.first
                 %thead
                   %tr
                     - labels_header.each do |title|
                       %th= title
-                    %th Total
+                    %th Subtotal
                 %tbody
                   %tr
                     - values_body.each do |value|
                       %td= value
                     %td
                       %span{style: "color:green"}
-                        = number_to_currency @dinero.total
+                        = number_to_currency @arqueo.monto_efectivo
+            .col-md-12
+              %h5 Monto no efectivo
+              %table.table.table-hover.text-center.table-sm.second
+                %thead
+                  %tr
+                    %th Monto Cheque
+                    %th Monto Tarjeta Débito
+                    %th Monto Tarjeta Crédito
+                    %th Monto Transferencia
+                    %th Subtotal
+                %tbody
+                  %tr
+                    %td= number_to_currency @arqueo.monto_cheque
+                    %td= number_to_currency @arqueo.monto_debito
+                    %td= number_to_currency @arqueo.monto_credito
+                    %td= number_to_currency @arqueo.monto_transferencia
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency @arqueo.monto_no_efectivo
 
         .btn-group.float-right
           = link_to cierre_caja_path(@arqueo.cierre_caja), class: 'btn btn-sm btn-secondary' do

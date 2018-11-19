@@ -13,6 +13,30 @@ class Arqueo < ApplicationRecord
   after_save :update_montos_cierre_caja
   after_create :crear_adeudo
 
+  def monto_cheque
+    Comprobante.where(arqueo_id: id).de_cheque.sum(:total)
+  end
+
+  def monto_debito
+    Comprobante.where(arqueo_id: id).de_debito.sum(:total)
+  end
+
+  def monto_credito
+    Comprobante.where(arqueo_id: id).de_credito.sum(:total)
+  end
+
+  def monto_transferencia
+    Comprobante.where(arqueo_id: id).de_transferencia.sum(:total)
+  end
+
+  def monto_efectivo
+    DineroPresenter.new(dinero).total
+  end
+
+  def monto_no_efectivo
+    monto_cheque + monto_debito + monto_credito + monto_transferencia
+  end
+
   private
 
   def update_montos_cierre_caja

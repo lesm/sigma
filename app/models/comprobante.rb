@@ -27,14 +27,20 @@ class Comprobante < ApplicationRecord
   scope :sin_arqueo, -> { where(arqueo_id: nil) }
   scope :del_dia, -> { where(created_at: self.rango_fecha) }
   scope :para_arqueo_actual, -> (cajero) { sin_arqueo.where(caja_id: cajero.caja.id, cajero_id: cajero.id).del_dia }
-  scope :monto_cheque, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Cheque nominativo").sum(:total) }
-  scope :monto_efectivo, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Efectivo").sum(:total) }
-  scope :monto_transferencia, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Transferencia electrónica de fondos").sum(:total) }
-  scope :monto_tarjeta_credito, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Tarjeta de crédito").sum(:total) }
-  scope :monto_tarjeta_debito, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: "Tarjeta de débito").sum(:total) }
+  scope :monto_cheque, -> (cajero) { para_arqueo_actual(cajero).de_cheque.sum(:total) }
+  scope :monto_efectivo, -> (cajero) { para_arqueo_actual(cajero).de_efectivo.sum(:total) }
+  scope :monto_transferencia, -> (cajero) { para_arqueo_actual(cajero).de_transferencia.sum(:total) }
+  scope :monto_tarjeta_credito, -> (cajero) { para_arqueo_actual(cajero).de_credito.sum(:total) }
+  scope :monto_tarjeta_debito, -> (cajero) { para_arqueo_actual(cajero).de_debito.sum(:total) }
 
   scope :monto_no_efectivo, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: self.formas_pago_no_efectivo ).sum(:total) }
   scope :monto_total, -> (cajero) { para_arqueo_actual(cajero).where(forma_pago: FORMA_PAGO.values).sum(:total) }
+
+  scope :de_efectivo, -> { where(forma_pago: "Efectivo") }
+  scope :de_cheque, -> { where(forma_pago: "Cheque nominativo") }
+  scope :de_debito, -> { where(forma_pago: "Tarjeta de débito") }
+  scope :de_credito, -> { where(forma_pago: "Tarjeta de crédito") }
+  scope :de_transferencia, -> { where(forma_pago: "Transferencia electrónica de fondos") }
 
   def timbrado_automatico?
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)

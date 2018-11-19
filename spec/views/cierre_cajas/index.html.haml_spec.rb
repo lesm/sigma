@@ -8,8 +8,9 @@ RSpec.describe "cierre_cajas/index", type: :view do
       password: "qwerty",
       contribuyente: contribuyente
   end
+  let(:dinero) { build :dinero, cincuenta_pesos: 1, total: 100 }
   let(:arqueo) do
-    build :arqueo, monto_sistema: 9.99, monto_cajero: 9.99
+    build :arqueo, monto_sistema: 100, monto_cajero: 50, dinero: dinero
   end
   before(:each) do
     assign(:cierre_cajas, [
@@ -29,6 +30,7 @@ RSpec.describe "cierre_cajas/index", type: :view do
   it "renders a list of cierre_cajas" do
     render
     assert_select "tr>td", :text => "Abierta".to_s, :count => 2
-    assert_select "tr>td", :text => "$0.00".to_s, :count => 2
+    assert_select "tr>td", :text => "$50.00".to_s, :count => 2
+    assert_select "tr>td", :text => "$100.00".to_s, :count => 2
   end
 end
