@@ -35,4 +35,15 @@ FactoryBot.define do
       recibo.total = 1600
     end
   end
+
+  trait :con_datos_centavos do
+    after(:build) do |recibo|
+      recibo.emisor = build :emisor if recibo.emisor.nil?
+      recibo.cajero = build :cajero, caja: nil if recibo.cajero.nil?
+      recibo.contribuyente = build :contribuyente
+      recibo.conceptos = build_list :concepto, 1, :con_cuenta, cantidad: 1, valor_unitario: 400.5, importe: 400.5
+      recibo.subtotal = 400.5
+      recibo.total = 400.5
+    end
+  end
 end

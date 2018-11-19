@@ -1,20 +1,21 @@
 FactoryBot.define do
   factory :dinero do
-    diez_centavos { 1 }
-    veinte_centavos { 1 }
-    cincuenta_centavos { 1 }
-    un_peso { 1 }
-    dos_pesos { 1 }
-    cinco_pesos { 1 }
-    diez_pesos { 1 }
-    veinte_pesos { 1 }
-    cincuenta_pesos { 1 }
-    cien_pesos { 1 }
-    doscientos_pesos { 1 }
-    quinientos_pesos { 1 }
-    mil_pesos { 1 }
-    dos_mil_pesos { 1 }
-    total { "9.99" }
+    diez_centavos { 0 }
+    veinte_centavos { 0 }
+    cincuenta_centavos { 0 }
+    un_peso { 0 }
+    dos_pesos { 0 }
+    cinco_pesos { 0 }
+    diez_pesos { 0 }
+    veinte_m_pesos { 0 }
+    veinte_pesos { 0 }
+    cincuenta_pesos { 0 }
+    cien_pesos { 0 }
+    doscientos_pesos { 0 }
+    quinientos_pesos { 0 }
+    mil_pesos { 0 }
+    dos_mil_pesos { 0 }
+    total { 0 }
     arqueo { nil }
   end
 end
