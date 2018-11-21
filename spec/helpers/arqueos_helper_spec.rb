@@ -2,6 +2,66 @@ require 'rails_helper'
 
 RSpec.describe ArqueosHelper, type: :helper do
 
+  context "helpers to close session" do
+    let(:emisor) { create :emisor, :con_direccion }
+    let(:comprobante) do
+      create :comprobante, :con_datos, cajero: cajero, caja: cajero.caja
+    end
+    let(:cajero) { create :cajero, :con_contribuyente }
+    let(:cierre_caja) do
+      create :cierre_caja, cajero: cajero, abierta: true
+    end
+
+    before :each do
+      [emisor, cajero]
+    end
+
+    describe "#arqueo_pendiente?" do
+      context "when #monto_sistema is greater than 0" do
+        it "is true" do
+          comprobante
+          expect(arqueo_pendiente?(cajero)).to be_truthy
+        end
+      end
+
+      context "when #monto_sistema is 0" do
+        it "is false" do
+          expect(arqueo_pendiente?(cajero)).to be_falsey
+        end
+      end
+    end
+
+    describe "#cierre_caja_abierta?" do
+      context "when caja has a cierre_de_caja" do
+        it "is returns cierre_caja state" do
+          cierre_caja
+          expect(cierre_caja_abierta?(cajero)).to be_truthy
+        end
+      end
+
+      context "when caje has not a cierre_caja" do
+        it "is returns false" do
+          expect(cierre_caja_abierta?(cajero)).to be_falsey
+        end
+      end
+    end
+
+    describe "#cierre_caja_id" do
+      context "when #cierre_caja_abierta? is true" do
+        it "is returns cierre_caja id" do
+          cierre_caja
+          expect(cierre_caja_id(cajero)).to eq cierre_caja.id
+        end
+      end
+      context "when #cierre_caja_abierta? is false" do
+        it "is returns nil" do
+          cierre_caja.update_column(:abierta, false)
+          expect(cierre_caja_id(cajero)).to be_nil
+        end
+      end
+    end
+  end
+
   describe "#monto_sistema" do
     context "must be the sum of comprobantes' total" do
       let(:caja) { create :caja }

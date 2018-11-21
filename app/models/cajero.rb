@@ -16,6 +16,10 @@ class Cajero < Usuario
     nombre.capitalize
   end
 
+  def ultimo_cierre_caja
+    cierre_cajas.last
+  end
+
   private
 
   def set_rol

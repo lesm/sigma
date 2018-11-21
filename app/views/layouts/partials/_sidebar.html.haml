@@ -100,7 +100,5 @@
               = link_to cajas_path, class: "nav-link #{ controller_name == 'cajas' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Cajas
-        %li.nav-item
-          = link_to destroy_usuario_session_path, class: 'nav-link', method: :delete, data: { confirm_swal: "Cerrar Sesión" } do
-            %i.fa.fa-sign-out.nav-icon
-            %p Cerrar Sesión
+        %li.nav-item#linkCloseSession
+          = render "layouts/partials/boton_cerrar_sesion"

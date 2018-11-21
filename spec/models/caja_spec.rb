@@ -10,16 +10,16 @@ RSpec.describe Caja, type: :model do
   it { should validate_presence_of :nombre }
   it { should validate_uniqueness_of :nombre }
 
-  describe "cajas_disponibles?" do
+  describe "disponibles?" do
     let(:caja) { create :caja, disponible: true }
     it "must be true" do
       caja
-      expect(Caja.cajas_disponibles?).to be_truthy
+      expect(Caja.disponibles?).to be_truthy
     end
 
     it "must be false" do
       caja.update_attribute(:disponible, false)
-      expect(Caja.cajas_disponibles?).to be_falsey
+      expect(Caja.disponibles?).to be_falsey
     end
   end
 

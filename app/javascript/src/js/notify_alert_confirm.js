@@ -16,16 +16,59 @@ const allowAction = element => {
   return false
 }
 
+const castValue = value => {
+  let booleanValues = {
+    "true": true,
+    "false": false
+  }
+  return booleanValues[value]
+}
+
 const showConfirmationDialog = element => {
   const message = element.getAttribute('data-confirm-swal')
   const text = element.getAttribute('data-text')
+  const arqueoPendiente = castValue(element.getAttribute('data-arqueo-pendiente'))
+  const cierreCajaAbierta = castValue(element.getAttribute('data-cierre-caja-abierta'))
+  const cierreCajaId = element.getAttribute('data-cierre-caja-id')
 
-  swal({
-    title: '¿Estas seguro?',
-    text: message,
-    icon: 'warning',
-    buttons: ["No", "Sí"],
-  }).then(result => confirmed(element, result))
+  let link = document.createElement("a")
+  let title = ""
+  if (arqueoPendiente || cierreCajaAbierta) {
+    if(arqueoPendiente) {
+      title = "Tienes un arqueo pendiente"
+      link.innerHTML = "Ír a crear Arqueo"
+      link.href = "/arqueos/new"
+    } else {
+      if (cierreCajaAbierta) {
+        title = "Cierre de caja abierta"
+        link.innerHTML = "Ír a cierre de caja"
+        link.href = `/cierre_cajas/${cierreCajaId}`
+      }
+    }
+    swal({
+      title: title,
+      icon: 'warning',
+      content: link,
+      buttons: ["No", "Cerrar Sesión"],
+    }).then(result => {
+      if (result) {
+        element.href = `${element.href}?quitar_referencia=false`
+        confirmed(element, result)
+      }
+    })
+  } else {
+      swal({
+        title: '¿Estas seguro?',
+        text: message,
+        icon: 'warning',
+        buttons: ["No", "Sí"],
+      }).then(result => {
+         if (result) {
+           element.href = `${element.href}?quitar_referencia=true`
+         }
+        confirmed(element, result)
+      })
+  }
 }
 
 const confirmed = (element, result) => {
