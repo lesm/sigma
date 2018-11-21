@@ -1,5 +1,20 @@
 module ArqueosHelper
 
+  def cierre_caja_id cajero = current_usuario
+    return nil unless cierre_caja_abierta?(cajero)
+    cajero.ultimo_cierre_caja.id
+  end
+
+  def cierre_caja_abierta? cajero = current_usuario
+    return false if cajero.ultimo_cierre_caja.nil?
+    cajero.ultimo_cierre_caja.abierta?
+  end
+
+  def arqueo_pendiente? cajero = current_usuario
+    return false if cajero.caja.nil?
+    monto_sistema(cajero) > 0
+  end
+
   def monto_no_efectivo(cajero)
     Comprobante.monto_no_efectivo(cajero)
   end

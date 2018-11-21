@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def cast_value value
+    ActiveRecord::Type::Boolean.new.cast(value)
+  end
+
   protected
 
   def configure_permitted_parameters

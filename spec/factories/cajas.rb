@@ -3,6 +3,6 @@ FactoryBot.define do
     sequence(:nombre) { |n| "Caja principal#{n}" }
     sequence(:numero, 1) { |n| n }
     descripcion { "La que está en el municipio" }
-    disponible { true }
+    disponible { false }
   end
 end
