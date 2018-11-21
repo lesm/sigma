@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Set conceptos", type: :system do
-  feature "Create a Recibo" do
+  feature "En nuevo Recibo" do
     before :each do
-      crea_datos_necesarios_para_contribuyente_cuenta_emisor
+      dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor
       dado_que_hay_un_cajero_logueado_con_una_caja
       cuando_da_click_en_el_link_caja
       cajero_debe_ser_redireccionado_a_set_cuenta_de_recibos_steps
@@ -32,24 +32,6 @@ RSpec.describe "Set conceptos", type: :system do
   def el_importe_debe_ser_200_y_total_debe_ser_200
     expect(find_field("Importe").value).to eq "200"
     expect(find_field("Total").value).to eq "200"
-  end
-
-  def crea_datos_necesarios_para_contribuyente_cuenta_emisor
-    create :contribuyente, nombre_o_razon_social: "Carlos",
-      primer_apellido: "José",
-      segundo_apellido: "Pérez",
-      rfc: "AAAA111111AAZ"
-    create :cuenta, codigo: "110101", descripcion: "RIFAS", formato: "DatosComun"
-    create :emisor, :con_direccion
-  end
-
-  def cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
-    select "Carlos José Pérez - AAAA111111AAZ", from: "Contribuyente"
-    select "110101 - DatosComun - RIFAS", from: "cuenta_ids"
-  end
-
-  def cajero_es_redireccionado_a_set_conceptos_de_recibo_steps
-    expect(page).to have_current_path(/recibo_steps\/set_conceptos/)
   end
 
   def folio_debe_ser_numero_de_emisor_mas_anio_actual_mas_numero_de_caja_mas_numero_de_recibo

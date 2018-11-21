@@ -12,10 +12,14 @@ RSpec.describe "Pages index", type: :system do
   end
 
   feature "Seleccionar caja" do
-    scenario "Seleccionar caja a usar" do
+
+    before :each do
       dado_que_hay_almenos_una_caja_disponible
       y_usuario_se_loguea_como_cajero
       cajero_es_redireccionado_a_seleccinar_caja_path
+    end
+
+    scenario "Seleccionar caja a usar" do
       cuando_cajero_seleciona_una_caja
       caja_seleccinada_se_asigna_al_cajero
       la_caja_debe_cambiar_a_no_disponible
@@ -24,9 +28,6 @@ RSpec.describe "Pages index", type: :system do
     end
 
     scenario "Cuando cajero no selecciona caja" do
-      dado_que_hay_almenos_una_caja_disponible
-      y_usuario_se_loguea_como_cajero
-      cajero_es_redireccionado_a_seleccinar_caja_path
       y_cajero_no_selecciona_caja_y_da_click_en_otro_link
       debe_ser_redireccionado_a_seleccionar_caja_path
     end

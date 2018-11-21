@@ -2,9 +2,12 @@ require "rails_helper"
 
 RSpec.describe "New Arqueo", type: :system do
 
+  before :each do
+    dado_que_hay_un_cajero_logueado_con_una_caja
+  end
+
   feature "Visiting new_arqueo_path" do
     scenario "Creating a new Arqueo" do
-      dado_que_hay_un_cajero_logueado_con_una_caja
       crea_datos_necesarios_para_nuevo_arqueo
       cajero_da_click_en_recaudacion
       cajero_da_click_en_crear_arqueo
@@ -32,12 +35,10 @@ RSpec.describe "New Arqueo", type: :system do
       debe_haber_una_leyenda_de_monto_cajero
       debe_mostrar_un_subtotal_de_1600_en_monto_efectivo
     end
-
   end
 
   feature "Vista show de arqueo" do
     scenario "muestra cantidad de dinero en monedas y billetes" do
-      dado_que_hay_un_cajero_logueado_con_una_caja
       crea_arqueo_de_monedas_y_billetes
       cajero_da_click_en_recaudacion
       cajero_da_click_en_cierre_de_caja
@@ -52,7 +53,6 @@ RSpec.describe "New Arqueo", type: :system do
     end
 
     scenario "muestra cantidad de dinero en [Cheque, Débito, Crédito]" do
-      dado_que_hay_un_cajero_logueado_con_una_caja
       crea_arqueo_de_cheque_debito_credito
       cajero_da_click_en_recaudacion
       cajero_da_click_en_cierre_de_caja

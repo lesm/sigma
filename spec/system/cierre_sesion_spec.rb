@@ -49,15 +49,6 @@ RSpec.describe "Cierre de sesión", type: :system do
     end
   end
   
-  def dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor
-    create :contribuyente, nombre_o_razon_social: "Carlos",
-      primer_apellido: "José",
-      segundo_apellido: "Pérez",
-      rfc: "AAAA111111AAZ"
-    create :cuenta, codigo: "110101", descripcion: "RIFAS", formato: "DatosComun"
-    create :emisor, :con_direccion
-  end
-
   def cuando_cajero_crea_un_recibo
     cuando_da_click_en_el_link_caja
     cajero_debe_ser_redireccionado_a_set_cuenta_de_recibos_steps
@@ -69,15 +60,6 @@ RSpec.describe "Cierre de sesión", type: :system do
     cajero_asigna_fecha_evento
     cajero_da_click_en_boton_pagar
     debe_mostrarse_mensaje_de_recibo_creado_correctamente
-  end
-
-  def cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
-    select "Carlos José Pérez - AAAA111111AAZ", from: "Contribuyente"
-    select "110101 - DatosComun - RIFAS", from: "cuenta_ids"
-  end
-
-  def cajero_es_redireccionado_a_set_conceptos_de_recibo_steps
-    expect(page).to have_current_path(/recibo_steps\/set_conceptos/)
   end
 
   def  cajero_selecciona_forma_pago
