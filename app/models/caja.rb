@@ -16,10 +16,22 @@ class Caja < ApplicationRecord
   end
 
   def abrir!
+    #TODO implement transations
+    update_historial_caja!
     Caja.find(id).update_columns(cajero_id: nil, disponible: true)
+  end
+
+  def update_historial_caja!
+    last_historial_caja.update_column(:fecha_cierre, Date.current)
   end
 
   def to_s
     nombre.capitalize
+  end
+
+  private
+
+  def last_historial_caja
+    HistorialCaja.last_historial_caja(self)
   end
 end

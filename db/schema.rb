@@ -219,8 +219,9 @@ ActiveRecord::Schema.define(version: 2018_11_07_212804) do
   create_table "historial_cajas", force: :cascade do |t|
     t.bigint "caja_id"
     t.bigint "cajero_id"
-    t.datetime "fecha_apertura"
     t.datetime "fecha_cierre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["caja_id"], name: "index_historial_cajas_on_caja_id"
     t.index ["cajero_id"], name: "index_historial_cajas_on_cajero_id"
   end

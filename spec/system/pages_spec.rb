@@ -33,26 +33,12 @@ RSpec.describe "Pages index", type: :system do
     end
   end
 
-  def dado_que_hay_almenos_una_caja_disponible
-    @caja = create :caja, nombre: "Mercado", disponible: true
-  end
-
   def y_usuario_se_loguea_como_cajero
     sign_in_cajero
   end
 
   def cajero_es_redireccionado_a_seleccinar_caja_path
     expect(page).to have_current_path(new_historial_caja_path)
-  end
-
-  def cuando_cajero_seleciona_una_caja
-    select "Mercado", from: "Seleccionar Caja"
-    click_button "Seleccionar Caja"
-  end
-
-  def caja_seleccinada_se_asigna_al_cajero
-    expect(page).to have_current_path(dashboard_path)
-    expect(page).to have_content "Caja en uso: Mercado"
   end
 
   def la_caja_debe_cambiar_a_no_disponible

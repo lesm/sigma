@@ -45,6 +45,7 @@ RSpec.describe "Cierre de sesión", type: :system do
         se_muestra_un_mensaje_de_confirmar_cerrar_sesion
         cuando_cajero_da_click_en_confirmar_cerrar_sesion
         caja_debe_estar_disponible
+        actualiza_fecha_cierre_de_ultimo_historial_caja
       end
     end
   end
@@ -168,5 +169,10 @@ RSpec.describe "Cierre de sesión", type: :system do
   def caja_debe_estar_disponible
     expect(@cajero.reload.caja).to be_nil
     expect(Caja.disponibles?).to be_truthy
+  end
+
+  def actualiza_fecha_cierre_de_ultimo_historial_caja
+    expect(HistorialCaja.count).to eq 1
+    expect(HistorialCaja.last.fecha_cierre).to_not be_nil
   end
 end
