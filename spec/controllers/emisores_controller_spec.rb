@@ -40,6 +40,10 @@ RSpec.describe EmisoresController, type: :controller do
     }
   end
 
+  before :each do
+    sign_in_admin
+  end
+
   describe "GET #index" do
     it "returns a success response" do
       Emisor.create! valid_attributes
@@ -134,20 +138,4 @@ RSpec.describe EmisoresController, type: :controller do
       end
     end
   end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested emisor" do
-      emisor = Emisor.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: emisor.to_param}
-      }.to change(Emisor, :count).by(-1)
-    end
-
-    it "redirects to the emisores list" do
-      emisor = Emisor.create! valid_attributes
-      delete :destroy, params: {id: emisor.to_param}
-      expect(response).to redirect_to(emisores_url)
-    end
-  end
-
 end

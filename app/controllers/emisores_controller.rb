@@ -1,30 +1,35 @@
 class EmisoresController < ApplicationController
+  before_action :authenticate_usuario!
   before_action :set_emisor, only: [:show, :edit, :update, :destroy]
 
   # GET /emisores
   # GET /emisores.json
   def index
-    @emisores = Emisor.all
+    @emisores = policy_scope(Emisor)
   end
 
   # GET /emisores/1
   # GET /emisores/1.json
   def show
+    authorize @emisor
   end
 
   # GET /emisores/new
   def new
     @emisor = Emisor.new direccion: Direccion.new
+    authorize @emisor
   end
 
   # GET /emisores/1/edit
   def edit
+    authorize @emisor
   end
 
   # POST /emisores
   # POST /emisores.json
   def create
     @emisor = Emisor.new(emisor_params)
+    authorize @emisor
 
     respond_to do |format|
       if @emisor.save
@@ -40,6 +45,7 @@ class EmisoresController < ApplicationController
   # PATCH/PUT /emisores/1
   # PATCH/PUT /emisores/1.json
   def update
+    authorize @emisor
     respond_to do |format|
       if @emisor.update(emisor_params)
         format.html { redirect_to @emisor, notice: 'Emisor was successfully updated.' }
@@ -48,16 +54,6 @@ class EmisoresController < ApplicationController
         format.html { render :edit }
         format.json { render json: @emisor.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /emisores/1
-  # DELETE /emisores/1.json
-  def destroy
-    @emisor.destroy
-    respond_to do |format|
-      format.html { redirect_to emisores_url, notice: 'Emisor was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
