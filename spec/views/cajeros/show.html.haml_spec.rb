@@ -30,9 +30,10 @@ RSpec.describe "cajeros/show", type: :view do
       nombre: "Carlos", username: "carlos", password: "1qaz2wsx",
       contribuyente_attributes: contribuyente 
     ))
+    sign_in @cajero
   end
 
-  it "renders attributes in <p>" do
+  it "renders the current_usuario name" do
     render
     expect(rendered).to match(/Carlos/)
     expect(rendered).to match(/carlos/)
