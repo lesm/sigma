@@ -30,9 +30,5 @@ RSpec.describe CajasController, type: :routing do
     it "routes to #update via PATCH" do
       expect(:patch => "/cajas/1").to route_to("cajas#update", :id => "1")
     end
-
-    it "routes to #destroy" do
-      expect(:delete => "/cajas/1").to route_to("cajas#destroy", :id => "1")
-    end
   end
 end

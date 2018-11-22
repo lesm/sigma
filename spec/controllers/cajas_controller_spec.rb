@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CajasController, type: :controller do
-
   let(:contribuyente) { create :contribuyente, :con_direccion }
-  let(:cajero) { create :cajero, contribuyente: contribuyente }
+  let(:admin) { create :usuario, :admin }
 
   let(:valid_attributes) do
     {
@@ -22,7 +21,7 @@ RSpec.describe CajasController, type: :controller do
   end
 
   before :each do
-    sign_in cajero
+    sign_in admin
   end
 
   describe "GET #index" do
@@ -108,20 +107,4 @@ RSpec.describe CajasController, type: :controller do
       end
     end
   end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested caja" do
-      caja = Caja.create! valid_attributes
-      expect {
-        delete :destroy, params: { id: caja.to_param }
-      }.to change(Caja, :count).by(-1)
-    end
-
-    it "redirects to the cajas list" do
-      caja = Caja.create! valid_attributes
-      delete :destroy, params: { id: caja.to_param }
-      expect(response).to redirect_to(cajas_url)
-    end
-  end
-
 end

@@ -3,8 +3,7 @@ class HistorialCajasController < ApplicationController
   before_action :set_caja, only: :create
 
   def index
-    @historial_cajas = HistorialCaja.all
-    authorize @historial_cajas
+    @historial_cajas = policy_scope(HistorialCaja)
   end
 
   def new

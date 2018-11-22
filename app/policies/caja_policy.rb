@@ -1,4 +1,4 @@
-class HistorialCajaPolicy < ApplicationPolicy
+class CajaPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       raise Pundit::NotAuthorizedError, "Usuario sin permisos." unless user.admin?
@@ -6,15 +6,23 @@ class HistorialCajaPolicy < ApplicationPolicy
     end
   end
 
-  def index?
-    user.admin?  
-  end
-
   def new?
     create?
   end
 
   def create?
-    user.cajero?
+    user.admin?
+  end
+
+  def show?
+    create?
+  end
+
+  def edit?
+    create?
+  end
+
+  def update?
+    create?
   end
 end

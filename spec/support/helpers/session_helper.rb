@@ -4,6 +4,14 @@ module Helper
       sign_in(usuario)
     end
 
+    def sign_in_admin(usuario = admin)
+      sign_in(usuario)
+    end
+
+    def admin
+      create :usuario, :admin
+    end
+
     def cajero
       create :cajero,
         contribuyente: contribuyente,
