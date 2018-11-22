@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :cajas, except: [:destroy]
   resources :historial_cajas, except: [:edit, :show, :destroy]
   resources :contribuyentes
-  resources :cajeros
+  resources :cajeros, except: [:destroy]
   resources :cuentas
   resources :cierre_cajas, except: [:new, :destroy] do
     post :cerrar, on: :member

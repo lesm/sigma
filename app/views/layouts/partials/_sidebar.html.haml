@@ -8,7 +8,9 @@
       .image
         %img.img-circle.elevation-2{:src => "#{asset_pack_path('images/sigma_avatar.png')}"}
       .info
-        %a.d-block{:href => "#"}
+        - if current_usuario.cajero?
+          = link_to current_usuario, cajero_path(current_usuario), class: "d-block"
+        - else
           = current_usuario
     %nav.mt-2
       %ul.nav.nav-pills.nav-sidebar.flex-column{"data-accordion" => "false", "data-widget" => "treeview", :role => "menu"}

@@ -27,6 +27,10 @@ RSpec.describe CajerosController, type: :controller do
     }
   end
 
+  before :each do
+    sign_in_admin
+  end
+
   describe "GET #index" do
     it "returns a success response" do
       Cajero.create! valid_attributes
@@ -147,21 +151,6 @@ RSpec.describe CajerosController, type: :controller do
         put :update, params: {id: cajero.to_param, cajero: invalid_attributes}
         expect(response).to be_successful
       end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested cajero" do
-      cajero = Cajero.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: cajero.to_param}
-      }.to change(Cajero, :count).by(-1)
-    end
-
-    it "redirects to the cajeros list" do
-      cajero = Cajero.create! valid_attributes
-      delete :destroy, params: {id: cajero.to_param}
-      expect(response).to redirect_to(cajeros_url)
     end
   end
 
