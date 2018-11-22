@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Cajeros", type: :request do
   before :each do
-    sign_in_cajero
+    sign_in_admin
   end
 
   describe "GET /cajeros" do

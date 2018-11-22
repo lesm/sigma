@@ -35,10 +35,11 @@
             %h6
               = @cajero.contribuyente.direccion
 
-        .btn-group.float-right
-          = link_to cajeros_path, class: 'btn btn-sm btn-secondary' do
-            %i.fa.fa-arrow-left
-            Regresar
-          = link_to edit_cajero_path(@cajero), class: 'btn btn-sm btn-warning' do
-            %i.fa.fa-pencil
-            Editar
+        - if para_admin?
+          .btn-group.float-right
+            = link_to cajeros_path, class: 'btn btn-sm btn-secondary' do
+              %i.fa.fa-arrow-left
+              Regresar
+            = link_to edit_cajero_path(@cajero), class: 'btn btn-sm btn-warning' do
+              %i.fa.fa-pencil
+              Editar

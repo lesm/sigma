@@ -31,8 +31,5 @@ RSpec.describe CajerosController, type: :routing do
       expect(:patch => "/cajeros/1").to route_to("cajeros#update", :id => "1")
     end
 
-    it "routes to #destroy" do
-      expect(:delete => "/cajeros/1").to route_to("cajeros#destroy", :id => "1")
-    end
   end
 end

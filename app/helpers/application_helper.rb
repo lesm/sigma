@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def para_admin?
+    current_usuario.admin?
+  end
+
   def cuenta_ids
     Cuenta.all.map { |c| [c, c.id] }
   end

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CajasController, type: :controller do
   let(:contribuyente) { create :contribuyente, :con_direccion }
-  let(:admin) { create :usuario, :admin }
 
   let(:valid_attributes) do
     {
@@ -21,7 +20,7 @@ RSpec.describe CajasController, type: :controller do
   end
 
   before :each do
-    sign_in admin
+    sign_in_admin
   end
 
   describe "GET #index" do

@@ -1,31 +1,36 @@
 class CajerosController < ApplicationController
+  before_action :authenticate_usuario!
   before_action :set_cajero, only: [:show, :edit, :update, :destroy]
 
   # GET /cajeros
   # GET /cajeros.json
   def index
-    @cajeros = Cajero.all
+    @cajeros = policy_scope(Cajero)
   end
 
   # GET /cajeros/1
   # GET /cajeros/1.json
   def show
+    authorize @cajero
   end
 
   # GET /cajeros/new
   def new
     @cajero = Cajero.new
     build_contribuyente
+    authorize @cajero
   end
 
   # GET /cajeros/1/edit
   def edit
+    authorize @cajero
   end
 
   # POST /cajeros
   # POST /cajeros.json
   def create
     @cajero = Cajero.new(cajero_params)
+    authorize @cajero
 
     respond_to do |format|
       if @cajero.save
@@ -42,6 +47,7 @@ class CajerosController < ApplicationController
   # PATCH/PUT /cajeros/1
   # PATCH/PUT /cajeros/1.json
   def update
+    authorize @cajero
     respond_to do |format|
       if @cajero.update(override_cajero_params)
         format.html { redirect_to @cajero, notice: 'Cajero was successfully updated.' }
@@ -50,16 +56,6 @@ class CajerosController < ApplicationController
         format.html { render :edit }
         format.json { render json: @cajero.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /cajeros/1
-  # DELETE /cajeros/1.json
-  def destroy
-    @cajero.destroy
-    respond_to do |format|
-      format.html { redirect_to cajeros_url, notice: 'Cajero was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
