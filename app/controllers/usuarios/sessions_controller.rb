@@ -12,6 +12,7 @@ class Usuarios::SessionsController < Devise::SessionsController
   private
 
   def quitar_relacion_caja?
+    return false if current_usuario.caja.nil?
     cast_value(params[:quitar_referencia])
   end
 end

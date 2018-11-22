@@ -19,6 +19,9 @@ end
 puts "Creando Cajero..."
 Cajero.create(nombre: "cajero de prueba", username: "cajero", password: "1qaz2wsx", rol: 1, contribuyente_id: Contribuyente.first.id) rescue nil
 
+puts "Creando Administrador"
+Usuario.create(nombre: "admin", username: "admin", rol: 3, password: "1qaz2wsx")
+
 puts "Creando Caja..."
 Caja.where(nombre: "Principal", descripcion: "Se localiza en el municipio", numero: 1).first_or_create
 

@@ -1,0 +1,20 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Historial de Apertura y Cierre de Cajas
+      .card-body
+        %table.table.table-hover.text-center
+          %thead
+            %tr
+              %th Caja
+              %th Cajero
+              %th Fecha de apertura
+              %th Fecha de cierre
+          %tbody
+            - @historial_cajas.each do |historial_caja|
+              %tr
+                %td= historial_caja.caja
+                %td= historial_caja.cajero
+                %td= l historial_caja.created_at, format: :short
+

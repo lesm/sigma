@@ -19,4 +19,32 @@ class Usuario < ApplicationRecord
   def inactive_message
     activo? ? super : :account_inactive
   end
+
+  def to_s
+    nombre.capitalize
+  end
+
+  def caja
+    nil
+  end
+
+  def cierre_caja_id
+    nil
+  end
+
+  def cierre_caja_abierta?
+    false
+  end
+
+  def arqueo_pendiente?
+    false
+  end
+
+  def monto_no_efectivo
+    nil
+  end
+
+  def monto_sistema
+    nil
+  end
 end

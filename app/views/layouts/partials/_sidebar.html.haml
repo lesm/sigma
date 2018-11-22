@@ -81,8 +81,9 @@
               %a.nav-link{:href => "#"}
                 %i.fa.fa-circle-o.nav-icon
                 %p Arqueos
-        %li.nav-item.has-treeview{ class: "#{ (%w(emisores cajeros cajas).include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (%w(emisores cajeros cajas).include? controller_name) && 'active' }" do
+        - controller_names = %w("emisores cajeros cajas historial_cajas")
+        %li.nav-item.has-treeview{ class: "#{ (controller_names.include? controller_name) && 'menu-open' }" }
+          = link_to "" , class: "nav-link #{ (controller_names.include? controller_name) && 'active' }" do
             %i.nav-icon.fa.fa-dashboard
             %p
               Administrador
@@ -100,5 +101,9 @@
               = link_to cajas_path, class: "nav-link #{ controller_name == 'cajas' && 'active' }" do
                 %i.fa.fa-circle-o.nav-icon
                 %p Cajas
+            %li.nav-item
+              = link_to historial_cajas_path, class: "nav-link #{ controller_name == 'historial_cajas' && 'active' }" do
+                %i.fa.fa-circle-o.nav-icon
+                %p Historial Cajas
         %li.nav-item#linkCloseSession
           = render "layouts/partials/boton_cerrar_sesion"

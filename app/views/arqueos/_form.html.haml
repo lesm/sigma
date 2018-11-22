@@ -15,7 +15,7 @@
         %span.badge.badge-success.btn-block
           #monto_banco_span
             = precede "$" do
-              = monto_no_efectivo(current_usuario)
+              = monto_no_efectivo
       %label Monto Total
       %h4
         %span.badge.badge-success.btn-block
@@ -24,7 +24,7 @@
       %h4
         %span.badge.badge-danger.btn-block
           #diferencia_monto $0.0
-      = hidden_field :monto_banco, nil, name: "monto_banco", id: "monto_banco", value: monto_no_efectivo(current_usuario)
+      = hidden_field :monto_banco, nil, name: "monto_banco", id: "monto_banco", value: monto_no_efectivo
 
     .col-md-9
       = f.simple_fields_for :dinero do |df|

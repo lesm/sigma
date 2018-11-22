@@ -12,15 +12,34 @@ class Cajero < Usuario
 
   before_create :set_rol
 
-  def to_s
-    nombre.capitalize
+  def cierre_caja_id
+    return nil unless cierre_caja_abierta?
+    ultimo_cierre_caja.id
   end
+
+  def cierre_caja_abierta?
+    return false if ultimo_cierre_caja.nil?
+    ultimo_cierre_caja.abierta?
+  end
+
+  def arqueo_pendiente?
+    return false if caja.nil?
+    monto_sistema > 0
+  end
+
+  def monto_no_efectivo
+    Comprobante.monto_no_efectivo(self)
+  end
+
+  def monto_sistema
+    Comprobante.total_monto_sistema(self)
+  end
+
+  private
 
   def ultimo_cierre_caja
     cierre_cajas.last
   end
-
-  private
 
   def set_rol
     self.rol = 1

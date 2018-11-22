@@ -1,26 +1,22 @@
 module ArqueosHelper
-
-  def cierre_caja_id cajero = current_usuario
-    return nil unless cierre_caja_abierta?(cajero)
-    cajero.ultimo_cierre_caja.id
+  def cierre_caja_id
+    current_usuario.cierre_caja_id
   end
 
-  def cierre_caja_abierta? cajero = current_usuario
-    return false if cajero.ultimo_cierre_caja.nil?
-    cajero.ultimo_cierre_caja.abierta?
+  def cierre_caja_abierta?
+    current_usuario.cierre_caja_abierta?
   end
 
-  def arqueo_pendiente? cajero = current_usuario
-    return false if cajero.caja.nil?
-    monto_sistema(cajero) > 0
+  def arqueo_pendiente?
+    current_usuario.arqueo_pendiente?
   end
 
-  def monto_no_efectivo(cajero)
-    Comprobante.monto_no_efectivo(cajero)
+  def monto_no_efectivo
+    current_usuario.monto_no_efectivo
   end
 
-  def monto_sistema(cajero)
-    Comprobante.total_monto_sistema(cajero)
+  def monto_sistema
+    current_usuario.monto_sistema
   end
 
   def values_body
@@ -33,10 +29,6 @@ module ArqueosHelper
     attributes_dinero.each_with_object([]) do |(title, attr), array|
       array << title if @dinero.send(attr) > 0
     end
-  end
-
-  def referer_url_cierre_caja
-    (request.referer =~ /cierre_cajas/) ?  request.referer : arqueos_path
   end
 
   private
