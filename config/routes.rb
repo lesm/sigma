@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :adeudos
   resources :emisores
-  resources :cajas
+  resources :cajas, except: [:destroy]
   resources :historial_cajas, except: [:edit, :show, :destroy]
   resources :contribuyentes
   resources :cajeros

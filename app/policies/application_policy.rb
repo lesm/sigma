@@ -39,7 +39,6 @@ class ApplicationPolicy
     attr_reader :user, :scope
 
     def initialize(user, scope)
-      require 'pry'; binding.pry
       raise Pundit::NotAuthorizedError, "must be logged in" unless user
       @user = user
       @scope = scope

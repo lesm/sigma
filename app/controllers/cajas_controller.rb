@@ -1,30 +1,35 @@
 class CajasController < ApplicationController
+  before_action :authenticate_usuario!
   before_action :set_caja, only: [:show, :edit, :update, :destroy]
 
   # GET /cajas
   # GET /cajas.json
   def index
-    @cajas = Caja.all
+    @cajas = policy_scope(Caja)
   end
 
   # GET /cajas/1
   # GET /cajas/1.json
   def show
+    authorize @caja
   end
 
   # GET /cajas/new
   def new
     @caja = Caja.new
+    authorize @caja
   end
 
   # GET /cajas/1/edit
   def edit
+    authorize @caja
   end
 
   # POST /cajas
   # POST /cajas.json
   def create
     @caja = Caja.new(caja_params)
+    authorize @caja
 
     respond_to do |format|
       if @caja.save
@@ -40,6 +45,7 @@ class CajasController < ApplicationController
   # PATCH/PUT /cajas/1
   # PATCH/PUT /cajas/1.json
   def update
+    authorize @caja
     respond_to do |format|
       if @caja.update(caja_params)
         format.html { redirect_to @caja, notice: 'Caja was successfully updated.' }
@@ -48,16 +54,6 @@ class CajasController < ApplicationController
         format.html { render :edit }
         format.json { render json: @caja.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /cajas/1
-  # DELETE /cajas/1.json
-  def destroy
-    @caja.destroy
-    respond_to do |format|
-      format.html { redirect_to cajas_url, notice: 'Caja was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -1,18 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe HistorialCajaPolicy do
-  let(:admin) { create :usuario, rol: 3 }
+  let(:admin) { create :usuario, :admin }
   let(:cajero) { create :cajero, :con_contribuyente, rol: 1 }
+  let(:historial_cajas) do
+    create_list :historial_caja, 5, cajero: cajero, caja: cajero.caja
+  end
 
   subject { described_class }
 
-  permissions :index? do
-    it "does not allow cajero to visit index" do
-      expect(subject).to_not permit(cajero, HistorialCaja.new)
+  permissions ".scope" do
+    context "with cajero" do
+      let(:policy_scope) { HistorialCajaPolicy::Scope.new(admin, HistorialCaja).resolve }
+      it "raise_error" do
+        historial_cajas
+        expect(policy_scope.count).to eq 5
+      end
     end
 
-    it "allow admin to visit index" do
-      expect(subject).to permit(admin, HistorialCaja.new)
+    context "with cajero" do
+      let(:policy_scope) { HistorialCajaPolicy::Scope.new(cajero, HistorialCaja).resolve }
+      it "raise_error" do
+        expect{ policy_scope }.to raise_error Pundit::NotAuthorizedError
+      end
     end
   end
 
