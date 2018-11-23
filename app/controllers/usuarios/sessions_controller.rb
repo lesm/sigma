@@ -3,6 +3,7 @@
 class Usuarios::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
+    #TODO Verify close session when cajero does not have a caja
     if quitar_relacion_caja?
       current_usuario.caja.abrir!
     end

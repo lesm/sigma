@@ -11,101 +11,87 @@
         - if current_usuario.cajero?
           = link_to current_usuario, cajero_path(current_usuario), class: "d-block"
         - else
-          = current_usuario
+          %a.d-block{ href: "#" }= current_usuario
     %nav.mt-2
       %ul.nav.nav-pills.nav-sidebar.flex-column{"data-accordion" => "false", "data-widget" => "treeview", :role => "menu"}
-        %li.nav-item
-          = link_to recibo_step_path(:set_cuenta), class: "nav-link #{ controller_name == 'recibo_steps' && 'active' }" do
-            %i.fa.fa-money.nav-icon
-            %p
-              Caja
-        %li.nav-item.has-treeview{ class: "#{ (%w(contribuyentes cuentas).include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (%w(contribuyentes cuentas).include? controller_name) && 'active' }" do
-            %i.nav-icon.fa.fa-globe
-            %p
-              General
-              %i.right.fa.fa-angle-left
-          %ul.nav.nav-treeview
-            %li.nav-item
-              = link_to contribuyentes_path, class: "nav-link #{ controller_name == 'contribuyentes' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Contribuyentes
-          %ul.nav.nav-treeview
-            %li.nav-item
-              = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Conceptos de cobro
-        %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'active' }" do
-            %i.nav-icon.fa.fa-bank
-            %p
-              Recaudación
-              %i.right.fa.fa-angle-left
-          %ul.nav.nav-treeview
-            %li.nav-item
-              = link_to recibos_path, class: "nav-link #{ (controller_name == 'recibos') && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Recibos
-            %li.nav-item
-              %a.nav-link{:href => "#"}
-                %i.fa.fa-circle-o.nav-icon
-                %p Facturas
-            %li.nav-item
-              = link_to new_arqueo_path, class: "nav-link #{ (controller_name == 'arqueos' && action_name == 'new') && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Crear Arqueo
-            %li.nav-item
-              = link_to cierre_cajas_path, class: "nav-link #{ controller_name == 'cierre_cajas' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Cierre de Caja
-            %li.nav-item
-              = link_to adeudos_path, class: "nav-link #{ controller_name == 'adeudos' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Adeudos
-        %li.nav-item.has-treeview
-          %a.nav-link{:href => "#"}
-            %i.nav-icon.fa.fa-bar-chart
-            %p
-              Reportes
-              %i.right.fa.fa-angle-left
-          %ul.nav.nav-treeview
-            %li.nav-item
-              %a.nav-link{:href => "#"}
-                %i.fa.fa-circle-o.nav-icon
-                %p Cuentas
-          %ul.nav.nav-treeview
-            %li.nav-item
-              %a.nav-link{:href => "#"}
-                %i.fa.fa-circle-o.nav-icon
-                %p Contribuyentes
-          %ul.nav.nav-treeview
-            %li.nav-item
-              %a.nav-link{:href => "#"}
-                %i.fa.fa-circle-o.nav-icon
-                %p Arqueos
-        - controller_names = %w("emisores cajeros cajas historial_cajas")
-        %li.nav-item.has-treeview{ class: "#{ (controller_names.include? controller_name) && 'menu-open' }" }
-          = link_to "" , class: "nav-link #{ (controller_names.include? controller_name) && 'active' }" do
-            %i.nav-icon.fa.fa-dashboard
-            %p
-              Administrador
-              %i.right.fa.fa-angle-left
-          %ul.nav.nav-treeview
-            %li.nav-item
-              = link_to emisores_path, class: "nav-link #{ controller_name == 'emisores' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Municipio
-            %li.nav-item
-              = link_to cajeros_path, class: "nav-link #{ controller_name == 'cajeros' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Cajeros
-            %li.nav-item
-              = link_to cajas_path, class: "nav-link #{ controller_name == 'cajas' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Cajas
-            %li.nav-item
-              = link_to historial_cajas_path, class: "nav-link #{ controller_name == 'historial_cajas' && 'active' }" do
-                %i.fa.fa-circle-o.nav-icon
-                %p Historial Cajas
+        - if para_cajero?
+          %li.nav-item
+            = link_to recibo_step_path(:set_cuenta), class: "nav-link #{ controller_name == 'recibo_steps' && 'active' }" do
+              %i.fa.fa-money.nav-icon
+              %p
+                Caja
+          %li.nav-item
+            = link_to contribuyentes_path, class: "nav-link #{ controller_name == 'contribuyentes' && 'active' }" do
+              %i.fa.fa-users.nav-icon
+              %p Contribuyentes
+          %li.nav-item
+            = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
+              %i.fa.fa-book.nav-icon
+              %p Conceptos de cobro
+          %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'menu-open' }" }
+            = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'active' }" do
+              %i.nav-icon.fa.fa-bank
+              %p
+                Recaudación
+                %i.right.fa.fa-angle-left
+            %ul.nav.nav-treeview
+              %li.nav-item
+                = link_to recibos_path, class: "nav-link #{ (controller_name == 'recibos') && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Recibos
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Facturas
+              %li.nav-item
+                = link_to new_arqueo_path, class: "nav-link #{ (controller_name == 'arqueos' && action_name == 'new') && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Crear Arqueo
+              %li.nav-item
+                = link_to cierre_cajas_path, class: "nav-link #{ controller_name == 'cierre_cajas' && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Cierre de Caja
+              %li.nav-item
+                = link_to adeudos_path, class: "nav-link #{ controller_name == 'adeudos' && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Adeudos
+        - if para_admin?
+          %li.nav-item
+            = link_to emisores_path, class: "nav-link #{ controller_name == 'emisores' && 'active' }" do
+              %i.fa.fa-home.nav-icon
+              %p Municipio
+          %li.nav-item
+            = link_to cajeros_path, class: "nav-link #{ controller_name == 'cajeros' && 'active' }" do
+              %i.fa.fa-users.nav-icon
+              %p Cajeros
+          %li.nav-item
+            = link_to cajas_path, class: "nav-link #{ controller_name == 'cajas' && 'active' }" do
+              %i.fa.fa-archive.nav-icon
+              %p Cajas
+          %li.nav-item
+            = link_to historial_cajas_path, class: "nav-link #{ controller_name == 'historial_cajas' && 'active' }" do
+              %i.fa.fa-history.nav-icon
+              %p Historial Cajas
+          %li.nav-item.has-treeview
+            %a.nav-link{:href => "#"}
+              %i.nav-icon.fa.fa-bar-chart
+              %p
+                Reportes
+                %i.right.fa.fa-angle-left
+            %ul.nav.nav-treeview
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Cuentas
+            %ul.nav.nav-treeview
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Contribuyentes
+            %ul.nav.nav-treeview
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Arqueos
         %li.nav-item#linkCloseSession
           = render "layouts/partials/boton_cerrar_sesion"
