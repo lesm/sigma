@@ -5,18 +5,20 @@ class ArqueosController < ApplicationController
   # GET /arqueos
   # GET /arqueos.json
   def index
-    @arqueos = current_usuario.arqueos.order(created_at: :desc)
+    @arqueos = policy_scope(Arqueo).order(created_at: :desc)
   end
 
   # GET /arqueos/1
   # GET /arqueos/1.json
   def show
+    authorize @arqueo
     @dinero = @arqueo.dinero
   end
 
   # GET /arqueos/new
   def new
     @arqueo = Arqueo.new monto_sistema: total_monto_sistema, dinero: Dinero.new
+    authorize @arqueo
   end
 
   def current_cierre_caja
@@ -34,8 +36,9 @@ class ArqueosController < ApplicationController
   # POST /arqueos
   # POST /arqueos.json
   def create
-    @cierre_caja = current_cierre_caja
     @arqueo = Arqueo.new(arqueo_params)
+    authorize @arqueo
+    @cierre_caja = current_cierre_caja
 
     respond_to do |format|
       if @cierre_caja.arqueos << @arqueo
