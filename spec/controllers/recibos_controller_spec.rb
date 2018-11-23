@@ -89,6 +89,10 @@ RSpec.describe RecibosController, type: :controller do
     }
   end
 
+  before :each do
+    sign_in cajero
+  end
+
   describe "GET #index" do
     it "returns a success response" do
       Recibo.create! valid_attributes
