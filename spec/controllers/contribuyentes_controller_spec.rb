@@ -38,6 +38,10 @@ RSpec.describe ContribuyentesController, type: :controller do
     }
   end
 
+  before :each do
+    sign_in_cajero
+  end
+
   describe "GET #index" do
     it "returns a success response" do
       Contribuyente.create! valid_attributes
@@ -133,18 +137,4 @@ RSpec.describe ContribuyentesController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested contribuyente" do
-      contribuyente = Contribuyente.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: contribuyente.to_param}
-      }.to change(Contribuyente, :count).by(-1)
-    end
-
-    it "redirects to the contribuyentes list" do
-      contribuyente = Contribuyente.create! valid_attributes
-      delete :destroy, params: {id: contribuyente.to_param}
-      expect(response).to redirect_to(contribuyentes_url)
-    end
-  end
 end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :emisores, except: [:destroy]
   resources :cajas, except: [:destroy]
   resources :historial_cajas, except: [:edit, :show, :destroy]
-  resources :contribuyentes
+  resources :contribuyentes, except: [:destroy]
   resources :cajeros, except: [:destroy]
   resources :cuentas
   resources :cierre_cajas, except: [:new, :destroy] do
