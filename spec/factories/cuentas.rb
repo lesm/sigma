@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :cuenta do
     codigo { "110101" }
-    descripcion { "RIFAS" }
+    sequence(:descripcion) { |n| "RIFAS#{n}" }
     formato { "DatosComun" }
   end
 end

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CuentasController, type: :controller do
   let(:contribuyente) { create :contribuyente, :con_direccion }
-  let(:cajero) { create :cajero, contribuyente: contribuyente }
 
   let(:valid_attributes) do
     {
@@ -23,7 +22,7 @@ RSpec.describe CuentasController, type: :controller do
   end
 
   before :each do
-    sign_in cajero
+    sign_in_admin
   end
 
   describe "GET #index" do
