@@ -1,15 +1,17 @@
 class CuentasController < ApplicationController
+  before_action :authenticate_usuario!
   before_action :set_cuenta, only: [:show, :edit, :update, :destroy]
 
   # GET /cuentas
   # GET /cuentas.json
   def index
-    @cuentas = Cuenta.all
+    @cuentas = policy_scope(Cuenta)
   end
 
   # GET /cuentas/1
   # GET /cuentas/1.json
   def show
+    authorize @cuenta
   end
 
   # GET /cuentas/new
@@ -19,12 +21,14 @@ class CuentasController < ApplicationController
 
   # GET /cuentas/1/edit
   def edit
+    authorize @cuenta
   end
 
   # POST /cuentas
   # POST /cuentas.json
   def create
     @cuenta = Cuenta.new(cuenta_params)
+    authorize @cuenta
 
     respond_to do |format|
       if @cuenta.save
@@ -40,6 +44,7 @@ class CuentasController < ApplicationController
   # PATCH/PUT /cuentas/1
   # PATCH/PUT /cuentas/1.json
   def update
+    authorize @cuenta
     respond_to do |format|
       if @cuenta.update(cuenta_params)
         format.html { redirect_to @cuenta, notice: 'Cuenta was successfully updated.' }
