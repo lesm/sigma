@@ -1,21 +1,24 @@
 class RecibosController < ApplicationController
+  before_action :authenticate_usuario!
   before_action :set_recibo, only: [:show, :update, :destroy]
 
   # GET /recibos
   # GET /recibos.json
   def index
-    @recibos = Recibo.all
+    @recibos = policy_scope(Recibo)
   end
 
   # GET /recibos/1
   # GET /recibos/1.json
   def show
+    authorize @recibo
   end
 
   # POST /recibos
   # POST /recibos.json
   def create
     @recibo = Recibo.new(recibo_params)
+    authorize @recibo
 
     respond_to do |format|
       if @recibo.save
