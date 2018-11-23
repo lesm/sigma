@@ -13,11 +13,15 @@ RSpec.describe ReciboStepsController, type: :controller do
       descripcion: "PREDIAL URBANOS"
   end
 
-  let(:valid_attributes) do 
+  let(:valid_attributes) do
     {
       contribuyente_id: contribuyente.id,
       cuenta_ids: [cuenta_rifas.id, cuenta_predial.id]
     }
+  end
+
+  before :each do
+    sign_in_cajero
   end
 
   describe "GET #show step :set_cuenta" do

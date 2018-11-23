@@ -1,9 +1,11 @@
 class ReciboStepsController < ApplicationController
+  before_action :authenticate_usuario!
   include Wicked::Wizard
 
   steps :set_cuenta, :set_conceptos
 
   def show
+    authorize ReciboStep.new
     case step
     when :set_cuenta
       @cuenta_form = CuentaForm.new
@@ -25,6 +27,7 @@ class ReciboStepsController < ApplicationController
   end
 
   def update
+    authorize ReciboStep.new
     contribuyente_id = params["cuenta_form"]["contribuyente_id"]
     @cuenta_form = CuentaForm.new(
       contribuyente_id: Contribuyente.find_by_id(contribuyente_id),
