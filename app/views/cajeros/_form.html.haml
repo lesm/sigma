@@ -19,7 +19,7 @@
         = f.input :contribuyente_id, collection: Contribuyente.all, readonly: true
 
   .btn-group.float-right
-    = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do
+    = link_to cajeros_path, class: 'btn btn-sm btn-secondary' do
       %i.fa.fa-arrow-left
       Regresar
     = f.button :submit, class: 'btn btn-sm btn-primary'
