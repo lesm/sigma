@@ -1,5 +1,6 @@
 class HistorialCajasController < ApplicationController
   skip_before_action :redirect_to_seleccionar_caja
+  before_action :authenticate_usuario!
   before_action :set_caja, only: :create
 
   def index
