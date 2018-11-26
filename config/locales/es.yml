@@ -358,3 +358,10 @@ es-MX:
           invalid: "Email o contraseña incorrecto"
           logged_in: "¡Has iniciado sesión!"
           logged_out: "¡Has cerrado sesión!"
+  views:
+    pagination:
+      first: "&laquo; Primero"
+      last: "Ultimo &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "&hellip;"

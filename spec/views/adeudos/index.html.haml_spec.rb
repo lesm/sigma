@@ -11,7 +11,7 @@ RSpec.describe "adeudos/index", type: :view do
   before(:each) do
     cierre_caja
     cierre_caja_dos
-    assign(:adeudos, [
+    assign(:adeudos, Kaminari.paginate_array([
       Adeudo.create!(
         :anticipo => "0",
         :monto => "9.99",
@@ -26,7 +26,7 @@ RSpec.describe "adeudos/index", type: :view do
         :cajero => cajero,
         :arqueo => arqueo_dos
       )
-    ])
+    ]).page(1))
   end
 
   it "renders a list of adeudos" do

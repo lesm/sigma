@@ -4,7 +4,7 @@ class HistorialCajasController < ApplicationController
   before_action :set_caja, only: :create
 
   def index
-    @historial_cajas = policy_scope(HistorialCaja)
+    @historial_cajas = policy_scope(HistorialCaja).page(params[:page])
   end
 
   def new

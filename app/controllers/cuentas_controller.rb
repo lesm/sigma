@@ -5,7 +5,7 @@ class CuentasController < ApplicationController
   # GET /cuentas
   # GET /cuentas.json
   def index
-    @cuentas = policy_scope(Cuenta)
+    @cuentas = policy_scope(Cuenta).page(params[:page])
   end
 
   # GET /cuentas/1

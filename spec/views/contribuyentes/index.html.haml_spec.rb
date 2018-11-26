@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "contribuyentes/index", type: :view do
   before(:each) do
-    assign(:contribuyentes, [
+    assign(:contribuyentes, Kaminari.paginate_array([
       Contribuyente.create!(
         :nombre_o_razon_social => "Pedro",
         :primer_apellido => "Pérez",
@@ -19,7 +19,7 @@ RSpec.describe "contribuyentes/index", type: :view do
         :email => "pedro@gmail.com",
         :rfc => "AAAA111111AA1"
       )
-    ])
+    ]).page(1))
   end
 
   it "renders a list of contribuyentes" do

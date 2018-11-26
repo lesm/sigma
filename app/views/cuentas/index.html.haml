@@ -32,3 +32,6 @@
                         = link_to edit_cuenta_path(cuenta), class: "btn btn-sm btn-warning" do
                           %i.fa.fa-edit
                           Editar
+
+      .row.justify-content-center
+        = paginate @cuentas

@@ -8,8 +8,8 @@ RSpec.describe "cierre_cajas/show", type: :view do
       password: "qwerty",
       contribuyente: contribuyente
   end
-  let(:arqueo) do
-    build :arqueo, monto_sistema: 9.99, monto_cajero: 9.99
+  let(:arqueos) do
+    build_list :arqueo, 5, monto_sistema: 9.99, monto_cajero: 9.99
   end
   before(:each) do
     @cierre_caja = assign(:cierre_caja, CierreCaja.create!(
@@ -17,8 +17,11 @@ RSpec.describe "cierre_cajas/show", type: :view do
       :monto_cajero => "9.99",
       :observacion => "MyText",
       :cajero => cajero,
-      :arqueos => [arqueo]
+      :arqueos => arqueos
     ))
+    @arqueos = assign(:arqueos, Kaminari.paginate_array(
+      arqueos
+    ).page(1))
   end
 
   it "renders attributes in <p>" do

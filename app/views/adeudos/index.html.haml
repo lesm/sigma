@@ -21,3 +21,6 @@
                 %td= liquidado(adeudo)
                 %td= adeudo.cajero
                 %td= l adeudo.arqueo.created_at, format: :short
+
+      .row.justify-content-center
+        = paginate @adeudos

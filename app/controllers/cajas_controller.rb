@@ -5,7 +5,7 @@ class CajasController < ApplicationController
   # GET /cajas
   # GET /cajas.json
   def index
-    @cajas = policy_scope(Caja)
+    @cajas = policy_scope(Caja).page(params[:page])
   end
 
   # GET /cajas/1

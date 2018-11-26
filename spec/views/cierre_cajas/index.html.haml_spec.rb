@@ -13,7 +13,7 @@ RSpec.describe "cierre_cajas/index", type: :view do
     build :arqueo, monto_sistema: 100, monto_cajero: 50, dinero: dinero
   end
   before(:each) do
-    assign(:cierre_cajas, [
+    assign(:cierre_cajas, Kaminari.paginate_array([
       CierreCaja.create!(
         :observacion => "MyText",
         :cajero => cajero,
@@ -24,7 +24,7 @@ RSpec.describe "cierre_cajas/index", type: :view do
         :cajero => cajero,
         :arqueos => [arqueo]
       )
-    ])
+    ]).page(1))
   end
 
   it "renders a list of cierre_cajas" do

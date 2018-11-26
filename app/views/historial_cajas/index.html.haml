@@ -18,3 +18,5 @@
                 %td= historial_caja.cajero
                 %td= l historial_caja.created_at, format: :short
 
+      .row.justify-content-center
+        = paginate @historial_cajas

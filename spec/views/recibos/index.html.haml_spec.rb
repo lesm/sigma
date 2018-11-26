@@ -6,10 +6,10 @@ RSpec.describe "recibos/index", type: :view do
   let(:recibo_dos) { create :recibo, :con_datos, folio: "2", caja: caja }
 
   before(:each) do
-    assign(:recibos, [
+    assign(:recibos, Kaminari.paginate_array([
       recibo,
       recibo_dos
-    ])
+    ]).page(1))
   end
 
   it "renders a list of recibos" do

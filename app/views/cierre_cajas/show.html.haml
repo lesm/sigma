@@ -29,7 +29,7 @@
                   %th Fecha de Creación
                   %th Acción
               %tbody.text-right
-                - @cierre_caja.arqueos.each do |arqueo|
+                - @arqueos.each do |arqueo|
                   %tr
                     %td= arqueo.id
                     %td= number_to_currency arqueo.monto_sistema
@@ -42,8 +42,7 @@
                         Ver
               %tfoot.text-right
                 %tr
-                  %td
-                  %td
+                  %td{ colspan: 2 }
                     %strong
                       %span{style: "color:green"}
                         = number_to_currency @cierre_caja.monto_sistema
@@ -51,8 +50,11 @@
                     %strong
                       %span{style: "color:green"}
                         = number_to_currency @cierre_caja.monto_cajero
-                  %td
-                  %td
+                  %td{ colspan: 3 }
+
+        .row.justify-content-center
+          = paginate @arqueos
+
         .btn-group.float-right
           = link_to cierre_cajas_path, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left

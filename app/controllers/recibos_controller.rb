@@ -5,7 +5,7 @@ class RecibosController < ApplicationController
   # GET /recibos
   # GET /recibos.json
   def index
-    @recibos = policy_scope(Recibo)
+    @recibos = policy_scope(Recibo).page(params[:page])
   end
 
   # GET /recibos/1
