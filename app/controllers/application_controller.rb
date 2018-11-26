@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
   include Pundit
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :redirect_to_seleccionar_caja
+  before_action :redirect_to_seleccionar_caja, if: :cajero_logueado_sin_caja?
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def redirect_to_seleccionar_caja
-    if cajero_logueado_sin_caja?
-      redirect_to new_historial_caja_path and return
-    end
+    redirect_to new_historial_caja_path and return
   end
 
   def cast_value value
@@ -23,6 +22,15 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || root_path)
   end
 
+  def after_sign_in_path_for(resource)
+    if current_usuario.cajero?
+      flash.keep(:notice)
+      return redirigue_a_new_arqueo if cajero_con_arqueo_pendiente?
+      return redirigue_a_cierre_caja if cajero_con_cierre_caja_pendiente?
+      recibo_step_path(:set_cuenta)
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -35,5 +43,27 @@ class ApplicationController < ActionController::Base
     usuario_signed_in? &&
       current_usuario.cajero? &&
       current_usuario.caja.nil?
+  end
+
+  def redirigue_a_new_arqueo
+    flash.alert = "Hay un arqueo pendiente..."
+    new_arqueo_path
+  end
+
+  def redirigue_a_cierre_caja
+    flash.alert = "Hay un cierre de caja pendiente..."
+    current_usuario.ultimo_cierre_caja
+  end
+
+  def cajero_con_arqueo_pendiente?
+    cajero_con_caja? and current_usuario.arqueo_pendiente?
+  end
+
+  def cajero_con_cierre_caja_pendiente?
+    cajero_con_caja? and current_usuario.cierre_caja_abierta?
+  end
+
+  def cajero_con_caja?
+    current_usuario.caja.present?
   end
 end
