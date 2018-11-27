@@ -35,11 +35,11 @@ class Cajero < Usuario
     Comprobante.total_monto_sistema(self)
   end
 
-  private
-
   def ultimo_cierre_caja
     cierre_cajas.last
   end
+
+  private
 
   def set_rol
     self.rol = 1

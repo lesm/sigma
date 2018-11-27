@@ -22,6 +22,7 @@ FactoryBot.define do
     contribuyente { nil }
     emisor { nil }
     arqueo { nil }
+    caja { nil }
   end
 
   trait :con_datos do

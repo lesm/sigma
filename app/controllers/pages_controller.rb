@@ -2,9 +2,9 @@ class PagesController < ApplicationController
   layout "pages"
 
   def index
-    if usuario_signed_in? and current_usuario.cajero?
-      redirect_to new_historial_caja_path and return
+    if usuario_signed_in?
+      flash.keep(:notice)
+      redirect_to dashboard_path
     end
-    redirect_to dashboard_path if usuario_signed_in?
   end
 end
