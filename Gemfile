@@ -57,6 +57,7 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 3.14', '>= 3.14.1'
   gem 'chromedriver-helper'
   gem 'database_cleaner'
+  gem 'bullet'
 end
 
 group :development do
