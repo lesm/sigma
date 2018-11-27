@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if current_usuario.cajero?
       flash.keep(:notice)
-      return redirigue_a_new_arqueo if cajero_con_arqueo_pendiente?
-      return redirigue_a_cierre_caja if cajero_con_cierre_caja_pendiente?
+      return redirige_a_new_arqueo if cajero_con_arqueo_pendiente?
+      return redirige_a_cierre_caja if cajero_con_cierre_caja_pendiente?
       recibo_step_path(:set_cuenta)
     end
   end
@@ -45,12 +45,12 @@ class ApplicationController < ActionController::Base
       current_usuario.caja.nil?
   end
 
-  def redirigue_a_new_arqueo
+  def redirige_a_new_arqueo
     flash.alert = "Hay un arqueo pendiente..."
     new_arqueo_path
   end
 
-  def redirigue_a_cierre_caja
+  def redirige_a_cierre_caja
     flash.alert = "Hay un cierre de caja pendiente..."
     current_usuario.ultimo_cierre_caja
   end
