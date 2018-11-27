@@ -2,7 +2,7 @@ class CierreCaja < ApplicationRecord
   belongs_to :cajero
   has_many :arqueos, inverse_of: :cierre_caja, dependent: :destroy
 
-  validates :monto_sistema, :monto_cajero, presence: true
+  validates :monto_sistema, :monto_cajero, :cajero, presence: true
 
   def update_montos
     update_monto_cajero

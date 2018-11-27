@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_212804) do
+ActiveRecord::Schema.define(version: 2018_11_27_131729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,16 @@ ActiveRecord::Schema.define(version: 2018_11_07_212804) do
     t.index ["cajero_id"], name: "index_historial_cajas_on_cajero_id"
   end
 
+  create_table "ingreso_por_clasificares", force: :cascade do |t|
+    t.money "monto", scale: 2
+    t.bigint "cajero_id"
+    t.bigint "arqueo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["arqueo_id"], name: "index_ingreso_por_clasificares_on_arqueo_id"
+    t.index ["cajero_id"], name: "index_ingreso_por_clasificares_on_cajero_id"
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "username", null: false
@@ -266,5 +276,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_212804) do
   add_foreign_key "dineros", "arqueos"
   add_foreign_key "historial_cajas", "cajas"
   add_foreign_key "historial_cajas", "usuarios", column: "cajero_id"
+  add_foreign_key "ingreso_por_clasificares", "arqueos"
+  add_foreign_key "ingreso_por_clasificares", "usuarios", column: "cajero_id"
   add_foreign_key "usuarios", "contribuyentes"
 end
