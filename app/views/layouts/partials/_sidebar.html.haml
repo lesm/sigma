@@ -28,8 +28,9 @@
             = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
               %i.fa.fa-book.nav-icon
               %p Conceptos de cobro
-          %li.nav-item.has-treeview{ class: "#{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'menu-open' }" }
-            = link_to "" , class: "nav-link #{ (%w(cierre_cajas arqueos adeudos recibos).include? controller_name) && 'active' }" do
+          - controller_names = %w(cierre_cajas arqueos adeudos recibos ingreso_por_clasificares)
+          %li.nav-item.has-treeview{ class: "#{ (controller_names.include? controller_name) && 'menu-open' }" }
+            = link_to "", class: "nav-link #{ (controller_names.include? controller_name) && 'active' }" do
               %i.nav-icon.fa.fa-bank
               %p
                 Recaudación
@@ -55,6 +56,10 @@
                 = link_to adeudos_path, class: "nav-link #{ controller_name == 'adeudos' && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
                   %p Adeudos
+              %li.nav-item
+                = link_to ingreso_por_clasificares_path, class: "nav-link #{ controller_name == 'ingreso_por_clasificares' && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Ingresos Por Clasificar
         - if para_admin?
           %li.nav-item
             = link_to emisores_path, class: "nav-link #{ controller_name == 'emisores' && 'active' }" do

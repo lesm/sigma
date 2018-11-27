@@ -6,6 +6,7 @@ RSpec.describe Arqueo, type: :model do
   it { should have_many(:facturas) }
   it { should have_one(:dinero).dependent(:destroy) }
   it { should have_one(:adeudo).dependent(:destroy) }
+  it { should have_one(:ingreso_por_clasificar).dependent(:destroy) }
   it { should accept_nested_attributes_for(:dinero).allow_destroy(true) }
   it { should validate_presence_of :monto_cajero }
   it { should_not allow_value(-1).for :monto_cajero }
@@ -77,5 +78,24 @@ RSpec.describe Arqueo, type: :model do
       end
     end
 
+  end
+
+  describe "#crear_ingreso_por_clasificar" do
+    context "when monto_cajero greater than monto_sistema" do
+      let(:cajero) { create :cajero, :con_contribuyente }
+      let(:cierre_caja) { build :cierre_caja, cajero: cajero }
+      let(:dinero) do
+        build :dinero, dos_mil_pesos: 1, total: 2000
+      end
+      let(:arqueo) do
+        create :arqueo, cierre_caja: cierre_caja,
+          dinero: dinero, monto_cajero: 2000, monto_sistema: 1000
+      end
+
+      it "creates a IngresoPorClasificar with monto $1,000.00" do
+        arqueo
+        expect(IngresoPorClasificar.first.monto).to eq 1000
+      end
+    end
   end
 end

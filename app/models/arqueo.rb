@@ -4,6 +4,7 @@ class Arqueo < ApplicationRecord
   has_many :facturas
   has_one :dinero, dependent: :destroy
   has_one :adeudo, dependent: :destroy
+  has_one :ingreso_por_clasificar, dependent: :destroy
 
   accepts_nested_attributes_for :dinero, allow_destroy: true
 
@@ -12,6 +13,7 @@ class Arqueo < ApplicationRecord
 
   after_save :update_montos_cierre_caja
   after_create :crear_adeudo
+  after_create :crear_ingreso_por_clasificar
 
   def monto_cheque
     Comprobante.where(arqueo_id: id).de_cheque.sum(:total)
@@ -56,5 +58,20 @@ class Arqueo < ApplicationRecord
 
   def adeudo_monto
     monto_sistema - monto_cajero
+  end
+
+  def crear_ingreso_por_clasificar
+    if monto_cajero_mayor_a_monto_sistema?
+      IngresoPorClasificar.create monto: ingreso_por_clasificar_monto,
+        arqueo: self, cajero: cierre_caja.cajero
+    end
+  end
+
+  def monto_cajero_mayor_a_monto_sistema?
+    monto_cajero > monto_sistema
+  end
+
+  def ingreso_por_clasificar_monto
+    monto_cajero - monto_sistema
   end
 end
