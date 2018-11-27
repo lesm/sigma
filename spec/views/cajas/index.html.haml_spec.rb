@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "cajas/index", type: :view do
   before(:each) do
-    assign(:cajas, [
+    assign(:cajas, Kaminari.paginate_array([
       Caja.create!(
         :nombre => "Nombre Uno",
         :numero => 301,
@@ -15,7 +15,7 @@ RSpec.describe "cajas/index", type: :view do
         :descripcion => "MyText",
         :disponible => true
       )
-    ])
+    ]).page(1))
   end
 
   it "renders a list of cajas" do

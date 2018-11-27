@@ -8,7 +8,7 @@ RSpec.describe "cajeros/index", type: :view do
     create :contribuyente, :con_direccion, rfc: "AAAA111111AAC"
   end
   before(:each) do
-    assign(:cajeros, [
+    assign(:cajeros, Kaminari.paginate_array([
       Cajero.create!(
         nombre: "Cajero",
         username: "cajerito",
@@ -25,7 +25,7 @@ RSpec.describe "cajeros/index", type: :view do
         rol: 1,
         contribuyente_id: contribuyente_dos.id
       ),
-    ])
+    ]).page(1))
   end
 
   it "renders a list of cajeros" do

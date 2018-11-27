@@ -5,7 +5,7 @@ class CajerosController < ApplicationController
   # GET /cajeros
   # GET /cajeros.json
   def index
-    @cajeros = policy_scope(Cajero)
+    @cajeros = policy_scope(Cajero).page(params[:page])
   end
 
   # GET /cajeros/1

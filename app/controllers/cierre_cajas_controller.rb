@@ -5,13 +5,16 @@ class CierreCajasController < ApplicationController
   # GET /cierre_cajas
   # GET /cierre_cajas.json
   def index
-    @cierre_cajas = policy_scope(CierreCaja).order(created_at: :desc)
+    @cierre_cajas = policy_scope(CierreCaja)
+      .order(created_at: :desc)
+      .page(params[:page])
   end
 
   # GET /cierre_cajas/1
   # GET /cierre_cajas/1.json
   def show
     authorize @cierre_caja
+    @arqueos = @cierre_caja.arqueos.page(params[:page])
   end
 
   # GET /cierre_cajas/1/edit
@@ -58,7 +61,7 @@ class CierreCajasController < ApplicationController
 
   private
     def set_cierre_caja
-      @cierre_caja = CierreCaja.find(params[:id])
+      @cierre_caja = CierreCaja.includes(:arqueos).find(params[:id])
     end
 
     def cierre_caja_params

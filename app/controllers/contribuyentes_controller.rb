@@ -5,7 +5,7 @@ class ContribuyentesController < ApplicationController
   # GET /contribuyentes
   # GET /contribuyentes.json
   def index
-    @contribuyentes = policy_scope(Contribuyente)
+    @contribuyentes = policy_scope(Contribuyente).page(params[:page])
   end
 
   # GET /contribuyentes/1

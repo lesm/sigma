@@ -5,7 +5,7 @@ class AdeudosController < ApplicationController
   # GET /adeudos
   # GET /adeudos.json
   def index
-    @adeudos = Adeudo.order(created_at: :desc)
+    @adeudos = Adeudo.order(created_at: :desc).page(params[:page])
   end
 
   # GET /adeudos/1

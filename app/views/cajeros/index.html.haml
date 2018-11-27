@@ -30,3 +30,6 @@
                     = link_to edit_cajero_path(cajero), class: "btn btn-sm btn-warning" do
                       %i.fa.fa-edit
                       Editar
+
+      .row.justify-content-center
+        = paginate @cajeros

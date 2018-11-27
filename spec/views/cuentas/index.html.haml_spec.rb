@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "cuentas/index", type: :view do
   before(:each) do
     sign_in_cajero
-    assign(:cuentas, [
+    assign(:cuentas, Kaminari.paginate_array([
       Cuenta.create!(
         codigo: "110101",
         formato: "DatosComun",
@@ -16,7 +16,7 @@ RSpec.describe "cuentas/index", type: :view do
         descripcion: "RIFAS DEL MUNICIPIO",
         importe: 10.00
       )
-    ])
+    ]).page(1))
   end
 
   it "renders a list of cuentas" do
