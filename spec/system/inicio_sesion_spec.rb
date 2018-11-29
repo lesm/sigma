@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Inicio de Sesión", type: :system do
   feature "Iniciar sesión cajero" do
-    scenario "Cuando Cajero incia sesión sin caja" do
+    scenario "Cuando Cajero inicia sesión sin caja y cierra sesión" do
       dado_que_existe_un_cajero_y_una_caja
       cuando_cajero_visita_root_path
       cuando_cajero_da_click_en_link_iniciar_sesion
@@ -10,6 +10,9 @@ RSpec.describe "Inicio de Sesión", type: :system do
       cajero_ingresa_username_y_password
       cuando_cajero_da_click_en_boton_iniciar_sesion
       cajero_debe_ser_redireccionado_a_historial_cajas_new
+      cuando_cajero_da_click_en_link_de_cerrar_sesion
+      cuando_cajero_da_click_en_confirmar_cerrar_sesion
+      se_muestra_un_mensaje_de_cierre_de_sesion
     end
 
     feature "Cuando Cajero incia sesión con caja" do
@@ -71,6 +74,10 @@ RSpec.describe "Inicio de Sesión", type: :system do
 
   def cajero_debe_ser_redireccionado_a_historial_cajas_new
     expect(current_path).to eq new_historial_caja_path
+  end
+
+  def se_muestra_un_mensaje_de_cierre_de_sesion
+    expect(page).to have_content "Sesión cerrada exitosamente."
   end
 
 

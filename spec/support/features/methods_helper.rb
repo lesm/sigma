@@ -34,5 +34,12 @@ module Features
       expect(page).to have_current_path(/recibo_steps\/set_conceptos/)
     end
 
+    def cuando_cajero_da_click_en_link_de_cerrar_sesion
+      click_link "Cerrar Sesión"
+    end
+
+    def cuando_cajero_da_click_en_confirmar_cerrar_sesion
+      click_button "Sí"
+    end
   end
 end

@@ -87,10 +87,6 @@ RSpec.describe "Cierre de sesión", type: :system do
     expect(find("a#closeSession")['data-arqueo-pendiente']).to eq "true"
   end
 
-  def cuando_cajero_da_click_en_link_de_cerrar_sesion
-    click_link "Cerrar Sesión"
-  end
-
   def se_muestra_un_mensaje_de_arqueo_pendiente
     expect(page).to have_content("Tienes un arqueo pendiente")
   end
@@ -160,10 +156,6 @@ RSpec.describe "Cierre de sesión", type: :system do
   def se_muestra_un_mensaje_de_confirmar_cerrar_sesion
     expect(page).to have_content(/\¿Estas seguro\?/)
     expect(page).to have_content(/Cerrar Sesión/)
-  end
-
-  def cuando_cajero_da_click_en_confirmar_cerrar_sesion
-    click_button "Sí" 
   end
 
   def caja_debe_estar_disponible

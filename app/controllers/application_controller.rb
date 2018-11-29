@@ -6,7 +6,12 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def redirect_to_seleccionar_caja
+    return if cierre_de_sesion?
     redirect_to new_historial_caja_path and return
+  end
+
+  def cierre_de_sesion?
+    controller_name == "sessions" and action_name == "destroy"
   end
 
   def cast_value value
