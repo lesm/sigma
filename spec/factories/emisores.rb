@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :emisor do
-    nombre { "MyString" }
+    nombre { "HUAJUAPAN DE LEÓN" }
     numero_municipio { "482" }
     rfc { "AAA111111AAA" }
     logotipo { "MyString" }

@@ -13,6 +13,7 @@
               = f.association :contribuyente, collection: Contribuyente.all, selected: @recibo.contribuyente.id, disabled: true
               = f.input :contribuyente_id, as: :hidden, input_html: { value: @recibo.contribuyente.id }
               = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
+              = f.input :uso_cfdi, collection: Contribuyente::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
               = f.input :subtotal, as: :hidden
               = f.input :moneda, as: :hidden
               = f.input :tipo_comprobante, as: :hidden, input_html: { value: "Recibo" }

@@ -18,6 +18,7 @@ FactoryBot.define do
     motivo_descuento { "por pago puntual" }
     fecha_emision { Date.current }
     observaciones { "pago puntual" }
+    uso_cfdi { "Por definir" }
     cajero { nil }
     contribuyente { nil }
     emisor { nil }
@@ -44,6 +45,18 @@ FactoryBot.define do
       recibo.conceptos = build_list :concepto, 1, :con_cuenta, cantidad: 1, valor_unitario: 400.5, importe: 400.5
       recibo.subtotal = 400.5
       recibo.total = 400.5
+    end
+  end
+
+  trait :para_timbrar do
+    after :build do |recibo|
+      recibo.emisor = build :emisor
+      recibo.cajero = build :cajero
+      recibo.caja = recibo.cajero.caja
+      recibo.contribuyente = build :contribuyente, rfc: "RAA111111AAA"
+      recibo.conceptos = [build(:concepto, :con_cuenta_rifas), build(:concepto, :con_cuenta_sorteos)]
+      recibo.subtotal = 400
+      recibo.total = 400
     end
   end
 end

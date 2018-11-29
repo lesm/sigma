@@ -21,6 +21,7 @@ class Comprobante < ApplicationRecord
     :fecha_emision, :metodo_pago, :forma_pago, :subtotal, :descuento,
     :total, presence: true
   validates :total, :subtotal, numericality: { greater_than: 0 }
+  validates :uso_cfdi, presence: true, if: :timbrado_automatico?
   validate :valida_subtotal
   validate :valida_total
 
