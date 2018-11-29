@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'dashboard/index', as: :dashboard
 
   resources :adeudos
+  resources :ingreso_por_clasificares, only: [:index]
   resources :emisores, except: [:destroy]
   resources :cajas, except: [:destroy]
   resources :historial_cajas, except: [:edit, :show, :destroy]

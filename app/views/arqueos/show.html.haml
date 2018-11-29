@@ -38,6 +38,19 @@
               %p
                 %b Cajero:
                 = @arqueo.cierre_caja.cajero
+        - if @arqueo.ingreso_por_clasificar.present?
+          .row
+            .col-md-12
+              %h5 Ingreso Por Clasificar
+            .col-md-4
+              %p
+                %b Monto:
+                %span{style: "color:green"}
+                  = number_to_currency @arqueo.ingreso_por_clasificar.monto
+            .col-md-4
+              %p
+                %b Cajero:
+                = @arqueo.cierre_caja.cajero
         - if @dinero
           %p
           .row
@@ -77,6 +90,6 @@
                         = number_to_currency @arqueo.monto_no_efectivo
 
         .btn-group.float-right
-          = link_to cierre_caja_path(@arqueo.cierre_caja), class: 'btn btn-sm btn-secondary' do
+          = link_to :back, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left
             Regresar

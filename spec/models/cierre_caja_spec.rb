@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CierreCaja, type: :model do
-  it { should validate_presence_of(:monto_sistema) }
-  it { should validate_presence_of(:monto_cajero) }
   it { should belong_to(:cajero) }
   it { should have_many(:arqueos).dependent :destroy }
+  it { should validate_presence_of(:monto_sistema) }
+  it { should validate_presence_of(:monto_cajero) }
+  it { should validate_presence_of(:cajero) }
 
   describe "Actualiza montos" do
     let(:cajero) { create :cajero, :con_contribuyente }

@@ -1,0 +1,27 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Listado de Ingresos Por Clasificar
+      .card-body
+        %table.table.table-hover.text-center
+          %thead
+            %tr
+              %th Monto
+              %th Cajero
+              %th Arqueo
+              %th Fecha de arqueo
+
+          %tbody
+            - @ingresos.each do |ingreso|
+              %tr
+                %td= number_to_currency ingreso.monto
+                %td= ingreso.cajero
+                %td
+                  = link_to arqueo_path(ingreso.arqueo.id), class: "btn btn-info" do
+                    %i.fa.fa-eye
+                    Ver
+                %td= l ingreso.created_at, format: :short
+
+      .row.justify-content-center
+        = paginate @ingresos

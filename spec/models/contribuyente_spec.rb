@@ -10,6 +10,70 @@ RSpec.describe Contribuyente, type: :model do
   it { should have_many(:recibos) }
   it { should have_many(:facturas) }
 
+  describe ".search" do
+    let(:arturo) do
+      create :contribuyente, :con_direccion,
+        nombre_o_razon_social: "Arturo",
+        primer_apellido: "Perez",
+        segundo_apellido: "Valdez",
+        rfc: "AAAA111111AAA"
+    end
+    let(:ramon) do
+      create :contribuyente, :con_direccion,
+        nombre_o_razon_social: "Ramón",
+        primer_apellido: "Martinez",
+        segundo_apellido: "Santos",
+        rfc: "BBBB111111BBB"
+    end
+    let(:jose) do
+      create :contribuyente, :con_direccion,
+        nombre_o_razon_social: "José",
+        primer_apellido: "Silva",
+        segundo_apellido: "Santos",
+        rfc: "CCCC111111CCC"
+    end
+
+    before :each do
+      [arturo, ramon, jose]
+    end
+
+    context "when search for name 'ArTuRo'" do
+      it "returns 1 coincidence" do
+        expect(Contribuyente.search("ArTuRo").count).to eq 1
+      end
+    end
+
+    context "when search for primer_apellido 'MarTineZ'" do
+      it "returns 1 coincidence" do
+        expect(Contribuyente.search("MarTineZ").count).to eq 1
+      end
+    end
+
+    context "when search for segundo_apellido 'SaNtOs'" do
+      it "returns 2 coincidence" do
+        expect(Contribuyente.search("SaNtOs").count).to eq 2
+      end
+    end
+
+    context "when search for rfc 'CCCC111111CCC'" do
+      it "returns 2 coincidence" do
+        expect(Contribuyente.search("CCCC111111CCC").count).to eq 1
+      end
+    end
+
+    context "when search for full_name 'José Silva Santos'" do
+      it "returns 1 coincidence" do
+        expect(Contribuyente.search("José Silva Santos").count).to eq 1
+      end
+    end
+
+    context "when search for full_name 'José Silvaa Santos'" do
+      it "returns 0 coincidences" do
+        expect(Contribuyente.search("José Silvaa Santos").count).to eq 0
+      end
+    end
+  end
+
   describe "#nombre_completo" do
     subject do
       build :contribuyente,

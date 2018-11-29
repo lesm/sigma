@@ -15,6 +15,10 @@ class Contribuyente < ApplicationRecord
   validates :rfc, rfc_format: { force_homoclave: true }, allow_blank: true
   validates :rfc, uniqueness: true, unless: :rfc_generico?, allow_blank: true
 
+  def self.search search
+    where("concat_ws(' ', nombre_o_razon_social, primer_apellido, segundo_apellido, rfc) ILIKE ?", "%#{search&.squish}%")
+  end
+
   def nombre_completo
     "#{nombre_o_razon_social} #{primer_apellido} #{segundo_apellido}".strip.titleize
   end

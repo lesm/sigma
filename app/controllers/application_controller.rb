@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
       return redirige_a_new_arqueo if cajero_con_arqueo_pendiente?
       return redirige_a_cierre_caja if cajero_con_cierre_caja_pendiente?
       recibo_step_path(:set_cuenta)
+    else
+      super
     end
   end
 
