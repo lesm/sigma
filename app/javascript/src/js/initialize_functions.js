@@ -5,6 +5,12 @@ function ready() {
   startDateTimePicker()
   startSelect2WithLink()
   hideSelect2WithLink()
+  startFocusSearch()
+}
+
+function startFocusSearch() {
+  $("#search").focus()
+  $("#search").select()
 }
 
 function resizeContentWrapperHeight() {
