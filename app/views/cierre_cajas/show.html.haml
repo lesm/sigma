@@ -55,6 +55,10 @@
         .row.justify-content-center
           = paginate @arqueos
 
+        .float-left
+          = link_to cierre_caja_path(@cierre_caja, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
+            %i.fa.fa-print
+            Imprimir
         .btn-group.float-right
           = link_to cierre_cajas_path, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left

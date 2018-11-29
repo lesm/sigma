@@ -15,6 +15,11 @@ class CierreCajasController < ApplicationController
   def show
     authorize @cierre_caja
     @arqueos = @cierre_caja.arqueos.page(params[:page])
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: nombre_pdf,
+                    template: "pdfs/cierre_caja" }
+    end
   end
 
   # GET /cierre_cajas/1/edit
@@ -59,9 +64,13 @@ class CierreCajasController < ApplicationController
     @cierre_caja.update_column(:abierta, false)
   end
 
+  def nombre_pdf
+    "cierre_caja_#{@cierre_caja.id}_#{@cierre_caja.created_at.to_s(:number)}".upcase
+  end
+
   private
     def set_cierre_caja
-      @cierre_caja = CierreCaja.includes(:arqueos).find(params[:id])
+      @cierre_caja = CierreCaja.find(params[:id])
     end
 
     def cierre_caja_params
