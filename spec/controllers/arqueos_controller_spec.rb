@@ -30,7 +30,7 @@ RSpec.describe ArqueosController, type: :controller do
   let(:invalid_attributes) do
     {
       monto_sistema: 0,
-      monto_cajero: 0,
+      monto_cajero: -10,
       observacion: "Primer arqueo del día",
       cierre_caja_id: cierre_caja.id
     }

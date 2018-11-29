@@ -9,7 +9,9 @@ class Arqueo < ApplicationRecord
   accepts_nested_attributes_for :dinero, allow_destroy: true
 
   validates :monto_sistema, :monto_cajero, presence: true
-  validates :monto_sistema, :monto_cajero, numericality: { greater_than: 0 }
+  validates :monto_sistema, :monto_cajero, numericality: {
+    greater_than_or_equal_to: 0
+  }
 
   after_save :update_montos_cierre_caja
   after_create :crear_adeudo

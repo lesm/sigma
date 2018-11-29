@@ -41,5 +41,27 @@ module Features
     def cuando_cajero_da_click_en_confirmar_cerrar_sesion
       click_button "Sí"
     end
+
+    def cajero_da_click_en_link_recaudacion
+      click_link "Recaudación"
+    end
+
+    def cajero_da_click_en_link_crear_arqueo
+      click_link "Crear Arqueo"
+    end
+
+    def cajero_da_click_en_link_cierre_de_caja
+      click_link "Cierre de Caja"
+    end
+
+    def cajero_da_click_en_boton_crear_arqueo
+      click_button "Crear Arqueo"
+    end
+
+    def cajero_da_click_en_el_link_ver
+      click_link "Ver"
+      sleep 1
+    end
+    alias_method :cajero_da_otro_click_en_el_link_ver, :cajero_da_click_en_el_link_ver
   end
 end

@@ -13,6 +13,10 @@ class Cajero < Usuario
 
   before_create :set_rol
 
+  def sin_arqueo?
+    arqueos_actuales.count == 0
+  end
+
   def cierre_caja_id
     return nil unless cierre_caja_abierta?
     ultimo_cierre_caja.id
@@ -44,5 +48,13 @@ class Cajero < Usuario
 
   def set_rol
     self.rol = 1
+  end
+
+  def arqueos_actuales
+    arqueos.where(arqueos: { created_at: rango_fecha })
+  end
+
+  def rango_fecha
+    Date.current.beginning_of_day..Date.current.end_of_day
   end
 end

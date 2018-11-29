@@ -25,38 +25,50 @@ const castValue = value => {
 }
 
 const showConfirmationDialog = element => {
-  const message = element.getAttribute('data-confirm-swal')
-  const text = element.getAttribute('data-text')
-  const arqueoPendiente = castValue(element.getAttribute('data-arqueo-pendiente'))
+  const message           = element.getAttribute('data-confirm-swal')
+  const text              = element.getAttribute('data-text')
+  const conCaja           = castValue(element.getAttribute('data-con-caja'))
+  const sinArqueo         = castValue(element.getAttribute('data-sin-arqueo'))
+  const arqueoPendiente   = castValue(element.getAttribute('data-arqueo-pendiente'))
   const cierreCajaAbierta = castValue(element.getAttribute('data-cierre-caja-abierta'))
-  const cierreCajaId = element.getAttribute('data-cierre-caja-id')
+  const cierreCajaId      = element.getAttribute('data-cierre-caja-id')
 
   let link = document.createElement("a")
   let title = ""
-  if (arqueoPendiente || cierreCajaAbierta) {
-    if(arqueoPendiente) {
-      title = "Tienes un arqueo pendiente"
-      link.innerHTML = "Ír a crear Arqueo"
-      link.href = "/arqueos/new"
-    } else {
-      if (cierreCajaAbierta) {
-        title = "Cierre de caja abierta"
-        link.innerHTML = "Ír a cierre de caja"
-        link.href = `/cierre_cajas/${cierreCajaId}`
-      }
-    }
+  if (sinArqueo && conCaja) {
+    link.innerHTML = "Ír a crear Arqueo"
+    link.href = "/arqueos/new"
     swal({
-      title: title,
+      title: "Debes crear un arqueo",
       icon: 'warning',
       content: link,
-      buttons: ["No", "Cerrar Sesión"],
-    }).then(result => {
-      if (result) {
-        element.href = `${element.href}?quitar_referencia=false`
-        confirmed(element, result)
-      }
+      buttons: [false, "Ok"],
     })
   } else {
+    if (arqueoPendiente || cierreCajaAbierta) {
+      if(arqueoPendiente) {
+        title = "Tienes un arqueo pendiente"
+        link.innerHTML = "Ír a crear Arqueo"
+        link.href = "/arqueos/new"
+      } else {
+        if (cierreCajaAbierta) {
+          title = "Cierre de caja abierta"
+          link.innerHTML = "Ír a cierre de caja"
+          link.href = `/cierre_cajas/${cierreCajaId}`
+        }
+      }
+      swal({
+        title: title,
+        icon: 'warning',
+        content: link,
+        buttons: ["No", "Cerrar Sesión"],
+      }).then(result => {
+        if (result) {
+          element.href = `${element.href}?quitar_referencia=false`
+          confirmed(element, result)
+        }
+      })
+    } else {
       swal({
         title: '¿Estas seguro?',
         text: message,
@@ -68,6 +80,7 @@ const showConfirmationDialog = element => {
          }
         confirmed(element, result)
       })
+    }
   }
 }
 

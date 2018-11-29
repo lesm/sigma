@@ -40,6 +40,10 @@ class Usuario < ApplicationRecord
     false
   end
 
+  def sin_arqueo?
+    false
+  end
+
   def monto_no_efectivo
     nil
   end

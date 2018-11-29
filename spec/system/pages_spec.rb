@@ -19,15 +19,17 @@ RSpec.describe "Pages index", type: :system do
       cajero_es_redireccionado_a_seleccinar_caja_path
     end
 
-    scenario "Seleccionar caja a usar" do
+    scenario "liberar caja para otro cajero" do
       cuando_cajero_seleciona_una_caja
       caja_seleccinada_se_asigna_al_cajero
       la_caja_debe_cambiar_a_no_disponible
+      cajero_crea_un_arqueo_en_ceros
+      cajero_cierra_cierre_de_caja_en_ceros
       cuando_cajero_cierra_sesion
       la_caja_debe_cambiar_a_disponible
     end
 
-    scenario "Cuando cajero no selecciona caja" do
+    scenario "debe ser redireccionado a seleccionar caja" do
       y_cajero_no_selecciona_caja_y_da_click_en_otro_link
       debe_ser_redireccionado_a_seleccionar_caja_path
     end
@@ -43,6 +45,27 @@ RSpec.describe "Pages index", type: :system do
 
   def la_caja_debe_cambiar_a_no_disponible
     expect(@caja.reload).to_not be_disponible
+  end
+
+  def cajero_crea_un_arqueo_en_ceros
+    cajero_da_click_en_link_recaudacion
+    cajero_da_click_en_link_crear_arqueo
+    cajero_da_click_en_boton_crear_arqueo
+  end
+
+  def cajero_cierra_cierre_de_caja_en_ceros
+    cajero_da_click_en_link_cierre_de_caja
+    cajero_da_click_en_el_link_ver
+    cajero_da_click_en_link_cerrar_caja
+    cajero_da_click_en_confirmar_cerrar_caja
+  end
+
+  def cajero_da_click_en_link_cerrar_caja
+    click_link "Cerrar caja"
+  end
+
+  def cajero_da_click_en_confirmar_cerrar_caja
+    click_button "Sí"
   end
 
   def y_cajero_no_selecciona_caja_y_da_click_en_otro_link

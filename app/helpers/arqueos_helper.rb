@@ -1,24 +1,4 @@
 module ArqueosHelper
-  def cierre_caja_id
-    current_usuario.cierre_caja_id
-  end
-
-  def cierre_caja_abierta?
-    current_usuario.cierre_caja_abierta?
-  end
-
-  def arqueo_pendiente?
-    current_usuario.arqueo_pendiente?
-  end
-
-  def monto_no_efectivo
-    current_usuario.monto_no_efectivo
-  end
-
-  def monto_sistema
-    current_usuario.monto_sistema
-  end
-
   def values_body
     attributes_dinero.each_with_object([]) do |(val, attr), array|
       array << @dinero.send(attr) if @dinero.send(attr) > 0
