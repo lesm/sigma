@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/LogicalBricks/fm_layout.git
+  revision: ac6c613cbd550d1fb1770895eba16d9f4947f881
+  branch: cfdi_3_3
+  specs:
+    fm_layout (0.0.4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -307,6 +314,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_bot_rails (~> 4.8, >= 4.8.2)
+  fm_layout!
   haml-rails (~> 1.0)
   identificamex
   jbuilder (~> 2.5)
@@ -336,4 +344,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.6
+   1.17.1

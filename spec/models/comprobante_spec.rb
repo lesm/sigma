@@ -22,6 +22,22 @@ RSpec.describe Comprobante, type: :model do
   it { should validate_numericality_of(:total).is_greater_than(0) }
   it { should validate_numericality_of(:subtotal).is_greater_than(0) }
 
+  describe "#uso_cfdi" do
+    let(:recibo) do
+      build :recibo, :para_timbrar, uso_cfdi: nil
+    end
+
+    it "must be valid" do
+      expect(recibo).to be_valid
+    end
+
+    it "must be presence when timbrado_automatico is true" do
+      recibo.timbrado_automatico = true
+      expect(recibo).to_not be_valid
+      expect(recibo.errors[:uso_cfdi].join).to eq "no puede estar en blanco"
+    end
+  end
+
   describe "#valida_subtotal" do
     let(:concepto) { build :concepto, cantidad: 2, valor_unitario: 200, importe: 400 }
     let(:comprobante) { build :comprobante, conceptos: [concepto], subtotal: 500, total: 400 }

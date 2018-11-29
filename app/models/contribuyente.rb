@@ -1,4 +1,8 @@
 class Contribuyente < ApplicationRecord
+  USO_CFDI = {
+    'P01' => "Por definir"
+  }
+
   include Direccionable
   has_many :facturas
   has_many :recibos
