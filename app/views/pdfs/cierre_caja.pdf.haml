@@ -1,0 +1,56 @@
+%h4.uppercase.text-center
+  cierre de caja folio ##{@cierre_caja.id}
+%table.table.text-center
+  %thead
+    %tr
+      %th Estado
+      %th Caja
+      %th Cajero
+      %th Apertura
+      %th Cierre
+
+  %tbody
+    %tr
+      %td= estado(@cierre_caja)
+      %td= @cierre_caja.cajero.caja
+      %td= @cierre_caja.cajero
+      %td= l @cierre_caja.created_at, format: :short
+      %td= l @cierre_caja.updated_at, format: :short unless @cierre_caja.abierta
+
+%h4.uppercase.text-center
+  #{@arqueos.count} #{"arqueo".pluralize(@arqueos.count)}
+%table.table
+  %thead
+    %tr
+      %th Folio
+      %th Monto sistema
+      %th Monto cajero
+      %th Fecha
+
+  %tfoot.text-right
+    %tr
+      %td
+      %td
+        %strong
+          = number_to_currency @cierre_caja.monto_sistema
+      %td
+        %strong
+          = number_to_currency @cierre_caja.monto_cajero
+      %td
+
+  %tbody.text-right
+    - @arqueos.each do |arqueo|
+      %tr
+        %td.text-center= arqueo.id
+        %td= number_to_currency arqueo.monto_sistema
+        %td= number_to_currency arqueo.monto_cajero
+        %td.text-center= l arqueo.created_at, format: :short
+
+.space-top.text-center
+  .row
+    .col50
+      .text-overline
+        Supervisor del área
+    .col50
+      .text-overline
+        = @cierre_caja.cajero

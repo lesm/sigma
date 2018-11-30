@@ -24,6 +24,9 @@
                 %td= l cierre_caja.updated_at, format: :short
                 %td
                   .btn-group
+                    = link_to cierre_caja_path(cierre_caja, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
+                      %i.fa.fa-print
+                      Imprimir
                     = link_to cierre_caja, class: 'btn btn-sm btn-info' do
                       %i.fa.fa-eye
                       Ver

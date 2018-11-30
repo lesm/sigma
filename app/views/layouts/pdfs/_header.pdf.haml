@@ -1,0 +1,8 @@
+.row
+  .col30
+    = wicked_pdf_image_tag(Emisor.first.escudo.url)
+  .col50
+    .text-center
+      = Emisor.first.nombre_con_rfc
+      %br
+      = Emisor.first.direccion

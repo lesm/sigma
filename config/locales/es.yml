@@ -116,6 +116,7 @@ es-MX:
       not_an_integer: debe ser un entero
       odd: debe ser un número non
       record_invalid: ! 'La validación falló: %{errors}'
+      mini_magick_processing_error: tubó un error al subir
       restrict_dependent_destroy:
         one: "No es posible borrar el registro porque %{record} dependiente existe"
         many: "No es posible borrar el registro porque %{record} dependientes existen"
