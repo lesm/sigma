@@ -14,14 +14,10 @@
               %b Monto (CAJERO):
               %span{style: "color:green"}
                 = number_to_currency @arqueo.monto_cajero
-          .col-md-4
+          .col-md-8
             %p
-              %b Apertura:
+              %b Fecha de Corte:
               = l @arqueo.created_at, format: :short
-            %p
-              %b Cierre:
-              = l @arqueo.updated_at, format: :short
-          .col-md-4
             %p
               %b Observación:
               = @arqueo.observacion
