@@ -34,9 +34,29 @@ RSpec.describe Cajero, type: :model do
     let(:cierre_caja) do
       create :cierre_caja, cajero: cajero, abierta: true
     end
+    let(:cierre_caja_en_ceros) do
+      create :cierre_caja, :en_ceros, cajero: cajero, abierta: true
+    end
 
     before :each do
       cajero
+    end
+
+    describe "#sin_arqueo?" do
+      context "when #monto_sistema is 0" do
+        context "when arqueos.count is 0 of current date" do
+          it "is true" do
+            expect(cajero.sin_arqueo?).to be_truthy
+          end
+        end
+
+        context "when arqueos.count is greater than 0 of current date" do
+          it "is false" do
+            cierre_caja_en_ceros
+            expect(cajero.sin_arqueo?).to be_falsey
+          end
+        end
+      end
     end
 
     describe "#arqueo_pendiente?" do

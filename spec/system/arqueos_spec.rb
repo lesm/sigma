@@ -9,8 +9,8 @@ RSpec.describe "New Arqueo", type: :system do
   feature "Visiting new_arqueo_path" do
     scenario "Creating a new Arqueo" do
       crea_datos_necesarios_para_nuevo_arqueo
-      cajero_da_click_en_recaudacion
-      cajero_da_click_en_crear_arqueo
+      cajero_da_click_en_link_recaudacion
+      cajero_da_click_en_link_crear_arqueo
       monto_sistema_debe_ser_2000_5
       monto_efectivo_debe_ser_0
       monto_banco_debe_ser_400_5
@@ -29,7 +29,7 @@ RSpec.describe "New Arqueo", type: :system do
       monto_total_debe_ser_2000_5
       debe_haber_una_leyenda_de_monto_correcto
 
-      cuando_cajero_da_click_en_crear_arqueo
+      cuando_cajero_da_click_en_boton_crear_arqueo
       debe_mostrar_mensaje_de_arqueo_creado_correctamente
       debe_haber_una_leyenda_de_monto_sistema
       debe_haber_una_leyenda_de_monto_cajero
@@ -40,10 +40,10 @@ RSpec.describe "New Arqueo", type: :system do
   feature "Vista show de arqueo" do
     scenario "muestra cantidad de dinero en monedas y billetes" do
       crea_arqueo_de_monedas_y_billetes
-      cajero_da_click_en_recaudacion
-      cajero_da_click_en_cierre_de_caja
-      cajero_da_click_en_el_boton_ver
-      cajero_da_otro_click_en_el_boton_ver
+      cajero_da_click_en_link_recaudacion
+      cajero_da_click_en_link_cierre_de_caja
+      cajero_da_click_en_el_link_ver
+      cajero_da_otro_click_en_el_link_ver
       debe_mostrar_un_texto_con_la_palabra_monto_efectivo
       debe_mostrar_un_th_con_200
       debe_mostrar_un_th_con_100
@@ -54,10 +54,10 @@ RSpec.describe "New Arqueo", type: :system do
 
     scenario "muestra cantidad de dinero en [Cheque, Débito, Crédito]" do
       crea_arqueo_de_cheque_debito_credito
-      cajero_da_click_en_recaudacion
-      cajero_da_click_en_cierre_de_caja
-      cajero_da_click_en_el_boton_ver
-      cajero_da_otro_click_en_el_boton_ver
+      cajero_da_click_en_link_recaudacion
+      cajero_da_click_en_link_cierre_de_caja
+      cajero_da_click_en_el_link_ver
+      cajero_da_otro_click_en_el_link_ver
       debe_mostrar_un_texto_con_la_palabra_monto_no_efectivo
       debe_mostrar_un_th_con_monto_cheque
       debe_mostrar_un_th_con_monto_tarjeta_debito
@@ -77,14 +77,6 @@ RSpec.describe "New Arqueo", type: :system do
       cajero: @cajero, emisor: emisor,
       caja: @cajero.caja, arqueo: nil,
       forma_pago: "Efectivo"
-  end
-
-  def cajero_da_click_en_recaudacion
-    click_link "Recaudación"
-  end
-
-  def cajero_da_click_en_crear_arqueo
-    click_link "Crear Arqueo"
   end
 
   def monto_sistema_debe_ser_2000_5
@@ -161,7 +153,7 @@ RSpec.describe "New Arqueo", type: :system do
     expect(page).to have_content "Monto correcto"
   end
 
-  def cuando_cajero_da_click_en_crear_arqueo
+  def cuando_cajero_da_click_en_boton_crear_arqueo
     click_button("Crear Arqueo")
   end
 
@@ -192,16 +184,6 @@ RSpec.describe "New Arqueo", type: :system do
     create :arqueo, monto_sistema: 800, monto_cajero: 800,
       cierre_caja: cierre_caja, dinero: dinero
   end
-
-  def cajero_da_click_en_cierre_de_caja
-    click_link "Cierre de Caja"
-  end
-
-  def cajero_da_click_en_el_boton_ver
-    click_link "Ver"
-    sleep 1
-  end
-  alias_method :cajero_da_otro_click_en_el_boton_ver, :cajero_da_click_en_el_boton_ver
 
   def debe_mostrar_un_texto_con_la_palabra_monto_efectivo
     expect(page).to have_content "Monto efectivo"
