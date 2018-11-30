@@ -10,6 +10,11 @@ class CierreCaja < ApplicationRecord
     save!
   end
 
+  def fecha_cierre
+    return nil if abierta?
+    updated_at
+  end
+
   private
 
   def update_monto_cajero

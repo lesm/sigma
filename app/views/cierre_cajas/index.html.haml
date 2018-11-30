@@ -1,5 +1,5 @@
 .row.justify-content-center
-  .col-md-11
+  .col-md-12
     .card.card-danger.card-outline
       .card-header
         .card-title Listado de Cierres de caja
@@ -11,7 +11,8 @@
               %th Estado
               %th Monto Sistema
               %th Monto Cajero
-              %th Fecha de Cierre
+              %th Apertura
+              %th Cierre
               %th Acciones
 
           %tbody.text-right
@@ -21,7 +22,8 @@
                 %td= estado(cierre_caja)
                 %td= number_to_currency cierre_caja.monto_sistema
                 %td= number_to_currency cierre_caja.monto_cajero
-                %td= l cierre_caja.updated_at, format: :short
+                %td= l cierre_caja.created_at, format: :short
+                %td= l cierre_caja.fecha_cierre, format: :short unless cierre_caja.abierta?
                 %td
                   .btn-group
                     = link_to cierre_caja_path(cierre_caja, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
