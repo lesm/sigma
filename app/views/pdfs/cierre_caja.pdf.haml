@@ -1,21 +1,4 @@
-%h5.text-uppercase.text-center
-  %strong cierre de caja folio ##{@cierre_caja.id}
-%table.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
-      %th Estado
-      %th Caja
-      %th Cajero
-      %th Apertura
-      %th Cierre
-
-  %tbody.text-right
-    %tr
-      %td= estado(@cierre_caja)
-      %td= @cierre_caja.cajero.caja
-      %td= @cierre_caja.cajero
-      %td= l @cierre_caja.created_at, format: :short
-      %td= l @cierre_caja.updated_at, format: :short unless @cierre_caja.abierta?
+= render "pdfs/cierre_caja_table", cierre_caja: @cierre_caja
 
 %h5.text-uppercase.text-center
   %strong #{@arqueos.count} #{"arqueo".pluralize(@arqueos.count)}

@@ -63,14 +63,14 @@ class CierreCajasController < ApplicationController
     @cierre_caja.update_column(:abierta, false)
   end
 
-  def nombre_pdf
-    "cierre_caja_#{@cierre_caja.id}_#{@cierre_caja.created_at.to_s(:number)}".upcase
-  end
-
   private
 
     def set_cierre_caja
       @cierre_caja = CierreCaja.find(params[:id])
+    end
+
+    def nombre_pdf
+      "cierre_caja_#{@cierre_caja.id}_#{@cierre_caja.created_at.to_s(:number)}".upcase
     end
 
     def cierre_caja_params
