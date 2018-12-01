@@ -44,6 +44,18 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
   end
 
+  def generar_pdf(nombre)
+    {
+      pdf: nombre_pdf,
+      page_size: "Letter",
+      template: "pdfs/#{nombre}",
+      viewport_size: "1280x1024",
+      margin: { top: "40", bottom: "50" },
+      header: { html: { template: "layouts/pdfs/_header" } },
+      footer: { html: { template: "layouts/pdfs/_footer" } }
+    }
+  end
+
   private
 
   def cajero_logueado_sin_caja?
