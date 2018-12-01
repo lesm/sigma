@@ -1,50 +1,27 @@
-%h4.uppercase.text-center
-  cierre de caja folio ##{@arqueo.cierre_caja.id}
-%table.table.text-center
-  %thead
-    %tr
-      %th Estado
-      %th Caja
-      %th Cajero
-      %th Apertura
-      %th Cierre
+= render "pdfs/cierre_caja_table", cierre_caja: @arqueo.cierre_caja
 
-  %tbody
-    %tr
-      %td= estado(@arqueo.cierre_caja)
-      %td= @arqueo.cierre_caja.cajero.caja
-      %td= @arqueo.cierre_caja.cajero
-      %td= l @arqueo.cierre_caja.created_at, format: :short
-      %td= l @arqueo.cierre_caja.updated_at, format: :short unless @arqueo.cierre_caja.abierta
-
-%h4.uppercase.text-center
-  arqueo folio ##{@arqueo.id}
-%table.table.text-center
+%h5.text-uppercase.text-center
+  %strong arqueo folio ##{@arqueo.id}
+%table.table.text-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Total cajero
       %th Total sistema
-      - if @arqueo.adeudo.present?
-        %th Adeudo
-      - if @arqueo.ingreso_por_clasificar.present?
-        %th Ingreso por clasificar
-      %th Apertura
-      %th Cierre
+      %th Adeudo
+      %th Ingreso por clasificar
+      %th Fecha corte
 
-  %tbody
+  %tbody.text-right
     %tr
       %td= number_to_currency @arqueo.monto_cajero
       %td= number_to_currency @arqueo.monto_sistema
-      - if @arqueo.adeudo.present?
-        %td= number_to_currency @arqueo.adeudo.monto
-      - if @arqueo.ingreso_por_clasificar.present?
-        %td= number_to_currency @arqueo.ingreso_por_clasificar.monto
+      %td= number_to_currency @arqueo.adeudo_monto
+      %td= number_to_currency @arqueo.ingreso_por_clasificar_monto
       %td= l @arqueo.created_at, format: :short
-      %td= l @arqueo.updated_at, format: :short
 
-%h4.uppercase.text-center
-  Monto Efectivo
-%table.table.text-center
+%h5.text-uppercase.text-center
+  %strong monto efectivo
+%table.table.table-striped.table-condensed.table-bordered.text-center
   %thead
     %tr
       - labels_header.each do |title|
@@ -58,9 +35,9 @@
         %span{style: "color:green"}
           = number_to_currency @arqueo.monto_efectivo
 
-%h4.uppercase.text-center
-  Monto no efectivo
-%table.table.text-center
+%h5.text-uppercase.text-center
+  %strong monto no efectivo
+%table.table.table-striped.table-condensed.table-bordered.text-center
   %thead
     %tr
       %th Monto Cheque
@@ -78,11 +55,10 @@
         %span{style: "color:green"}
           = number_to_currency @arqueo.monto_no_efectivo
 
-.space-top.text-center
-  .row
-    .col50
-      .text-overline
-        Supervisor del área
-    .col50
-      .text-overline
-        = @arqueo.cierre_caja.cajero
+.row.text-center.space-top
+  .col-md-6
+    .text-overline
+      Supervisor del área
+  .col-md-6
+    .text-overline
+      = @arqueo.cierre_caja.cajero
