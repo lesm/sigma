@@ -26,7 +26,7 @@
                   %th Monto Sistema
                   %th Monto Cajero
                   %th Observación
-                  %th Fecha de Creación
+                  %th Fecha de Corte
                   %th Acción
               %tbody.text-right
                 - @arqueos.each do |arqueo|
@@ -37,9 +37,13 @@
                     %td= arqueo.observacion
                     %td= l arqueo.created_at, format: :short
                     %td
-                      = link_to arqueo, class: "btn btn-sm btn-info" do
-                        %i.fa.fa-eye
-                        Ver
+                      .btn-group
+                        = link_to arqueo_path(arqueo, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
+                          %i.fa.fa-print
+                          Imprimir
+                        = link_to arqueo, class: "btn btn-sm btn-info" do
+                          %i.fa.fa-eye
+                          Ver
               %tfoot.text-right
                 %tr
                   %td{ colspan: 2 }

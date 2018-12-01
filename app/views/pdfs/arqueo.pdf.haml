@@ -1,0 +1,88 @@
+%h4.uppercase.text-center
+  cierre de caja folio ##{@arqueo.cierre_caja.id}
+%table.table.text-center
+  %thead
+    %tr
+      %th Estado
+      %th Caja
+      %th Cajero
+      %th Apertura
+      %th Cierre
+
+  %tbody
+    %tr
+      %td= estado(@arqueo.cierre_caja)
+      %td= @arqueo.cierre_caja.cajero.caja
+      %td= @arqueo.cierre_caja.cajero
+      %td= l @arqueo.cierre_caja.created_at, format: :short
+      %td= l @arqueo.cierre_caja.updated_at, format: :short unless @arqueo.cierre_caja.abierta
+
+%h4.uppercase.text-center
+  arqueo folio ##{@arqueo.id}
+%table.table.text-center
+  %thead
+    %tr
+      %th Total cajero
+      %th Total sistema
+      - if @arqueo.adeudo.present?
+        %th Adeudo
+      - if @arqueo.ingreso_por_clasificar.present?
+        %th Ingreso por clasificar
+      %th Apertura
+      %th Cierre
+
+  %tbody
+    %tr
+      %td= number_to_currency @arqueo.monto_cajero
+      %td= number_to_currency @arqueo.monto_sistema
+      - if @arqueo.adeudo.present?
+        %td= number_to_currency @arqueo.adeudo.monto
+      - if @arqueo.ingreso_por_clasificar.present?
+        %td= number_to_currency @arqueo.ingreso_por_clasificar.monto
+      %td= l @arqueo.created_at, format: :short
+      %td= l @arqueo.updated_at, format: :short
+
+%h4.uppercase.text-center
+  Monto Efectivo
+%table.table.text-center
+  %thead
+    %tr
+      - labels_header.each do |title|
+        %th= title
+      %th Subtotal
+  %tbody
+    %tr
+      - values_body.each do |value|
+        %td= value
+      %td
+        %span{style: "color:green"}
+          = number_to_currency @arqueo.monto_efectivo
+
+%h4.uppercase.text-center
+  Monto no efectivo
+%table.table.text-center
+  %thead
+    %tr
+      %th Monto Cheque
+      %th Monto Tarjeta Débito
+      %th Monto Tarjeta Crédito
+      %th Monto Transferencia
+      %th Subtotal
+  %tbody
+    %tr
+      %td= number_to_currency @arqueo.monto_cheque
+      %td= number_to_currency @arqueo.monto_debito
+      %td= number_to_currency @arqueo.monto_credito
+      %td= number_to_currency @arqueo.monto_transferencia
+      %td
+        %span{style: "color:green"}
+          = number_to_currency @arqueo.monto_no_efectivo
+
+.space-top.text-center
+  .row
+    .col50
+      .text-overline
+        Supervisor del área
+    .col50
+      .text-overline
+        = @arqueo.cierre_caja.cajero

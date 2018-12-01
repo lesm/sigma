@@ -9,10 +9,15 @@ class ArqueosController < ApplicationController
   end
 
   # GET /arqueos/1
-  # GET /arqueos/1.json
+  # GET /arqueos/1.pdf
   def show
     authorize @arqueo
     @dinero = @arqueo.dinero
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: nombre_pdf,
+                    template: "pdfs/arqueo" }
+    end
   end
 
   # GET /arqueos/new
@@ -57,6 +62,10 @@ class ArqueosController < ApplicationController
 
     def total_monto_sistema
       Comprobante.total_monto_sistema current_usuario
+    end
+
+    def nombre_pdf
+      "arqueo_#{@arqueo.id}_#{@arqueo.created_at.to_s(:number)}".upcase
     end
 
     def update_comprobantes_sin_arqueo

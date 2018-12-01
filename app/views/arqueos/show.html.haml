@@ -16,7 +16,7 @@
                 = number_to_currency @arqueo.monto_cajero
           .col-md-8
             %p
-              %b Fecha de creación:
+              %b Fecha de Corte:
               = l @arqueo.created_at, format: :short
             %p
               %b Observación:
@@ -89,6 +89,10 @@
                       %span{style: "color:green"}
                         = number_to_currency @arqueo.monto_no_efectivo
 
+        .float-left
+          = link_to arqueo_path(@arqueo, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
+            %i.fa.fa-print
+            Imprimir
         .btn-group.float-right
           = link_to :back, class: 'btn btn-sm btn-secondary' do
             %i.fa.fa-arrow-left

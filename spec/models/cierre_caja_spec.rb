@@ -100,5 +100,31 @@ RSpec.describe CierreCaja, type: :model do
         end
       end
     end
+
+    describe "#fecha_cierre" do
+      context "when cierre_caja abierta is true" do
+        let(:cajero) { create :cajero, :con_contribuyente }
+        let(:cierre_caja) do
+          create :cierre_caja, :with_arqueo,
+            cajero: cajero, abierta: true
+        end
+
+        it "returns nil" do
+          expect(cierre_caja.fecha_cierre).to be_nil
+        end
+      end
+
+      context "when cierre_caja abierta is false" do
+        let(:cajero) { create :cajero, :con_contribuyente }
+        let(:cierre_caja) do
+          create :cierre_caja, :with_arqueo,
+            cajero: cajero, abierta: false
+        end
+
+        it "returns updated_at" do
+          expect(cierre_caja.fecha_cierre).to eq cierre_caja.updated_at
+        end
+      end
+    end
   end
 end
