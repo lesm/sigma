@@ -215,6 +215,7 @@ es-MX:
       factura_sin_hora: ! '%d de %B %Y'
       listado: ! '%d %b %y'
       short: ! '%d de %b a las %H:%M hrs'
+      emision: ! '%d de %b %I:%M %p'
       apertura: ! '%d de %b %I:%M %p'
       cierre: ! '%d de %b %I:%M %p'
       comprobante: ! '%FT%T'
