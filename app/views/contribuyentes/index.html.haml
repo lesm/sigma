@@ -3,17 +3,8 @@
     .card.card-danger.card-outline
       .card-header
         .card-title Listado de Contribuyentes
-        .row
-          = form_tag(contribuyentes_path, method: :get, class: "form-inline") do
-            .form-group.mx-sm-3.mb-2
-              .input-group
-                .input-group-prepend
-                  %span.input-group-text
-                    %i.fa.fa-search
-                = text_field_tag :search, params[:search], class: "form-control",
-                  id: "search", placeholder: "Buscar Contribuyente", autocomplete: "off"
-            .form-group
-              = submit_tag "Buscar", class: "btn btn-primary mb-2"
+        = render "shared/search", search_path: contribuyentes_path,
+          placeholder: "Contribuyente"
 
         .card-tools
           = link_to new_contribuyente_path, class: 'btn btn-sm btn-primary' do

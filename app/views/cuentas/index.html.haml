@@ -3,6 +3,9 @@
     .card.card-danger.card-outline
       .card-header
         .card-title Listado de Conceptos de Cobro
+        = render "shared/search", search_path: cuentas_path,
+          placeholder: "Cuenta"
+
         .card-tools
           = link_to new_cuenta_path, class: 'btn btn-sm btn-primary' do
             %i.fa.fa-plus
