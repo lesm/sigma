@@ -81,10 +81,18 @@
                     %th Subtotal
                 %tbody
                   %tr
-                    %td= number_to_currency @arqueo.monto_cheque
-                    %td= number_to_currency @arqueo.monto_debito
-                    %td= number_to_currency @arqueo.monto_credito
-                    %td= number_to_currency @arqueo.monto_transferencia
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency @arqueo.monto_cheque
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency @arqueo.monto_debito
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency @arqueo.monto_credito
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency @arqueo.monto_transferencia
                     %td
                       %span{style: "color:green"}
                         = number_to_currency @arqueo.monto_no_efectivo

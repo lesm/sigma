@@ -2,40 +2,43 @@
   .col-md-12
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Cierres de caja
+        .card-title
+          %i.fa.fa-list
+          Listado de Cierres de caja
       .card-body
         %table.table.table-hover.table-sm
           %thead.text-right
             %tr
-              %th Folio
+              %th.text-center Folio
               %th Estado
               %th Monto Sistema
               %th Monto Cajero
-              %th Apertura
-              %th Cierre
+              %th.text-center Apertura
+              %th.text-center Cierre
               %th Acciones
 
           %tbody.text-right
             - @cierre_cajas.each do |cierre_caja|
               %tr
-                %td= cierre_caja.id
+                %td.text-center= cierre_caja.id
                 %td= estado(cierre_caja)
-                %td= number_to_currency cierre_caja.monto_sistema
-                %td= number_to_currency cierre_caja.monto_cajero
-                %td= l cierre_caja.created_at, format: :short
-                %td= l cierre_caja.fecha_cierre, format: :short unless cierre_caja.abierta?
+                %td
+                  %span{style: "color:green"}
+                    = number_to_currency cierre_caja.monto_sistema
+                %td
+                  %span{style: "color:green"}
+                    = number_to_currency cierre_caja.monto_cajero
+                %td= l cierre_caja.created_at, format: :apertura
+                %td= l cierre_caja.fecha_cierre, format: :cierre unless cierre_caja.abierta?
                 %td
                   .btn-group
-                    = link_to cierre_caja_path(cierre_caja, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
-                      %i.fa.fa-print
-                      Imprimir
-                    = link_to cierre_caja, class: 'btn btn-sm btn-info' do
+                    = link_to cierre_caja, title: "Ver", class: 'btn btn-sm btn-info' do
                       %i.fa.fa-eye
-                      Ver
                     - if cierre_caja.abierta?
-                      = link_to edit_cierre_caja_path(cierre_caja), class: 'btn btn-sm btn-warning' do
+                      = link_to edit_cierre_caja_path(cierre_caja), title: "Editar", class: 'btn btn-sm btn-warning' do
                         %i.fa.fa-edit
-                        Editar
+                    = link_to cierre_caja_path(cierre_caja, format: :pdf), title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
+                      %i.fa.fa-print
 
       .row.justify-content-center
         = paginate @cierre_cajas

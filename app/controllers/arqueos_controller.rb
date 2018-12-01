@@ -15,8 +15,7 @@ class ArqueosController < ApplicationController
     @dinero = @arqueo.dinero
     respond_to do |format|
       format.html
-      format.pdf { render pdf: nombre_pdf,
-                    template: "pdfs/arqueo" }
+      format.pdf { render generar_pdf("arqueo") }
     end
   end
 

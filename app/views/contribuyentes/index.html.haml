@@ -2,9 +2,11 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Contribuyentes
+        .cart-title
+          %i.fa.fa-list
+          Listado de Contribuyentes
         = render "shared/search", search_path: contribuyentes_path,
-          placeholder: "Contribuyente"
+          placeholder: "Contribuyentes"
 
         .card-tools
           = link_to new_contribuyente_path, class: 'btn btn-sm btn-primary' do
@@ -29,12 +31,10 @@
                 %td= contribuyente.rfc
                 %td
                   .btn-group
-                    = link_to contribuyente, class: 'btn btn-sm btn-info' do
+                    = link_to contribuyente, title: "Ver", class: 'btn btn-sm btn-info' do
                       %i.fa.fa-eye
-                      Ver
-                    = link_to edit_contribuyente_path(contribuyente), class: 'btn btn-sm btn-warning' do
-                      %i.fa.fa-pencil
-                      Editar
+                    = link_to edit_contribuyente_path(contribuyente), title: "Editar", class: 'btn btn-sm btn-warning' do
+                      %i.fa.fa-edit
 
       .row.justify-content-center
         = paginate @contribuyentes

@@ -257,6 +257,6 @@ RSpec.describe "New Arqueo", type: :system do
   end
 
   def debe_mostrar_un_subtotal_de_1600_en_monto_no_efectivo
-    expect(find("table.second").find("tbody").find("span")).to have_content("$1,600.00")
+    expect(find("table.second").find(:xpath, ".//td[5]")).to have_content("$1,600.00")
   end
 end

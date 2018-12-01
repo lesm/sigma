@@ -30,6 +30,7 @@ RSpec.describe "ingreso_por_clasificares/index", type: :view do
   it "renders a list of ingresos por clasificar" do
     render
     assert_select "tr>td", :text => "$1,000.00".to_s, :count => 2
-    assert_select "tr>td>a", :text => "Ver".to_s, :count => 2
+    assert_select "tr>td", :text => cajero.to_s, :count => 2
+    assert_select "tr>td>a", :title => "Ver", :count => 2
   end
 end
