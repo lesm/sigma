@@ -2,7 +2,9 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Recibos
+        .card-title
+          %i.fa.fa-list
+          Listado de Recibos
         .card-tools
           = link_to recibo_step_path(:set_cuenta), class: 'btn btn-sm btn-primary' do
             %i.fa.fa-plus
@@ -22,11 +24,12 @@
               %tr
                 %td= recibo.folio
                 %td.text-center= recibo.contribuyente
-                %td= number_to_currency(recibo.total)
-                %td= l recibo.fecha_emision, format: :short
                 %td
-                  = link_to recibo, class: "btn btn-sm btn-info" do
+                  %span{style: "color:green"}
+                    = number_to_currency(recibo.total)
+                %td= l recibo.fecha_emision, format: :emision
+                %td
+                  = link_to recibo, title: "Ver", class: "btn btn-sm btn-info" do
                     %i.fa.fa-eye
-                    Ver
       .row.justify-content-center
         = paginate @recibos

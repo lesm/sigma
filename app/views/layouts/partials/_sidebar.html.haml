@@ -47,11 +47,11 @@
               %li.nav-item
                 = link_to new_arqueo_path, class: "nav-link #{ (controller_name == 'arqueos' && action_name == 'new') && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
-                  %p Crear Arqueo
+                  %p Crear arqueo
               %li.nav-item
                 = link_to cierre_cajas_path, class: "nav-link #{ controller_name == 'cierre_cajas' && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
-                  %p Cierre de Caja
+                  %p Cierre de caja
               %li.nav-item
                 = link_to adeudos_path, class: "nav-link #{ controller_name == 'adeudos' && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
@@ -59,7 +59,7 @@
               %li.nav-item
                 = link_to ingreso_por_clasificares_path, class: "nav-link #{ controller_name == 'ingreso_por_clasificares' && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
-                  %p Ingresos Por Clasificar
+                  %p Ingresos por clasificar
         - if para_admin?
           %li.nav-item
             = link_to emisores_path, class: "nav-link #{ controller_name == 'emisores' && 'active' }" do
@@ -76,7 +76,7 @@
           %li.nav-item
             = link_to historial_cajas_path, class: "nav-link #{ controller_name == 'historial_cajas' && 'active' }" do
               %i.fa.fa-history.nav-icon
-              %p Historial Cajas
+              %p Historial cajas
           %li.nav-item.has-treeview
             %a.nav-link{:href => "#"}
               %i.nav-icon.fa.fa-bar-chart

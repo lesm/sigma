@@ -22,28 +22,30 @@
             %table.table.table-hover.table-sm
               %thead.text-right
                 %tr
-                  %th Folio
+                  %th.text-center Folio
                   %th Monto Sistema
                   %th Monto Cajero
                   %th Observación
-                  %th Fecha de Corte
-                  %th Acción
+                  %th.text-center Corte
+                  %th Acciones
               %tbody.text-right
                 - @arqueos.each do |arqueo|
                   %tr
-                    %td= arqueo.id
-                    %td= number_to_currency arqueo.monto_sistema
-                    %td= number_to_currency arqueo.monto_cajero
+                    %td.text-center= arqueo.id
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency arqueo.monto_sistema
+                    %td
+                      %span{style: "color:green"}
+                        = number_to_currency arqueo.monto_cajero
                     %td= arqueo.observacion
-                    %td= l arqueo.created_at, format: :short
+                    %td= l arqueo.created_at, format: :cierre
                     %td
                       .btn-group
-                        = link_to arqueo_path(arqueo, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
+                        = link_to arqueo_path(arqueo, format: :pdf), title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
                           %i.fa.fa-print
-                          Imprimir
-                        = link_to arqueo, class: "btn btn-sm btn-info" do
+                        = link_to arqueo, class: "btn btn-sm btn-info", title: "Ver" do
                           %i.fa.fa-eye
-                          Ver
               %tfoot.text-right
                 %tr
                   %td{ colspan: 2 }
@@ -60,7 +62,7 @@
           = paginate @arqueos
 
         .float-left
-          = link_to cierre_caja_path(@cierre_caja, format: :pdf), class: "btn btn-sm btn-danger", target: "_blank" do
+          = link_to cierre_caja_path(@cierre_caja, format: :pdf), title: "Cierre de caja", class: "btn btn-sm btn-danger", target: "_blank" do
             %i.fa.fa-print
             Imprimir
         .btn-group.float-right

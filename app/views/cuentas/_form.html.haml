@@ -1,19 +1,20 @@
 -# frozen_string_literal: true
 = simple_form_for(@cuenta) do |f|
   .row
-    .col-md-4
+    .col-md-12
       - if @cuenta.new_record?
         = f.input :codigo, collection: cuenta_codigos,
           input_html: { class: "select2", data: { formato: (cuenta_formatos) } }
       - else
         = f.input :codigo, readonly: true
-    .col-md-4
+    .col-md-12
       = f.input :descripcion
-    .col-md-4
+    .col-md-6
       = f.input :importe, as: :integer
       = f.input :formato, as: :hidden
-  .btn-group.float-right
-    = link_to :back, class: 'btn btn-sm btn-secondary' do
-      %i.fa.fa-arrow-left
-      Regresar
-    = f.button :submit, class: "btn btn-sm btn-primary"
+    .col-md-6.align-self-center
+      .btn-group.float-right
+        = link_to :back, class: 'btn btn-sm btn-secondary' do
+          %i.fa.fa-arrow-left
+          Regresar
+        = f.button :submit, class: "btn btn-sm btn-primary"

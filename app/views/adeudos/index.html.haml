@@ -2,7 +2,9 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Adeudos
+        .card-title
+          %i.fa.fa-list
+          Listado de Adeudos
       .card-body
         %table.table.table-hover.text-center
           %thead
@@ -16,8 +18,12 @@
           %tbody
             - @adeudos.each do |adeudo|
               %tr
-                %td= number_to_currency adeudo.anticipo
-                %td= number_to_currency adeudo.monto
+                %td
+                  %span{style: "color:green"}
+                    = number_to_currency adeudo.anticipo
+                %td
+                  %span{style: "color:green"}
+                    = number_to_currency adeudo.monto
                 %td= liquidado(adeudo)
                 %td= adeudo.cajero
                 %td= l adeudo.arqueo.created_at, format: :short

@@ -2,7 +2,9 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Contribuyentes
+        .card-title
+          %i.fa.fa-list
+          Listado de Contribuyentes
         .row
           = form_tag(contribuyentes_path, method: :get, class: "form-inline") do
             .form-group.mx-sm-3.mb-2
@@ -38,12 +40,10 @@
                 %td= contribuyente.rfc
                 %td
                   .btn-group
-                    = link_to contribuyente, class: 'btn btn-sm btn-info' do
+                    = link_to contribuyente, title: "Ver", class: 'btn btn-sm btn-info' do
                       %i.fa.fa-eye
-                      Ver
-                    = link_to edit_contribuyente_path(contribuyente), class: 'btn btn-sm btn-warning' do
-                      %i.fa.fa-pencil
-                      Editar
+                    = link_to edit_contribuyente_path(contribuyente), title: "Editar", class: 'btn btn-sm btn-warning' do
+                      %i.fa.fa-edit
 
       .row.justify-content-center
         = paginate @contribuyentes
