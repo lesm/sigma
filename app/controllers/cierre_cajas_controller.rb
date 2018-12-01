@@ -17,8 +17,7 @@ class CierreCajasController < ApplicationController
     @arqueos = @cierre_caja.arqueos.page(params[:page])
     respond_to do |format|
       format.html
-      format.pdf { render pdf: nombre_pdf,
-                    template: "pdfs/cierre_caja" }
+      format.pdf { render generar_pdf("cierre_caja") }
     end
   end
 
@@ -69,6 +68,7 @@ class CierreCajasController < ApplicationController
   end
 
   private
+
     def set_cierre_caja
       @cierre_caja = CierreCaja.find(params[:id])
     end

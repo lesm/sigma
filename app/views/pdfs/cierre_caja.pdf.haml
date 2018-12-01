@@ -1,6 +1,6 @@
-%h4.uppercase.text-center
-  cierre de caja folio ##{@cierre_caja.id}
-%table.table.text-center
+%h5.text-uppercase.text-center
+  %strong cierre de caja folio ##{@cierre_caja.id}
+%table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Estado
@@ -9,34 +9,26 @@
       %th Apertura
       %th Cierre
 
-  %tbody
+  %tbody.text-right
     %tr
       %td= estado(@cierre_caja)
       %td= @cierre_caja.cajero.caja
       %td= @cierre_caja.cajero
       %td= l @cierre_caja.created_at, format: :short
-      %td= l @cierre_caja.updated_at, format: :short unless @cierre_caja.abierta
+      %td= l @cierre_caja.updated_at, format: :short unless @cierre_caja.abierta?
 
-%h4.uppercase.text-center
-  #{@arqueos.count} #{"arqueo".pluralize(@arqueos.count)}
-%table.table
+%h5.text-uppercase.text-center
+  %strong #{@arqueos.count} #{"arqueo".pluralize(@arqueos.count)}
+
+%table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Folio
       %th Monto sistema
       %th Monto cajero
-      %th Fecha
-
-  %tfoot.text-right
-    %tr
-      %td
-      %td
-        %strong
-          = number_to_currency @cierre_caja.monto_sistema
-      %td
-        %strong
-          = number_to_currency @cierre_caja.monto_cajero
-      %td
+      %th Adeudo
+      %th Ingreso por clasificar
+      %th Fecha corte
 
   %tbody.text-right
     - @arqueos.each do |arqueo|
@@ -44,13 +36,33 @@
         %td.text-center= arqueo.id
         %td= number_to_currency arqueo.monto_sistema
         %td= number_to_currency arqueo.monto_cajero
-        %td.text-center= l arqueo.created_at, format: :short
+        %td= number_to_currency arqueo.adeudo_monto
+        %td= number_to_currency arqueo.ingreso_por_clasificar_monto
+        %td= l arqueo.created_at, format: :short
 
-.space-top.text-center
-  .row
-    .col50
-      .text-overline
-        Supervisor del área
-    .col50
-      .text-overline
-        = @cierre_caja.cajero
+  %tfoot.text-right
+    %tr
+      %td.text-center
+        %strong Totales
+      %td
+        %strong
+          = number_to_currency @cierre_caja.monto_sistema
+      %td
+        %strong
+          = number_to_currency @cierre_caja.monto_cajero
+      %td
+        %strong
+          = number_to_currency @cierre_caja.monto_adeudo
+      %td
+        %strong
+          = number_to_currency @cierre_caja.monto_ingreso_por_clasificar
+      %td
+
+
+.row.text-center.space-top
+  .col-md-6
+    .text-overline
+      Supervisor del área
+  .col-md-6
+    .text-overline
+      = @cierre_caja.cajero

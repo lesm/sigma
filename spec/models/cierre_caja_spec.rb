@@ -7,6 +7,66 @@ RSpec.describe CierreCaja, type: :model do
   it { should validate_presence_of(:monto_cajero) }
   it { should validate_presence_of(:cajero) }
 
+  describe "#monto_adeudo" do
+    let(:cajero) { create :cajero, :con_contribuyente }
+    let(:arqueo) do
+      build :arqueo, monto_sistema: 1000,
+        monto_cajero: 500
+    end
+    let(:arqueo_dos) do
+      build :arqueo, monto_sistema: 1000,
+        monto_cajero: 700
+    end
+    let(:cierre_caja) do
+      create :cierre_caja, :en_ceros, cajero: cajero
+    end
+
+    it "returns 0" do
+      expect(cierre_caja.monto_adeudo).to eq 0
+    end
+
+    it "returns 500" do
+      cierre_caja.arqueos << arqueo
+      expect(cierre_caja.reload.monto_adeudo).to eq 500
+    end
+
+    it "returns 800" do
+      cierre_caja.arqueos << [arqueo, arqueo_dos]
+      expect(cierre_caja.reload.monto_adeudo).to eq 800
+    end
+  end
+
+  describe "#monto_ingreso_por_clasificar" do
+    let(:cajero) { create :cajero, :con_contribuyente }
+    let(:arqueo) do
+      build :arqueo, monto_sistema: 1000,
+        monto_cajero: 1500
+    end
+    let(:arqueo_dos) do
+      build :arqueo, monto_sistema: 1000,
+        monto_cajero: 1300
+    end
+    let(:cierre_caja) do
+      create :cierre_caja, :en_ceros, cajero: cajero
+    end
+
+    it "returns 0" do
+      expect(cierre_caja.monto_ingreso_por_clasificar).to eq 0
+    end
+
+    it "returns 500" do
+      cierre_caja.arqueos << arqueo
+      cierre_caja.reload
+      expect(cierre_caja.monto_ingreso_por_clasificar).to eq 500
+    end
+
+    it "returns 800" do
+      cierre_caja.arqueos << [arqueo, arqueo_dos]
+      cierre_caja.reload
+      expect(cierre_caja.monto_ingreso_por_clasificar).to eq 800
+    end
+  end
+
   describe "Actualiza montos" do
     let(:cajero) { create :cajero, :con_contribuyente }
     let(:arqueo) { build :arqueo, monto_sistema: 100, monto_cajero: 10 }

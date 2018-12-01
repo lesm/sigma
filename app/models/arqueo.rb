@@ -17,6 +17,9 @@ class Arqueo < ApplicationRecord
   after_create :crear_adeudo
   after_create :crear_ingreso_por_clasificar
 
+  delegate :monto, to: :adeudo, prefix: true, allow_nil: true
+  delegate :monto, to: :ingreso_por_clasificar, prefix: true, allow_nil: true
+
   def monto_cheque
     Comprobante.where(arqueo_id: id).de_cheque.sum(:total)
   end
@@ -49,7 +52,7 @@ class Arqueo < ApplicationRecord
 
   def crear_adeudo
     if monto_cajero_menor_a_monto_sistema?
-      Adeudo.create monto: adeudo_monto, arqueo: self,
+      Adeudo.create monto: monto_para_adeudo, arqueo: self,
         cajero: cierre_caja.cajero
     end
   end
@@ -58,14 +61,15 @@ class Arqueo < ApplicationRecord
     monto_cajero < monto_sistema
   end
 
-  def adeudo_monto
+  def monto_para_adeudo
     monto_sistema - monto_cajero
   end
 
   def crear_ingreso_por_clasificar
     if monto_cajero_mayor_a_monto_sistema?
-      IngresoPorClasificar.create monto: ingreso_por_clasificar_monto,
-        arqueo: self, cajero: cierre_caja.cajero
+      IngresoPorClasificar.create(
+        monto: monto_para_ingreso_por_clasificar,
+        arqueo: self, cajero: cierre_caja.cajero)
     end
   end
 
@@ -73,7 +77,7 @@ class Arqueo < ApplicationRecord
     monto_cajero > monto_sistema
   end
 
-  def ingreso_por_clasificar_monto
+  def monto_para_ingreso_por_clasificar
     monto_cajero - monto_sistema
   end
 end
