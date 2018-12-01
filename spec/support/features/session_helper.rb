@@ -35,7 +35,7 @@ module Features
     end
 
     def log_out_cajero
-      click_link "Cerrar Sesión"
+      click_link "Cerrar sesión"
       click_button "Sí"
     end
   end

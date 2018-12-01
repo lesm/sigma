@@ -35,7 +35,7 @@ module Features
     end
 
     def cuando_cajero_da_click_en_link_de_cerrar_sesion
-      click_link "Cerrar Sesión"
+      click_link "Cerrar sesión"
     end
 
     def cuando_cajero_da_click_en_confirmar_cerrar_sesion
@@ -47,11 +47,11 @@ module Features
     end
 
     def cajero_da_click_en_link_crear_arqueo
-      click_link "Crear Arqueo"
+      click_link "Crear arqueo"
     end
 
     def cajero_da_click_en_link_cierre_de_caja
-      click_link "Cierre de Caja"
+      click_link "Cierre de caja"
     end
 
     def cajero_da_click_en_boton_crear_arqueo
