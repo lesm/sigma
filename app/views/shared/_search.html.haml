@@ -1,0 +1,12 @@
+.row
+  = form_tag(search_path, method: :get, class: "form-inline") do
+    .form-group.mx-sm-3.mb-2
+      .input-group
+        .input-group-prepend
+          %span.input-group-text
+            %i.fa.fa-search
+        = text_field_tag :search, params[:search], class: "form-control",
+          id: "search", placeholder: "Buscar #{placeholder}", autocomplete: "off"
+    .form-group
+      = submit_tag "Buscar", class: "btn btn-primary mb-2"
+
