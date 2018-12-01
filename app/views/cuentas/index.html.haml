@@ -2,7 +2,9 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Listado de Conceptos de Cobro
+        .card-title
+          %i.fa.fa-list
+          Listado de Conceptos de Cobro
         .card-tools
           = link_to new_cuenta_path, class: 'btn btn-sm btn-primary' do
             %i.fa.fa-plus
@@ -22,16 +24,16 @@
                 %tr.d-flex
                   %td.col-md-2= cuenta.codigo
                   %td.col-md-6= cuenta.descripcion
-                  %td.col-md-2= cuenta.importe
+                  %td.col-md-2
+                    %span{style: "color:green"}
+                      = number_to_currency cuenta.importe
                   %td.col-md-2
                     .btn-group
-                      = link_to cuenta, class: "btn btn-sm btn-info" do
+                      = link_to cuenta, title: "Ver", class: "btn btn-sm btn-info" do
                         %i.fa.fa-eye
-                        Ver
                       - if current_usuario.admin?
-                        = link_to edit_cuenta_path(cuenta), class: "btn btn-sm btn-warning" do
+                        = link_to edit_cuenta_path(cuenta), title: "Editar", class: "btn btn-sm btn-warning" do
                           %i.fa.fa-edit
-                          Editar
 
       .row.justify-content-center
         = paginate @cuentas
