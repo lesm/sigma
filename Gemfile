@@ -48,6 +48,7 @@ gem "pundit"
 gem 'kaminari'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.12.3'
+gem 'unicorn'
 
 gem 'fm_layout', github: "LogicalBricks/fm_layout", branch: 'cfdi_3_3'
 
@@ -72,6 +73,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 
