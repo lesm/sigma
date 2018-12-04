@@ -20,7 +20,7 @@ RSpec.describe CajasController, type: :controller do
   end
 
   before :each do
-    sign_in_admin
+    sign_in_admin_with_municipio
   end
 
   describe "GET #index" do

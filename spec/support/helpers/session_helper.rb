@@ -8,6 +8,15 @@ module Helper
       sign_in(usuario)
     end
 
+    def sign_in_admin_with_municipio(usuario = admin)
+      registra_municipio
+      sign_in(usuario)
+    end
+
+    def registra_municipio
+      create :emisor, :con_direccion
+    end
+
     def admin
       create :usuario, :admin
     end
