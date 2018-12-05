@@ -7,6 +7,8 @@ RSpec.describe Emisor, type: :model do
   it { should_not allow_value("hola").for(:numero_municipio) }
   it { should validate_presence_of(:rfc) }
   it { should validate_presence_of(:regimen_fiscal) }
+  it { should validate_presence_of(:logotipo) }
+  it { should validate_presence_of(:escudo) }
   it { should have_one(:direccion).dependent(:destroy) }
   it { should have_many(:recibos) }
   it { should have_many(:facturas) }
