@@ -51,6 +51,7 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
   gem 'capistrano-yarn'
+  gem 'capistrano-rake'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
