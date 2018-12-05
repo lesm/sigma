@@ -22,7 +22,7 @@ gem 'wicked'
 gem "pundit"
 gem 'kaminari'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '0.12.3'
+gem 'wkhtmltopdf-binary', '~> 0.12.4'
 gem 'unicorn'
 
 gem 'fm_layout', github: "LogicalBricks/fm_layout", branch: 'cfdi_3_3'
