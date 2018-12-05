@@ -51,6 +51,8 @@ RSpec.describe "Emisor", type: :system do
     fill_in "Código Postal", with: "68000"
     fill_in "Localidad", with: "Centro"
     find(:css, "input[id$='_attributes_municipio']").set("Huajuapan de León")
+    attach_file("Logotipo", Rails.root + "spec/fixtures/files/logotipo.png")
+    attach_file("Escudo", Rails.root + "spec/fixtures/files/escudo.png")
   end
 
   def debe_haber_un_mensaje_de_registrar_un_municipio

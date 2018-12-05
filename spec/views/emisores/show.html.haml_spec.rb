@@ -6,10 +6,11 @@ RSpec.describe "emisores/show", type: :view do
       :nombre => "Nombre",
       :numero_municipio => "482",
       :rfc => "AAA111111AAA",
-      :logotipo => "Logo",
       :regimen_fiscal => "Regimen Fiscal",
       :registro_patronal => "Registro Patronal",
-      :eslogan => "Mi eslogan"
+      :eslogan => "Mi eslogan",
+      :logotipo => fixture_file_upload("files/logotipo.png", "image/png"),
+      :escudo => fixture_file_upload("files/escudo.png", "image/png"),
     ))
   end
 
