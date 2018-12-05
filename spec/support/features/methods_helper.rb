@@ -13,6 +13,10 @@ module Features
       sign_in_cajero_with_caja
     end
 
+    def dado_que_hay_un_administrador_logueado
+      sign_in_admin
+    end
+
     def cuando_da_click_en_el_link_caja
       click_link "Caja"
     end
@@ -42,6 +46,14 @@ module Features
       click_button "Sí"
     end
 
+    def cuando_admin_da_click_en_link_de_cerrar_sesion
+      click_link "Cerrar sesión"
+    end
+
+    def cuando_admin_da_click_en_confirmar_cerrar_sesion
+      click_button "Sí"
+    end
+
     def cajero_da_click_en_link_recaudacion
       click_link "Recaudación"
     end
@@ -63,5 +75,9 @@ module Features
       sleep 1
     end
     alias_method :cajero_da_otro_click_en_el_link_ver, :cajero_da_click_en_el_link_ver
+
+    def se_muestra_un_mensaje_de_cierre_de_sesion
+      expect(page).to have_content "Sesión cerrada exitosamente."
+    end
   end
 end

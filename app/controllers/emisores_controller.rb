@@ -1,4 +1,5 @@
 class EmisoresController < ApplicationController
+  skip_before_action :redirect_to_new_emisor, only: [:new, :create]
   before_action :authenticate_usuario!
   before_action :set_emisor, only: [:show, :edit, :update, :destroy]
 
@@ -33,7 +34,7 @@ class EmisoresController < ApplicationController
 
     respond_to do |format|
       if @emisor.save
-        format.html { redirect_to @emisor, notice: 'Emisor was successfully created.' }
+        format.html { redirect_to @emisor, notice: "Municipio se registro correctamente." }
         format.json { render :show, status: :created, location: @emisor }
       else
         format.html { render :new }

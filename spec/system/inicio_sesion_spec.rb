@@ -76,10 +76,6 @@ RSpec.describe "Inicio de Sesión", type: :system do
     expect(current_path).to eq new_historial_caja_path
   end
 
-  def se_muestra_un_mensaje_de_cierre_de_sesion
-    expect(page).to have_content "Sesión cerrada exitosamente."
-  end
-
 
   def dado_que_cajero_tiene_asignada_una_caja
     @caja.update_column(:cajero_id, @cajero.id)

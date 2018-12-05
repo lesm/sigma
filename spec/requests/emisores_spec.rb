@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Emisores", type: :request do
   before :each do
-    sign_in_admin
+    sign_in_admin_with_municipio
   end
 
   describe "GET /emisores" do

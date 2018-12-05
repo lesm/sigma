@@ -1,5 +1,5 @@
 class HistorialCajasController < ApplicationController
-  skip_before_action :redirect_to_seleccionar_caja
+  skip_before_action :redirect_to_seleccionar_caja, only: [:new, :create]
   before_action :authenticate_usuario!
   before_action :set_caja, only: :create
 

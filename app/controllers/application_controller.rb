@@ -2,12 +2,19 @@ class ApplicationController < ActionController::Base
   include Pundit
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_to_seleccionar_caja, if: :cajero_logueado_sin_caja?
+  before_action :redirect_to_new_emisor, if: :admin_logueado_sin_emisor?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def redirect_to_seleccionar_caja
     return if cierre_de_sesion?
     redirect_to new_historial_caja_path and return
+  end
+
+  def redirect_to_new_emisor
+    return if cierre_de_sesion?
+    flash.alert = "Debes registrar un Municipio."
+    redirect_to new_emisor_path and return
   end
 
   def cierre_de_sesion?
@@ -57,6 +64,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def admin_logueado_sin_emisor?
+    return false unless usuario_signed_in?
+    current_usuario.admin? and Emisor.count == 0
+  end
 
   def cajero_logueado_sin_caja?
     usuario_signed_in? &&
