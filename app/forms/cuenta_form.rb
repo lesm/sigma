@@ -5,6 +5,6 @@ class CuentaForm
   validates :contribuyente_id, :cuenta_ids, presence: true
 
   def save
-    valid? 
+    valid?
   end
 end

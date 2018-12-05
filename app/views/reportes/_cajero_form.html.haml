@@ -1,0 +1,12 @@
+-# frozen_string_literal: true
+= simple_form_for(@reporte, url: cajeros_reportes_path) do |f|
+  .row
+    .col
+      = f.input :cajero_id, collection: cajero_ids,input_html: { class: "select2" }
+    .col
+      = f.input :fecha_inicial, as: :string, input_html: { class: "fecha-reporte" }
+    .col
+      = f.input :fecha_final, as: :string, input_html: { class: "fecha-reporte" }
+      = f.input :nombre, as: :hidden
+
+  = f.submit "Generar", class: "btn btn-primary"

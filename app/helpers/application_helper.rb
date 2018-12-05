@@ -46,4 +46,8 @@ module ApplicationHelper
   def cuenta_codigos
     Cuenta.all.map { |c| [c, c.codigo] }
   end
+
+  def cajero_ids
+    Cajero.all.map { |c| [c, c.id] }
+  end
 end

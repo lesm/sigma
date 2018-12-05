@@ -52,6 +52,11 @@ function hideSelect2WithLink() {
 }
 
 function startDateTimePicker() {
+  $(".fecha-reporte").datetimepicker({
+    locale: 'es',
+    format: 'YYYY-MM-DD'
+  })
+
   $("input[id$='fecha_emision']").datetimepicker({
     locale: 'es',
     format: 'YYYY-MM-DD HH:mm a'
