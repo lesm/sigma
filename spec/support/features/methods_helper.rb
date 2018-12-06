@@ -27,7 +27,7 @@ module Features
 
     def cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
       select "Carlos José Pérez - AAAA111111AAZ", from: "Contribuyente"
-      select "110101 - DatosComun - RIFAS", from: "cuenta_ids"
+      select "110101 - RIFAS", from: "cuenta_ids"
     end
 
     def cuando_da_click_en_el_link_siguiente

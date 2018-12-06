@@ -10,6 +10,6 @@ class Cuenta < ApplicationRecord
   end
 
   def to_s
-    "#{codigo} - #{formato} - #{descripcion}"
+    "#{codigo} - #{descripcion}"
   end
 end

@@ -1,0 +1,29 @@
+%h5.text-uppercase.text-center
+  %strong=@cuenta
+%h6.text-uppercase.text-center
+  reporte del #{@reporte.fecha_inicial} al #{@reporte.fecha_final}
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Cuenta
+      %th Observaciones
+      %th Fecha
+      %th Cantidad
+      %th Precio Unitario
+      %th Importe
+  %tbody.text-right
+    - @conceptos.each do |concepto|
+      %tr
+        %td= concepto.cuenta
+        %td= truncate concepto.observaciones, length: 50
+        %td= l concepto.created_at, format: :apertura
+        %td= concepto.cantidad
+        %td= number_to_currency concepto.valor_unitario
+        %td= number_to_currency concepto.importe
+  %tfoot.text-right
+    %tr
+      %td{ colspan: 5 }
+        %strong Total
+      %td
+        %strong
+          = number_to_currency @suma_importe_conceptos
