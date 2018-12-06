@@ -14,6 +14,14 @@ class Emisor < ApplicationRecord
   mount_uploader :logotipo, LogotipoUploader
   mount_uploader :escudo, EscudoUploader
 
+  def logotipo_small_url
+    logotipo.small.url
+  end
+
+  def escudo_small_url
+    escudo.small.url
+  end
+
   def nombre_con_rfc
     "#{nombre} - #{rfc}"
   end

@@ -30,7 +30,7 @@ class EscudoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :small do
-    process resize_to_fit: [50, 50]
+    process resize_to_fit: [100, 100]
   end
 
   version :medium do

@@ -55,11 +55,11 @@ class ApplicationController < ActionController::Base
     {
       pdf: nombre_pdf,
       page_size: "Letter",
-      template: "pdfs/#{nombre}",
+      template: "pdfs/#{nombre}.pdf.haml",
       viewport_size: "1280x1024",
       margin: { top: "40", bottom: "50" },
-      header: { html: { template: "layouts/pdfs/_header" } },
-      footer: { html: { template: "layouts/pdfs/_footer" } }
+      header: { html: { template: "layouts/pdfs/_header.pdf.haml" } },
+      footer: { html: { template: "layouts/pdfs/_footer.pdf.haml" } }
     }
   end
 

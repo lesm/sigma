@@ -1,0 +1,43 @@
+%h5.text-uppercase.text-center
+  %strong cajero #{@cajero}
+%h6.text-uppercase.text-center
+  reporte del #{@reporte.fecha_inicial} al #{@reporte.fecha_final}
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Folio
+      %th Estado
+      %th Caja
+      %th Monto Cajero
+      %th Monto Sistema
+      %th Adeudo
+      %th Ingreso por Clasificar
+      %th Apertura
+      %th Cierre
+  %tbody.text-right
+    - @cierre_cajas.each do |cierre_caja|
+      %tr
+        %td= cierre_caja.id
+        %td= estado(cierre_caja)
+        %td= cierre_caja.cajero.caja
+        %td= number_to_currency cierre_caja.monto_cajero
+        %td= number_to_currency cierre_caja.monto_sistema
+        %td= number_to_currency cierre_caja.monto_adeudo
+        %td= number_to_currency cierre_caja.monto_ingreso_por_clasificar
+        %td= l cierre_caja.created_at, format: :apertura
+        %td= l cierre_caja.fecha_cierre, format: :cierre unless cierre_caja.abierta?
+  %tfoot.text-right
+    %tr
+      %td{ colspan: 4 }
+        %strong
+          = number_to_currency @suma_montos_cajero
+      %td
+        %strong
+          = number_to_currency @suma_montos_sistema
+      %td
+        %strong
+          = number_to_currency @suma_montos_adeudo
+      %td
+        %strong
+          = number_to_currency @suma_montos_ingreso_por_clasificar
+      %td{ colspan: 2}

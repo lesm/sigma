@@ -77,12 +77,18 @@
             = link_to historial_cajas_path, class: "nav-link #{ controller_name == 'historial_cajas' && 'active' }" do
               %i.fa.fa-history.nav-icon
               %p Historial cajas
-          %li.nav-item.has-treeview
-            %a.nav-link{:href => "#"}
+          - controller_names = %w(reportes)
+          %li.nav-item.has-treeview{ class: "#{ (controller_names.include? controller_name) && 'menu-open' }" }
+            = link_to "", class: "nav-link #{ (controller_names.include? controller_name) && 'active' }" do
               %i.nav-icon.fa.fa-bar-chart
               %p
                 Reportes
                 %i.right.fa.fa-angle-left
+            %ul.nav.nav-treeview
+              %li.nav-item
+                = link_to new_reporte_path(nombre: "cajero"), class: "nav-link #{ controller_name == 'reportes' && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Cajeros
             %ul.nav.nav-treeview
               %li.nav-item
                 %a.nav-link{:href => "#"}
