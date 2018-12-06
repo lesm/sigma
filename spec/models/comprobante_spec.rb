@@ -63,7 +63,7 @@ RSpec.describe Comprobante, type: :model do
   describe "monto forma_pagos" do
     let(:caja) { create :caja }
     let(:cajero) { create :cajero, :con_contribuyente, caja: caja }
-    let(:concepto) { create :concepto, :con_cuenta, :con_datos }
+    let(:concepto) { build :concepto, :con_cuenta, :con_datos }
     let(:comprobante) do
       create :comprobante,
         :con_datos, forma_pago: "Efectivo",
