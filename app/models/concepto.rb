@@ -1,5 +1,6 @@
 class Concepto < ApplicationRecord
   belongs_to :cuenta
+  belongs_to :comprobante
   has_one :datos_concepto, dependent: :destroy
   accepts_nested_attributes_for :datos_concepto, allow_destroy: true
 

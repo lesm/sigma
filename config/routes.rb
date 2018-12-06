@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :reportes, only: [:new] do
     post :cajeros, on: :collection
+    post :cuentas, on: :collection
   end
   resources :adeudos
   resources :ingreso_por_clasificares, only: [:index]
