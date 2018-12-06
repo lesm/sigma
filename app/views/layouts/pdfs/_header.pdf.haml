@@ -1,10 +1,12 @@
 .row.text-center
   .col-md-2.center-vertical
-    = wicked_pdf_image_tag(Emisor.first.logotipo.small.url, class: "img-rounded")
+    = wicked_pdf_image_tag(current_emisor.logotipo_small_url, class: "img-rounded")
   .col-md-7.center-vertical
     .text-center.text-uppercase
-      %strong= Emisor.first.nombre_con_rfc
+      %strong
+        = current_emisor.nombre_con_rfc
       %br
-      %strong= Emisor.first.direccion
+      %strong
+        = current_emisor.direccion
   .col-md-2.center-vertical
-    = wicked_pdf_image_tag(Emisor.first.escudo.small.url, class: "img-rounded")
+    = wicked_pdf_image_tag(current_emisor.escudo_small_url, class: "img-rounded")

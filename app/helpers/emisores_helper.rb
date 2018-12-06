@@ -10,4 +10,8 @@ module EmisoresHelper
       "Crear Municipio"
     end
   end
+
+  def current_emisor
+    Emisor.first
+  end
 end
