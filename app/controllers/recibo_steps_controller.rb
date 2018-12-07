@@ -37,6 +37,11 @@ class ReciboStepsController < ApplicationController
     render_wizard(@cuenta_form, {}, @cuenta_form.instance_values)
   end
 
+  def asignar_cuentas
+    @contribuyente = Contribuyente.find_by_id(params[:contribuyente_id])
+    load_cuentas_contribuyente if @contribuyente.present?
+  end
+
   private
 
   def cuenta_ids

@@ -47,6 +47,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def load_cuentas_contribuyente
+    ids_cuentas          = @contribuyente.cuenta_ids
+    @cuentas_asignadas   = Cuenta.where(id: ids_cuentas).map { |c| [c, c.id] }
+    @cuentas_por_asignar = Cuenta.where.not(id: ids_cuentas).map { |c| [c, c.id] }
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
   end

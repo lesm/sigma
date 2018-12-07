@@ -30,5 +30,9 @@ RSpec.describe ContribuyentesController, type: :routing do
     it "routes to #update via PATCH" do
       expect(:patch => "/contribuyentes/1").to route_to("contribuyentes#update", :id => "1")
     end
+
+    it "routes to #asignar_cuentas via PATCH" do
+      expect(:patch => "/contribuyentes/1/asignar_cuentas").to route_to("contribuyentes#asignar_cuentas", :id => "1")
+    end
   end
 end

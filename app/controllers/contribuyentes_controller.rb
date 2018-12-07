@@ -1,6 +1,6 @@
 class ContribuyentesController < ApplicationController
   before_action :authenticate_usuario!
-  before_action :set_contribuyente, only: [:show, :edit, :update, :destroy]
+  before_action :set_contribuyente, only: [:show, :edit, :update, :destroy, :asignar_cuentas]
 
   # GET /contribuyentes
   # GET /contribuyentes.json
@@ -57,6 +57,12 @@ class ContribuyentesController < ApplicationController
         format.json { render json: @contribuyente.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def asignar_cuentas
+    @cuentas = Cuenta.where(id: params[:contribuyente][:cuenta_ids])
+    @contribuyente.cuentas << @cuentas
+    load_cuentas_contribuyente
   end
 
   private

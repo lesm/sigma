@@ -29,6 +29,18 @@ function startSelect2Multiple() {
     multiple: true,
     text: "Selecciona al menos cuenta"
   })
+
+  $(".select2-multiple.with-link").select2({
+    width: '100%',
+    escapeMarkup: function (markup) { return markup; },
+    language: {
+      noResults() {
+        return `<button type='button' id='btnCerrarSelect2' data-toggle='modal' data-target='#cuenta_nueva' class='btn btn-sm btn-primary'>
+                  Relacionar cuenta
+                </button>`
+      }
+    }
+  })
 }
 
 function startSelect2WithLink() {
@@ -47,7 +59,7 @@ function startSelect2WithLink() {
 
 function hideSelect2WithLink() {
   $(document).on("click", "#btnCerrarSelect2", function() {
-    $(".select2.with-link").select2("close")
+    $(".with-link").select2("close")
   })
 }
 

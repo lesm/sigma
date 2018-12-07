@@ -12,6 +12,7 @@ import '../src/js/arqueos/Dinero'
 import '../src/js/cajeros/cajero'
 import '../src/js/recibos/datos_concepto'
 import '../src/js/recibos/recibo'
+import '../src/js/recibos/asignar_cuentas'
 import '../src/js/cuentas/asignar_formato'
 
 const images = require.context('../images', true)

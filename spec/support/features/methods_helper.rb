@@ -1,12 +1,13 @@
 module Features
   module MethodsHelpers
     def dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor
-      create :contribuyente, nombre_o_razon_social: "Carlos",
+      contribuyente = create :contribuyente, nombre_o_razon_social: "Carlos",
         primer_apellido: "José",
         segundo_apellido: "Pérez",
         rfc: "AAAA111111AAZ"
-      create :cuenta, codigo: "110101", descripcion: "RIFAS", formato: "DatosComun"
+      cuenta = create :cuenta, codigo: "110101", descripcion: "RIFAS", formato: "DatosComun"
       create :emisor, :con_direccion
+      contribuyente.cuentas << cuenta
     end
 
     def dado_que_hay_un_cajero_logueado_con_una_caja
@@ -27,6 +28,7 @@ module Features
 
     def cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
       select "Carlos José Pérez - AAAA111111AAZ", from: "Contribuyente"
+      page.execute_script("$('#cuenta_form_contribuyente_id').trigger('select2:close')")
       select "110101 - RIFAS", from: "cuenta_ids"
     end
 
