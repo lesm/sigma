@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'dashboard/index', as: :dashboard
 
   resources :reportes, only: [:new] do
-    post :cajeros, on: :collection
-    post :cuentas, on: :collection
+    post :cajero, on: :collection
+    post :cuenta, on: :collection
   end
   resources :adeudos
   resources :ingreso_por_clasificares, only: [:index]

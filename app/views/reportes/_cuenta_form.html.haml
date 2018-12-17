@@ -1,5 +1,5 @@
 -# frozen_string_literal: true
-= simple_form_for(@reporte, url: cuentas_reportes_path) do |f|
+= simple_form_for(@reporte, url: cuenta_reportes_path) do |f|
   .row
     .col-md-12
       = f.input :cuenta_id, collection: cuenta_ids, input_html: { class: "select2" }
@@ -9,4 +9,4 @@
       = f.input :fecha_final, as: :string, input_html: { class: "fecha-reporte" }
       = f.input :nombre, as: :hidden
 
-  = f.submit "Generar", class: "btn btn-primary"
+  = f.submit "Generar", class: "btn btn-primary", data: { disable_with: false }

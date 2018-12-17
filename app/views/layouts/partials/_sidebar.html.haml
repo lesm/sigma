@@ -88,12 +88,12 @@
               %li.nav-item
                 = link_to new_reporte_path(nombre: "cajero"), class: "nav-link #{ controller_name == 'reportes' && params[:nombre] == "cajero" && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
-                  %p Cajeros
+                  %p Cajero
             %ul.nav.nav-treeview
               %li.nav-item
                 = link_to new_reporte_path(nombre: "cuenta"), class: "nav-link #{ controller_name == 'reportes' && params[:nombre] == "cuenta" && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
-                  %p Cuentas
+                  %p Cuenta
             %ul.nav.nav-treeview
               %li.nav-item
                 %a.nav-link{:href => "#"}
