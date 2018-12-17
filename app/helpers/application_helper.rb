@@ -50,4 +50,12 @@ module ApplicationHelper
   def cajero_ids
     Cajero.all.map { |c| [c, c.id] }
   end
+
+  def set_previous_url
+    if request.referrer =~ /recibo_steps\/set_cuenta/
+      recibo_step_path(:set_cuenta, @cuenta_params.merge!(disabled: false))
+    else
+      :back
+    end
+  end
 end

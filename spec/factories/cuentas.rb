@@ -19,5 +19,13 @@ FactoryBot.define do
         cuenta.formato = "DatosComun"
       end
     end
+
+    trait :teatros do
+      after :build do |cuenta|
+        cuenta.codigo = "110201"
+        cuenta.descripcion = "TEATROS"
+        cuenta.formato = "DatosComun"
+      end
+    end
   end
 end

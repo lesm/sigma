@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "contribuyentes/edit", type: :view do
+  let(:rifas) { create :cuenta, :rifas }
+
   before(:each) do
     @contribuyente = assign(:contribuyente, Contribuyente.create!(
       :nombre_o_razon_social => "Pedro",
@@ -8,7 +10,8 @@ RSpec.describe "contribuyentes/edit", type: :view do
       :segundo_apellido => "Pérez",
       :persona_fisica => true,
       :email => "pedro@gmail.com",
-      :rfc => "AAAA111111AAA"
+      :rfc => "AAAA111111AAA",
+      :concepto_ids => [rifas.id]
     ))
   end
 

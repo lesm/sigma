@@ -50,7 +50,7 @@
               = f.check_box :timbrado_automatico
               Timbrar Recibo
           .btn-group.float-right
-            = link_to recibo_step_path(:set_cuenta, @cuenta_params), class: "btn btn-warning btn-sm" do
+            = link_to set_previous_url, class: "btn btn-warning btn-sm" do
               %i.fa.fa-arrow-left
               Regresar
             = button_tag :submit, class: "btn btn-sm btn-primary" do

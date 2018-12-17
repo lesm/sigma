@@ -48,9 +48,20 @@ class ApplicationController < ActionController::Base
   protected
 
   def load_cuentas_contribuyente
-    ids_cuentas          = @contribuyente.cuenta_ids
-    @cuentas_asignadas   = Cuenta.where(id: ids_cuentas).map { |c| [c, c.id] }
-    @cuentas_por_asignar = Cuenta.where.not(id: ids_cuentas).map { |c| [c, c.id] }
+    cuentas_asignadas
+    cuentas_por_asignar
+  end
+
+  def contribuyente_cuenta_ids
+    @contribuyente.cuenta_ids
+  end
+
+  def cuentas_asignadas
+    @cuentas_asignadas = Cuenta.where(id: contribuyente_cuenta_ids).map { |c| [c, c.id] }
+  end
+
+  def cuentas_por_asignar
+    @cuentas_por_asignar = Cuenta.where.not(id: contribuyente_cuenta_ids).map { |c| [c, c.id] }
   end
 
   def configure_permitted_parameters
