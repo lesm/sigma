@@ -1,6 +1,6 @@
 class ContribuyentesController < ApplicationController
   before_action :authenticate_usuario!
-  before_action :set_contribuyente, only: [:show, :edit, :update, :destroy]
+  before_action :set_contribuyente, only: [:show, :edit, :update, :destroy, :asignar_cuentas]
 
   # GET /contribuyentes
   # GET /contribuyentes.json
@@ -23,6 +23,7 @@ class ContribuyentesController < ApplicationController
   # GET /contribuyentes/1/edit
   def edit
     authorize @contribuyente
+    cuentas_por_asignar
   end
 
   # POST /contribuyentes
@@ -33,7 +34,8 @@ class ContribuyentesController < ApplicationController
 
     respond_to do |format|
       if @contribuyente.save
-        format.html { redirect_to @contribuyente, notice: 'Contribuyente was successfully created.' }
+        update_cuentas
+        format.html { redirect_to @contribuyente, notice: 'Contribuyente fue creado correctamente.' }
         format.json { render :show, status: :created, location: @contribuyente }
         format.js
       else
@@ -50,6 +52,7 @@ class ContribuyentesController < ApplicationController
     authorize @contribuyente
     respond_to do |format|
       if @contribuyente.update(contribuyente_params)
+        update_cuentas
         format.html { redirect_to @contribuyente, notice: 'Contribuyente was successfully updated.' }
         format.json { render :show, status: :ok, location: @contribuyente }
       else
@@ -59,16 +62,37 @@ class ContribuyentesController < ApplicationController
     end
   end
 
+  def asignar_cuentas
+    @cuentas_seleccionadas = cuentas_seleccionadas
+    update_cuentas
+    load_cuentas_contribuyente
+  end
+
   private
+    def cuentas_seleccionadas
+      cuentas = params[:cuentas_seleccionadas]
+      cuentas.present? ? cuentas.first.split(",") : []
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_contribuyente
       @contribuyente = Contribuyente.find(params[:id])
     end
 
+    def update_cuentas
+      @cuentas = Cuenta.where(id: set_cuenta_ids)
+      @contribuyente.cuentas << @cuentas
+    end
+
+    def set_cuenta_ids
+      params[:contribuyente][:cuenta_ids] || contribuyente_params[:concepto_ids]
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def contribuyente_params
       params.require(:contribuyente).permit(
-        :nombre_o_razon_social, :primer_apellido, :segundo_apellido, :persona_fisica, :email, :rfc,
+        :nombre_o_razon_social, :primer_apellido, :segundo_apellido, :persona_fisica,
+        :email, :rfc, concepto_ids: [],
         direccion_attributes: [:id, :calle, :numero, :colonia, :codigo_postal, :localidad,
                                :municipio, :estado, :pais]
       )

@@ -6,9 +6,24 @@ RSpec.describe Contribuyente, type: :model do
   it { should accept_nested_attributes_for(:direccion).allow_destroy(true) }
   it { should have_one(:cajero) }
   it { should have_one(:direccion).dependent(:destroy) }
+  it { should have_and_belong_to_many(:cuentas) }
   it { should accept_nested_attributes_for(:direccion).allow_destroy(true) }
   it { should have_many(:recibos) }
   it { should have_many(:facturas) }
+
+  describe "Uniqueness" do
+    let(:contribuyente) { create :contribuyente, :con_direccion }
+    let(:cuenta_rifas) { create :cuenta, :rifas }
+
+    before :each do
+      contribuyente.cuentas << cuenta_rifas
+    end
+
+    it "not add relationship" do
+      contribuyente.cuentas << cuenta_rifas
+      expect(contribuyente.reload.cuentas.count).to eq 1
+    end
+  end
 
   describe ".search" do
     let(:arturo) do

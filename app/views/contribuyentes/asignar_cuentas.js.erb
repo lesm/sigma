@@ -1,0 +1,3 @@
+$("#cuenta_ids").html("<%= j options_for_select(@cuentas_asignadas, @cuentas_seleccionadas) %>")
+$("#contribuyente_cuenta_ids").html("<%= j options_for_select(@cuentas_por_asignar) %>")
+$("#cuenta_nueva").modal("hide")

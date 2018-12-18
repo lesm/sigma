@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   def cast_value value
     ActiveRecord::Type::Boolean.new.cast(value)
   end
+  helper_method :cast_value
 
   def current_user
     current_usuario
@@ -46,6 +47,23 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def load_cuentas_contribuyente
+    cuentas_asignadas
+    cuentas_por_asignar
+  end
+
+  def contribuyente_cuenta_ids
+    @contribuyente.cuenta_ids
+  end
+
+  def cuentas_asignadas
+    @cuentas_asignadas = Cuenta.where(id: contribuyente_cuenta_ids).map { |c| [c, c.id] }
+  end
+
+  def cuentas_por_asignar
+    @cuentas_por_asignar = Cuenta.where.not(id: contribuyente_cuenta_ids).map { |c| [c, c.id] }
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:username])

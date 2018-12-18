@@ -1,10 +1,15 @@
 if Rails.env.development?
   puts "Creando Emisor..."
-  Emisor.where(nombre: "Municipio de Huajuapan de León",
-               numero_municipio: "482", rfc: "AAAA111111AA",
-               regimen_fiscal: "Personas morales con fines no lucrativos",
-               registro_patronal: "sin registro",
-               eslogan: "Por una mejor mixteca...").first_or_create
+  if Emisor.count.zero?
+    emisor = Emisor.new(nombre: "Municipio de Huajuapan de León",
+                        numero_municipio: "482", rfc: "AAAA111111AA",
+                        regimen_fiscal: "Personas morales con fines no lucrativos",
+                        registro_patronal: "sin registro",
+                        logotipo: Rails.root.join('spec/fixtures/files/logotipo.png').open,
+                        escudo:  Rails.root.join('spec/fixtures/files/escudo.png').open,
+                        eslogan: "Por una mejor mixteca...")
+    emisor.save!
+  end
 
   Direccion.where(calle: "Independencia", numero: "8",
                    colonia: "Azteca", codigo_postal: "68000",

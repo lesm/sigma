@@ -22,6 +22,30 @@
               Dirección
             %h6
               = @contribuyente.direccion
+        .row
+          .col-md-12
+            %fieldset
+              %legend
+                %i.fa.fa-book
+                &nbsp;
+                Cuentas Asociadas
+              %table.table.table-hover.table-sm.text-center
+                %thead
+                  %tr
+                    %th Descripción
+                    %th Importe
+                    %th Acciones
+                %tbody
+                  - @contribuyente.cuentas.each do |cuenta|
+                    %tr.text-right
+                      %td= cuenta
+                      %td= number_to_currency cuenta.importe
+                      %td
+                        .btn-group
+                          = link_to recibo_step_path(:set_conceptos, contribuyente_id: @contribuyente.id, :"cuenta_ids[]" => cuenta.id), class: "btn btn-sm btn-primary" do
+                            %i.fa.fa-money
+                            Pagar
+
 
         .btn-group.float-right
           = link_to :back, class: 'btn btn-sm btn-secondary' do

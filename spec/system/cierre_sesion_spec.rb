@@ -72,7 +72,7 @@ RSpec.describe "Cierre de sesión", type: :system do
   end
 
   def dado_que_cajero_crea_un_recibo
-    cuando_da_click_en_el_link_caja
+    cuando_cajero_da_click_en_el_link_caja
     cajero_debe_ser_redireccionado_a_set_cuenta_de_recibos_steps
     cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
     cuando_da_click_en_el_link_siguiente

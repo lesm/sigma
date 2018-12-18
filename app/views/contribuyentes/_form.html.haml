@@ -5,6 +5,8 @@
       = render "contribuyente_fields", f: f
     .col-md-6
       = render "direcciones/direccion_fields", f: f
+    .col-md-12
+      = render "cuentas_fields", f: f
 
   .btn-group.float-right
     = link_to contribuyentes_path, class: 'btn btn-sm btn-secondary' do

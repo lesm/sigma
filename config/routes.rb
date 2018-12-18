@@ -13,14 +13,18 @@ Rails.application.routes.draw do
   resources :emisores, except: [:destroy]
   resources :cajas, except: [:destroy]
   resources :historial_cajas, except: [:edit, :show, :destroy]
-  resources :contribuyentes, except: [:destroy]
+  resources :contribuyentes, except: [:destroy] do
+    patch :asignar_cuentas, on: :member
+  end
   resources :cajeros, except: [:destroy]
   resources :cuentas
   resources :cierre_cajas, except: [:new, :destroy] do
     post :cerrar, on: :member
   end
   resources :recibos, only: [:index, :show, :create, :destroy]
-  resources :recibo_steps, only: [:show, :update]
+  resources :recibo_steps, only: [:show, :update] do
+    get :asignar_cuentas, on: :collection
+  end
   resources :arqueos, except: [:edit, :update, :destroy]
   root 'pages#index'
 end

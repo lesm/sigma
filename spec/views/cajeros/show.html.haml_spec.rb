@@ -21,6 +21,7 @@ RSpec.describe "cajeros/show", type: :view do
       persona_fisica: true,
       email: "pedro@gmail.com",
       rfc: "AAAA111111AAA",
+      concepto_ids: [1,2],
       direccion_attributes: direccion,
     }
   end

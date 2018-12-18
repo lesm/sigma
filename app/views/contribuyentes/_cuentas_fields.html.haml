@@ -1,0 +1,6 @@
+.form-group
+  %label.form-control-label
+    Seleccione al menos una cuenta por cobrar
+  = select_tag :concepto_ids, options_for_select(@cuentas_por_asignar || cuenta_ids), class: "form-control is-invalid select2-multiple", name: "contribuyente[concepto_ids][]", required: true
+  - if f.object.errors[:concepto_ids].any?
+    .form-text.invalid-feedback= f.object.errors[:concepto_ids].to_sentence

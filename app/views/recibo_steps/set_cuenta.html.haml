@@ -4,16 +4,16 @@
       .card-header
         .card-title Seleccione al contribuyente y las cuentas por pagar
       .card-body
-        - @cuenta_form.contribuyente_id = params["contribuyente_id"] if params["contribuyente_id"]
         = simple_form_for(@cuenta_form, url: wizard_path, method: :put) do |f|
           = f.input :contribuyente_id, collection: Contribuyente.all, input_html: { class: "select2 with-link" }
           .form-group
             %label.form-control-label
               Seleccione al menos una cuenta por cobrar
-            = select_tag :cuenta_ids, options_for_select(cuenta_ids), class: "form-control is-invalid select2-multiple", name: "cuenta_form[cuenta_ids][]", data: { cuenta_ids: params["cuenta_ids"]}
+            = select_tag :cuenta_ids, options_for_select(@cuentas_asignadas || []), class: "form-control is-invalid select2-multiple with-link", name: "cuenta_form[cuenta_ids][]", data: { cuenta_ids: params["cuenta_ids"]} , disabled: !cast_value(params["state_cuenta_ids"])
             - if f.object.errors[:cuenta_ids].any?
               .form-text.invalid-feedback= f.object.errors[:cuenta_ids].to_sentence
 
           = f.submit "Siguiente", class: "btn btn-primary"
 
 = render "contribuyentes/modal_contribuyente"
+= render "cuentas/modal_cuenta"

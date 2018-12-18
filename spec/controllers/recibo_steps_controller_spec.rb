@@ -37,4 +37,13 @@ RSpec.describe ReciboStepsController, type: :controller do
       expect(response).to be_successful
     end
   end
+
+  describe "GET #asignar_cuentas step :set_cuenta" do
+    it "return a success response" do
+      get :asignar_cuentas,
+        params: { contribuyente_id: contribuyente.id },
+        xhr: :true
+      expect(response).to be_successful
+    end
+  end
 end

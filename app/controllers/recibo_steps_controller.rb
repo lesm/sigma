@@ -8,8 +8,14 @@ class ReciboStepsController < ApplicationController
     authorize ReciboStep.new
     case step
     when :set_cuenta
-      @cuenta_form = CuentaForm.new
-      @contribuyente = Contribuyente.new(direccion: Direccion.new)
+      if params["contribuyente_id"].present?
+        @contribuyente = Contribuyente.find_by_id(params["contribuyente_id"])
+        load_cuentas_contribuyente
+      end
+
+      @cuenta_form = CuentaForm.new contribuyente_id: params["contribuyente_id"]
+      @contribuyente_new = Contribuyente.new(direccion: Direccion.new)
+
     when :set_conceptos
       set_recibo
 
@@ -35,6 +41,11 @@ class ReciboStepsController < ApplicationController
     )
     @contribuyente = Contribuyente.new(direccion: Direccion.new)
     render_wizard(@cuenta_form, {}, @cuenta_form.instance_values)
+  end
+
+  def asignar_cuentas
+    @contribuyente = Contribuyente.find_by_id(params[:contribuyente_id])
+    load_cuentas_contribuyente if @contribuyente.present?
   end
 
   private

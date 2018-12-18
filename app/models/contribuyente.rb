@@ -4,16 +4,20 @@ class Contribuyente < ApplicationRecord
   }
 
   include Direccionable
+  has_one :cajero
   has_many :facturas
   has_many :recibos
+  has_and_belongs_to_many :cuentas, -> { distinct }
 
-  has_one :cajero
   validates :nombre_o_razon_social, presence: true
+  validates :concepto_ids, presence: true, on: :create
   validates :primer_apellido, presence: true, if: :persona_fisica?
   validates :rfc, length: { is: 13 }, if: :persona_fisica_con_rfc?
   validates :rfc, length: { is: 12 }, if: :persona_moral_con_rfc?
   validates :rfc, rfc_format: { force_homoclave: true }, allow_blank: true
   validates :rfc, uniqueness: true, unless: :rfc_generico?, allow_blank: true
+
+  attr_accessor :concepto_ids
 
   def self.search search
     where("concat_ws(' ', nombre_o_razon_social, primer_apellido, segundo_apellido, rfc) ILIKE ?", "%#{search&.squish}%")

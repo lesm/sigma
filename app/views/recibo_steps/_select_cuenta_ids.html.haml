@@ -1,0 +1,7 @@
+.form-group
+  %label.form-control-label
+    Seleccione al menos una cuenta por cobrar
+  = select_tag :cuenta_ids, options_for_select(cuenta_ids), class: "form-control is-invalid select2-multiple", name: "cuenta_form[cuenta_ids][]", data: { cuenta_ids: params["cuenta_ids"]}
+  - if f.object.errors[:cuenta_ids].any?
+    .form-text.invalid-feedback= f.object.errors[:cuenta_ids].to_sentence
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_142207) do
+ActiveRecord::Schema.define(version: 2018_12_06_210744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,13 @@ ActiveRecord::Schema.define(version: 2018_11_28_142207) do
     t.string "rfc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contribuyentes_cuentas", id: false, force: :cascade do |t|
+    t.bigint "contribuyente_id", null: false
+    t.bigint "cuenta_id", null: false
+    t.index ["contribuyente_id", "cuenta_id"], name: "index_contribuyentes_cuentas_on_contribuyente_id_and_cuenta_id"
+    t.index ["cuenta_id", "contribuyente_id"], name: "index_contribuyentes_cuentas_on_cuenta_id_and_contribuyente_id"
   end
 
   create_table "cuentas", force: :cascade do |t|
