@@ -78,3 +78,5 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+Chromedriver.set_version "2.41"
