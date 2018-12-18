@@ -1,11 +1,12 @@
-- if @contribuyente.persisted?
+- if @contribuyente and @contribuyente.persisted?
   = simple_form_for(@contribuyente, url: asignar_cuentas_contribuyente_path(@contribuyente), remote: true) do |cf|
     .col-md-12
       %h4
         Contribuyente
         = @contribuyente
     .col-md-12
-      = select_tag :contribuyente_cuenta_ids, options_for_select(@cuentas_por_asignar || []), class: "form-control select2-multiple-modal", name: "contribuyente[cuenta_ids][]"
+      = select_tag :contribuyente_cuenta_ids, options_for_select(@cuentas_por_asignar || []), class: "form-control select2-multiple", name: "contribuyente[cuenta_ids][]"
+      = hidden_field nil, :cuentas_seleccionadas, name: "[cuentas_seleccionadas][]"
 
     .btn-group.float-right
       = button_tag :submit, class: 'btn btn-sm btn-primary' do

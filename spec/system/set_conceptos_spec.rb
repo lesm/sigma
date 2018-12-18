@@ -5,7 +5,7 @@ RSpec.describe "Set conceptos", type: :system do
     before :each do
       dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor
       dado_que_hay_un_cajero_logueado_con_una_caja
-      cuando_da_click_en_el_link_caja
+      cuando_cajero_da_click_en_el_link_caja
       cajero_debe_ser_redireccionado_a_set_cuenta_de_recibos_steps
       cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
       cuando_da_click_en_el_link_siguiente

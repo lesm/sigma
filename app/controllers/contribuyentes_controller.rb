@@ -63,11 +63,17 @@ class ContribuyentesController < ApplicationController
   end
 
   def asignar_cuentas
+    @cuentas_seleccionadas = cuentas_seleccionadas
     update_cuentas
     load_cuentas_contribuyente
   end
 
   private
+    def cuentas_seleccionadas
+      cuentas = params[:cuentas_seleccionadas]
+      cuentas.present? ? cuentas.first.split(",") : []
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_contribuyente
       @contribuyente = Contribuyente.find(params[:id])

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
-  describe "#set_previous_url" do
+  describe "#previous_url" do
     before :each do
       allow(helper.request).to receive(:referrer).and_return(previous_url)
     end
@@ -9,7 +9,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     context "previous url is different of recibo_step(:set_conepto)" do
       let(:previous_url) { root_path }
       it "returns :back symbol" do
-        expect(helper.set_previous_url).to eq :back
+        expect(helper.previous_url).to eq :back
       end
     end
 
@@ -21,7 +21,7 @@ RSpec.describe ApplicationHelper, type: :helper do
           contribuyente_id: 1,
           cuenta_ids: [1,2,3]
         }
-        expect(helper.set_previous_url).to eq recibo_step_path(:set_cuenta, @cuenta_params)
+        expect(helper.previous_url).to eq recibo_step_path(:set_cuenta, @cuenta_params)
       end
     end
   end

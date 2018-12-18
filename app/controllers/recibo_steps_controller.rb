@@ -10,11 +10,11 @@ class ReciboStepsController < ApplicationController
     when :set_cuenta
       if params["contribuyente_id"].present?
         @contribuyente = Contribuyente.find_by_id(params["contribuyente_id"])
-        cuentas_asignadas
+        load_cuentas_contribuyente
       end
 
       @cuenta_form = CuentaForm.new contribuyente_id: params["contribuyente_id"]
-      @contribuyente = Contribuyente.new(direccion: Direccion.new)
+      @contribuyente_new = Contribuyente.new(direccion: Direccion.new)
 
     when :set_conceptos
       set_recibo

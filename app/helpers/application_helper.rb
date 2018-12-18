@@ -51,9 +51,13 @@ module ApplicationHelper
     Cajero.all.map { |c| [c, c.id] }
   end
 
-  def set_previous_url
+  ENABLE_CUENTA_IDS_IN_SET_CUENTA = true.freeze
+
+  def previous_url
     if request.referrer =~ /recibo_steps\/set_cuenta/
-      recibo_step_path(:set_cuenta, @cuenta_params.merge!(disabled: false))
+      recibo_step_path(:set_cuenta,
+                       @cuenta_params.merge!(
+                         state_cuenta_ids: ENABLE_CUENTA_IDS_IN_SET_CUENTA))
     else
       :back
     end

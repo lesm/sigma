@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   def cast_value value
     ActiveRecord::Type::Boolean.new.cast(value)
   end
+  helper_method :cast_value
 
   def current_user
     current_usuario

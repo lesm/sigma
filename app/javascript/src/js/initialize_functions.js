@@ -60,7 +60,13 @@ function startSelect2WithLink() {
 function hideSelect2WithLink() {
   $(document).on("click", "#btnCerrarSelect2", function() {
     $(".with-link").select2("close")
+    startSelect2Multiple()
+    asignarCuentasSeleccionadas()
   })
+}
+
+function asignarCuentasSeleccionadas() {
+  $("#cuentas_seleccionadas").val($("#cuenta_ids").val())
 }
 
 function startDateTimePicker() {

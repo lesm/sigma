@@ -1,13 +1,15 @@
 module Features
   module MethodsHelpers
     def dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor
-      contribuyente = create :contribuyente, nombre_o_razon_social: "Carlos",
-        primer_apellido: "José",
-        segundo_apellido: "Pérez",
-        rfc: "AAAA111111AAZ"
-      cuenta = create :cuenta, codigo: "110101", descripcion: "RIFAS", formato: "DatosComun"
+      dado_que_hay_un_contribuyente_y_un_emisor
+      cuenta = create :cuenta, :rifas
+      @contribuyente.cuentas << cuenta
+    end
+
+    def dado_que_hay_un_contribuyente_y_un_emisor
+      @contribuyente = create :contribuyente, nombre_o_razon_social: "Carlos", primer_apellido: "José",
+        segundo_apellido: "Pérez", rfc: "AAAA111111AAZ"
       create :emisor, :con_direccion
-      contribuyente.cuentas << cuenta
     end
 
     def dado_que_hay_un_cajero_logueado_con_una_caja
@@ -18,7 +20,7 @@ module Features
       sign_in_admin
     end
 
-    def cuando_da_click_en_el_link_caja
+    def cuando_cajero_da_click_en_el_link_caja
       click_link "Caja"
     end
 
@@ -27,9 +29,13 @@ module Features
     end
 
     def cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
+      cajero_selecciona_un_contribuyente
+      select "110101 - RIFAS", from: "cuenta_ids"
+    end
+
+    def cajero_selecciona_un_contribuyente
       select "Carlos José Pérez - AAAA111111AAZ", from: "Contribuyente"
       page.execute_script("$('#cuenta_form_contribuyente_id').trigger('select2:close')")
-      select "110101 - RIFAS", from: "cuenta_ids"
     end
 
     def cuando_da_click_en_el_link_siguiente
