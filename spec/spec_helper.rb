@@ -33,16 +33,6 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  config.before(:each, type: :system) do
-    config.before(:each, type: :system) do
-      driven_by :rack_test
-    end
-
-    config.before(:each, type: :system, js: true) do
-      driven_by :selenium_chrome_headless
-    end
-  end
-
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
@@ -112,18 +102,3 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 end
-
-#Capybara.app_host = "http://localhost:3000"
-
-#Capybara.register_driver :chrome do |app|
-  #Capybara::Selenium::Driver.new(app, browser: :chrome)
-#end
-
-#Capybara.javascript_driver = :chrome
-#Capybara.default_driver = :selenium
-
-#Capybara.configure do |config|
-  #config.default_max_wait_time = 10 # seconds
-  #config.default_driver        = :selenium
-#end
-
