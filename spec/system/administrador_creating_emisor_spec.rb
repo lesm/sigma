@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Emisor", type: :system do
+RSpec.describe "Administrador creating Emisor", type: :system do
   feature "when there is no a Emisor" do
     before :each do
       dado_que_hay_un_administrador_logueado

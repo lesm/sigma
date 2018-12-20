@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Set cuentas", type: :system do
+RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
   feature "En nuevo Recibo" do
     scenario "Seleccionar y actualizar conceptos de cobro" do
       dado_que_existen_tres_conceptos_de_cobro

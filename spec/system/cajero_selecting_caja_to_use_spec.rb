@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Pages index", type: :system do
+RSpec.describe "Cajero Seleccting and Unselecting Caja", type: :system do
   let(:contribuyente) { create :contribuyente, :con_direccion }
   let(:cajero) { create :cajero, username: "cajero", contribuyente: contribuyente }
 

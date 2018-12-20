@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Set conceptos", type: :system do
+RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :system do
   feature "En nuevo Recibo" do
     before :each do
       dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor

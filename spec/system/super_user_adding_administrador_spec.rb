@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Admin user", type: :system do
+RSpec.describe "SuperUser WorkFlow", type: :system do
   feature "with a super user" do
     scenario "Add a new admin user" do
       dado_que_hay_un_super_user_logueado
