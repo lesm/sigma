@@ -1,9 +1,11 @@
 class AdministradoresController < ApplicationController
+  before_action :authenticate_usuario!
   before_action :set_administrador, only: [:show, :update]
 
   def new
     if Administrador.count.zero?
       @administrador = Administrador.new
+      authorize @administrador
     else
       redirect_to Administrador.first and return
     end
@@ -12,13 +14,16 @@ class AdministradoresController < ApplicationController
   def edit
     #TODO change password in other way
     @administrador = Administrador.find(params[:id])
+    authorize @administrador
   end
 
   def show
+    authorize @administrador
   end
 
   def create
     @administrador = Administrador.new administrador_params
+    authorize @administrador
     respond_to do |format|
       if @administrador.save
         format.html {
@@ -31,6 +36,7 @@ class AdministradoresController < ApplicationController
   end
 
   def update
+    authorize @administrador
     respond_to do |format|
       if @administrador.update(administrador_params)
         format.html {

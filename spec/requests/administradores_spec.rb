@@ -19,7 +19,7 @@ RSpec.describe "Administradores", type: :request do
   end
 
   before :each do
-    sign_in_cajero
+    sign_in_super_user
   end
 
   describe "GET /administradores/new" do

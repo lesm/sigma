@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReciboStepPolicy do
   let(:user) { User.new }
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cajero) { create :cajero, :con_contribuyente }
 
   subject { described_class }

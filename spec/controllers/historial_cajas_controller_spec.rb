@@ -26,7 +26,7 @@ RSpec.describe HistorialCajasController, type: :controller do
     before :each do
       registra_municipio
     end
-    let(:usuario) { create :usuario, :admin }
+    let(:usuario) { create :administrador }
     it "returns a success response" do
       HistorialCaja.create! valid_attributes
       get :index, params: {}

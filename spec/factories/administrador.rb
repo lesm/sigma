@@ -4,6 +4,6 @@ FactoryBot.define do
     username { "admin" }
     activo { true }
     password { "1qaz2wsx" }
-    rol { 1 }
+    rol { 3 }
   end
 end

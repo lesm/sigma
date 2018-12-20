@@ -23,6 +23,7 @@ class Usuario < ApplicationRecord
   end
 
   def to_s
+    return "" if nombre.nil?
     nombre.capitalize
   end
 
