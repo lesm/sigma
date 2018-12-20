@@ -16,3 +16,10 @@
         %td= cuenta[:cantidad]
         %td= number_to_currency cuenta[:valor_unitario]
         %td= number_to_currency cuenta[:importe]
+  %tfoot.text-right
+    %tr
+      %td{ colspan: 3 }
+        %strong Total
+      %td
+        %strong
+          = number_to_currency @suma_importe_cuentas
