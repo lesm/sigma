@@ -5,7 +5,7 @@ RSpec.describe "Administrador Adding Cajero", type: :system do
     scenario "Adding a new cajero with contribuyente" do
       dado_que_hay_un_administrador_logueado
       dado_que_hay_un_emisor_registrado
-      dado_que_existen_conceptos_de_cobro
+      dado_que_existen_dos_conceptos_de_cobro
       cuando_admin_da_click_en_link_cajeros
       admin_debe_ver_el_link_agregar_cajero
       cuando_admin_da_click_en_link_agregar_cajero
@@ -27,17 +27,9 @@ RSpec.describe "Administrador Adding Cajero", type: :system do
     end
   end
 
-  def dado_que_hay_un_emisor_registrado
-    create :emisor, :con_direccion
-  end
-
-  def dado_que_existen_conceptos_de_cobro
+  def dado_que_existen_dos_conceptos_de_cobro
     create :cuenta, :rifas
     create :cuenta, :sorteos
-  end
-
-  def cuando_admin_da_click_en_link_cajeros
-    click_link "Cajeros"
   end
 
   def admin_debe_ver_el_link_agregar_cajero
@@ -46,10 +38,6 @@ RSpec.describe "Administrador Adding Cajero", type: :system do
 
   def cuando_admin_da_click_en_link_agregar_cajero
     click_link "Agregar Cajero"
-  end
-
-  def admin_debe_ver_el_texto_datos_de_inicio_de_sesion
-    expect(page).to have_content "DATOS DE INICIO DE SESIÓN"
   end
 
   def dado_que_admin_captura_username_y_password
