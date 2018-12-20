@@ -1,7 +1,7 @@
 module Features
   module SessionHelpers
     def sign_in_cajero
-      @cajero = create :cajero, contribuyente: contribuyente, caja: nil
+      @cajero = create :cajero, :con_contribuyente, :sin_caja
       sign_in_usuario @cajero
     end
 
@@ -31,10 +31,6 @@ module Features
     def caja_seleccinada_se_asigna_al_cajero
       expect(page).to have_current_path(dashboard_path)
       expect(page).to have_content "Caja en uso: Mercado"
-    end
-
-    def contribuyente
-      create :contribuyente, :con_direccion
     end
 
     def log_out_cajero

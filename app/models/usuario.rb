@@ -8,7 +8,7 @@ class Usuario < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable
 
-  validates :nombre, :username, :password, presence: true
+  validates :nombre, :username, presence: true
 
   def email_required?
     false

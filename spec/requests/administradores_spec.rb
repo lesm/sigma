@@ -13,7 +13,7 @@ RSpec.describe "Administradores", type: :request do
   let(:invalid_attributes) do
     {
       nombre: "admin",
-      username: "admin",
+      username: nil,
       password: nil
     }
   end

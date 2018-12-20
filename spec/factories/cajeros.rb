@@ -15,4 +15,10 @@ FactoryBot.define do
       end
     end
   end
+
+  trait :sin_caja do
+    after :build do |cajero|
+      cajero.caja = nil
+    end
+  end
 end

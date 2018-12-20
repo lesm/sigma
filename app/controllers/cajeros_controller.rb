@@ -34,7 +34,7 @@ class CajerosController < ApplicationController
 
     respond_to do |format|
       if @cajero.save
-        format.html { redirect_to @cajero, notice: 'Cajero was successfully created.' }
+        format.html { redirect_to @cajero, notice: 'Cajero fue creado correctamente.' }
         format.json { render :show, status: :created, location: @cajero }
       else
         build_contribuyente
@@ -50,7 +50,7 @@ class CajerosController < ApplicationController
     authorize @cajero
     respond_to do |format|
       if @cajero.update(override_cajero_params)
-        format.html { redirect_to @cajero, notice: 'Cajero was successfully updated.' }
+        format.html { redirect_to @cajero, notice: 'Cajero fue actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @cajero }
       else
         format.html { render :edit }

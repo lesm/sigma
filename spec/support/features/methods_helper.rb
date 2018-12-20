@@ -87,5 +87,18 @@ module Features
     def se_muestra_un_mensaje_de_cierre_de_sesion
       expect(page).to have_content "Sesión cerrada exitosamente."
     end
+
+    def dado_que_hay_un_emisor_registrado
+      create :emisor, :con_direccion
+    end
+
+    def cuando_admin_da_click_en_link_cajeros
+      click_link "Cajeros"
+    end
+
+    def admin_debe_ver_el_texto_datos_de_inicio_de_sesion
+      expect(page).to have_content "DATOS DE INICIO DE SESIÓN"
+    end
+
   end
 end

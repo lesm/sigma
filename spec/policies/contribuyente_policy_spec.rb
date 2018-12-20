@@ -30,8 +30,8 @@ RSpec.describe ContribuyentePolicy do
     end
   end
 
-  permissions :new?, :create? do
-    it "allow access to cajero" do
+  permissions :new? do
+    it "allows access to cajero" do
       expect(subject).to permit(cajero, Contribuyente.new)
     end
 
@@ -40,8 +40,18 @@ RSpec.describe ContribuyentePolicy do
     end
   end
 
+  permissions :create? do
+    it "allows access to cajero" do
+      expect(subject).to permit(cajero, Contribuyente.new)
+    end
+
+    it "allows access to admin" do
+      expect(subject).to permit(admin, Contribuyente.new)
+    end
+  end
+
   permissions :show?, :edit?, :update? do
-    it "allow access to cajero" do
+    it "allows access to cajero" do
       expect(subject).to permit(cajero, contribuyente)
     end
 
@@ -49,5 +59,4 @@ RSpec.describe ContribuyentePolicy do
       expect(subject).to_not permit(admin, contribuyente)
     end
   end
-
 end
