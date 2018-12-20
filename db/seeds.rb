@@ -16,38 +16,47 @@ if Rails.env.development?
                    localidad: "Oaxaca", municipio: "Centro",
                    estado: "Oaxaca", pais: "México",
                    direccionable_type: "Emisor",
-                   direccionable_id: Emisor.first.id).first_or_create
+                   direccionable_id: Emisor.first.id).first_or_create!
+
+  values = {
+    nombre_o_razon_social: [
+      "Carlos", "José", "Miguel",
+      "Ruben", "Rodrigo", "Carla"
+    ],
+    primer_apellido: [
+      "José", "Cruz", "Díaz",
+      "Luis", "Ramos", "Sánchez"
+    ],
+    segundo_apellido: [
+      "Pérez", "Hernández", "Cruz",
+      "Santiago", "Candela", "Moreno"
+    ],
+    persona_fisica: true,
+    email: [
+      "carlos@mail.com", "jose@mail.com", "miguel@mail.com",
+      "ruben@mail.com", "rodrigo@mail.com", "carla@mail.com"
+    ],
+    rfc: [
+      "AAAA111111AAA", "AAAA111111AAB", "AAAA111111AAC",
+      "AAAA111111AAD", "AAAA111111AAE", "AAAA111111AAF"
+    ],
+    concepto_ids: ["1","2"]
+  }
 
   puts "Creando Contribuyentes..."
-  Contribuyente.where(nombre_o_razon_social: "Carlos",
-                      primer_apellido: "José", segundo_apellido: "Pérez",
-                      persona_fisica: true, email: "jose@mail.com",
-                      rfc: "AAAA111111AAA").first_or_create
-  Contribuyente.where(nombre_o_razon_social: "Jose",
-                      primer_apellido: "Cruz",
-                      segundo_apellido: "Hernández",
-                      persona_fisica: true, email: "carlos@mail.com",
-                      rfc: "AAAA111111AAB").first_or_create
-  Contribuyente.where(nombre_o_razon_social: "Miguel",
-                      primer_apellido: "Díaz",
-                      segundo_apellido: "Cruz", persona_fisica: true,
-                      email: "miguel@mail.com",
-                      rfc: "AAAA111111AAC").first_or_create
-  Contribuyente.where(nombre_o_razon_social: "Ruben",
-                      primer_apellido: "Luis",
-                      segundo_apellido: "Santiago",
-                      persona_fisica: true, email: "ruben@mail.com",
-                      rfc: "AAAA111111AAD").first_or_create
-  Contribuyente.where(nombre_o_razon_social: "Rodrigo",
-                      primer_apellido: "Bautista",
-                      segundo_apellido: "Nose", persona_fisica: true,
-                      email: "rodrigo@mail.com",
-                      rfc: "AAAA111111AAE").first_or_create
-  Contribuyente.where(nombre_o_razon_social: "andrea",
-                      primer_apellido: "Jeronimo",
-                      segundo_apellido: "Nose", persona_fisica: true,
-                      email: "andrea@mail.com",
-                      rfc: "AAAA111111AAF").first_or_create
+  if Contribuyente.count.zero?
+    6.times do |n|
+      Contribuyente.create!(
+        nombre_o_razon_social: values[:nombre_o_razon_social][n],
+        primer_apellido: values[:primer_apellido][n],
+        segundo_apellido: values[:segundo_apellido][n],
+        persona_fisica: values[:persona_fisica],
+        email: values[:email][n],
+        rfc: values[:rfc][n],
+        concepto_ids: values[:concepto_ids]
+      )
+    end
+  end
 
   puts "Creando Domicilios para contribuyentes..."
   Contribuyente.ids.each do |id|
@@ -56,22 +65,33 @@ if Rails.env.development?
                     localidad: "Oaxaca", municipio: "Centro",
                     estado: "Oaxaca", pais: "México",
                     direccionable_type: "Contribuyente",
-                    direccionable_id: id).first_or_create
+                    direccionable_id: id).first_or_create!
+  end
+
+  puts "Creando a Super User"
+
+  if Usuario.where(rol: 4).empty?
+    Usuario.create!(nombre: "superuser", username: "superuser",
+                    rol: 4, password: "1qaz2wsx")
   end
 
   puts "Creando Administrador..."
-  Usuario.create(nombre: "admin", username: "admin",
-                 rol: 3, password: "1qaz2wsx") rescue nil
+  if Administrador.count.zero?
+    Administrador.create!(nombre: "admin", username: "admin",
+                   rol: 3, password: "1qaz2wsx")
+  end
 
   puts "Creando Cajero..."
-  Cajero.create(nombre: "cajero de prueba", username: "cajero",
-                password: "1qaz2wsx", rol: 1,
-                contribuyente_id: Contribuyente.first.id) rescue nil
+  if Cajero.count.zero? and Contribuyente.first.id
+    Cajero.create!(nombre: "cajero de prueba", username: "cajero",
+                  password: "1qaz2wsx", rol: 1,
+                  contribuyente_id: Contribuyente.first.id)
+  end
 
   puts "Creando Caja..."
   Caja.where(nombre: "Principal",
              descripcion: "Se localiza en el municipio",
-             numero: 1).first_or_create
+             numero: 1).first_or_create!
 end
 
 puts "Creando Cuentas..."

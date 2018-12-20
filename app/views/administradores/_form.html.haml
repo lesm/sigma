@@ -1,0 +1,15 @@
+-# frozen_string_literal: true
+= simple_form_for(@administrador) do |f|
+  .row
+    .col-md-6
+      = f.input :nombre
+    .col-md-6
+      = f.input :username
+    .col-md-6
+      = f.input :password
+    .col-md-6
+      %label Activar / Desactivar
+      = f.input :activo
+
+  .btn-group.float-right
+    = f.button :submit, class: 'btn btn-sm btn-primary'

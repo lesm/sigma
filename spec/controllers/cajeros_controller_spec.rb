@@ -97,6 +97,7 @@ RSpec.describe CajerosController, type: :controller do
   end
 
   describe "PUT #update" do
+    #TODO fix these tests
     context "with valid params" do
       let(:new_attributes) do
         {
