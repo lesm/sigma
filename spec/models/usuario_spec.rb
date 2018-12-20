@@ -17,11 +17,11 @@ RSpec.describe Usuario, type: :model do
     end
   end
 
-   describe "#sin_arqueo?" do
-     it "is false" do
-       expect(usuario).to_not be_sin_arqueo
-     end
-   end
+  describe "#sin_arqueo?" do
+    it "is false" do
+      expect(usuario).to_not be_sin_arqueo
+    end
+  end
 
   describe "#caja" do
     it "is nil" do

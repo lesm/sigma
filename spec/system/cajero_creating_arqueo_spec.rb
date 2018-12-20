@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "New Arqueo", type: :system do
+RSpec.describe "Cajero Creating Arqueo", type: :system do
 
   before :each do
     dado_que_hay_un_cajero_logueado_con_una_caja

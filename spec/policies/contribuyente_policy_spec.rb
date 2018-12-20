@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContribuyentePolicy do
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cajero) do
     create :cajero, :con_contribuyente,
       rol: 1, contribuyente: contribuyente

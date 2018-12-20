@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe IngresoPorClasificarPolicy do
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
 
   let(:cajero) { create :cajero, :con_contribuyente }
   let(:cierre_caja) { build :cierre_caja, cajero: cajero }

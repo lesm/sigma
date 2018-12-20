@@ -20,6 +20,7 @@ RSpec.describe Cajero, type: :model do
         contribuyente: contribuyente,
         rol: nil
     end
+
     it "after create must be cajero rol" do
       expect(cajero).to be_cajero
     end

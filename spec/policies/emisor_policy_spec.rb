@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EmisorPolicy do
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cajero) { create :cajero, :con_contribuyente, rol: 1 }
   let(:emisor) { create :emisor, :con_direccion }
 

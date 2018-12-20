@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def para_super_user?
+    current_usuario.super_user?
+  end
+
   def para_admin?
     current_usuario.admin?
   end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CuentaPolicy do
   let(:cajero) { create :cajero, :con_contribuyente }
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:usuario) { create :usuario, rol: 0 }
   let(:cuentas) { create_list :cuenta, 5 }
 

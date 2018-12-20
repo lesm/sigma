@@ -1,14 +1,18 @@
 module Helper
   module SessionHelpers
-    def sign_in_cajero(usuario = cajero)
+    def sign_in_super_user(usuario = create_super_user)
       sign_in(usuario)
     end
 
-    def sign_in_admin(usuario = admin)
+    def sign_in_cajero(usuario = create_cajero)
       sign_in(usuario)
     end
 
-    def sign_in_admin_with_municipio(usuario = admin)
+    def sign_in_admin(usuario = create_admin)
+      sign_in(usuario)
+    end
+
+    def sign_in_admin_with_municipio(usuario = create_admin)
       registra_municipio
       sign_in(usuario)
     end
@@ -17,17 +21,21 @@ module Helper
       create :emisor, :con_direccion
     end
 
-    def admin
-      create :usuario, :admin
+    def create_super_user
+      create :usuario, :super_user
     end
 
-    def cajero
+    def create_admin
+      create :administrador
+    end
+
+    def create_cajero
       create :cajero,
-        contribuyente: contribuyente,
+        contribuyente: build_contribuyente,
         caja: caja
     end
 
-    def contribuyente
+    def build_contribuyente
       build :contribuyente, :con_direccion
     end
 

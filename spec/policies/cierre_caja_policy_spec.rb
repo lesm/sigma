@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CierreCajaPolicy do
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
 
   let(:cajero) { create :cajero, :con_contribuyente, rol: 1 }
   let(:cierre_caja) { create :cierre_caja, :with_arqueo, cajero: cajero }

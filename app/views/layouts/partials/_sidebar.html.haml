@@ -104,5 +104,10 @@
                 %a.nav-link{:href => "#"}
                   %i.fa.fa-circle-o.nav-icon
                   %p Arqueos
+        - if para_super_user?
+          %li.nav-item
+            = link_to new_administrador_path, class: "nav-link #{ controller_name == 'administradores' && 'active' }" do
+              %i.fa.fa-home.nav-icon
+              %p Administrador
         %li.nav-item#linkCloseSession
           = render "layouts/partials/boton_cerrar_sesion"

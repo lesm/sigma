@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe HistorialCajaPolicy do
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cajero) { create :cajero, :con_contribuyente, rol: 1 }
   let(:historial_cajas) do
     create_list :historial_caja, 5, cajero: cajero, caja: cajero.caja

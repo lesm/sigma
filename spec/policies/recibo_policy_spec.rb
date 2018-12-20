@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReciboPolicy do
   let(:caja) { create :caja }
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cajero) { create :cajero, :con_contribuyente, rol: 1, caja: caja }
   let(:recibo) { create :recibo, :para_nuevo_arqueo, caja: caja }
   let(:recibos) { create_list :recibo, 5, :para_nuevo_arqueo, caja: caja }

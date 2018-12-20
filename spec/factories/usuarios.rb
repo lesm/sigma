@@ -7,10 +7,10 @@ FactoryBot.define do
     rol { 0 }
   end
 
-  trait :admin do
+  trait :super_user do
     after(:build) do |usuario|
-      usuario.username = "admin"
-      usuario.rol = 3
+      usuario.username = "super_user"
+      usuario.rol = 4
     end
   end
 end

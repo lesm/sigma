@@ -6,7 +6,7 @@ RSpec.describe CajeroPolicy do
     create :cajero, :con_contribuyente,
       rol: 1, caja: caja
   end
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cajeros) do
     create_list :cajero, 5, :con_contribuyente,
       caja: caja

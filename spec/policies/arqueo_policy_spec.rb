@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ArqueoPolicy do
   let(:cajero) { create :cajero, :con_contribuyente }
   let(:cajero_dos) { create :cajero, :con_contribuyente }
-  let(:admin) { create :usuario, :admin }
+  let(:admin) { create :administrador }
   let(:cierre_caja) { create :cierre_caja, cajero: cajero }
   let(:cierre_caja_dos) { create :cierre_caja, cajero: cajero_dos }
   let(:arqueos_cajero_uno) { create_list :arqueo, 5, cierre_caja: cierre_caja }
