@@ -34,7 +34,7 @@ class CajerosController < ApplicationController
 
     respond_to do |format|
       if @cajero.save
-        format.html { redirect_to @cajero, notice: 'Cajero was successfully created.' }
+        format.html { redirect_to @cajero, notice: 'Cajero fue creado correctamente.' }
         format.json { render :show, status: :created, location: @cajero }
       else
         build_contribuyente

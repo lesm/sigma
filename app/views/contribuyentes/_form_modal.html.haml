@@ -1,4 +1,4 @@
-= simple_form_for(@contribuyente_new, remote: true) do |cf|
+= simple_form_for(contribuyente, remote: true) do |cf|
   .row
     .col-md-6
       %h3 Datos Contribuyente
@@ -7,6 +7,9 @@
     .col-md-6
       %h3 Datos Dirección
       = render "direcciones/direccion_fields", f: cf
+
+    .col-md-12
+      = render "contribuyentes/cuentas_fields", f: cf
 
   .btn-group.float-right
     = button_tag :submit, class: 'btn btn-sm btn-primary' do

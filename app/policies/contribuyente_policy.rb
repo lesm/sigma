@@ -7,22 +7,22 @@ class ContribuyentePolicy < ApplicationPolicy
   end
 
   def new?
-    create?
-  end
-
-  def create?
     user.cajero?
   end
 
+  def create?
+    user.cajero? or user.admin?
+  end
+
   def show?
-    create?
+    new?
   end
 
   def edit?
-    create?
+    new?
   end
 
   def update?
-    create?
+    new?
   end
 end

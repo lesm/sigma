@@ -24,4 +24,5 @@
       Regresar
     = f.button :submit, class: 'btn btn-sm btn-primary'
 
-= render "contribuyentes/modal_contribuyente" if para_registro?
+- if para_registro?
+  = render "contribuyentes/modal_contribuyente", contribuyente: @contribuyente
