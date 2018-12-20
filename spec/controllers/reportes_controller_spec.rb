@@ -91,4 +91,38 @@ RSpec.describe ReportesController, type: :controller do
       end
     end
   end
+
+  describe "POST #cuentas" do
+    let(:valid_attributes) do
+      {
+        nombre: "cuentas",
+        cuenta_id: cuenta.id,
+        fecha_inicial: 3.months.ago,
+        fecha_final: Date.current
+      }
+    end
+
+    let(:invalid_attributes) do
+      {
+        nombre: "cajero",
+        cuenta_id: cuenta.id,
+        fecha_inicial: 3.months.ago,
+        fecha_final: nil
+      }
+    end
+
+    context "with valid params" do
+      it "download a pdf file" do
+        post :cuentas, params: { reporte_form: valid_attributes }
+        expect(response.content_type).to eq "application/pdf"
+      end
+    end
+
+    context "with invalid params" do
+      it "renders to new" do
+        post :cuentas, params: { reporte_form: invalid_attributes }
+        expect(response).to be_successful
+      end
+    end
+  end
 end

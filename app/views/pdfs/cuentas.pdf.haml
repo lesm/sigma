@@ -1,0 +1,18 @@
+%h5.text-uppercase.text-center
+  %strong Cuentas
+%h6.text-uppercase.text-center
+  reporte del #{@reporte.fecha_inicial} al #{@reporte.fecha_final}
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Cuenta
+      %th Cantidad
+      %th Precio Unitario
+      %th Importe
+  %tbody.text-right
+    - @cuentas.each do |cuenta|
+      %tr
+        %td.text-left= cuenta[:cuenta]
+        %td= cuenta[:cantidad]
+        %td= number_to_currency cuenta[:valor_unitario]
+        %td= number_to_currency cuenta[:importe]

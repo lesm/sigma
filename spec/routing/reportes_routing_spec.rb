@@ -13,5 +13,9 @@ RSpec.describe ReportesController, type: :routing do
     it "routes to #cuenta" do
       expect(post: "/reportes/cuenta").to route_to("reportes#cuenta")
     end
+
+    it "routes to #cuenta" do
+      expect(post: "/reportes/cuentas").to route_to("reportes#cuentas")
+    end
   end
 end

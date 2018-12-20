@@ -38,10 +38,31 @@ class ReportesController < ApplicationController
     end
   end
 
+  def cuentas
+    @reporte = CuentasForm.new(reporte_params)
+    if @reporte.valid?
+      conceptos = Concepto.where(conceptos: {created_at: range_of_dates})
+        .group_by(&:cuenta_id)
+
+      @cuentas = conceptos.map do |key, value|
+        {
+          cuenta: "#{value.first.clave} - #{value.first.descripcion}",
+          cantidad: value.map(&:cantidad).reduce(0, :+),
+          valor_unitario: value.map(&:valor_unitario).reduce(0, :+),
+          importe: value.map(&:importe).reduce(0, :+)
+        }
+      end
+
+      render generar_pdf("cuentas").merge!(options)
+    else
+      render :new
+    end
+  end
+
   private
 
   def nombre_pdf
-    tipo = @cajero || @cuenta
+    tipo = @cajero || @cuenta || "reporte"
     "#{tipo}_#{Date.current.to_s(:number)}".upcase
   end
 
