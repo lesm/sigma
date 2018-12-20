@@ -45,14 +45,14 @@ RSpec.describe ReportesController, type: :controller do
 
     context "with valid params" do
       it "download a pdf file" do
-        post :cajeros, params: { reporte_form: valid_attributes }
+        post :cajero, params: { reporte_form: valid_attributes }
         expect(response.content_type).to eq "application/pdf"
       end
     end
 
     context "with valid params" do
       it "renders to new" do
-        post :cajeros, params: { reporte_form: valid_attributes }
+        post :cajero, params: { reporte_form: valid_attributes }
         expect(response).to be_successful
       end
     end
@@ -79,14 +79,14 @@ RSpec.describe ReportesController, type: :controller do
 
     context "with valid params" do
       it "download a pdf file" do
-        post :cuentas, params: { reporte_form: valid_attributes }
+        post :cuenta, params: { reporte_form: valid_attributes }
         expect(response.content_type).to eq "application/pdf"
       end
     end
 
     context "with valid params" do
       it "renders to new" do
-        post :cuentas, params: { reporte_form: valid_attributes }
+        post :cuenta, params: { reporte_form: valid_attributes }
         expect(response).to be_successful
       end
     end
