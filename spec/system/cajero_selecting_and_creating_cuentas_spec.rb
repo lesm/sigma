@@ -92,7 +92,7 @@ RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
   end
 
   def concepto_loterias_debe_ser_agregado_a_options_cuenta_ids
-    sleep 0.5
+    sleep 0.7
     expect(page.all("select#cuenta_ids option").map(&:text)).to include "110103 - LOTERÍAS"
   end
 
