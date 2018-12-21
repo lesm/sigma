@@ -1,4 +1,3 @@
 class DatosPermisoPublicidad < DatosConcepto
-  validates :fecha, presence: true
+  validates :fecha, :years, presence: true
 end
-

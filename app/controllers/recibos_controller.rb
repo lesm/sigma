@@ -31,6 +31,7 @@ class RecibosController < ApplicationController
           contribuyente_id: recibo_params["contribuyente_id"],
           cuenta_ids: params["cuenta_ids"].first.split
         }
+        #TODO set total correctly after render to recibo_steps/set_conceptos
         format.html { render "recibo_steps/set_conceptos" }
         format.json { render json: @recibo.errors, status: :unprocessable_entity }
       end
@@ -72,7 +73,7 @@ class RecibosController < ApplicationController
             :nombre_contratista, :fecha_refrendo, :cantidad_folios_cinco,
             :cantidad_folios_diez, :resposable, :mes_pago, :fecha_corte,
             :numero_contrato, :numero_medidor, :lectura_actual,
-            :lectura_anterior, :consumo, :ruta, :lecturista, :type
+            :lectura_anterior, :consumo, :ruta, :lecturista, :type, years: []
           ]
         ]
       )

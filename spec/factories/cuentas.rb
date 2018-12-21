@@ -35,5 +35,13 @@ FactoryBot.define do
         cuenta.formato = "DatosComun"
       end
     end
+
+    trait :de_licencias_y_refrendos do
+      after :build do |cuenta|
+        cuenta.codigo = "430601"
+        cuenta.descripcion = "LICENCIAS Y REFRENDOS COMERCIAL"
+        cuenta.formato = "DatosLicenciaComercial"
+      end
+    end
   end
 end
