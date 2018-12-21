@@ -14,6 +14,10 @@ class RecibosController < ApplicationController
   # GET /recibos/1.json
   def show
     authorize @recibo
+    respond_to do |format|
+      format.html
+      format.pdf { render generar_pdf("recibo") }
+    end
   end
 
   # POST /recibos
@@ -48,12 +52,14 @@ class RecibosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_recibo
       @recibo = Recibo.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def nombre_pdf
+      "recibo_#{@recibo.id}_#{@recibo.created_at.to_s(:number)}".upcase
+    end
+
     def recibo_params
       params.require(:recibo).permit(
         :id, :serie, :folio, :moneda, :tipo_comprobante,

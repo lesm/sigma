@@ -29,7 +29,10 @@
                     = number_to_currency(recibo.total)
                 %td= l recibo.fecha_emision, format: :emision
                 %td
-                  = link_to recibo, title: "Ver", class: "btn btn-sm btn-info" do
-                    %i.fa.fa-eye
+                  .btn-group
+                    = link_to [recibo, format: "pdf"], title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
+                      %i.fa.fa-print
+                    = link_to recibo, title: "Ver", class: "btn btn-sm btn-info" do
+                      %i.fa.fa-eye
       .row.justify-content-center
         = paginate @recibos
