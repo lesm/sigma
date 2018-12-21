@@ -14,7 +14,7 @@ class Concepto < ApplicationRecord
     :nombre_contratista, :fecha_refrendo, :cantidad_folios_cinco,
     :cantidad_folios_diez, :resposable, :mes_pago, :fecha_corte,
     :numero_contrato, :numero_medidor, :lectura_actual,
-    :lectura_anterior, :consumo, :ruta, :lecturista,
+    :lectura_anterior, :consumo, :ruta, :lecturista, :years,
     to: :datos_concepto, prefix: false, allow_nil: true
 
   def importe_value

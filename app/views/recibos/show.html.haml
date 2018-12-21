@@ -3,6 +3,9 @@
     .card.card-danger.card-outline
       .card-header
         .card-title Detalle Recibo
+        .card-tools
+          = link_to [@recibo, format: "pdf"], title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
+            %i.fa.fa-print
       .card-body
         .row
           .col-md-6
@@ -42,6 +45,9 @@
                   %tr
                     %th Cajero
                     %td= @recibo.cajero
+                  %tr
+                    %th Cajero
+                    %td= @recibo.caja
           .col-md-6
             %fieldset
               %legend

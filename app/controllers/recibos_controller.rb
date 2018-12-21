@@ -14,6 +14,10 @@ class RecibosController < ApplicationController
   # GET /recibos/1.json
   def show
     authorize @recibo
+    respond_to do |format|
+      format.html
+      format.pdf { render generar_pdf("recibo") }
+    end
   end
 
   # POST /recibos
@@ -31,6 +35,7 @@ class RecibosController < ApplicationController
           contribuyente_id: recibo_params["contribuyente_id"],
           cuenta_ids: params["cuenta_ids"].first.split
         }
+        #TODO set total correctly after render to recibo_steps/set_conceptos
         format.html { render "recibo_steps/set_conceptos" }
         format.json { render json: @recibo.errors, status: :unprocessable_entity }
       end
@@ -48,12 +53,14 @@ class RecibosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_recibo
       @recibo = Recibo.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def nombre_pdf
+      "recibo_#{@recibo.id}_#{@recibo.created_at.to_s(:number)}".upcase
+    end
+
     def recibo_params
       params.require(:recibo).permit(
         :id, :serie, :folio, :moneda, :tipo_comprobante,
@@ -72,7 +79,7 @@ class RecibosController < ApplicationController
             :nombre_contratista, :fecha_refrendo, :cantidad_folios_cinco,
             :cantidad_folios_diez, :resposable, :mes_pago, :fecha_corte,
             :numero_contrato, :numero_medidor, :lectura_actual,
-            :lectura_anterior, :consumo, :ruta, :lecturista, :type
+            :lectura_anterior, :consumo, :ruta, :lecturista, :type, years: []
           ]
         ]
       )

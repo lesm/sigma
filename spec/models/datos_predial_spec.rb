@@ -8,4 +8,5 @@ RSpec.describe DatosPredial, type: :model do
   it { should validate_presence_of :ubicacion }
   it { should validate_presence_of :base_catastral }
   it { should validate_presence_of :impuesto_predial }
+  it { should validate_presence_of :years }
 end

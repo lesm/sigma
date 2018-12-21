@@ -24,7 +24,18 @@ FactoryBot.define do
       numero_cuenta { "23322213" }
       ubicacion { "A lada de mi casa" }
       observaciones { "Terreno grande" }
+      years { ["2015", "2016"] }
       type { "DatosPredial" }
+    end
+
+    trait :licencia_comercial do
+      sequence(:folio) { |n| "482181-#{n}" }
+      serie { "AA" }
+      observaciones { "Pago de 2015"}
+      fecha_refrendo { Date.current }
+      fecha { Date.current }
+      years { ["2015", "2016"] }
+      type { "DatosLicenciaComercial" }
     end
   end
 end

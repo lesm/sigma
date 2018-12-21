@@ -8,6 +8,9 @@
   %th Fecha de Refrendo
   %td= l concepto.fecha_refrendo, format: :complete
 %tr{class: color }
+  %th Años de Refrendo
+  %td= concepto.years.join(",")
+%tr{class: color }
   %th Serie
   %td= concepto.serie
 %tr{class: color }

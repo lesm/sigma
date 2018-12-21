@@ -63,6 +63,7 @@ class ContribuyentesController < ApplicationController
   end
 
   def asignar_cuentas
+    #TODO add the newest cuenta to cuentas_seleccionadas
     @cuentas_seleccionadas = cuentas_seleccionadas
     update_cuentas
     load_cuentas_contribuyente

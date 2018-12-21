@@ -107,6 +107,12 @@ RSpec.describe RecibosController, type: :controller do
       get :show, params: { id: recibo.to_param }
       expect(response).to be_successful
     end
+
+    it "returns a success response with format pdf" do
+      recibo = Recibo.create! valid_attributes
+      get :show, params: { id: recibo.to_param, format: "pdf" }
+      expect(response).to be_successful
+    end
   end
 
   describe "POST #create" do

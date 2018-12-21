@@ -4,6 +4,9 @@
 %tr{class: color }
   %th Emisión
   %td= concepto.fecha.year
+%tr{class: color }
+  %th Años de Pagados
+  %td= concepto.years.join(",")
 %tr{class: color}
   %th Folio
   %td= concepto.folio

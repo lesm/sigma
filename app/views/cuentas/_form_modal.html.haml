@@ -5,7 +5,7 @@
         Contribuyente
         = @contribuyente
     .col-md-12
-      = select_tag :contribuyente_cuenta_ids, options_for_select(@cuentas_por_asignar || []), class: "form-control select2-multiple", name: "contribuyente[cuenta_ids][]"
+      = select_tag :contribuyente_cuenta_ids, options_for_select(@cuentas_por_asignar || []), class: "form-control select2-multiple", name: "contribuyente[cuenta_ids][]", multiple: true
       = hidden_field nil, :cuentas_seleccionadas, name: "[cuentas_seleccionadas][]"
 
     .btn-group.float-right

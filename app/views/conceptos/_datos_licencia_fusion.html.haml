@@ -11,6 +11,9 @@
   %th Fecha
   %td= l concepto.fecha, format: :short
 %tr{class: color }
+  %th Años de Refrendo
+  %td= concepto.years.join(",")
+%tr{class: color }
   %th Observaciones
   %td= concepto.observaciones
 %tr{class: color }

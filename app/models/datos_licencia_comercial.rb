@@ -1,3 +1,3 @@
-class DatosLicenciaComercial < DatosConcepto
-  validates :fecha, :fecha_refrendo, :serie, :folio, presence: true
+class DatosLicenciaComercial < DatosLicencia
+  validates :fecha_refrendo, presence: true
 end
