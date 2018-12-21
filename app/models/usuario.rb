@@ -24,7 +24,7 @@ class Usuario < ApplicationRecord
 
   def to_s
     return "" if nombre.nil?
-    nombre.capitalize
+    nombre.titleize
   end
 
   def caja
