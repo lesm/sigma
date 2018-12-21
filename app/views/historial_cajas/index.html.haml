@@ -16,7 +16,11 @@
               %tr
                 %td= historial_caja.caja
                 %td= historial_caja.cajero
-                %td= l historial_caja.created_at, format: :short
-
+                %td= l historial_caja.created_at, format: :apertura
+                %td
+                  - if historial_caja.fecha_cierre.present?
+                    = l historial_caja.fecha_cierre, format: :cierre
+                  - else
+                    En uso
       .row.justify-content-center
         = paginate @historial_cajas
