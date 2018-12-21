@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :administradores, except: [:destroy]
 
   resources :reportes, only: [:new] do
-    post :cajeros, on: :collection
+    post :cajero, on: :collection
+    post :cuenta, on: :collection
     post :cuentas, on: :collection
   end
   resources :adeudos

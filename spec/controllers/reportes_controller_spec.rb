@@ -24,7 +24,7 @@ RSpec.describe ReportesController, type: :controller do
     end
   end
 
-  describe "POST #cajeros" do
+  describe "POST #cajero" do
     let(:valid_attributes) do
       {
         nombre: "cajero",
@@ -45,20 +45,20 @@ RSpec.describe ReportesController, type: :controller do
 
     context "with valid params" do
       it "download a pdf file" do
-        post :cajeros, params: { reporte_form: valid_attributes }
+        post :cajero, params: { reporte_form: valid_attributes }
         expect(response.content_type).to eq "application/pdf"
       end
     end
 
-    context "with valid params" do
+    context "with invalid params" do
       it "renders to new" do
-        post :cajeros, params: { reporte_form: valid_attributes }
+        post :cajero, params: { reporte_form: invalid_attributes }
         expect(response).to be_successful
       end
     end
   end
 
-  describe "POST #cuentas" do
+  describe "POST #cuenta" do
     let(:valid_attributes) do
       {
         nombre: "cuenta",
@@ -79,14 +79,48 @@ RSpec.describe ReportesController, type: :controller do
 
     context "with valid params" do
       it "download a pdf file" do
+        post :cuenta, params: { reporte_form: valid_attributes }
+        expect(response.content_type).to eq "application/pdf"
+      end
+    end
+
+    context "with invalid params" do
+      it "renders to new" do
+        post :cuenta, params: { reporte_form: invalid_attributes }
+        expect(response).to be_successful
+      end
+    end
+  end
+
+  describe "POST #cuentas" do
+    let(:valid_attributes) do
+      {
+        nombre: "cuentas",
+        cuenta_id: cuenta.id,
+        fecha_inicial: 3.months.ago,
+        fecha_final: Date.current
+      }
+    end
+
+    let(:invalid_attributes) do
+      {
+        nombre: "cajero",
+        cuenta_id: cuenta.id,
+        fecha_inicial: 3.months.ago,
+        fecha_final: nil
+      }
+    end
+
+    context "with valid params" do
+      it "download a pdf file" do
         post :cuentas, params: { reporte_form: valid_attributes }
         expect(response.content_type).to eq "application/pdf"
       end
     end
 
-    context "with valid params" do
+    context "with invalid params" do
       it "renders to new" do
-        post :cuentas, params: { reporte_form: valid_attributes }
+        post :cuentas, params: { reporte_form: invalid_attributes }
         expect(response).to be_successful
       end
     end
