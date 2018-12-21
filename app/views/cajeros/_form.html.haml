@@ -4,14 +4,14 @@
     .col-md-12
       %h3 Datos de inicio de sesión
     .col-md-6
-      = f.input :username
+      = f.input :username, input_html: { autocomplete: "nope" }
     .col-md-6
       = f.input :nombre, readonly: true
     - if @cajero.persisted?
       = f.input :password, as: :hidden, value: nil
     - else
       .col-md-6
-        = f.input :password
+        = f.input :password, input_html: { autocomplete: "nope" }
     .col-md-6
       %label Activar / Desactivar
       = f.input :activo

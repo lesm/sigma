@@ -51,6 +51,8 @@ es-MX:
         numero_municipio: "Número Municipio"
         fecha: "Fecha de Evento"
         valor_unitario: "Precio Unitario"
+        password: "Contraseña"
+        username: "Username"
     # Examples
     # labels:
     #   defaults:
