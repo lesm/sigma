@@ -1,0 +1,107 @@
+.space-top.text-uppercase
+  .row
+    .col-md-4
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th{ colspan: 2 } INFORMACIÓN DEL RECEPTOR
+        %tbody
+          %tr
+            %th r.f.c.
+            %td= @recibo.contribuyente.rfc
+          %tr
+            %th razón social
+            %td= @recibo.contribuyente.nombre_completo
+          %tr
+            %th uso cfdi
+            %td= @recibo.uso_cfdi
+    .col-md-4.col-offset-4.pull-right
+      %table.table.text-striped.table-bordered
+        %tbody
+          %tr
+            %th Fecha
+            %td= l @recibo.created_at, format: :factura
+          %tr
+            %th Folio
+            %td= @recibo.folio
+          %tr
+            %th Cajero
+            %td= @recibo.cajero
+          %tr
+            %th Caja
+            %td= "#{@recibo.caja.numero} #{@recibo.caja}"
+
+  .space-top.row
+    .col-md-12
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th no. id
+            %th clave sat
+            %th descripción
+            %th cantidad
+            %th valor unitario
+            %th importe
+        %tbody
+          - @recibo.conceptos.each do |concepto|
+            %tr
+              %td
+              %td
+              %td= "#{concepto.clave} - #{concepto.descripcion}"
+              %td.text-right= concepto.cantidad
+              %td.text-right= number_to_currency concepto.valor_unitario
+              %td.text-right= number_to_currency concepto.importe
+        %tfoot
+          %tr.text-right
+            %td{ colspan: 4 }
+            %td
+              %strong Total
+            %td
+              %strong
+                = number_to_currency @recibo.total
+
+  .space-top.row
+    .col-md-12
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th{ colspan: 4 } información adicional
+        %tbody
+          %tr
+            %th
+              forma de pago
+            %td
+              = @recibo.forma_pago
+            %th
+              moneda
+            %td
+              = @recibo.moneda
+          %tr
+            %th
+              método de pago
+            %td
+              = @recibo.metodo_pago
+            %th
+              tipo de comprobante
+            %td
+              = @recibo.type
+
+  .space-top.row
+    .col-md-8
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th{ colspan: 2 } sello digital del cfdi
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th{ colspan: 2 } sello del sat
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th{ colspan: 2 } cadena original del complemento de certificación del sat
+    .col-md-4
+      %table.table.text-striped.table-bordered
+        %thead
+          %tr
+            %th{ colspan: 2 } código bidimensional
