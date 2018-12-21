@@ -6,7 +6,7 @@ class ReportesController < ApplicationController
                                fecha_final: Date.current)
   end
 
-  def cajeros
+  def cajero
     @reporte = CajeroForm.new(reporte_params)
     if @reporte.valid?
       @cajero = Cajero.find(@reporte.cajero_id)
@@ -16,13 +16,14 @@ class ReportesController < ApplicationController
       @suma_montos_sistema = @cierre_cajas.map(&:monto_sistema).reduce(0,:+)
       @suma_montos_adeudo = @cierre_cajas.map(&:monto_adeudo).reduce(0,:+)
       @suma_montos_ingreso_por_clasificar = @cierre_cajas.map(&:monto_ingreso_por_clasificar).reduce(0,:+)
+
       render generar_pdf("cajero").merge!(options)
     else
       render :new
     end
   end
 
-  def cuentas
+  def cuenta
     @reporte = ConceptoForm.new(reporte_params)
     if @reporte.valid?
       @conceptos = Concepto.includes(:comprobante)
@@ -30,7 +31,34 @@ class ReportesController < ApplicationController
         .where(cuenta_id: @reporte.cuenta_id)
       @cuenta = Cuenta.find(@reporte.cuenta_id)
       @suma_importe_conceptos = @conceptos.map(&:importe).reduce(0,:+)
+
       render generar_pdf("cuenta").merge!(options)
+    else
+      render :new
+    end
+  end
+
+  def cuentas
+    @reporte = CuentasForm.new(reporte_params)
+    if @reporte.valid?
+      conceptos = Concepto.includes(:comprobante)
+        .where(comprobantes: {created_at: range_of_dates})
+        .group_by(&:cuenta_id)
+
+      @cuentas = conceptos.map do |key, value|
+        {
+          cuenta: "#{value.first.clave} - #{value.first.descripcion}",
+          cantidad: value.map(&:cantidad).reduce(0, :+),
+          valor_unitario: value.map(&:valor_unitario).reduce(0, :+),
+          importe: value.map(&:importe).reduce(0, :+)
+        }
+      end
+      @suma_importe_cuentas = 0
+      @cuentas.each do |cuenta|
+        @suma_importe_cuentas += cuenta[:importe]
+      end
+
+      render generar_pdf("cuentas").merge!(options)
     else
       render :new
     end
@@ -39,7 +67,8 @@ class ReportesController < ApplicationController
   private
 
   def nombre_pdf
-    "#{@cajero}_#{Date.current.to_s(:number)}".upcase
+    tipo = @cajero || @cuenta || "reporte"
+    "#{tipo}_#{Date.current.to_s(:number)}".upcase
   end
 
   def options

@@ -3649,3 +3649,6 @@ button.list-group-item-danger.active:focus {
 .text-overline {
   text-decoration: overline !important;
 }
+.text-underline {
+  text-decoration: underline !important;
+}

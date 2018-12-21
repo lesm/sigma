@@ -56,9 +56,14 @@
           = number_to_currency @arqueo.monto_no_efectivo
 
 .row.text-center.space-top
-  .col-md-6
-    .text-overline
-      Supervisor del área
-  .col-md-6
-    .text-overline
-      = @arqueo.cierre_caja.cajero
+  %h4
+    .col-md-6
+      .text-underline
+        = Administrador.first
+      %br
+      %strong JEFE DE INGRESOS
+    .col-md-6
+      .text-underline
+        = @arqueo.cierre_caja.cajero
+      %br
+      %strong CAJERO

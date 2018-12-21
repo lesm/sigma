@@ -43,9 +43,14 @@
 
 
 .row.text-center.space-top
-  .col-md-6
-    .text-overline
-      Supervisor del área
-  .col-md-6
-    .text-overline
-      = @cierre_caja.cajero
+  %h4
+    .col-md-6
+      .text-underline
+        = Administrador.first
+      %br
+      JEFE DE INGRESOS
+    .col-md-6
+      .text-underline
+        = @cierre_caja.cajero
+      %br
+      %strong CAJERO
