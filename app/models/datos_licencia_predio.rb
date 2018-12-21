@@ -1,3 +1,2 @@
-class DatosLicenciaPredio < DatosConcepto
-  validates :folio, :serie, :fecha, presence: true
+class DatosLicenciaPredio < DatosLicencia
 end

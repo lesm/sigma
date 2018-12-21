@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_210744) do
+ActiveRecord::Schema.define(version: 2018_12_20_193808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_210744) do
     t.string "lecturista"
     t.date "fecha_corte"
     t.date "mes_pago"
+    t.text "years", default: [], array: true
     t.index ["concepto_id"], name: "index_datos_conceptos_on_concepto_id"
   end
 
