@@ -4,11 +4,11 @@
     %p
     .row.text-right
       .col-md-6
-        = f.input :dos_mil_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+        -#= f.input :dos_mil_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
         = f.input :mil_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
         = f.input :quinientos_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
-      .col-md-6
         = f.input :doscientos_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
+      .col-md-6
         = f.input :cien_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
         = f.input :cincuenta_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
         = f.input :veinte_pesos, as: :integer, hint: "Cantidad de billetes", input_html: { min: 0 }
