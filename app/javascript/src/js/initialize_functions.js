@@ -6,6 +6,11 @@ function ready() {
   startSelect2WithLink()
   hideSelect2WithLink()
   startFocusSearch()
+  setTimeout(flash_messages, 5000)
+}
+
+function flash_messages() {
+  $(".alert").fadeOut()
 }
 
 function startFocusSearch() {

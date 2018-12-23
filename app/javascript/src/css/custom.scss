@@ -4,6 +4,13 @@
 @import 'var_adminlte';
 @import 'landing';
 
+.alert {
+  position: absolute;
+  right: -25px;
+  top: -25px;
+  z-index: 999;
+}
+
 .btn-primary {
   color: $white !important;
 }
