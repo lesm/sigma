@@ -47,7 +47,7 @@ class ArqueosController < ApplicationController
     respond_to do |format|
       if @cierre_caja.arqueos << @arqueo
         update_comprobantes_sin_arqueo
-        format.html { redirect_to @arqueo, notice: 'Arqueo se creo correctamente.' }
+        format.html { redirect_to @arqueo, notice: 'Arqueo fue creado correctamente.' }
         format.json { render :show, status: :created, location: @arqueo }
       else
         current_cierre_caja
@@ -72,12 +72,10 @@ class ArqueosController < ApplicationController
       @comprobantes.update_all(arqueo_id: @arqueo.id)
     end
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_arqueo
       @arqueo = Arqueo.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def arqueo_params
       params.require(:arqueo).permit(
         :monto_sistema, :monto_cajero, :observacion, :cierre_caja_id,

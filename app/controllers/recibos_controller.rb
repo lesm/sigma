@@ -28,7 +28,7 @@ class RecibosController < ApplicationController
 
     respond_to do |format|
       if @recibo.save
-        format.html { redirect_to @recibo, notice: 'Recibo creado correctamente.' }
+        format.html { redirect_to @recibo, notice: 'Recibo fue creado correctamente.' }
         format.json { render :show, status: :created, location: @recibo }
       else
         @cuenta_params = {
@@ -47,7 +47,7 @@ class RecibosController < ApplicationController
   def destroy
     @recibo.destroy
     respond_to do |format|
-      format.html { redirect_to recibos_url, notice: 'Recibo was successfully destroyed.' }
+      format.html { redirect_to recibos_url, notice: 'Recibo fue eliminado correctamente.' }
       format.json { head :no_content }
     end
   end

@@ -60,7 +60,6 @@ class CajerosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_cajero
       @cajero = Cajero.find(params[:id])
     end
@@ -77,7 +76,6 @@ class CajerosController < ApplicationController
       @contribuyente = Contribuyente.new(direccion: Direccion.new)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def cajero_params
       params.require(:cajero).permit(
         :id, :nombre, :username, :password, :activo, :contribuyente_id

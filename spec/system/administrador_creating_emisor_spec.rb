@@ -56,7 +56,7 @@ RSpec.describe "Administrador creating Emisor", type: :system do
   end
 
   def debe_haber_un_mensaje_de_registrar_un_municipio
-    expect(page).to have_content "Debes registrar un Municipio." 
+    expect(page).to have_content "Debes registrar un Municipio."
   end
 
   def cuando_admin_da_click_en_boton_crear_municipio
@@ -64,7 +64,7 @@ RSpec.describe "Administrador creating Emisor", type: :system do
   end
 
   def se_muestra_un_mensaje_de_municipio_creado_correctamente
-    expect(page).to have_content "Municipio se registro correctamente." 
+    expect(page).to have_content "Municipio fue creado correctamente."
   end
 
   def debe_ser_redireccionado_correctamente_a_cajeros_path

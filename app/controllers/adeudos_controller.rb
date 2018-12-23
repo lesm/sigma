@@ -29,7 +29,7 @@ class AdeudosController < ApplicationController
 
     respond_to do |format|
       if @adeudo.save
-        format.html { redirect_to @adeudo, notice: 'Adeudo was successfully created.' }
+        format.html { redirect_to @adeudo, notice: 'Adeudo fue creado correctamente.' }
         format.json { render :show, status: :created, location: @adeudo }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class AdeudosController < ApplicationController
   def update
     respond_to do |format|
       if @adeudo.update(adeudo_params)
-        format.html { redirect_to @adeudo, notice: 'Adeudo was successfully updated.' }
+        format.html { redirect_to @adeudo, notice: 'Adeudo fue actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @adeudo }
       else
         format.html { render :edit }
@@ -57,18 +57,16 @@ class AdeudosController < ApplicationController
   def destroy
     @adeudo.destroy
     respond_to do |format|
-      format.html { redirect_to adeudos_url, notice: 'Adeudo was successfully destroyed.' }
+      format.html { redirect_to adeudos_url, notice: 'Adeudo fue eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_adeudo
       @adeudo = Adeudo.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def adeudo_params
       params.require(:adeudo).permit(:anticipo, :monto, :liquidado, :cajero_id, :arqueo_id)
     end

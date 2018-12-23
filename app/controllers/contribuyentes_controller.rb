@@ -53,7 +53,7 @@ class ContribuyentesController < ApplicationController
     respond_to do |format|
       if @contribuyente.update(contribuyente_params)
         update_cuentas
-        format.html { redirect_to @contribuyente, notice: 'Contribuyente was successfully updated.' }
+        format.html { redirect_to @contribuyente, notice: 'Contribuyente fue actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @contribuyente }
       else
         format.html { render :edit }
@@ -75,7 +75,6 @@ class ContribuyentesController < ApplicationController
       cuentas.present? ? cuentas.first.split(",") : []
     end
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_contribuyente
       @contribuyente = Contribuyente.find(params[:id])
     end
@@ -89,7 +88,6 @@ class ContribuyentesController < ApplicationController
       params[:contribuyente][:cuenta_ids] || contribuyente_params[:concepto_ids]
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def contribuyente_params
       params.require(:contribuyente).permit(
         :nombre_o_razon_social, :primer_apellido, :segundo_apellido, :persona_fisica,

@@ -54,7 +54,7 @@ RSpec.describe "Cajero creating a recibo", type: :system do
   end
 
   def cajero_debe_ver_recibo_creado_correctamente
-    expect(page).to have_content "Recibo creado correctamente."
+    expect(page).to have_content "Recibo fue creado correctamente."
   end
 
   def cajero_debe_ver_anios_de_refrendo_2018_y_2019
