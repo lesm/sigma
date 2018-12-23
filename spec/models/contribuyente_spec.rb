@@ -25,6 +25,58 @@ RSpec.describe Contribuyente, type: :model do
     end
   end
 
+  describe "#nombre_o_razon_social" do
+    let(:contribuyente) do
+      create :contribuyente, :con_direccion,
+        nombre_o_razon_social: "Octavio",
+        primer_apellido: "Paz",
+        segundo_apellido: "Lozano"
+    end
+
+    let(:cajero) do
+      create :cajero, contribuyente: contribuyente,
+        nombre: "Octavio Paz Lozano"
+    end
+
+    before :each do
+      cajero
+    end
+
+    context "When contribuyente belongs_to a cajero" do
+      context "when nombre_o_razon_social has changed" do
+        it "cajero nombre must be updated" do
+          contribuyente.nombre_o_razon_social = "Irineo"
+          contribuyente.save!
+          expect(cajero.reload.nombre).to eq "Irineo Paz Lozano"
+        end
+      end
+
+      context "when primer_apellido has changed" do
+        it "cajero nombre must be updated" do
+          contribuyente.primer_apellido = "Fuentes"
+          contribuyente.save!
+          expect(cajero.reload.nombre).to eq "Octavio Fuentes Lozano"
+        end
+      end
+
+      context "when segundo_apellido has changed" do
+        it "cajero nombre must be updated" do
+          contribuyente.segundo_apellido = "Macías"
+          contribuyente.save!
+          expect(cajero.reload.nombre).to eq "Octavio Paz Macías"
+        end
+      end
+
+      context "when differents attributes has changed but no nombre_o_razon_social and primer_apellido and segundo_apellido" do
+        it "cajero nombre must not be updated" do
+          contribuyente.email = "mail@mail.com"
+          contribuyente.save!
+          expect(cajero.reload.nombre).to eq "Octavio Paz Lozano"
+        end
+      end
+    end
+  end
+
   describe ".search" do
     let(:arturo) do
       create :contribuyente, :con_direccion,

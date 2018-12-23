@@ -33,6 +33,8 @@ class Contribuyente < ApplicationRecord
 
   attr_accessor :concepto_ids
 
+  after_save :update_nombre_cajero, if: :cajero_present?
+
   def self.search search
     where("concat_ws(' ', nombre_o_razon_social, primer_apellido, segundo_apellido, rfc) ILIKE ?", "%#{search&.squish}%")
   end
@@ -50,6 +52,21 @@ class Contribuyente < ApplicationRecord
   end
 
   private
+
+  def cajero_present?
+    cajero.present?
+  end
+
+  def update_nombre_cajero
+    return unless attributes_name_have_changed?
+    cajero.update_column(:nombre, nombre_completo)
+  end
+
+  def attributes_name_have_changed?
+    saved_change_to_nombre_o_razon_social? or
+      saved_change_to_primer_apellido or
+      saved_change_to_segundo_apellido
+  end
 
   def validate_length
     if length_rfc_persona_fisica_invalid?
