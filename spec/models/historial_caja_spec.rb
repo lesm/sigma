@@ -6,6 +6,28 @@ RSpec.describe HistorialCaja, type: :model do
 
   it { should validate_presence_of :caja_id }
 
+  describe ".period" do
+    context "when fecha_inicial is 2018-12-01 and fecha_final is 2018-12-31" do
+      let(:caja) { create :caja }
+      let(:cajero) { create :cajero, :con_contribuyente, caja: caja }
+      let(:historial_cajas_noviembre) do
+        create_list :historial_caja, 10, :noviembre, cajero: cajero, caja: caja
+      end
+      let(:historial_cajas_diciembre) do
+        create_list :historial_caja, 10, :diciembre, cajero: cajero, caja: caja
+      end
+
+      before :each do
+        [historial_cajas_noviembre, historial_cajas_diciembre]
+      end
+
+      it "returns 10 registers" do
+        fechas = { inicial: "2018-12-01 00:00:00", final: "2018-12-31 23:59:59" }
+        expect(HistorialCaja.period(fechas).count).to eq 10
+      end
+    end
+  end
+
   describe ".last_historial_caja" do
     let(:caja) { create :caja }
     let(:cajero) do

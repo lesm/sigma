@@ -4,7 +4,9 @@ class HistorialCajasController < ApplicationController
   before_action :set_caja, only: :create
 
   def index
-    @historial_cajas = policy_scope(HistorialCaja).page(params[:page])
+    fechas = { inicial: params[:fecha_inicial], final: params[:fecha_final] }
+    @historial_cajas = policy_scope(HistorialCaja).includes(:caja, :cajero)
+      .period(fechas).order(created_at: :desc).page(params[:page])
   end
 
   def new
