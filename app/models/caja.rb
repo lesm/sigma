@@ -26,7 +26,7 @@ class Caja < ApplicationRecord
   end
 
   def to_s
-    nombre.to_s.capitalize
+    "#{nombre.to_s.capitalize} - #{numero}"
   end
 
   private
