@@ -20,12 +20,16 @@ class Contribuyente < ApplicationRecord
 
   validates :nombre_o_razon_social, presence: true
   validates :concepto_ids, presence: true, on: :create
-  validates :primer_apellido, presence: true, if: :persona_fisica?
-  validates :rfc, length: { is: VALID_LENGTH_RFC_SAT_PERSONA_MORAL }, if: :persona_moral_con_rfc?
-  validates :rfc, rfc_format: { force_homoclave: false }, if: :valid_length_rfc_without_homoclave_persona_fisica?
-  validates :rfc, rfc_format: { force_homoclave: true }, if: :valid_lengths_rfc_sat?
   validates :rfc, uniqueness: true, unless: :rfc_generico?, allow_blank: true
+  validates :rfc, rfc_format: { force_homoclave: true }, if: :rfc_present_and_rfc_is_not_10_digits_length?
+
+  #persona_fisica
+  validates :primer_apellido, presence: true, if: :persona_fisica?
   validate :rfc, :validate_length, if: :persona_fisica_con_rfc?
+  validates :rfc, rfc_format: { force_homoclave: false }, if: :valid_length_rfc_without_homoclave_persona_fisica?
+
+  #persona_moral
+  validates :rfc, length: { is: VALID_LENGTH_RFC_SAT_PERSONA_MORAL }, if: :persona_moral_con_rfc?
 
   attr_accessor :concepto_ids
 
@@ -54,28 +58,16 @@ class Contribuyente < ApplicationRecord
   end
 
   def length_rfc_persona_fisica_invalid?
-    return false unless persona_fisica_con_rfc?
     VALID_LENGTHS_RFC_PERSONA_FISICA.exclude?(rfc.length)
   end
 
-  def valid_lengths_rfc_sat?
-    valid_length_rfc_sat_persona_fisica? or
-      valid_length_rfc_sat_persona_moral?
+  def rfc_present_and_rfc_is_not_10_digits_length?
+    rfc.present? and !valid_length_rfc_without_homoclave_persona_fisica?
   end
 
   def valid_length_rfc_without_homoclave_persona_fisica?
     return false unless persona_fisica_con_rfc?
     VALID_LENGTH_RFC_WITHOUT_HOMOCLAVE_PERSONA_FISICA == rfc.length
-  end
-
-  def valid_length_rfc_sat_persona_fisica?
-    return false unless persona_fisica_con_rfc?
-    VALID_LENGTH_RFC_SAT_PERSONA_FISICA == rfc.length
-  end
-
-  def valid_length_rfc_sat_persona_moral?
-    return false unless persona_moral_con_rfc?
-    VALID_LENGTH_RFC_SAT_PERSONA_MORAL == rfc.length
   end
 
   def rfc_generico?
