@@ -11,7 +11,7 @@
       = f.input :password, as: :hidden, value: nil
     - else
       .col-md-6
-        = f.input :password, input_html: { autocomplete: "nope" }
+        = f.input :password, required: true, input_html: { autocomplete: "nope" }
     .col-md-6
       %label Activar / Desactivar
       = f.input :activo
@@ -19,7 +19,7 @@
       - if f.object.new_record?
         = f.input :contribuyente_id, collection: Contribuyente.all, input_html: { class: "select2 with-link" }
       - else
-        = f.input :contribuyente_id, collection: Contribuyente.all, readonly: true
+        = f.input :contribuyente_id, collection: Contribuyente.where(id: @cajero.contribuyente_id), disabled: true
 
   .btn-group.float-right
     = link_to cajeros_path, class: 'btn btn-sm btn-secondary' do
