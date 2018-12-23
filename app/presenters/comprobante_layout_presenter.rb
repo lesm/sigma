@@ -10,11 +10,11 @@ class ComprobanteLayoutPresenter < SimpleDelegator
   end
 
   def forma_pago
-    Comprobante::FORMA_PAGO.key(super) 
+    Comprobante::FORMA_PAGO.key(super)
   end
 
   def metodo_pago
-    "PUE" 
+    "PUE"
   end
 
   def descuento
@@ -22,14 +22,14 @@ class ComprobanteLayoutPresenter < SimpleDelegator
   end
 
   def subtotal
-    "%.2f" % super 
+    "%.2f" % super
   end
 
   def total
-    "%.2f" % super 
+    "%.2f" % super
   end
 
   def uso_cfdi
-    Contribuyente::USO_CFDI.key(super) 
+    Comprobante::USO_CFDI.key(super)
   end
 end

@@ -7,6 +7,13 @@ class Comprobante < ApplicationRecord
     "28" => "Tarjeta de débito",
   }
 
+  USO_CFDI = {
+    "G03" => "Gastos en general",
+    "D03" => "Gastos funerales",
+    "D04" => "Donativos",
+    "P01" => "Por definir"
+  }
+
   attr_accessor :timbrado_automatico
 
   belongs_to :caja
