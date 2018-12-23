@@ -9,6 +9,7 @@ class Usuario < ApplicationRecord
          :trackable
 
   validates :nombre, :username, presence: true
+  validates :username, uniqueness: { case_sensitive: false }
 
   def email_required?
     false
