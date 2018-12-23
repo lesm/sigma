@@ -111,13 +111,36 @@ RSpec.describe Contribuyente, type: :model do
     end # context primer apellido
 
     context "rfc" do
-      context "debe ser 13 dígitos" do
+      context "most be 10 o 13 digits" do
         subject { build :contribuyente, rfc: 'AAAA111111AA' }
-        it "debe ser 13 digitos" do
+        it "displays an error message 'debe ser 10 o 13 digitos'" do
           expect(subject).to_not be_valid
-          expect(subject.errors.to_a.to_sentence).to match /debe ser de 13 caracteres/
+          expect(subject.errors.to_a.to_sentence).to match /debe ser de 10 o 13 caracteres/
         end
       end # context debe ser 13 dígitos
+
+      context 'with 10 digits' do
+        context "with valid format" do
+          subject { build :contribuyente, rfc: 'AAAA111111' }
+          it "must be valid" do
+            expect(subject).to be_valid
+          end
+        end
+
+        context "with invalid format" do
+          subject { build :contribuyente, rfc: '1111AAAAAA' }
+          it "must be invalid" do
+            expect(subject).to_not be_valid
+          end
+        end
+      end
+
+      context 'with 13 digits' do
+        subject { build :contribuyente, rfc: 'AAAA111111AAA' }
+        it "must be valid" do
+          expect(subject).to be_valid
+        end
+      end
 
       context "puede no estar presente" do
         subject { build :contribuyente, rfc: nil }
@@ -161,7 +184,7 @@ RSpec.describe Contribuyente, type: :model do
         end
       end
 
-      context "formato no valido" do
+      context "with formato no valido, valid format starts with letters" do
         subject { build :contribuyente, persona_fisica: false, rfc: '1111AAAAAA11' }
         it "no debe ser válido" do
           expect(subject).to_not be_valid
@@ -181,6 +204,7 @@ RSpec.describe Contribuyente, type: :model do
     it "must be uniq" do
       expect(contribuyente).to be_valid
       expect(contribuyente_dos).to_not be_valid
+      expect(contribuyente_dos.errors.to_a).to include "Rfc ya ha sido tomado"
     end # context must bu uniq
 
     it "can be blank" do

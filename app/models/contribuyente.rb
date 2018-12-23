@@ -3,6 +3,15 @@ class Contribuyente < ApplicationRecord
     'P01' => "Por definir"
   }
 
+  VALID_LENGTH_RFC_WITHOUT_HOMOCLAVE_PERSONA_FISICA = 10.freeze
+  VALID_LENGTH_RFC_SAT_PERSONA_FISICA               = 13.freeze
+  VALID_LENGTH_RFC_SAT_PERSONA_MORAL                = 12.freeze
+
+  VALID_LENGTHS_RFC_PERSONA_FISICA = [
+    VALID_LENGTH_RFC_WITHOUT_HOMOCLAVE_PERSONA_FISICA,
+    VALID_LENGTH_RFC_SAT_PERSONA_FISICA
+  ].freeze
+
   include Direccionable
   has_one :cajero
   has_many :facturas
@@ -12,10 +21,11 @@ class Contribuyente < ApplicationRecord
   validates :nombre_o_razon_social, presence: true
   validates :concepto_ids, presence: true, on: :create
   validates :primer_apellido, presence: true, if: :persona_fisica?
-  validates :rfc, length: { is: 13 }, if: :persona_fisica_con_rfc?
-  validates :rfc, length: { is: 12 }, if: :persona_moral_con_rfc?
-  validates :rfc, rfc_format: { force_homoclave: true }, allow_blank: true
+  validates :rfc, length: { is: VALID_LENGTH_RFC_SAT_PERSONA_MORAL }, if: :persona_moral_con_rfc?
+  validates :rfc, rfc_format: { force_homoclave: false }, if: :valid_length_rfc_without_homoclave_persona_fisica?
+  validates :rfc, rfc_format: { force_homoclave: true }, if: :valid_lengths_rfc_sat?
   validates :rfc, uniqueness: true, unless: :rfc_generico?, allow_blank: true
+  validate :rfc, :validate_length, if: :persona_fisica_con_rfc?
 
   attr_accessor :concepto_ids
 
@@ -36,6 +46,37 @@ class Contribuyente < ApplicationRecord
   end
 
   private
+
+  def validate_length
+    if length_rfc_persona_fisica_invalid?
+      errors.add :rfc, "debe ser de 10 o 13 caracteres"
+    end
+  end
+
+  def length_rfc_persona_fisica_invalid?
+    return false unless persona_fisica_con_rfc?
+    VALID_LENGTHS_RFC_PERSONA_FISICA.exclude?(rfc.length)
+  end
+
+  def valid_lengths_rfc_sat?
+    valid_length_rfc_sat_persona_fisica? or
+      valid_length_rfc_sat_persona_moral?
+  end
+
+  def valid_length_rfc_without_homoclave_persona_fisica?
+    return false unless persona_fisica_con_rfc?
+    VALID_LENGTH_RFC_WITHOUT_HOMOCLAVE_PERSONA_FISICA == rfc.length
+  end
+
+  def valid_length_rfc_sat_persona_fisica?
+    return false unless persona_fisica_con_rfc?
+    VALID_LENGTH_RFC_SAT_PERSONA_FISICA == rfc.length
+  end
+
+  def valid_length_rfc_sat_persona_moral?
+    return false unless persona_moral_con_rfc?
+    VALID_LENGTH_RFC_SAT_PERSONA_MORAL == rfc.length
+  end
 
   def rfc_generico?
     rfc == "XAXX010101000"
