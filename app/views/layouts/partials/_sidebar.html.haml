@@ -99,16 +99,6 @@
                 = link_to new_reporte_path(nombre: "cuentas"), class: "nav-link #{ controller_name == 'reportes' && params[:nombre] == "cuentas" && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
                   %p Por Cuentas
-            %ul.nav.nav-treeview
-              %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %i.fa.fa-circle-o.nav-icon
-                  %p Contribuyentes
-            %ul.nav.nav-treeview
-              %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %i.fa.fa-circle-o.nav-icon
-                  %p Arqueos
         - if para_super_user?
           %li.nav-item
             = link_to new_administrador_path, class: "nav-link #{ controller_name == 'administradores' && 'active' }" do
