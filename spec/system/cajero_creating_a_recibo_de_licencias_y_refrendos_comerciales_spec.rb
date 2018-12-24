@@ -16,7 +16,7 @@ RSpec.describe "Cajero creating a recibo", type: :system do
       cajero_es_redireccionado_a_set_conceptos_de_recibo_steps
 
       dado_que_cajero_captura_datos_de_recibo
-      cuando_cajero_da_click_en_boton_pagar
+      cuando_cajero_da_click_en_boton_cobrar
       cajero_debe_ver_recibo_creado_correctamente
       cajero_debe_ver_anios_de_refrendo_2018_y_2019
     end
@@ -47,10 +47,6 @@ RSpec.describe "Cajero creating a recibo", type: :system do
     fill_in "Observaciones", with: "Pagando 2018 y 2019"
     select "2018", from: "Años"
     select "2019", from: "Años"
-  end
-
-  def cuando_cajero_da_click_en_boton_pagar
-    click_button "Pagar"
   end
 
   def cajero_debe_ver_recibo_creado_correctamente

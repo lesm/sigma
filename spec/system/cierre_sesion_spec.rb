@@ -80,7 +80,7 @@ RSpec.describe "Cierre de sesión", type: :system do
     cajero_selecciona_forma_pago
     cajero_asigna_precio_unitario
     cajero_asigna_fecha_evento
-    cajero_da_click_en_boton_pagar
+    cuando_cajero_da_click_en_boton_cobrar
     debe_mostrarse_mensaje_de_recibo_creado_correctamente
   end
 
@@ -94,10 +94,6 @@ RSpec.describe "Cierre de sesión", type: :system do
 
   def  cajero_asigna_fecha_evento
     fill_in "Fecha de Evento", with: Date.current.to_s
-  end
-
-  def cajero_da_click_en_boton_pagar
-    click_button "Pagar"
   end
 
   def debe_mostrarse_mensaje_de_recibo_creado_correctamente

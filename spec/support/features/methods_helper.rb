@@ -100,5 +100,8 @@ module Features
       expect(page).to have_content "DATOS DE INICIO DE SESIÓN"
     end
 
+    def cuando_cajero_da_click_en_boton_cobrar
+      click_button "Cobrar"
+    end
   end
 end
