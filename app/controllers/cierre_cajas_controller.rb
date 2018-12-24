@@ -34,7 +34,7 @@ class CierreCajasController < ApplicationController
 
     respond_to do |format|
       if @cierre_caja.save
-        format.html { redirect_to @cierre_caja, notice: 'Cierre caja fue creada correctamente.' }
+        format.html { redirect_to @cierre_caja, notice: 'Cierre caja fue creado correctamente.' }
         format.json { render :show, status: :created, location: @cierre_caja }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class CierreCajasController < ApplicationController
     authorize @cierre_caja
     respond_to do |format|
       if @cierre_caja.update(cierre_caja_params)
-        format.html { redirect_to @cierre_caja, notice: 'Cierre caja fue actualizada correctamente.' }
+        format.html { redirect_to @cierre_caja, notice: 'Cierre caja fue actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @cierre_caja }
       else
         format.html { render :edit }
