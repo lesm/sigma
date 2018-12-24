@@ -64,8 +64,8 @@ class Contribuyente < ApplicationRecord
 
   def attributes_name_have_changed?
     saved_change_to_nombre_o_razon_social? or
-      saved_change_to_primer_apellido or
-      saved_change_to_segundo_apellido
+      saved_change_to_primer_apellido? or
+      saved_change_to_segundo_apellido?
   end
 
   def validate_length
