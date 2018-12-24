@@ -1,7 +1,4 @@
 class Contribuyente < ApplicationRecord
-  USO_CFDI = {
-    'P01' => "Por definir"
-  }
 
   VALID_LENGTH_RFC_WITHOUT_HOMOCLAVE_PERSONA_FISICA = 10.freeze
   VALID_LENGTH_RFC_SAT_PERSONA_FISICA               = 13.freeze
