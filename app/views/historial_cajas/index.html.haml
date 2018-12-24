@@ -2,7 +2,23 @@
   .col-md-11
     .card.card-danger.card-outline
       .card-header
-        .card-title Historial de Apertura y Cierre de Cajas
+        .card-title
+          %i.fa.fa-history
+          Historial de Apertura y Cierre de Cajas
+        .row
+          = form_tag(historial_cajas_path, method: :get, class: "form-inline") do
+            .col
+              .form-group
+                = text_field_tag :fecha_inicial, params[:fecha_inicial], class: "form-control fecha",
+                  placeholder: "Fecha inicial", autocomplete: false, required: true
+            .col
+              .form-group
+                = text_field_tag :fecha_final, params[:fecha_final], class: "form-control fecha",
+                  placeholder: "Fecha final", autocomplete: false, required: true
+            .col
+              .form-group
+                = submit_tag "Filtrar", class: "btn btn-primary"
+
       .card-body
         %table.table.table-hover.text-center
           %thead
@@ -23,4 +39,4 @@
                   - else
                     En uso
       .row.justify-content-center
-        = paginate @historial_cajas
+        = paginate @historial_cajas, params: { fecha_inicial: params[:fecha_inicial], fecha_final: params[:fecha_final] }
