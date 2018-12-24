@@ -10,6 +10,14 @@ RSpec.describe Caja, type: :model do
   it { should validate_presence_of :nombre }
   it { should validate_uniqueness_of :nombre }
 
+  describe "#to_s" do
+    let(:caja) { create :caja, nombre: "Principal", numero: "5" }
+
+    it "returns the following format 'nombre - número'" do
+      expect(caja.to_s).to eq "Principal - 5"
+    end
+  end
+
   describe "#update_historial_caja!" do
     let(:caja) { create :caja }
     let(:cajero) { create :cajero, :con_contribuyente, caja: caja }
