@@ -8,16 +8,17 @@
         .row
           = form_tag(historial_cajas_path, method: :get, class: "form-inline") do
             .col
-              .form-group.mx-sm-3.mb-2
-                = text_field_tag :fecha_inicial, 7.days.ago, class: "form-control fecha",
-                  title: "Seleccione la fecha inicial"
-            .col
-              .form-group.mx-sm-3.mb-2
-                = text_field_tag :fecha_final, Time.current, class: "form-control fecha",
-                  title: "Seleccione la fecha final"
+              .form-group
+                = text_field_tag :fecha_inicial, params[:fecha_inicial], class: "form-control fecha",
+                  placeholder: "Fecha inicial", autocomplete: false, required: true
             .col
               .form-group
-                = submit_tag "Filtrar", class: "btn btn-primary mb-2"
+                = text_field_tag :fecha_final, params[:fecha_final], class: "form-control fecha",
+                  placeholder: "Fecha final", autocomplete: false, required: true
+            .col
+              .form-group
+                = submit_tag "Filtrar", class: "btn btn-primary"
+
       .card-body
         %table.table.table-hover.text-center
           %thead

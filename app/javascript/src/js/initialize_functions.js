@@ -72,7 +72,7 @@ function asignarCuentasSeleccionadas() {
 function startDateTimePicker() {
   $(".fecha").datetimepicker({
     locale: 'es',
-    format: 'YYYY-MM-DD HH:mm a'
+    format: 'YYYY-MM-DD HH:mm:ss'
   })
 
   $(".fecha-reporte").datetimepicker({
