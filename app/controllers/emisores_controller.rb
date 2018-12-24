@@ -34,7 +34,7 @@ class EmisoresController < ApplicationController
 
     respond_to do |format|
       if @emisor.save
-        format.html { redirect_to @emisor, notice: "Municipio se registro correctamente." }
+        format.html { redirect_to @emisor, notice: "Municipio fue creado correctamente." }
         format.json { render :show, status: :created, location: @emisor }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class EmisoresController < ApplicationController
     authorize @emisor
     respond_to do |format|
       if @emisor.update(emisor_params)
-        format.html { redirect_to @emisor, notice: 'Emisor was successfully updated.' }
+        format.html { redirect_to @emisor, notice: 'Municipio fue actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @emisor }
       else
         format.html { render :edit }
@@ -59,12 +59,10 @@ class EmisoresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_emisor
       @emisor = Emisor.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def emisor_params
       params.require(:emisor).permit(
         :nombre, :rfc, :logotipo, :regimen_fiscal,

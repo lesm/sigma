@@ -32,7 +32,7 @@ class CuentasController < ApplicationController
 
     respond_to do |format|
       if @cuenta.save
-        format.html { redirect_to @cuenta, notice: 'Cuenta was successfully created.' }
+        format.html { redirect_to @cuenta, notice: 'Cuenta fue creada correctamente.' }
         format.json { render :show, status: :created, location: @cuenta }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class CuentasController < ApplicationController
     authorize @cuenta
     respond_to do |format|
       if @cuenta.update(cuenta_params)
-        format.html { redirect_to @cuenta, notice: 'Cuenta was successfully updated.' }
+        format.html { redirect_to @cuenta, notice: 'Cuenta fue actualizada correctamente.' }
         format.json { render :show, status: :ok, location: @cuenta }
       else
         format.html { render :edit }
@@ -61,18 +61,16 @@ class CuentasController < ApplicationController
   def destroy
     @cuenta.destroy
     respond_to do |format|
-      format.html { redirect_to cuentas_url, notice: 'Cuenta was successfully destroyed.' }
+      format.html { redirect_to cuentas_url, notice: 'Cuenta fue eliminada correctamente.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_cuenta
       @cuenta = Cuenta.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def cuenta_params
       params.require(:cuenta).permit(
         :id, :codigo, :formato, :descripcion, :importe

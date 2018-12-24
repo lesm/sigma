@@ -97,7 +97,7 @@ RSpec.describe "Cierre de sesión", type: :system do
   end
 
   def debe_mostrarse_mensaje_de_recibo_creado_correctamente
-    expect(page).to have_content "Recibo creado correctamente."
+    expect(page).to have_content "Recibo fue creado correctamente."
   end
 
   def data_arqueo_pendiente_debe_ser_true

@@ -158,7 +158,7 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
   end
 
   def debe_mostrar_mensaje_de_arqueo_creado_correctamente
-    expect(page).to have_content "Arqueo se creo correctamente."
+    expect(page).to have_content "Arqueo fue creado correctamente."
   end
 
   def debe_haber_una_leyenda_de_monto_sistema
