@@ -1,9 +1,12 @@
 .row
   .col-md-8
     = f.input :nombre_o_razon_social
-  .col-md-4
-    %label ¿Persona física?
-    = f.input :persona_fisica, label: "Sí"
+  - if controller_name == "contribuyentes"
+    .col-md-4
+      %label ¿Persona física?
+      = f.input :persona_fisica, label: "Sí"
+  - else
+    = f.input :persona_fisica, as: :hidden
 .row
   .col-md-6
     = f.input :primer_apellido
