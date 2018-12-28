@@ -55,6 +55,7 @@ es-MX:
         password: "Contraseña"
         username: "Username"
         years: "Años"
+        cuenta_ids: "Seleccione al menos una cuenta a cobrar"
     # Examples
     # labels:
     #   defaults:

@@ -30,7 +30,7 @@ module Features
 
     def cajero_selecciona_un_contribuyente_y_un_concepto_de_cobro
       cajero_selecciona_un_contribuyente
-      select "110101 - RIFAS", from: "cuenta_ids"
+      select "110101 - RIFAS", from: "cuenta_form_cuenta_ids"
     end
 
     def cajero_selecciona_un_contribuyente

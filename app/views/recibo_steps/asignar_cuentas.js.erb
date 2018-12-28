@@ -1,9 +1,8 @@
-$("#cuenta_ids").attr("disabled", false)
-$("#cuenta_ids").html("<%= j options_for_select(@cuentas_asignadas) %>")
+$("select[id$='_cuenta_ids'").attr("disabled", false)
+$("select[id$='_cuenta_ids'").html("<%= j options_for_select(@cuentas_asignadas) %>")
 $("#form_modal_cuenta").html("<%= j render 'cuentas/form_modal' %>")
 $(".select2-multiple-modal").select2({
   width: '100%',
   multiple: true,
   text: "Selecciona al menos cuenta"
 })
-
