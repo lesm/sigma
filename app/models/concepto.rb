@@ -1,11 +1,19 @@
 class Concepto < ApplicationRecord
+  CLAVE_PROD_SERV = {
+    "93161700" => "93161700 - Administración tributaria",
+    "93171500" => "93171500 - Política comercial",
+    "93151500" => "93151500 - Administración pública"
+  }
+  CLAVE_UNIDAD = { "E48" => "E48 - Unidad de servicio" }
+
   belongs_to :cuenta
   belongs_to :comprobante
   has_one :datos_concepto, dependent: :destroy
   accepts_nested_attributes_for :datos_concepto, allow_destroy: true
 
-  validates :importe, :cantidad, :valor_unitario, presence: true
-  validates :cantidad, numericality: { only_integer: true }
+  validates :importe, :cantidad, :valor_unitario, :clave, :clave_unidad,
+    presence: true
+  validates :cantidad, numericality: { greater_than: 0 }
   validate :importe_value
 
   delegate :folio, :clave_catastral, :numero_cuenta, :ubicacion,

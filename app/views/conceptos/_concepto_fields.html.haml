@@ -2,16 +2,16 @@
   .row
     .col-md-12
       = f.input :descripcion, readonly: true, input_html: { value: f.object.cuenta.descripcion }
-    .col-md-3
-      = f.input :clave, readonly: true, input_html: { value: f.object.cuenta.codigo }
-    .col-md-3
-      = f.input :cantidad, as: :numeric, input_html: { value: 1, pattern: "\d*", min: "1" }
-    .col-md-3
+    .col-md-6
+      = f.input :clave, readonly: true, input_html: { value: f.object.cuenta.clave_producto }
+    .col-md-6
+      = f.input :clave_unidad, readonly: true, input_html: { value: f.object.cuenta.clave_unidad }
+    .col-md-4
+      = f.input :cantidad, as: :numeric, input_html: { value: (f.object.cantidad || 1), pattern: "\d*", min: "1" }
+    .col-md-4
       = f.input :valor_unitario, as: :numeric, input_html: { min: "1" }
-    .col-md-3
+    .col-md-4
       = f.input :importe, as: :numeric, readonly: true, input_html: { min: 0 }
-      = f.input :unidad, as: :hidden #preguntar
-      = f.input :clave_unidad, as: :hidden
       = f.input :cuenta_id, as: :hidden, input_html: { value: f.object.cuenta_id }
   .row
     .col-md-12

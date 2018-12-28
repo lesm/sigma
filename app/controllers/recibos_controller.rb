@@ -16,7 +16,7 @@ class RecibosController < ApplicationController
     authorize @recibo
     respond_to do |format|
       format.html
-      format.pdf { render generar_pdf("recibo") }
+      format.pdf { render generar_pdf }
     end
   end
 
@@ -53,12 +53,25 @@ class RecibosController < ApplicationController
   end
 
   private
-    def set_recibo
-      @recibo = Recibo.find(params[:id])
+
+    def generar_pdf
+      {
+        pdf: nombre_pdf,
+        page_size: "Letter",
+        template: "pdfs/comprobantes/recibo.pdf.haml",
+        viewport_size: "1280x1024",
+        margin: { top: "65", bottom: "90" },
+        header: { html: { template: "pdfs/comprobantes/header.pdf.haml" } },
+        footer: { html: { template: "pdfs/comprobantes/footer.pdf.haml" } }
+      }
     end
 
     def nombre_pdf
       "recibo_#{@recibo.id}_#{@recibo.created_at.to_s(:number)}".upcase
+    end
+
+    def set_recibo
+      @recibo = Recibo.find(params[:id])
     end
 
     def recibo_params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_193808) do
+ActiveRecord::Schema.define(version: 2018_12_28_165213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_193808) do
     t.string "moneda", default: "MXN"
     t.string "tipo_comprobante"
     t.string "lugar_expedicion"
-    t.string "metodo_pago", default: "Pago en una sola exhibición"
+    t.string "metodo_pago", default: "PUE - Pago en una sola exhibición"
     t.string "forma_pago"
     t.money "subtotal", scale: 2, default: "0.0"
     t.money "descuento", scale: 2, default: "0.0"
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2018_12_20_193808) do
     t.datetime "updated_at", null: false
     t.string "formato"
     t.money "importe", scale: 2, default: "0.0"
+    t.string "clave_producto"
+    t.string "clave_unidad"
   end
 
   create_table "datos_conceptos", force: :cascade do |t|
@@ -216,7 +218,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_193808) do
     t.string "nombre"
     t.string "rfc"
     t.string "logotipo"
-    t.string "regimen_fiscal", default: "Personas morales con fines no lucrativos"
+    t.string "regimen_fiscal", default: "603 - Personas morales con fines no lucrativos"
     t.string "registro_patronal"
     t.string "eslogan"
     t.datetime "created_at", null: false

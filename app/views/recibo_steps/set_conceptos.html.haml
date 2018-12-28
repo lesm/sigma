@@ -16,7 +16,7 @@
               -#= f.input :uso_cfdi, collection: Comprobante::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
               = f.input :subtotal, as: :hidden
               = f.input :moneda, as: :hidden
-              = f.input :tipo_comprobante, as: :hidden, input_html: { value: "Recibo" }
+              = f.input :tipo_comprobante, as: :hidden, input_html: { value: "Ingreso" }
               = f.input :metodo_pago, as: :hidden
               = f.input :serie, as: :hidden
               = f.input :descuento, as: :hidden
@@ -27,7 +27,7 @@
               = f.input :motivo_descuento, as: :hidden #por qué lo agregamos?
               = f.input :observaciones, as: :hidden #posible para borrar
               = f.input :emisor_id, as: :hidden, input_html: { value: Emisor.first.id }
-              = f.input :lugar_expedicion, as: :hidden, input_html: { value: Emisor.first.direccion_codigo_postal }
+              = f.input :lugar_expedicion, as: :hidden, input_html: { value: Emisor.first.codigo_postal }
               = f.input :cajero_id, as: :hidden, input_html: { value: current_usuario.id }
               = f.input :caja_id, as: :hidden, input_html: { value: current_usuario.caja.id }
 

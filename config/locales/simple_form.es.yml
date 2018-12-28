@@ -55,6 +55,8 @@ es-MX:
         password: "Contraseña"
         username: "Username"
         years: "Años"
+        clave: "Clave Producto"
+        clave_unidad: "Clave Unidad"
     # Examples
     # labels:
     #   defaults:
