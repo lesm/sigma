@@ -51,7 +51,8 @@ class ReciboStepsController < ApplicationController
   private
 
   def cuenta_ids
-    params["cuenta_ids"]
+    return [] if params["cuenta_ids"].empty?
+    params["cuenta_ids"].reject(&:blank?)
   end
 
   def set_recibo
@@ -65,5 +66,4 @@ class ReciboStepsController < ApplicationController
       datos_concepto: cuenta.formato.constantize.new
     )
   end
-
 end

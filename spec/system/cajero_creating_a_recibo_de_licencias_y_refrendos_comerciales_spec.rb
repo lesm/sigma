@@ -33,7 +33,7 @@ RSpec.describe "Cajero creating a recibo", type: :system do
 
   def cajero_selecciona_un_contribuyente_y_el_concepto_licencias
     cajero_selecciona_un_contribuyente
-    select "430601 - LICENCIAS Y REFRENDOS COMERCIAL", from: "cuenta_ids"
+    select "430601 - LICENCIAS Y REFRENDOS COMERCIAL", from: "cuenta_form_cuenta_ids"
   end
 
   def dado_que_cajero_captura_datos_de_recibo

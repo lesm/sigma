@@ -67,11 +67,11 @@ RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
 
   def concepto_sorteos_debe_ser_agregado_a_optios_cuenta_ids
     sleep 1
-    expect(page.all("select#cuenta_ids option").map(&:text)).to include "110102 - SORTEOS"
+    expect(page.all("select[id$='_cuenta_ids'] option").map(&:text)).to include "110102 - SORTEOS"
   end
 
   def cajero_debe_poder_seleccionar_el_concepto_sorteos
-    select "110102 - SORTEOS", from: "cuenta_ids"
+    select "110102 - SORTEOS", from: "cuenta_form_cuenta_ids"
   end
 
   def cajero_debe_ver_la_leyenda_pagar_recibo_a_nombre_de
@@ -83,7 +83,7 @@ RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
   end
 
   def cajero_debe_tener_el_concepto_110102_sorteos_seleccionado
-    expect(page).to have_select("cuenta_ids", selected: "110102 - SORTEOS")
+    expect(page).to have_select("cuenta_form_cuenta_ids", selected: "110102 - SORTEOS")
   end
 
   def cuando_cajero_selecciona_el_concepto_loterias_y_da_click_en_el_boton_crear_relacion
@@ -93,14 +93,14 @@ RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
 
   def concepto_loterias_debe_ser_agregado_a_options_cuenta_ids
     sleep 1
-    expect(page.all("select#cuenta_ids option").map(&:text)).to include "110103 - LOTERÍAS"
+    expect(page.all("select#cuenta_form_cuenta_ids option").map(&:text)).to include "110103 - LOTERÍAS"
   end
 
   def cajero_debe_poder_seleccionar_el_concepto_loterias
-    select "110103 - LOTERÍAS", from: "cuenta_ids"
+    select "110103 - LOTERÍAS", from: "cuenta_form_cuenta_ids"
   end
 
   def cajero_debe_tener_los_conceptos_110102_sorteos_y_110103_loterias_seleccionados
-    expect(page).to have_select("cuenta_ids", selected: ["110102 - SORTEOS", "110103 - LOTERÍAS"])
+    expect(page).to have_select("cuenta_form_cuenta_ids", selected: ["110102 - SORTEOS", "110103 - LOTERÍAS"])
   end
 end

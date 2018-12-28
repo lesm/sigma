@@ -71,7 +71,7 @@ function hideSelect2WithLink() {
 }
 
 function asignarCuentasSeleccionadas() {
-  $("#cuentas_seleccionadas").val($("#cuenta_ids").val())
+  $("#cuentas_seleccionadas").val($("select[id$='_cuenta_ids'").val())
 }
 
 function startDateTimePicker() {
