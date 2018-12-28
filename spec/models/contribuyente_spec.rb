@@ -77,6 +77,27 @@ RSpec.describe Contribuyente, type: :model do
     end
   end
 
+  describe ".persona_fisica" do
+    let(:persona_fisica) do
+      create :contribuyente, :con_direccion,
+        rfc: nil, persona_fisica: true
+    end
+    let(:not_persona_fisica) do
+      create :contribuyente, :con_direccion,
+        rfc: nil, persona_fisica: false
+    end
+
+    it "when persona_fisica is true" do
+      [persona_fisica, not_persona_fisica]
+      expect(Contribuyente.persona_fisica).to eq [persona_fisica]
+    end
+
+    it "when persona_fisica is false" do
+      not_persona_fisica
+      expect(Contribuyente.persona_fisica).to eq []
+    end
+  end
+
   describe ".search" do
     let(:arturo) do
       create :contribuyente, :con_direccion,
