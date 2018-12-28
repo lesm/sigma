@@ -7,7 +7,7 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
   end
 
   feature "Visiting new_arqueo_path" do
-    scenario "Creating a new Arqueo" do
+    before :each do
       crea_datos_necesarios_para_nuevo_arqueo
       cajero_da_click_en_link_recaudacion
       cajero_da_click_en_link_crear_arqueo
@@ -16,7 +16,9 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
       monto_banco_debe_ser_400_5
       monto_total_debe_ser_400_5
       monto_adeudo_por_pagar_debe_ser_1600
+    end
 
+    scenario "Creating a new Arqueo" do
       cuando_cajero_agrega_1_moneda_de_10_y_1_moneda_de_20
       cuando_cajero_agrega_1_billete_de_100_y_1_billete_de_200
       monto_efectivo_debe_ser_330
@@ -34,6 +36,15 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
       debe_haber_una_leyenda_de_monto_sistema
       debe_haber_una_leyenda_de_monto_cajero
       debe_mostrar_un_subtotal_de_1600_en_monto_efectivo
+    end
+
+    scenario "Shows alert confirm when exists adeudo" do
+      cuando_cajero_da_click_en_boton_crear_arqueo
+      debe_mostrar_mensaje_de_generar_un_adeudo
+      cuando_cajero_da_click_en_boton_si_generar
+      debe_ser_redireccionado_correctamente_a_arqueo_path
+      debe_mostrar_mensaje_de_arqueo_creado_correctamente
+      debe_mostrar_un_adeudo_de_1600
     end
   end
 
@@ -171,6 +182,23 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
 
   def debe_mostrar_un_subtotal_de_1600_en_monto_efectivo
     expect(first("tbody").find("span")).to have_content("$1,600.00")
+  end
+
+  def debe_mostrar_mensaje_de_generar_un_adeudo
+    expect(page).to have_content "¿Generar un adeudo?"
+  end
+
+  def cuando_cajero_da_click_en_boton_si_generar
+    click_button "Si, Generar"
+  end
+
+  def debe_ser_redireccionado_correctamente_a_arqueo_path
+    expect(page).to have_current_path arqueo_path Arqueo.last
+  end
+
+  def debe_mostrar_un_adeudo_de_1600
+    expect(page).to have_content "Adeudo"
+    expect(page).to have_content "$1,600.00"
   end
 
 

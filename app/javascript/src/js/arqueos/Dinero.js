@@ -166,6 +166,26 @@ function calculateAmount() {
 
   actualiza_total_dinero_input(dinero)
   actualiza_monto_cajero_input(dinero)
+
+  $(document).on("click", "#crearArqueo", function(e) {
+    e.preventDefault()
+    let form = $(this).parents('form')
+
+    if (dinero.diferencia_monto() > 0) { confirmAdeudo(form) }
+    else { form.submit() }
+  })
+
+}
+
+function confirmAdeudo(form) {
+  swal({
+    title: 'Adeudo',
+    text: "¿Generar un adeudo?",
+    icon: 'warning',
+    buttons: ["Cancelar", "Si, Generar"]
+  }).then(result => {
+    if (result) { form.submit() }
+  })
 }
 
 function actualiza_monto_total_span(dinero) {
