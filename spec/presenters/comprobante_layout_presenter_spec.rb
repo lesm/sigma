@@ -21,27 +21,27 @@ RSpec.describe ComprobanteLayoutPresenter do
 
   describe "#forma_pago" do
     it "receives 'Efectivo' and returns '01'" do
-      recibo.forma_pago = "Efectivo"
+      recibo.forma_pago = "01 - Efectivo"
       expect(subject.forma_pago).to eq "01"
     end
 
     it "receives 'Cheque nominativo' and returns '02'" do
-      recibo.forma_pago = "Cheque nominativo"
+      recibo.forma_pago = "02 - Cheque nominativo"
       expect(subject.forma_pago).to eq "02"
     end
 
     it "receives 'Transferencia electrónica de fondos' and returns '03'" do
-      recibo.forma_pago = "Transferencia electrónica de fondos"
+      recibo.forma_pago = "03 - Transferencia electrónica de fondos"
       expect(subject.forma_pago).to eq "03"
     end
 
     it "receives 'Tarjeta de crédito' and returns '04'" do
-      recibo.forma_pago = "Tarjeta de crédito"
+      recibo.forma_pago = "04 - Tarjeta de crédito"
       expect(subject.forma_pago).to eq "04"
     end
 
     it "receives 'Tarjeta de débito' and returns '28" do
-      recibo.forma_pago = "Tarjeta de débito"
+      recibo.forma_pago = "28 - Tarjeta de débito"
       expect(subject.forma_pago).to eq "28"
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe ComprobanteLayoutPresenter do
 
   describe "#uso_cfdi" do
     it 'receives 150 and returns 150.00' do
-      recibo.uso_cfdi = "Por definir"
+      recibo.uso_cfdi = "P01 - Por definir"
       expect(subject.uso_cfdi).to eq "P01"
     end  
   end

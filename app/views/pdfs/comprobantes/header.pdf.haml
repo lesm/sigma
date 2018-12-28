@@ -1,0 +1,48 @@
+.row
+  .col-md-2.text-left
+    = wicked_pdf_image_tag(current_emisor.logotipo_medium_url)
+  .col-md-8.text-center.text-uppercase
+    %h3
+      %strong
+        = current_emisor.nombre
+    = current_emisor.rfc
+    %br
+    = current_emisor.regimen_fiscal
+    %br
+    = current_emisor.direccion
+    %br
+    %h3
+      %strong
+        RECIBO
+        = @recibo.id
+  .col-md-2.text-right
+    = wicked_pdf_image_tag(current_emisor.escudo_medium_url)
+  .col-md-12
+    %hr.line-top
+  .col-md-12
+    .row.font-12
+      .col-md-7
+        %strong
+          = @recibo.contribuyente.nombre_o_razon_social
+        %br
+        = @recibo.contribuyente.rfc
+        %br
+        = @recibo.contribuyente.direccion
+        %br
+        LUGAR DE EXPEDICIÓN: 
+        = @recibo.emisor.direccion.codigo_postal
+        - if @recibo.is_a? Factura
+          %br
+          USO CFDI:
+          = @recibo.uso_cfdi
+      .col-md-5
+        FECHA:
+        = l @recibo.created_at, format: :factura
+        %br
+        FOLIO:
+        = @recibo.folio
+        %br
+        CAJERO:
+        = @recibo.cajero
+  .col-md-12
+    %hr.line-bottom

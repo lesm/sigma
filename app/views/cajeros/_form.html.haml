@@ -17,7 +17,7 @@
       = f.input :activo
     .col-md-6
       - if f.object.new_record?
-        = f.input :contribuyente_id, collection: Contribuyente.all, input_html: { class: "select2 with-link" }
+        = f.input :contribuyente_id, collection: Contribuyente.persona_fisica, input_html: { class: "select2 with-link" }
       - else
         = f.input :contribuyente_id, collection: Contribuyente.where(id: @cajero.contribuyente_id), disabled: true
 

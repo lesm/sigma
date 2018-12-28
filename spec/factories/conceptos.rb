@@ -26,8 +26,8 @@ FactoryBot.define do
     trait :con_cuenta_rifas do
       after :build do |concepto|
         concepto.cuenta = build :cuenta, :rifas
-        concepto.clave = nil
-        concepto.clave_unidad = nil
+        concepto.clave = concepto.cuenta.clave_producto
+        concepto.clave_unidad = concepto.cuenta.clave_unidad
         concepto.cantidad = 1
         concepto.valor_unitario = 100
         concepto.importe = 100
@@ -38,8 +38,8 @@ FactoryBot.define do
     trait :con_cuenta_sorteos do
       after :build do |concepto|
         concepto.cuenta = build :cuenta, :sorteos
-        concepto.clave = nil
-        concepto.clave_unidad = nil
+        concepto.clave = concepto.cuenta.clave_producto
+        concepto.clave_unidad = concepto.cuenta.clave_unidad
         concepto.cantidad = 2
         concepto.valor_unitario = 150
         concepto.importe = 300

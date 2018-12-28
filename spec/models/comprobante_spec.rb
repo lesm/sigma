@@ -66,21 +66,21 @@ RSpec.describe Comprobante, type: :model do
     let(:concepto) { build :concepto, :con_cuenta, :con_datos }
     let(:comprobante) do
       create :comprobante,
-        :con_datos, forma_pago: "Efectivo",
+        :con_datos, forma_pago: "01 - Efectivo",
         caja: cajero.caja, cajero: cajero,
         arqueo_id: nil, conceptos: [ concepto ]
     end
 
     let(:comprobante_tarjeta_debito) do
       create :comprobante,
-        :con_datos, forma_pago: "Tarjeta de débito",
+        :con_datos, forma_pago: "28 - Tarjeta de débito",
         caja: cajero.caja, cajero: cajero,
         arqueo_id: nil, conceptos: [ concepto ]
     end
 
     let(:comprobante_cheque_nominativo) do
       create :comprobante,
-        :con_datos, forma_pago: "Cheque nominativo",
+        :con_datos, forma_pago: "02 - Cheque nominativo",
         caja: cajero.caja, cajero: cajero,
         arqueo_id: nil, conceptos: [ concepto ]
     end
@@ -98,20 +98,20 @@ RSpec.describe Comprobante, type: :model do
           describe ".monto_no_efectivo" do
             context "when comprobante forma_pago is 'efectivo' and total is 400" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Efectivo")
+                comprobante.update_column(:forma_pago, "01 - Efectivo")
                 expect(Comprobante.monto_no_efectivo(cajero)).to eq 0
               end
             end
 
             context "when comprobante forma_pago is 'Cheque nominativo' and total is 400" do
               it "returns 400" do
-                comprobante.update_column(:forma_pago, "Cheque nominativo")
+                comprobante.update_column(:forma_pago, "02 - Cheque nominativo")
                 expect(Comprobante.monto_no_efectivo(cajero)).to eq 400
               end
             end
 
             context "when there are three comprobantes" do
-              context "most be the sum of payment method different of 'Efectivo'" do
+              context "most be the sum of payment method different of '01 - Efectivo'" do
                 it "returns 800" do
                   comprobante
                   comprobante_tarjeta_debito
@@ -123,23 +123,23 @@ RSpec.describe Comprobante, type: :model do
           end
 
           describe ".monto_efectivo" do
-            context "when comprobante forma_pago is not 'Efectivo'" do
+            context "when comprobante forma_pago is not '01 - Efectivo'" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Cheque nominativo")
+                comprobante.update_column(:forma_pago, "02 - Cheque nominativo")
                 expect(Comprobante.monto_efectivo(cajero)).to eq 0
               end
             end
 
-            context "when comprobante forma_pago is 'Efectivo'" do
+            context "when comprobante forma_pago is '01 - Efectivo'" do
               it "returns 400" do
-                comprobante.update_column(:forma_pago, "Efectivo")
+                comprobante.update_column(:forma_pago, "01 - Efectivo")
                 expect(Comprobante.monto_efectivo(cajero)).to eq 400
               end
             end
 
-            context "when comprobante forma_pago is 'Efectivo' and created_at is 2 days ago" do
+            context "when comprobante forma_pago is '01 - Efectivo' and created_at is 2 days ago" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Efectivo")
+                comprobante.update_column(:forma_pago, "01 - Efectivo")
                 comprobante.update_column(:created_at, 2.days.ago)
                 expect(Comprobante.monto_efectivo(cajero)).to eq 0
               end
@@ -147,23 +147,23 @@ RSpec.describe Comprobante, type: :model do
           end
 
           describe ".monto_cheque" do
-            context "when comprobante forma_pago is not 'Cheque'" do
+            context "when comprobante forma_pago is not '02 - Cheque'" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Efectivo")
+                comprobante.update_column(:forma_pago, "01 - Efectivo")
                 expect(Comprobante.monto_cheque(cajero)).to eq 0
               end
             end
 
-            context "when comprobante forma_pago is 'Cheque'" do
+            context "when comprobante forma_pago is '02 - Cheque'" do
               it "returns 400" do
-                comprobante.update_column(:forma_pago, "Cheque nominativo")
+                comprobante.update_column(:forma_pago, "02 - Cheque nominativo")
                 expect(Comprobante.monto_cheque(cajero)).to eq 400
               end
             end
 
-            context "when comprobante forma_pago is 'Cheque nominativo' and created_at is 2 days ago" do
+            context "when comprobante forma_pago is '02 - Cheque nominativo' and created_at is 2 days ago" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Cheque nominativo")
+                comprobante.update_column(:forma_pago, "02 - Cheque nominativo")
                 comprobante.update_column(:created_at, 2.days.ago)
                 expect(Comprobante.monto_cheque(cajero)).to eq 0
               end
@@ -171,23 +171,23 @@ RSpec.describe Comprobante, type: :model do
           end
 
           describe ".monto_transferencia" do
-            context "when comprobante forma_pago is not 'Transferencia electrónica de fondos'" do
+            context "when comprobante forma_pago is not '03 - Transferencia electrónica de fondos'" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Cheque nominativo")
+                comprobante.update_column(:forma_pago, "02 - Cheque nominativo")
                 expect(Comprobante.monto_transferencia(cajero)).to eq 0
               end
             end
 
-            context "when comprobante forma_pago is 'Transferencia electrónica de fondos'" do
+            context "when comprobante forma_pago is '03 - Transferencia electrónica de fondos'" do
               it "returns 400" do
-                comprobante.update_column(:forma_pago, "Transferencia electrónica de fondos")
+                comprobante.update_column(:forma_pago, "03 - Transferencia electrónica de fondos")
                 expect(Comprobante.monto_transferencia(cajero)).to eq 400
               end
             end
 
-            context "when comprobante forma_pago is 'Transferencia electrónica de fondos' and created_at is 2 days ago" do
+            context "when comprobante forma_pago is '03 - Transferencia electrónica de fondos' and created_at is 2 days ago" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Transferencia electrónica de fondos")
+                comprobante.update_column(:forma_pago, "03 - Transferencia electrónica de fondos")
                 comprobante.update_column(:created_at, 2.days.ago)
                 expect(Comprobante.monto_transferencia(cajero)).to eq 0
               end
@@ -197,21 +197,21 @@ RSpec.describe Comprobante, type: :model do
           describe ".monto_tarjerta_credito" do
             context "when comprobante forma_pago is not 'Tarjeta de crédito'" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Efectivo")
+                comprobante.update_column(:forma_pago, "01 - Efectivo")
                 expect(Comprobante.monto_tarjeta_credito(cajero)).to eq 0
               end
             end
 
-            context "when comprobante forma_pago is 'Tarjeta de crédito'" do
+            context "when comprobante forma_pago is '04 - Tarjeta de crédito'" do
               it "returns 400" do
-                comprobante.update_column(:forma_pago, "Tarjeta de crédito")
+                comprobante.update_column(:forma_pago, "04 - Tarjeta de crédito")
                 expect(Comprobante.monto_tarjeta_credito(cajero)).to eq 400
               end
             end
 
-            context "when comprobante forma_pago is 'Tarjeta de crédito' and created_at is 2 days ago" do
+            context "when comprobante forma_pago is '04 - Tarjeta de crédito' and created_at is 2 days ago" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Tarjeta de crédito")
+                comprobante.update_column(:forma_pago, "04 - Tarjeta de crédito")
                 comprobante.update_column(:created_at, 2.days.ago)
                 expect(Comprobante.monto_tarjeta_credito(cajero)).to eq 0
               end
@@ -219,23 +219,23 @@ RSpec.describe Comprobante, type: :model do
           end
 
           describe ".monto_tarjerta_debito" do
-            context "when comprobante forma_pago is not 'Tarjeta de débito'" do
+            context "when comprobante forma_pago is not '28 - Tarjeta de débito'" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Efectivo")
+                comprobante.update_column(:forma_pago, "01 - Efectivo")
                 expect(Comprobante.monto_tarjeta_debito(cajero)).to eq 0
               end
             end
 
-            context "when comprobante forma_pago is 'Tarjeta de débito'" do
+            context "when comprobante forma_pago is '28 - Tarjeta de débito'" do
               it "returns 400" do
-                comprobante.update_column(:forma_pago, "Tarjeta de débito")
+                comprobante.update_column(:forma_pago, "28 - Tarjeta de débito")
                 expect(Comprobante.monto_tarjeta_debito(cajero)).to eq 400
               end
             end
 
-            context "when comprobante forma_pago is 'Tarjeta de débito' and created_at is 2 days ago" do
+            context "when comprobante forma_pago is '04 - Tarjeta de débito' and created_at is 2 days ago" do
               it "returns 0" do
-                comprobante.update_column(:forma_pago, "Tarjeta de débito")
+                comprobante.update_column(:forma_pago, "04 - Tarjeta de débito")
                 comprobante.update_column(:created_at, 2.days.ago)
                 expect(Comprobante.monto_tarjeta_debito(cajero)).to eq 0
               end
@@ -251,80 +251,80 @@ RSpec.describe Comprobante, type: :model do
       context "where comprobante.arqueo_id is nil" do
 
         describe ".monto_efectivo" do
-          context "when comprobante forma_pago is not 'Efectivo'" do
+          context "when comprobante forma_pago is not '01 - Efectivo'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Transferencia electrónica de fondos")
+              comprobante.update_column(:forma_pago, "03 - Transferencia electrónica de fondos")
               expect(Comprobante.monto_efectivo(cajero_dos)).to eq 0
             end
           end
 
-          context "when comprobante forma_pago is 'Efectivo'" do
+          context "when comprobante forma_pago is '01 - Efectivo'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Efectivo")
+              comprobante.update_column(:forma_pago, "01 - Efectivo")
               expect(Comprobante.monto_efectivo(cajero_dos)).to eq 0
             end
           end
         end
 
         describe ".monto_cheque" do
-          context "when comprobante forma_pago is not 'Cheque'" do
+          context "when comprobante forma_pago is not '02 - Cheque'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Efectivo")
+              comprobante.update_column(:forma_pago, "01 - Efectivo")
               expect(Comprobante.monto_cheque(cajero_dos)).to eq 0
             end
           end
 
-          context "when comprobante forma_pago is 'Cheque'" do
+          context "when comprobante forma_pago is '02 - Cheque'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Cheque nominativo")
+              comprobante.update_column(:forma_pago, "02 - Cheque nominativo")
               expect(Comprobante.monto_cheque(cajero_dos)).to eq 0
             end
           end
         end
 
         describe ".monto_transferencia" do
-          context "when comprobante forma_pago is not 'Transferencia electrónica de fondos'" do
+          context "when comprobante forma_pago is not '03 - Transferencia electrónica de fondos'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Efectivo")
+              comprobante.update_column(:forma_pago, "01 - Efectivo")
               expect(Comprobante.monto_transferencia(cajero_dos)).to eq 0
             end
           end
 
-          context "when comprobante forma_pago is 'Transferencia electrónica de fondos'" do
+          context "when comprobante forma_pago is '03 - Transferencia electrónica de fondos'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Transferencia electrónica de fondos")
+              comprobante.update_column(:forma_pago, "03 - Transferencia electrónica de fondos")
               expect(Comprobante.monto_transferencia(cajero_dos)).to eq 0
             end
           end
         end
 
         describe ".monto_tarjerta_credito" do
-          context "when comprobante forma_pago is not 'Tarjeta de crédito'" do
+          context "when comprobante forma_pago is not '04 - Tarjeta de crédito'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Efectivo")
+              comprobante.update_column(:forma_pago, "01 - Efectivo")
               expect(Comprobante.monto_tarjeta_credito(cajero_dos)).to eq 0
             end
           end
 
-          context "when comprobante forma_pago is 'Tarjeta de crédito'" do
+          context "when comprobante forma_pago is '04 - Tarjeta de crédito'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Tarjeta de crédito")
+              comprobante.update_column(:forma_pago, "04 - Tarjeta de crédito")
               expect(Comprobante.monto_tarjeta_credito(cajero_dos)).to eq 0
             end
           end
         end
 
         describe ".monto_tarjerta_debito" do
-          context "when comprobante forma_pago is not 'Tarjeta de débito'" do
+          context "when comprobante forma_pago is not '28 - Tarjeta de débito'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Efectivo")
+              comprobante.update_column(:forma_pago, "01 - Efectivo")
               expect(Comprobante.monto_tarjeta_debito(cajero_dos)).to eq 0
             end
           end
 
-          context "when comprobante forma_pago is 'Tarjeta de débito'" do
+          context "when comprobante forma_pago is '28 - Tarjeta de débito'" do
             it "returns 0" do
-              comprobante.update_column(:forma_pago, "Tarjeta de débito")
+              comprobante.update_column(:forma_pago, "28 - Tarjeta de débito")
               expect(Comprobante.monto_tarjeta_debito(cajero_dos)).to eq 0
             end
           end

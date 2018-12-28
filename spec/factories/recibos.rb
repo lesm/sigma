@@ -5,8 +5,8 @@ FactoryBot.define do
     moneda { "MXN" }
     tipo_comprobante { "Factura" }
     lugar_expedicion { "68300" }
-    metodo_pago { "Pago en una sola exhibición" }
-    forma_pago { "Efectivo" }
+    metodo_pago { "PUE - Pago en una sola exhibición" }
+    forma_pago { "01 - Efectivo" }
     subtotal { 2500 }
     descuento { 0 }
     total { 2500 }
@@ -18,7 +18,7 @@ FactoryBot.define do
     motivo_descuento { "por pago puntual" }
     fecha_emision { Date.current }
     observaciones { "pago puntual" }
-    uso_cfdi { "Por definir" }
+    uso_cfdi { "P01 - Por definir" }
     cajero { nil }
     contribuyente { nil }
     emisor { nil }

@@ -83,11 +83,11 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
     create :recibo, :con_datos_centavos,
       cajero: @cajero, emisor: emisor,
       caja: @cajero.caja, arqueo: nil,
-      forma_pago: "Cheque nominativo"
+      forma_pago: "02 - Cheque nominativo"
     create :recibo, :para_nuevo_arqueo,
       cajero: @cajero, emisor: emisor,
       caja: @cajero.caja, arqueo: nil,
-      forma_pago: "Efectivo"
+      forma_pago: "01 - Efectivo"
   end
 
   def monto_sistema_debe_ser_2000_5
@@ -205,7 +205,7 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
   def crea_arqueo_de_monedas_y_billetes
     emisor = create :emisor, :con_direccion
     create_list :recibo, 2, :con_datos, cajero: @cajero, emisor: emisor,
-      caja: @cajero.caja, arqueo: nil, forma_pago: "Efectivo"
+      caja: @cajero.caja, arqueo: nil, forma_pago: "01 - Efectivo"
     cierre_caja = create :cierre_caja, cajero: @cajero
     dinero = build :dinero, doscientos_pesos: 1, cien_pesos: 5,
       diez_pesos: 5, cinco_pesos: 10, total: 800
@@ -245,13 +245,13 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
   def crea_arqueo_de_cheque_debito_credito
     emisor = create :emisor, :con_direccion
     recibo_cheque = create :recibo, :con_datos, cajero: @cajero, emisor: emisor,
-      caja: @cajero.caja, arqueo: nil, forma_pago: "Cheque nominativo"
+      caja: @cajero.caja, arqueo: nil, forma_pago: "02 - Cheque nominativo"
     recibo_debito = create :recibo, :con_datos, cajero: @cajero, emisor: emisor,
-      caja: @cajero.caja, arqueo: nil, forma_pago: "Tarjeta de débito"
+      caja: @cajero.caja, arqueo: nil, forma_pago: "28 - Tarjeta de débito"
     recibo_credito = create :recibo, :con_datos, cajero: @cajero, emisor: emisor,
-      caja: @cajero.caja, arqueo: nil, forma_pago: "Tarjeta de crédito"
+      caja: @cajero.caja, arqueo: nil, forma_pago: "04 - Tarjeta de crédito"
     recibo_transferencia = create :recibo, :con_datos, cajero: @cajero, emisor: emisor,
-      caja: @cajero.caja, arqueo: nil, forma_pago: "Transferencia electrónica de fondos"
+      caja: @cajero.caja, arqueo: nil, forma_pago: "03 - Transferencia electrónica de fondos"
     cierre_caja = create :cierre_caja, cajero: @cajero
     dinero = Dinero.new(total: 1600)
     arqueo = create :arqueo, monto_sistema: 1600, monto_cajero: 1600,
