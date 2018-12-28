@@ -116,7 +116,7 @@ Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unid
 Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120102", formato: "DatosPredial", descripcion: "120102 - PREDIAL RUSTICOS").first_or_create
 Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120103", formato: "DatosPredial", descripcion: "120103 - PREDIAL EJIDALES").first_or_create
 Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120104", formato: "DatosPredial", descripcion: "120104 - PREDIAL COMUNALES").first_or_create
-Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120105", formato: "DatosPredial", descripcion: "120105 - PREDIAL REZAGOS").first_or_create
+Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120105", formato: "DatosPredialRezagos", descripcion: "120105 - PREDIAL REZAGOS").first_or_create
 
 Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120201", formato: "DatosLicenciaFusion", descripcion: "120201 - FRACCIONAMIENTO Y FUSIÓN DE BIENES INMUEBLES HABITACIÓN RESIDENCIAL").first_or_create
 Cuenta.where(clave_producto: "93161700 - Administración tributaria", clave_unidad: "E48 - Unidad de servicio", codigo: "120202", formato: "DatosLicenciaFusion", descripcion: "120202 - FRACCIONAMIENTO Y FUSIÓN DE BIENES INMUEBLES HABITACIÓN TIPO MEDIO").first_or_create
