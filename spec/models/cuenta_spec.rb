@@ -5,6 +5,9 @@ RSpec.describe Cuenta, type: :model do
 
   it { should validate_presence_of :descripcion }
   it { should validate_presence_of :codigo }
+  it { should validate_presence_of :clave_producto }
+  it { should validate_presence_of :clave_unidad }
+  it { should validate_presence_of :codigo }
   it { should validate_length_of(:codigo).is_equal_to(6) }
   it { should have_and_belong_to_many :contribuyentes }
   context "uniqueness" do
@@ -29,11 +32,13 @@ RSpec.describe Cuenta, type: :model do
   describe ".search" do
     let(:rifa) do
       create :cuenta, codigo: "110101",
-        descripcion: "RIFAS"
+        descripcion: "110101 - RIFAS",
+        clave_producto: "93161700 - Administración tributaria"
     end
     let(:sorteo) do
       create :cuenta, codigo: "110102",
-        descripcion: "SORTEOS"
+        descripcion: "110102 - SORTEOS",
+        clave_producto: "93161700 - Administración tributaria"
     end
 
     before :each do

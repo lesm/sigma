@@ -42,8 +42,8 @@ UsoCFDI=P01
 [Concepto#1]
 
 Cantidad=1.0
-ClaveProdServ=
-ClaveUnidad=
+ClaveProdServ=93161700
+ClaveUnidad=E48
 Descripcion=Pago de rifas
 ValorUnitario=100.00
 Importe=100.00
@@ -52,8 +52,8 @@ Descuento=
 [Concepto#2]
 
 Cantidad=2.0
-ClaveProdServ=
-ClaveUnidad=
+ClaveProdServ=93161700
+ClaveUnidad=E48
 Descripcion=Pago de sorteos
 ValorUnitario=150.00
 Importe=300.00

@@ -2,20 +2,9 @@ require 'rails_helper'
 
 RSpec.describe RecibosController, type: :controller do
   let(:caja) { create :caja }
-  let(:cuenta_rifas) do
-    create :cuenta, codigo: "110101", formato: "DatosComun",
-      descripcion: "RIFAS"
-  end
-
-  let(:cuenta_sorteos) do
-    create :cuenta, codigo: "110102", formato: "DatosComun",
-      descripcion: "SORTEOS"
-  end
-
-  let(:cuenta_predial_urbano) do
-    create :cuenta, codigo: "120101", formato: "DatosPredial",
-      descripcion: "PREDIAL URBANOS"
-  end
+  let(:cuenta_rifas) { create :cuenta, :rifas }
+  let(:cuenta_sorteos) { create :cuenta, :sorteos }
+  let(:cuenta_predial_urbano) { create :cuenta, :predial_urbano }
 
   let(:emisor) { create :emisor }
   let(:contribuyente) { create :contribuyente, :con_direccion }
@@ -29,17 +18,23 @@ RSpec.describe RecibosController, type: :controller do
 
   let(:conceptos_attributes) do
     [
-      attributes_for(:concepto, cantidad: 2, valor_unitario: 100, importe: 200).merge!(
-        cuenta_id: cuenta_rifas.id,
-        datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
+      attributes_for(:concepto, cantidad: 2, valor_unitario: 100,
+                     importe: 200, clave: cuenta_rifas.clave_producto,
+                     clave_unidad: cuenta_rifas.clave_unidad).merge!(
+                       cuenta_id: cuenta_rifas.id,
+                       datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
       ),
-      attributes_for(:concepto, cantidad: 2, valor_unitario: 100, importe: 200).merge!(
-        cuenta_id: cuenta_sorteos.id,
-        datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
+      attributes_for(:concepto, cantidad: 2, valor_unitario: 100,
+                     importe: 200, clave: cuenta_sorteos.clave_producto,
+                     clave_unidad: cuenta_sorteos.clave_unidad).merge!(
+                       cuenta_id: cuenta_sorteos.id,
+                       datos_concepto_attributes: attributes_for(:datos_concepto, :datos_comun)
       ),
-      attributes_for(:concepto, cantidad: 2, valor_unitario: 100, importe: 200).merge!(
-        cuenta_id: cuenta_predial_urbano.id,
-        datos_concepto_attributes: attributes_for(:datos_concepto, :datos_predial)
+      attributes_for(:concepto, cantidad: 2, valor_unitario: 100,
+                     importe: 200, clave: cuenta_predial_urbano.clave_producto,
+                     clave_unidad: cuenta_predial_urbano.clave_unidad).merge!(
+                       cuenta_id: cuenta_predial_urbano.id,
+                       datos_concepto_attributes: attributes_for(:datos_concepto, :datos_predial)
       )
     ]
   end

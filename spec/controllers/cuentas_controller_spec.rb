@@ -7,8 +7,10 @@ RSpec.describe CuentasController, type: :controller do
     {
       codigo: "123456",
       formato: "DatosComun",
-      descripcion: "Algúna descripción",
-      importe: 10.00
+      descripcion: "12345 - Algúna descripción",
+      importe: 10.00,
+      clave_producto: "12221212",
+      clave_unidad: "E48"
     }
   end
 
@@ -18,6 +20,8 @@ RSpec.describe CuentasController, type: :controller do
       formato: "DatosComun",
       descripcion: "Algúna descripción",
       importe: 10.00,
+      clave_producto: "12221212",
+      clave_unidad: "E48"
     }
   end
 

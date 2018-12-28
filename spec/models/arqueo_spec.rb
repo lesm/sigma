@@ -29,9 +29,9 @@ RSpec.describe Arqueo, type: :model do
     end
 
     let(:formas_pago) do
-      ["Efectivo", "Cheque nominativo",
-       "Tarjeta de crédito", "Tarjeta de débito",
-       "Transferencia electrónica de fondos"]
+      ["01 - Efectivo", "02 - Cheque nominativo",
+       "04 - Tarjeta de crédito", "28 - Tarjeta de débito",
+       "03 - Transferencia electrónica de fondos"]
     end
 
     before :each do

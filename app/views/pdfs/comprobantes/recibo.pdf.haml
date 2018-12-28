@@ -1,0 +1,20 @@
+.row
+  .col-md-12{style: "font-size:11px;"}
+    %table.table.text-striped.table-bordered
+      %thead
+        %tr
+          %th.col-md-2 C. PRODUCTO
+          %th.col-md-2 C. UNIDAD
+          %th.col-md-4 DESCRIPCIÓN
+          %th.col-md-1 CANTIDAD
+          %th.col-md-1-5 P. UNITARIO
+          %th.col-md-1-5 IMPORTE
+      %tbody
+        - @recibo.conceptos.each do |concepto|
+          %tr
+            %td.col-md-2= concepto.clave
+            %td.col-md-2= concepto.clave_unidad
+            %td.col-md-4= concepto.descripcion
+            %td.col-md-1.text-right= concepto.cantidad
+            %td.col-md-1-5.text-right= number_to_currency concepto.valor_unitario
+            %td.col-md-1-5.text-right= number_to_currency concepto.importe

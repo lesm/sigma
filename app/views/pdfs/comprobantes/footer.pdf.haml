@@ -1,0 +1,76 @@
+.row
+  .col-md-12
+    %hr.line-top
+  .col-md-9.font-20
+    %p.importe-letra IMPORTE CON LETRA:
+    &nbsp;
+    = @recibo.total.to_i.to_words.capitalize
+    pesos
+    = @recibo.centavos
+    \/100 #{@recibo.moneda}
+    %br
+    .row.font-11
+      .col-md-12
+        %strong
+          MÉTODO DE PAGO:
+        = @recibo.metodo_pago
+        &nbsp;
+        &nbsp;
+        %strong
+          FORMA DE PAGO:
+        = @recibo.forma_pago
+        &nbsp;
+        &nbsp;
+        %strong
+          TIPO DE COMPROBANTE:
+        = @recibo.tipo_comprobante
+  .col-md-3.font-14
+    %table.table.text-striped
+      %tr
+        %th.text-right Subtotal:
+        %td.text-right= number_to_currency @recibo.subtotal
+      %tr
+        %th.text-right Total:
+        %td.text-right= number_to_currency @recibo.total
+  .col-md-12.font-12
+    .row
+      .col-md-6
+        %strong
+          FOLIO FISCAL:
+        %br
+        %strong
+          NO. DE SERIE DEL CERTIFICADO DEL SAT:
+        %br
+        %strong
+          NO. DE SERIE DEL CERTIFICADO DEL EMISOR:
+        %br
+        %strong
+          LUGAR DE EXPEDICIÓN:
+        68120
+      .col-md-6
+        %strong
+          RFC PROVEEDOR DE CERTIFICACIÓN:
+        %br
+        %strong
+          FECHA Y HORA DE EMISIÓN DE CFDI:
+        %br
+        %strong
+          FECHA Y HORA DE CERTIFICACIÓN:
+.col-md-12
+  %hr.line-bottom
+.col-md-12.font-12
+  .row
+    .col-md-3
+      .text-center
+        = wicked_pdf_image_tag("qr_sigma")
+        %br
+        Este documento es una representación impresa de un CFDI
+    .col-md-9
+      %strong
+        SELLO DIGITAL DEL CFDI:
+      %br
+      %strong
+        SELLO DIGITAL DEL SAT:
+      %br
+      %strong
+        CADENA ORIGINAL DEL COMPLEMENTO DE CERTIFICACIÓN DIGITAL DEL SAT:

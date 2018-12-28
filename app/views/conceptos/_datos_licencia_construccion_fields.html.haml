@@ -6,5 +6,5 @@
     = f.input :fecha, as: :string, input_html: { class: "fecha-comun" }
     = f.input :observaciones
   .col-md-12
-    = f.input :years, collection: (2010..2019).to_a, input_html: { class: "select2-multiple", name: "recibo[conceptos_attributes][0][datos_concepto_attributes][years][]", multiple: true }
+    = f.input :years, collection: (2010..2019).to_a, input_html: { class: "select2-multiple", multiple: true }
     = f.input :type, as: :hidden, value: "DatosLicenciaConstruccion"

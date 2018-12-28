@@ -95,12 +95,6 @@ function startDateTimePicker() {
     format: 'YYYY-MM-DD'
   })
 
-  $("input[id$='_fecha'].fecha-predial").datetimepicker({
-    locale: 'es',
-    format: "YYYY",
-    viewMode: 'years',
-  })
-
   // DatosAgua
   $("input[id$='_fecha_corte']").datetimepicker({
     locale: 'es',

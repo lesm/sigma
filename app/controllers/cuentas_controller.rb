@@ -73,7 +73,8 @@ class CuentasController < ApplicationController
 
     def cuenta_params
       params.require(:cuenta).permit(
-        :id, :codigo, :formato, :descripcion, :importe
+        :id, :codigo, :formato, :descripcion, :importe,
+        :clave_producto, :clave_unidad
       )
     end
 end
