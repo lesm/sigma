@@ -25,7 +25,11 @@
         %td= number_to_currency cierre_caja.monto_adeudo
         %td= number_to_currency cierre_caja.monto_ingreso_por_clasificar
         %td= l cierre_caja.created_at, format: :apertura
-        %td= l cierre_caja.fecha_cierre, format: :cierre unless cierre_caja.abierta?
+        %td
+          - if cierre_caja.abierta?
+            Pendiente
+          - else
+            = l cierre_caja.fecha_cierre, format: :cierre
   %tfoot.text-right
     %tr
       %td{ colspan: 4 }

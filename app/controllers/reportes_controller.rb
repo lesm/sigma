@@ -47,7 +47,7 @@ class ReportesController < ApplicationController
 
       @cuentas = conceptos.map do |key, value|
         {
-          cuenta: "#{value.first.clave} - #{value.first.descripcion}",
+          cuenta: value.first.descripcion,
           cantidad: value.map(&:cantidad).reduce(0, :+),
           valor_unitario: value.map(&:valor_unitario).reduce(0, :+),
           importe: value.map(&:importe).reduce(0, :+)
