@@ -21,17 +21,56 @@ RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :sys
       cuando_cantidad_es_2_y_precio_unitario_es_100
       el_importe_debe_ser_200_y_total_debe_ser_200
     end
+
+    scenario "Asigna importe y total con decimales aplicando redondeo" do
+      cuando_cantidad_es_1_y_precio_unitario_es_9_99
+      el_importe_debe_ser_9_5_y_total_debe_ser_9_5
+
+      cuando_cantidad_es_1_y_precio_unitario_es_9_53
+      el_importe_debe_ser_9_5_y_total_debe_ser_9_5
+
+      cuando_cantidad_es_1_y_precio_unitario_es_9_49
+      el_importe_debe_ser_9_y_total_debe_ser_9
+    end
   end
 
   def cuando_cantidad_es_2_y_precio_unitario_es_100
     fill_in "Cantidad", with: 2
     fill_in "Precio Unitario", with: 100
-    fill_in "Observaciones", with: "Hola"
+    fill_in "Observaciones", with: "Para lanzar evento javascript"
   end
 
   def el_importe_debe_ser_200_y_total_debe_ser_200
     expect(find_field("Importe").value).to eq "200"
     expect(find_field("Total").value).to eq "200"
+  end
+
+  def cuando_cantidad_es_1_y_precio_unitario_es_9_99
+    fill_in "Cantidad", with: 1
+    fill_in "Precio Unitario", with: 9.99
+    fill_in "Observaciones", with: "Para lanzar evento javascript"
+  end
+
+  def cuando_cantidad_es_1_y_precio_unitario_es_9_53
+    fill_in "Cantidad", with: 1
+    fill_in "Precio Unitario", with: 9.53
+    fill_in "Observaciones", with: "Para lanzar evento javascript"
+  end
+
+  def el_importe_debe_ser_9_5_y_total_debe_ser_9_5
+    expect(find_field("Importe").value).to eq "9.5"
+    expect(find_field("Total").value).to eq "9.5"
+  end
+
+  def cuando_cantidad_es_1_y_precio_unitario_es_9_49
+    fill_in "Cantidad", with: 1
+    fill_in "Precio Unitario", with: 9.49
+    fill_in "Observaciones", with: "Para lanzar evento javascript"
+  end
+
+  def el_importe_debe_ser_9_y_total_debe_ser_9
+    expect(find_field("Importe").value).to eq "9"
+    expect(find_field("Total").value).to eq "9"
   end
 
   def folio_debe_ser_numero_de_emisor_mas_anio_actual_mas_numero_de_caja_mas_numero_de_recibo
