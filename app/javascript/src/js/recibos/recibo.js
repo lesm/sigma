@@ -35,3 +35,4 @@ function eliminarConcepto() {
 $(document).on("click", "#eliminarConcepto", eliminarConcepto)
 $(document).on("change", "input[id$='_valor_unitario']", actualizarImporte)
 $(document).on("change", "input[id$='_cantidad']", actualizarImporte)
+$(document).on("turbolinks:load", actualizarImporte)
