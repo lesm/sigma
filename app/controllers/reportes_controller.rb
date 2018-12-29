@@ -26,8 +26,7 @@ class ReportesController < ApplicationController
   def cuenta
     @reporte = ConceptoForm.new(reporte_params)
     if @reporte.valid?
-      @conceptos = Concepto.includes(:comprobante)
-        .where(comprobantes: {created_at: range_of_dates})
+      @conceptos = Concepto.by_range_of_dates(range_of_dates)
         .where(cuenta_id: @reporte.cuenta_id)
       @cuenta = Cuenta.find(@reporte.cuenta_id)
       @suma_importe_conceptos = @conceptos.map(&:importe).reduce(0,:+)
@@ -41,8 +40,7 @@ class ReportesController < ApplicationController
   def cuentas
     @reporte = CuentasForm.new(reporte_params)
     if @reporte.valid?
-      conceptos = Concepto.includes(:comprobante)
-        .where(comprobantes: {created_at: range_of_dates})
+      conceptos = Concepto.by_range_of_dates(range_of_dates)
         .group_by(&:cuenta_id)
 
       @cuentas = conceptos.map do |key, value|
@@ -53,10 +51,8 @@ class ReportesController < ApplicationController
           importe: value.map(&:importe).reduce(0, :+)
         }
       end
-      @suma_importe_cuentas = 0
-      @cuentas.each do |cuenta|
-        @suma_importe_cuentas += cuenta[:importe]
-      end
+
+      @suma_importe_cuentas = @cuentas.map {|obj| obj[:importe]}.reduce(0,:+)
 
       render generar_pdf("cuentas").merge!(options)
     else

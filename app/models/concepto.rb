@@ -16,6 +16,8 @@ class Concepto < ApplicationRecord
   validates :cantidad, numericality: { greater_than: 0 }
   validate :importe_value
 
+  scope :by_range_of_dates, -> (range_of_dates) { includes(:comprobante).where(comprobantes: { created_at: range_of_dates }) }
+
   delegate :folio, :clave_catastral, :numero_cuenta, :ubicacion,
     :base_catastral, :impuesto_predial, :observaciones, :fecha,
     :serie, :placa, :estimacion, :nombre_obra, :localidad,
