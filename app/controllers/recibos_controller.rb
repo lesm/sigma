@@ -90,7 +90,7 @@ class RecibosController < ApplicationController
             :base_catastral, :impuesto_predial, :observaciones, :fecha,
             :serie, :placa, :estimacion, :nombre_obra, :localidad,
             :nombre_contratista, :fecha_refrendo, :cantidad_folios_cinco,
-            :cantidad_folios_diez, :resposable, :mes_pago, :fecha_corte,
+            :cantidad_folios_diez, :responsable, :mes_pago, :fecha_corte,
             :numero_contrato, :numero_medidor, :lectura_actual,
             :lectura_anterior, :consumo, :ruta, :lecturista, :type, years: []
           ]
