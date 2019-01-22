@@ -32,7 +32,7 @@ const showConfirmationDialog = element => {
   const arqueoPendiente   = castValue(element.getAttribute('data-arqueo-pendiente'))
   const cierreCajaAbierta = castValue(element.getAttribute('data-cierre-caja-abierta'))
   const cierreCajaId      = element.getAttribute('data-cierre-caja-id')
-  const alertCerrarCaja   = element.getAttribute('data-alert-cerrar-caja')
+  const alertCerrarCaja   = castValue(element.getAttribute('data-alert-cerrar-caja'))
 
   let link = document.createElement("a")
   let title = ""
