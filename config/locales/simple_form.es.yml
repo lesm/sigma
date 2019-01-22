@@ -58,6 +58,7 @@ es-MX:
         cuenta_ids: "Seleccione al menos una cuenta a cobrar"
         clave: "Clave Producto"
         clave_unidad: "Clave Unidad"
+        responsable: "Inspector Responsable"
     # Examples
     # labels:
     #   defaults:

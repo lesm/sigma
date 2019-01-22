@@ -1,9 +1,9 @@
 .row
   .col-md-4
     -#= f.input :dia
-    = f.input :cantidad_folios_cinco
+    = f.input :cantidad_folios_cinco, as: :integer, input_html: { min: 0 }
   .col-md-4
-    = f.input :cantidad_folios_diez
+    = f.input :cantidad_folios_diez, as: :integer, input_html: { min: 0 }
   .col-md-4
     = f.input :fecha, as: :string, input_html: { class: "fecha-comun" }
   .col-md-6
