@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :system do
   feature "En nuevo Recibo" do
     before :each do
+      allow(Date).to receive(:current).and_return(Date.new(2018))
       dado_que_hay_un_contribuyente_una_cuenta_y_un_emisor
       dado_que_hay_un_cajero_logueado_con_una_caja
       cuando_cajero_da_click_en_el_link_caja
@@ -24,13 +25,13 @@ RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :sys
 
     scenario "Asigna importe y total con decimales aplicando redondeo" do
       cuando_cantidad_es_1_y_precio_unitario_es_9_99
-      el_importe_debe_ser_9_5_y_total_debe_ser_9_5
+      el_importe_debe_ser_10_y_total_debe_ser_10
 
       cuando_cantidad_es_1_y_precio_unitario_es_9_53
       el_importe_debe_ser_9_5_y_total_debe_ser_9_5
 
       cuando_cantidad_es_1_y_precio_unitario_es_9_49
-      el_importe_debe_ser_9_y_total_debe_ser_9
+      el_importe_debe_ser_9_5_y_total_debe_ser_9_5
     end
   end
 
@@ -41,8 +42,8 @@ RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :sys
   end
 
   def el_importe_debe_ser_200_y_total_debe_ser_200
-    expect(find_field("Importe").value).to eq "200"
-    expect(find_field("Total").value).to eq "200"
+    expect(find_field("Importe").value).to eq "200.0"
+    expect(find_field("Total").value).to eq "200.0"
   end
 
   def cuando_cantidad_es_1_y_precio_unitario_es_9_99
@@ -57,9 +58,9 @@ RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :sys
     fill_in "Observaciones", with: "Para lanzar evento javascript"
   end
 
-  def el_importe_debe_ser_9_5_y_total_debe_ser_9_5
-    expect(find_field("Importe").value).to eq "9.5"
-    expect(find_field("Total").value).to eq "9.5"
+  def el_importe_debe_ser_10_y_total_debe_ser_10
+    expect(find_field("Importe").value).to eq "10.0"
+    expect(find_field("Total").value).to eq "10.0"
   end
 
   def cuando_cantidad_es_1_y_precio_unitario_es_9_49
@@ -68,9 +69,9 @@ RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :sys
     fill_in "Observaciones", with: "Para lanzar evento javascript"
   end
 
-  def el_importe_debe_ser_9_y_total_debe_ser_9
-    expect(find_field("Importe").value).to eq "9"
-    expect(find_field("Total").value).to eq "9"
+  def el_importe_debe_ser_9_5_y_total_debe_ser_9_5
+    expect(find_field("Importe").value).to eq "9.5"
+    expect(find_field("Total").value).to eq "9.5"
   end
 
   def folio_debe_ser_numero_de_emisor_mas_anio_actual_mas_numero_de_caja_mas_numero_de_recibo

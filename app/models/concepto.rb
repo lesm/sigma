@@ -14,7 +14,7 @@ class Concepto < ApplicationRecord
   validates :importe, :cantidad, :valor_unitario, :clave, :clave_unidad,
     presence: true
   validates :cantidad, numericality: { greater_than: 0 }
-  validate :importe_value
+  validate :importe_igual_a_cantidad_por_valor_unitario
 
   scope :by_range_of_dates, -> (range_of_dates) { includes(:comprobante).where(comprobantes: { created_at: range_of_dates }) }
 
@@ -27,33 +27,14 @@ class Concepto < ApplicationRecord
     :lectura_anterior, :consumo, :ruta, :lecturista, :years,
     to: :datos_concepto, prefix: false, allow_nil: true
 
-  def importe_value
+  def importe_igual_a_cantidad_por_valor_unitario
     return if cantidad.nil? or valor_unitario.nil?
-    if importe != importe_redondeado
+    if importe != cantidad_por_valor_unitario
       errors.add :importe, "debe ser #{cantidad_por_valor_unitario}"
     end
   end
 
   private
-
-  def importe_redondeado
-    return cantidad_por_valor_unitario if [0, 50].include?(centavos)
-    cantidad_por_valor_unitario - centavos_redondeados
-  end
-
-  def centavos_redondeados
-    return redondear(centavos - 50) if (centavos >= 51)
-    redondear
-  end
-
-  def redondear cantidad = centavos
-    return "0.#{cantidad}".to_f if (cantidad >= 10)
-    "0.0#{cantidad}".to_f
-  end
-
-  def centavos
-    ('%02d' % ((cantidad_por_valor_unitario * 100).to_i % 100)).to_i
-  end
 
   def cantidad_por_valor_unitario
     cantidad * valor_unitario
