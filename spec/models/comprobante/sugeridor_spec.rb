@@ -8,6 +8,7 @@ RSpec.describe Comprobante::Sugeridor, type: :model do
       let(:caja) { build :caja, numero: 1 }
 
       before :each do
+        allow(Date).to receive(:current).and_return(Date.new(2018))
         emisor
       end
 
