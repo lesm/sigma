@@ -75,7 +75,7 @@ RSpec.describe "Cajero Assigning Folio, Importe and Total of Recibo", type: :sys
 
   def folio_debe_ser_numero_de_emisor_mas_anio_actual_mas_numero_de_caja_mas_numero_de_recibo
     numero_caja = @cajero.caja.numero
-    expect(page).to have_field("Folio", with: "48218#{numero_caja}-1")
+    expect(page).to have_field("Folio", with: "48219#{numero_caja}-1")
   end
 
   def fecha_cobro_debe_ser_igual_a_fecha_actual

@@ -1,0 +1,17 @@
+%tr{class: color }
+  %th Cantidad de Folios $5.00
+  %td= concepto.cantidad_folios_cinco
+%tr{class: color }
+  %th Cantidad de Folios $10.00
+  %td= concepto.cantidad_folios_diez
+%tr{class: color }
+  %th Inspector Responsable
+  %td= concepto.responsable
+%tr{class: color }
+  %th Observaciones
+  %td= concepto.observaciones
+%tr{class: color }
+  %th Monto
+  %td
+    %span{style: "color:green"}
+      %strong= number_to_currency concepto.importe
