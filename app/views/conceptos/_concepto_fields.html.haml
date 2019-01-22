@@ -11,7 +11,7 @@
     .col-md-4
       = f.input :valor_unitario, as: :numeric, input_html: { min: "1" }
     .col-md-4
-      = f.input :importe, as: :numeric, readonly: true, input_html: { min: 0 }
+      = f.input :importe, as: :numeric, readonly: true, input_html: { min: "0" }
       = f.input :cuenta_id, as: :hidden, input_html: { value: f.object.cuenta_id }
   .row
     .col-md-12
