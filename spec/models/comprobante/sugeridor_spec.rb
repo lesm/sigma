@@ -8,23 +8,22 @@ RSpec.describe Comprobante::Sugeridor, type: :model do
       let(:caja) { build :caja, numero: 1 }
 
       before :each do
-        allow(Date).to receive(:current).and_return(Date.new(2018))
         emisor
       end
 
-      it "folio 482181-1 cuando es el primer comprobante" do
-        expect(Comprobante::Sugeridor.folio(caja)).to eq "482181-1"
+      it "folio 482191-1 cuando es el primer comprobante" do
+        expect(Comprobante::Sugeridor.folio(caja)).to eq "482191-1"
       end
 
-      it "folio 482181-2 cuando es el segundo comprobante" do
-        create :recibo, :con_datos, folio: "482181-1", caja: caja
-        expect(Comprobante::Sugeridor.folio(caja)).to eq "482181-2"
+      it "folio 482191-2 cuando es el segundo comprobante" do
+        create :recibo, :con_datos, folio: "482191-1", caja: caja
+        expect(Comprobante::Sugeridor.folio(caja)).to eq "482191-2"
       end
 
-      it "folio 482181-3 cuando es el segundo comprobante" do
-        create :recibo, :con_datos, folio: "482181-1", caja: caja
-        create :recibo, :con_datos, folio: "482181-2", caja: caja
-        expect(Comprobante::Sugeridor.folio(caja)).to eq "482181-3"
+      it "folio 482191-3 cuando es el segundo comprobante" do
+        create :recibo, :con_datos, folio: "482191-1", caja: caja
+        create :recibo, :con_datos, folio: "482191-2", caja: caja
+        expect(Comprobante::Sugeridor.folio(caja)).to eq "482191-3"
       end
     end
 
