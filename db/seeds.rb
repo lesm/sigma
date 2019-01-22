@@ -235,7 +235,21 @@ Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E4
 Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430803", formato: "DatosPermisoPublicidad", descripcion: "430803 - PERMISOS PARA ANUNCIOS Y PUBLICIDAD DE ANUNCIOS COLOCADOS").first_or_create
 Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430804", formato: "DatosPermisoPublicidad", descripcion: "430804 - PERMISOS PARA ANUNCIOS Y PUBLICIDAD DE DIFUSIÓN FONÉTICA DE PUBLICIDAD POR UNIDAD DE SONIDO").first_or_create
 Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430806", formato: "DatosPermisoPublicidad", descripcion: "430806 - PERMISOS PARA ANUNCIOS Y PUBLICIDAD DE CARTELERAS DE CINES, CIRCOS, TEATROS, OTROS").first_or_create
-#Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430913", descripcion: "430913 - OTROS CONCEPTOS DE AGUA POTABLE, DRENAJE Y ALCANTARILLADO").first_or_create
+
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430901", descripcion: "430901 - USO DOMESTICO DE AGUA POTABLE").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430902", descripcion: "430902 - USO COMERCIAL DE AGUA POTABLE").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430903", descripcion: "430903 - USO INDUSTRIAL DE AGUA POTABLE").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430904", descripcion: "430904 - USO DOMESTICO DE DRENAJE Y ALCANTARILLADO").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430905", descripcion: "430905 - USO COMERCIAL DE DRENAJE Y ALCANTARILLADO").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430906", descripcion: "430906 - USO INDUSTRIAL DE DRENAJE Y ALCANTARILLADO").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430907", descripcion: "430907 - AGUA POTABLE REZAGOS").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430908", descripcion: "430908 - CAMBIO DE USUARIO DE AGUA POTABLE, DRENAJE Y ALCANTARILLADO").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430909", descripcion: "430909 - BAJA Y CAMBIO DE MEDIDOR").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430910", descripcion: "430910 - RECONEXION A LA RED DE AGUA POTABLE").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430911", descripcion: "430911 - RECONEXION A LA TUBERIA DE DRENAJE").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430912", descripcion: "430912 - DESAZOLVE DE ALCANTARILLADO PUBLICO").first_or_create
+Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "430913", descripcion: "430913 - OTROS CONCEPTOS DE AGUA POTABLE, DRENAJE Y ALCANTARILLADO").first_or_create
+
 #Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "431001", descripcion: "431001 - CONSULTA MÉDICA").first_or_create
 #Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "431003", descripcion: "431003 - SERVICIOS PRESTADOS PARA EL CONTROL DE ENFERMEDADES DE TRANSMISIÓN SEXUAL").first_or_create
 #Cuenta.where(clave_producto: "93171500 - Política comercial", clave_unidad: "E48 - Unidad de servicio", codigo: "431005", descripcion: "431005 - CONSULTA DE ODONTOLOGÍA").first_or_create
