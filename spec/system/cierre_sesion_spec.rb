@@ -56,7 +56,7 @@ RSpec.describe "Cierre de sesión", type: :system do
             cajero_debe_ver_un_link_de_cerrar_caja
             cuando_cajero_da_click_en_link_cerrar_caja
             se_muestra_un_mensaje_de_confirmar_cerrar_caja
-            cuando_cajero_da_click_en_confirmar_cerrar_caja
+            cajero_da_click_en_confirmar_cerrar_caja
             data_cierre_caja_abierta_debe_ser_false
             cuando_cajero_da_click_en_link_de_cerrar_sesion
             se_muestra_un_mensaje_de_confirmar_cerrar_sesion
@@ -177,10 +177,6 @@ RSpec.describe "Cierre de sesión", type: :system do
 
   def se_muestra_un_mensaje_de_confirmar_cerrar_caja
     expect(page).to have_content("Una vez cerrada la caja ya no se puede abrir.")
-  end
-
-  def cuando_cajero_da_click_en_confirmar_cerrar_caja
-    click_button "Sí"
   end
 
   def data_cierre_caja_abierta_debe_ser_false

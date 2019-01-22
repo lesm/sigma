@@ -55,17 +55,13 @@ RSpec.describe "Cajero Seleccting and Unselecting Caja", type: :system do
 
   def cajero_cierra_cierre_de_caja_en_ceros
     cajero_da_click_en_link_cierre_de_caja
-    cajero_da_click_en_el_link_ver
     cajero_da_click_en_link_cerrar_caja
+    cajero_da_click_en_el_boton_cerrar_caja
     cajero_da_click_en_confirmar_cerrar_caja
   end
 
-  def cajero_da_click_en_link_cerrar_caja
+  def cajero_da_click_en_el_boton_cerrar_caja
     click_link "Cerrar caja"
-  end
-
-  def cajero_da_click_en_confirmar_cerrar_caja
-    click_button "Sí"
   end
 
   def y_cajero_no_selecciona_caja_y_da_click_en_otro_link
