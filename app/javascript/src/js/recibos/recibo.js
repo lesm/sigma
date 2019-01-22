@@ -2,10 +2,10 @@ function actualizarImporte() {
   $("input[id$='_cantidad']").each(function() {
     let cantidad       = parseInt($(this).val())
     let row            = $(this).closest(".row")
-    let valor_unitario = convertirAFloat(row.find("input[id$='_valor_unitario']").val()).toFixed(1)
+    let valor_unitario = convertirAFloat(row.find("input[id$='_valor_unitario']").val())
 
     if (existe(cantidad) && existe(valor_unitario)) {
-      row.find("input[id$='_valor_unitario']").val(valor_unitario)
+      row.find("input[id$='_valor_unitario']").val(valor_unitario.toFixed(1))
       importe = convertirAFloat((cantidad * valor_unitario)).toFixed(1)
       row.find("input[id$='_importe']").val(importe)
     }
