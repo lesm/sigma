@@ -53,8 +53,8 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
       crea_arqueo_de_monedas_y_billetes
       cajero_da_click_en_link_recaudacion
       cajero_da_click_en_link_cierre_de_caja
-      cajero_da_click_en_el_link_ver
-      cajero_da_otro_click_en_el_link_ver
+      cajero_da_click_en_link_cerrar_caja
+      cajero_da_click_en_link_ver
       debe_mostrar_un_texto_con_la_palabra_monto_efectivo
       debe_mostrar_un_th_con_200
       debe_mostrar_un_th_con_100
@@ -67,8 +67,8 @@ RSpec.describe "Cajero Creating Arqueo", type: :system do
       crea_arqueo_de_cheque_debito_credito
       cajero_da_click_en_link_recaudacion
       cajero_da_click_en_link_cierre_de_caja
-      cajero_da_click_en_el_link_ver
-      cajero_da_otro_click_en_el_link_ver
+      cajero_da_click_en_link_cerrar_caja
+      cajero_da_click_en_link_ver
       debe_mostrar_un_texto_con_la_palabra_monto_no_efectivo
       debe_mostrar_un_th_con_monto_cheque
       debe_mostrar_un_th_con_monto_tarjeta_debito

@@ -32,6 +32,7 @@ const showConfirmationDialog = element => {
   const arqueoPendiente   = castValue(element.getAttribute('data-arqueo-pendiente'))
   const cierreCajaAbierta = castValue(element.getAttribute('data-cierre-caja-abierta'))
   const cierreCajaId      = element.getAttribute('data-cierre-caja-id')
+  const alertCerrarCaja   = castValue(element.getAttribute('data-alert-cerrar-caja'))
 
   let link = document.createElement("a")
   let title = ""
@@ -75,9 +76,12 @@ const showConfirmationDialog = element => {
         icon: 'warning',
         buttons: ["No", "Sí"],
       }).then(result => {
-         if (result) {
-           element.href = `${element.href}?quitar_referencia=true`
-         }
+        if (result) {
+          if (alertCerrarCaja) {
+            swal('Cierre de Caja!', 'La caja se cerro correctamente.', 'success')
+          }
+          element.href = `${element.href}?quitar_referencia=true`
+        }
         confirmed(element, result)
       })
     }

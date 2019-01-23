@@ -6,15 +6,8 @@
           %i.fa.fa-key
           Detalle del Cierre de Caja (Folio #{@cierre_caja.id})
       .card-body
-        .row
-          .col-md-4
-            %h6
-              Cajero:
-              = @cierre_caja.cajero.nombre
-          .col-md-8
-            %h6
-              Observación:
-              = @cierre_caja.observacion
+        #cierreCaja
+          = render "cierre_caja"
         .row
           .col-md-12
             %p

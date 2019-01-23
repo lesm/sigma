@@ -78,11 +78,20 @@ module Features
       click_button "Crear Arqueo"
     end
 
-    def cajero_da_click_en_el_link_ver
+    def cajero_da_click_en_link_cerrar_caja
+      click_link "Cerrar caja"
+      sleep 1
+    end
+
+    def cajero_da_click_en_confirmar_cerrar_caja
+      click_button "Sí"
+      click_button "OK"
+    end
+
+    def cajero_da_click_en_link_ver
       click_link "Ver"
       sleep 1
     end
-    alias_method :cajero_da_otro_click_en_el_link_ver, :cajero_da_click_en_el_link_ver
 
     def se_muestra_un_mensaje_de_cierre_de_sesion
       expect(page).to have_content "Sesión cerrada exitosamente."
