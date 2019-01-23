@@ -1,0 +1,15 @@
+.row
+  .col-md-6
+    %h6
+      Cajero:
+      = @cierre_caja.cajero.nombre
+    %h6
+      Estado:
+      = estado(@cierre_caja)
+  .col-md-6
+    %h6
+      Apertura:
+      = l @cierre_caja.created_at, format: :apertura
+    %h6
+      Cierre:
+      = l @cierre_caja.fecha_cierre, format: :cierre unless @cierre_caja.abierta?
