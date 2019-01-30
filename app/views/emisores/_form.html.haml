@@ -10,9 +10,13 @@
       = f.input :numero_municipio
       .row
         .col-md-6
+          = image_tag(@emisor.logotipo_url, class: "img-thumbnail") if @emisor.logotipo?
           = f.input :logotipo
+          = f.hidden_field :logotipo_cache
         .col-md-6
+          = image_tag(@emisor.escudo_url, class: "img-thumbnail") if @emisor.escudo?
           = f.input :escudo
+          = f.hidden_field :escudo_cache
     .col-md-6
       = f.simple_fields_for :direccion do |df|
         .row
