@@ -9,7 +9,7 @@ namespace :import_contribuyentes do
     ContribuyentesCuentaImport.new.call
   end
 
-  URL_FILE = "#{Rails.root}/lib/import_files/contribuyentes_morales.csv"
+  URL_FILE = "#{Rails.root}/lib/import_files/contribuyentes.csv"
 
   module ImportMethod
     def import
@@ -26,16 +26,37 @@ namespace :import_contribuyentes do
     def call
       contribuyentes = []
       import do |row|
-        contribuyentes << build_contrbuyente(row)
+        contribuyentes << Contribuyente.new(set_attr(row))
       end
       Contribuyente.import(contribuyentes, recursive: true)
     end
 
-    def build_contrbuyente row
-      Contribuyente.new(
-        id_import: row["id"],
+    private
+
+    def set_attr row
+      (row["tipo_contribuyente"] == "M") ? attr_moral(row) : attr_fisica(row)
+    end
+
+    def attr_fisica row
+      { 
+        nombre_o_razon_social: row["nombre"],
+        primer_apellido: row["ape_pat"],
+        segundo_apellido: row["ape_mat"],
+        persona_fisica: true,
+      }.merge(common_attributes(row))
+    end
+
+    def attr_moral row
+      {
         nombre_o_razon_social: row["nombre_completo"],
-        persona_fisica: false, rfc: row["rfc"].blank? ? nil : row["rfc"],
+        persona_fisica: false,
+      }.merge(common_attributes(row)) 
+    end
+
+    def common_attributes row
+      {
+        id_import: row["id"],
+        rfc: row["rfc"].blank? ? nil : row["rfc"],
         import_skip: true,
         direccion_attributes: {
           calle: row["calle"].blank? ? "Conocida" : row["calle"],
@@ -44,7 +65,7 @@ namespace :import_contribuyentes do
           codigo_postal: row["codigo_postal"].blank? ? "69800" : row["codigo_postal"],
           localidad: row["localidad"].blank? ? "Tlaxiaco" : row["localidad"]
         }
-      )
+      }  
     end
   end
 
