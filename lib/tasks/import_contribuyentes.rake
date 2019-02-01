@@ -1,4 +1,5 @@
 require 'activerecord-import/base'
+require 'activerecord-import/active_record/adapters/postgresql_adapter'
 require 'csv'
 
 namespace :import_contribuyentes do
