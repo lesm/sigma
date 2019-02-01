@@ -6,6 +6,7 @@ class Caja < ApplicationRecord
   validates :numero, numericality: { greater_than_or_equal_to: 1 }
 
   scope :disponibles, -> { where(disponible: true) }
+  scope :no_disponibles, -> { where(disponible: false) }
 
   def self.disponibles?
     Caja.disponibles.count > 0

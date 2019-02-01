@@ -34,6 +34,21 @@ RSpec.describe Caja, type: :model do
     end
   end
 
+  describe ".no_disponibles" do
+    let(:cajas_disponibles) { create_list :caja, 2, disponible: true }
+    let(:cajas_no_disponibles) { create_list :caja, 2, disponible: false }
+
+    it "must be 2" do
+      cajas_no_disponibles
+      expect(Caja.no_disponibles).to eq cajas_no_disponibles
+    end
+
+    it "must be empty" do
+      cajas_disponibles
+      expect(Caja.no_disponibles).to be_empty
+    end
+  end
+
   describe "disponibles?" do
     let(:caja) { create :caja, disponible: true }
     it "must be true" do
