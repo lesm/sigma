@@ -6,6 +6,8 @@ class CierreCaja < ApplicationRecord
 
   validates :monto_sistema, :monto_cajero, :cajero, presence: true
 
+  scope :abiertas, -> { where(abierta: true) }
+
   def update_montos
     update_monto_cajero
     update_monto_sistema
