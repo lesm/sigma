@@ -1,6 +1,7 @@
 class Caja < ApplicationRecord
   belongs_to :cajero, optional: true
   has_many :comprobantes
+  has_many :historial_cajas
   validates :nombre, :numero, presence: true
   validates :nombre, :numero, uniqueness: true
   validates :numero, numericality: { greater_than_or_equal_to: 1 }
