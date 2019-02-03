@@ -2,11 +2,9 @@ $("#form_modal").html("<%= j render 'contribuyentes/form_modal', contribuyente: 
 
 <%- if @contribuyente.valid? %>
   $("select[id$='_contribuyente_id']").html("<%= j options_for_select(contribuyente_for_select(@contribuyente)) %>")
-  $("select[id$='_contribuyente_id']").val("<%= @contribuyente %>").trigger("change")
+  $("select[id$='_contribuyente_id']").val("<%= @contribuyente.id %>").trigger("change")
 
-  <%- if ($("select[id$='_cuenta_ids'").length) %>
-    $("select[id$='_cuenta_ids'").attr("disabled", false)
-  <%- end %>
+  $("select[id$='_cuenta_ids'").attr("disabled", false)
 
   $("#contribuyente_nuevo").modal("hide")
   swal(
