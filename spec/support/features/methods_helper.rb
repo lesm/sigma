@@ -112,5 +112,11 @@ module Features
     def cuando_cajero_da_click_en_boton_cobrar
       click_button "Cobrar"
     end
+
+    def dado_que_existen_dos_conceptos_de_cobro
+      create :cuenta, :rifas
+      create :cuenta, :sorteos
+    end
+
   end
 end

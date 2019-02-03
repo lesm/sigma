@@ -27,11 +27,6 @@ RSpec.describe "Administrador Adding Cajero", type: :system do
     end
   end
 
-  def dado_que_existen_dos_conceptos_de_cobro
-    create :cuenta, :rifas
-    create :cuenta, :sorteos
-  end
-
   def admin_debe_ver_el_link_agregar_cajero
     expect(page).to have_link("Agregar Cajero")
   end
