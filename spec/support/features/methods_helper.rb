@@ -34,8 +34,8 @@ module Features
     end
 
     def cajero_selecciona_un_contribuyente
-      select "Carlos José Pérez - AAAA111111AAZ", from: "Contribuyente"
-      page.execute_script("$('#cuenta_form_contribuyente_id').trigger('select2:close')")
+      first("span.selection").click
+      first("li.select2-results__option", text: "Carlos José Pérez - AAAA111111AAZ").click
     end
 
     def cuando_da_click_en_el_link_siguiente

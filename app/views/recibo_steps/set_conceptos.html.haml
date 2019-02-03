@@ -10,7 +10,7 @@
         = simple_form_for(@recibo) do |f|
           .row
             .col-md-6
-              = f.association :contribuyente, collection: Contribuyente.all, selected: @recibo.contribuyente.id, disabled: true
+              = f.association :contribuyente, collection: find_contribuyente(@recibo.contribuyente_id), selected: @recibo.contribuyente_id, disabled: true
               = f.input :contribuyente_id, as: :hidden, input_html: { value: @recibo.contribuyente.id }
               = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
               -#= f.input :uso_cfdi, collection: Comprobante::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
