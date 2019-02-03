@@ -9,6 +9,7 @@ RSpec.describe ContribuyentePolicy do
   let(:contribuyente) { create :contribuyente, :con_direccion }
   let(:contribuyentes) do
     create_list :contribuyente, 4, :con_direccion
+    create_list :contribuyente, 4, :persona_moral, :con_direccion
   end
 
   subject { described_class }
@@ -18,14 +19,14 @@ RSpec.describe ContribuyentePolicy do
     context "with cajero" do
       let(:policy_scope) { ContribuyentePolicy::Scope.new(cajero, Contribuyente).resolve }
       it "responds all contribuyentes" do
-        expect(policy_scope.count).to eq 5
+        expect(policy_scope.count).to eq 9
       end
     end
 
     context "with admin" do
       let(:policy_scope) { ContribuyentePolicy::Scope.new(admin, Contribuyente).resolve }
-      it "raise_error" do
-        expect{ policy_scope }.to raise_error Pundit::NotAuthorizedError
+      it "responds all contribuyentes" do
+        expect(policy_scope.count).to eq 4
       end
     end
   end
