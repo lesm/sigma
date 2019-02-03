@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "rake liberar_cajas:no_disponibles", type: :task do
+RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
 
   it "preloads the Rails environment" do
     expect(task.prerequisites).to include "environment"
@@ -10,132 +10,127 @@ RSpec.describe "rake liberar_cajas:no_disponibles", type: :task do
     expect { task.execute }.not_to raise_error
   end
 
-  describe "when Caja is not disponible" do
+  describe "When Caja is not disponible" do
     let(:caja) { create :caja, disponible: false }
+    let(:caja_dos) { create :caja, disponible: false }
     let(:cajero) { create :cajero, :con_contribuyente, caja: caja }
-    let(:cajero_dos) { create :cajero, :con_contribuyente, caja: caja }
-
-    context "when comprobantes without Arqueo" do
-      let!(:comprobantes_sin_arqueo) do
-        create_list :comprobante, 5, :con_datos, cajero: cajero,
-          caja: caja, arqueo_id: nil
-      end
-      let!(:comprobantes_sin_arqueo_cajero_dos) do
-        create_list :comprobante, 5, :con_datos, cajero: cajero_dos,
-          caja: caja, arqueo_id: nil
-      end
-
-      it "should create Arqueo and CierreCaja" do
-        allow_any_instance_of(Caja).to receive(:update_historial_caja!)
-          .and_return(HistorialCaja.new)
-
-        expect{ task.execute }.to output(
-          "Cierre automatico, se genero arqueo y cierre caja.\n"
-        ).to_stdout
-
-        abrir_caja
-      end
+    let(:cajero_dos) do
+      create :cajero, :con_contribuyente, caja: caja_dos
+    end
+    let(:historial_caja) do
+      create :historial_caja, caja: caja, cajero: cajero
+    end
+    let(:historial_caja_dos) do
+      create :historial_caja, caja: caja_dos, cajero: cajero_dos
     end
 
-    context "when comprobantes with Arqueo" do
-      let(:cierre_caja) do
-        create :cierre_caja, :en_ceros, cajero: cajero,
-          abierta: false
+    before :each do
+      [caja, caja_dos]
+      [cajero, cajero_dos]
+      [historial_caja, historial_caja_dos]
+    end
+
+    context "when Cajero needs a CierreCaja with an Arqueo" do
+      let(:comprobantes_sin_arqueo) do
+        create_list :recibo, 5, :para_nuevo_arqueo,
+          cajero: cajero, caja: caja, arqueo_id: nil
+      end
+      let(:comprobantes_sin_arqueo_dos) do
+        create_list :recibo, 5, :para_nuevo_arqueo,
+          cajero: cajero_dos, caja: caja_dos, arqueo_id: nil
       end
 
-      it "should not create Arqueo and CierreCaja" do
-        cierre_caja
-        allow_any_instance_of(Caja).to receive(:update_historial_caja!)
-          .and_return(HistorialCaja.new)
+      let(:cierre_caja_abierta) do
+        create :cierre_caja, :en_ceros, cajero: cajero_dos, abierta: true
+      end
 
+      before :each do
+        [comprobantes_sin_arqueo, comprobantes_sin_arqueo_dos]
+        cierre_caja_abierta
+      end
+
+      it "An Arqueo must be created with all comprobantes" do
+        expect {
+          task.execute
+        }.to change { cajero.arqueos.count }.by(1)
+        expect(cajero.arqueos.first.recibos.count).to eq 5
+      end
+
+      it "A CierreCaja must be created with an arqueo" do
+        expect {
+          task.execute
+        }.to change { cajero.cierre_cajas.count }.by(1)
+        expect(cajero.cierre_cajas.first.arqueos.count).to eq 1
+      end
+
+      it "HistorialCaja fecha_cierre must be updated" do
         task.execute
-        expect(Arqueo.count).to eq 2
-        expect(CierreCaja.count).to eq 2
+        expect(caja.historial_cajas.last.fecha_cierre).to_not be_nil
+      end
 
-        abrir_caja
+      it "Caja must be open" do
+        task.execute
+        caja_debe_estar_abierta
+      end
+
+      it "cajero_dos must be has one CierreCaja opened" do
+        task.execute
+        expect(cajero_dos.cierre_cajas.first).to be_abierta
+        expect(cajero_dos.cierre_cajas.count).to eq 2
+        expect(cajero_dos.arqueos.count).to eq 2
       end
     end
 
-    context "when CierreCaja is abierta" do
-      let(:cierre_cajas_abiertas) do
-        create_list :cierre_caja, 5, :with_arqueo,
+    context "when Cajero just needs to close CierreCaja" do
+      let(:cierre_caja_abierta) do
+        create :cierre_caja, :en_ceros,
           cajero: cajero, abierta: true
       end
 
       before :each do
-        cierre_cajas_abiertas
-        cajero
-        allow_any_instance_of(Caja).to receive(:update_historial_caja!)
-          .and_return(HistorialCaja.new)
+        cierre_caja_abierta
       end
 
-      it "should closes CierreCaja" do
+      it "CierreCaja must be closed" do
         task.execute
-        expect{ task.execute }.to output(
-          "Cierre automatico, se cerro el cierre caja.\n"
-        ).to_stdout
+        expect(caja.cajero.cierre_cajas.first).to_not be_abierta
+      end
 
-        #TODO caja
-        #abrir_caja
+      it "Caja must be open" do
+        task.execute
+        caja_debe_estar_abierta
+      end
+
+      it "cajero must be has one CierreCaja and one Arqueo" do
+        task.execute
+        expect(cajero.cierre_cajas.count).to eq 1
+        expect(cajero.arqueos.count).to eq 1
       end
     end
 
-    context "when CierreCaja is cerrada" do
-      let(:cierre_caja_cerrada) do
-        create :cierre_caja, :with_arqueo,
-          cajero: cajero, abierta: false
-      end
-
-      before :each do
-        cierre_caja_cerrada
-        allow_any_instance_of(Caja).to receive(:update_historial_caja!)
-          .and_return(HistorialCaja.new)
+    context "when Cajero needs to create Arqueos and CierreCaja in 0" do
+      it "Arqueo must be 0" do
         task.execute
+        expect(caja.cajero.arqueos.first.monto_sistema).to eq 0
+        expect(caja.cajero.arqueos.first.monto_cajero).to eq 0
       end
 
-      it "should opens CierreCaja" do
-        expect(CierreCaja.count).to eq 2
-
-        abrir_caja
-      end
-    end
-
-    context "when only Caja is not disponible" do
-      before :each do
-        cajero
-        allow_any_instance_of(Caja).to receive(:update_historial_caja!)
-          .and_return(HistorialCaja.new)
-      end
-
-      it "should be disponible" do
-        expect{ task.execute }.to output(
-          "Liberar caja, con arqueo y cierre caja en 0.\n"
-        ).to_stdout
-
-        abrir_caja
-      end
-
-      it "should create Arqueo and CierreCaja" do
+      it "CierreCaja must be 0" do
         task.execute
-        expect(Arqueo.count).to eq 1
-        expect(CierreCaja.count).to eq 1
-
-        abrir_caja
+        expect(caja.cajero.cierre_cajas.first.monto_sistema).to eq 0
+        expect(caja.cajero.cierre_cajas.first.monto_cajero).to eq 0
       end
 
-      it "must be 0" do
+      it "Caja must be open" do
         task.execute
-        expect(Arqueo.first.monto_cajero).to eq 0
-        expect(CierreCaja.first.monto_cajero).to eq 0
-
-        abrir_caja
+        caja_debe_estar_abierta
       end
     end
   end
 
   private
 
-  def abrir_caja
+  def caja_debe_estar_abierta
     expect(caja.reload.disponible).to eq true
     expect(caja.reload.cajero_id).to be_nil
   end
