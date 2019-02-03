@@ -35,18 +35,14 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
         create_list :recibo, 5, :para_nuevo_arqueo,
           cajero: cajero, caja: caja, arqueo_id: nil
       end
-      let(:comprobantes_sin_arqueo_dos) do
-        create_list :recibo, 5, :para_nuevo_arqueo,
-          cajero: cajero_dos, caja: caja_dos, arqueo_id: nil
-      end
 
       let(:cierre_caja_abierta) do
-        create :cierre_caja, :en_ceros, cajero: cajero_dos, abierta: true
+        create :cierre_caja, :en_ceros_con_arqueo,
+          cajero: cajero_dos, abierta: true
       end
 
       before :each do
-        [comprobantes_sin_arqueo, comprobantes_sin_arqueo_dos]
-        cierre_caja_abierta
+        [comprobantes_sin_arqueo, cierre_caja_abierta]
       end
 
       it "An Arqueo must be created with all comprobantes" do
@@ -73,17 +69,17 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
         caja_debe_estar_abierta
       end
 
-      it "cajero_dos must be has one CierreCaja opened" do
+      it "cajero_dos CierreCaja must be closed" do
         task.execute
-        expect(cajero_dos.cierre_cajas.first).to be_abierta
-        expect(cajero_dos.cierre_cajas.count).to eq 2
-        expect(cajero_dos.arqueos.count).to eq 2
+        expect(cajero_dos.cierre_cajas.first).to_not be_abierta
+        expect(cajero_dos.cierre_cajas.count).to eq 1
+        expect(cajero_dos.arqueos.count).to eq 1
       end
     end
 
     context "when Cajero just needs to close CierreCaja" do
       let(:cierre_caja_abierta) do
-        create :cierre_caja, :en_ceros,
+        create :cierre_caja, :en_ceros_con_arqueo,
           cajero: cajero, abierta: true
       end
 
@@ -101,8 +97,9 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
         caja_debe_estar_abierta
       end
 
-      it "cajero must be has one CierreCaja and one Arqueo" do
+      it "cajero CierreCaja must be has one and must be closed" do
         task.execute
+        expect(cajero.cierre_cajas.first).to_not be_abierta
         expect(cajero.cierre_cajas.count).to eq 1
         expect(cajero.arqueos.count).to eq 1
       end

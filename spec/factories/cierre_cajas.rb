@@ -21,4 +21,13 @@ FactoryBot.define do
       create_list :arqueo, 1, :en_ceros, cierre_caja: cierre_caja
     end
   end
+
+  trait :en_ceros_con_arqueo do
+    after :build do |cierre_caja|
+      cierre_caja.monto_sistema = 0
+      cierre_caja.monto_cajero = 0
+      cierre_caja.observacion = "En ceros"
+      create_list :arqueo, 1, :en_ceros, cierre_caja: cierre_caja
+    end
+  end
 end
