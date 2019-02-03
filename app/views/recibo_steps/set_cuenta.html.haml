@@ -5,7 +5,7 @@
         .card-title Seleccione al contribuyente y las cuentas por pagar
       .card-body
         = simple_form_for(@cuenta_form, url: wizard_path, method: :put) do |f|
-          = f.input :contribuyente_id, collection: Contribuyente.all, input_html: { class: "select2 with-link" }
+          = f.input :contribuyente_id, collection: [], input_html: { class: "select2 with-link" }
           = f.input :cuenta_ids, collection: (@cuentas_asignadas || []), input_html: { class:  "select2-multiple with-link", multiple: true, data: { cuenta_ids: params["cuenta_ids"] } }, disabled: !cast_value(params["state_cuenta_ids"])
 
           = f.submit "Siguiente", class: "btn btn-primary"

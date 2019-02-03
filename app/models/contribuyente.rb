@@ -45,9 +45,15 @@ class Contribuyente < ApplicationRecord
   def to_s
     rfc.present? ? "#{nombre_completo} - #{rfc}" : nombre_completo
   end
+  alias_method :text, :to_s
 
   def tipo
     persona_fisica? ? "Persona Física" : "Persona Moral"
+  end
+
+  def as_json(options={})
+    super(only: [:id],
+          methods: [:text])
   end
 
   private
