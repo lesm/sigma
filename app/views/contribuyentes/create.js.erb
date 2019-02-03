@@ -5,6 +5,7 @@ $("#form_modal").html("<%= j render 'contribuyentes/form_modal', contribuyente: 
     $("#cajero_contribuyente_id").html("<%= j options_for_select(contribuyente_ids) %>")
     $("#cajero_contribuyente_id").val("<%= @contribuyente.id %>").trigger("change")
   } else {
+    $("select[id$='_cuenta_ids'").attr("disabled", false)
     $("select[id$='_contribuyente_id']").html("<%= j options_for_select(Contribuyente.all) %>")
     $("select[id$='_contribuyente_id']").val("<%= @contribuyente %>").trigger("change")
   }
@@ -16,6 +17,6 @@ $("#form_modal").html("<%= j render 'contribuyentes/form_modal', contribuyente: 
       icon: 'success'
     }
   )
-  <%= @contribuyente = Contribuyente.new(direccion: Direccion.new) %>
+  <%- @contribuyente = Contribuyente.new(direccion: Direccion.new) %>
   $("#form_modal").html("<%= j render 'contribuyentes/form_modal', contribuyente: @contribuyente %>")
 <%- end %>
