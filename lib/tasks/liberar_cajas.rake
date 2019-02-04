@@ -6,46 +6,47 @@ namespace :liberar_cajas do
 
   class LiberarCajas
     def call
-      cajas_ocupadas.each do |caja|
-        if caja.comprobantes.sin_arqueo.any?
-          cajero       = caja.cajero
-          comprobantes = caja.comprobantes.para_arqueo_actual cajero
-          total        = comprobantes.total_monto_sistema cajero
-
-          arqueo = crear_arqueo total
-          crear_cierre_caja cajero, arqueo, total
-          comprobantes.update_all(arqueo_id: arqueo.id)
-
-          caja.abrir!
-        elsif caja.cajero.cierre_cajas.abiertas.any?
-          caja.cajero.cierre_cajas.abiertas.update_all(abierta: false)
-
-          caja.abrir!
-        else ! caja.disponible
-          cajero = caja.cajero
-          arqueo = crear_arqueo
-          crear_cierre_caja cajero, arqueo
-
-          caja.abrir!
+      Caja.no_disponibles.each do |caja|
+        cajero = caja.cajero
+        if cajero.arqueo_pendiente?
+          crear_cierre_caja_con_arqueo(cajero)
+        elsif cajero.cierre_caja_abierta?
+          cerrar_cierre_caja(cajero)
+        else
+          crear_cierre_caja_con_arqueo_en_ceros(cajero)
         end
+        caja.abrir!
       end
     end
 
-    def cajas_ocupadas
-      Caja.no_disponibles
+    def crear_cierre_caja_con_arqueo cajero
+      total  = cajero.monto_sistema
+      arqueo = build_arqueo(total)
+      create_cierre_caja(cajero: cajero, arqueo: arqueo, total: total)
+      comprobantes = Comprobante.para_arqueo_actual(cajero)
+      comprobantes.update_all(arqueo_id: arqueo.id)
     end
 
-    def crear_arqueo(total = 0)
-      Arqueo.new(dinero: Dinero.new, monto_sistema: total,
-                monto_cajero: total)
+    def cerrar_cierre_caja cajero
+      cajero.ultimo_cierre_caja.update_column(:abierta, false)
     end
 
-    def crear_cierre_caja(cajero, arqueo, total = 0)
-      cierre_caja = CierreCaja.create(
-        cajero: cajero, monto_sistema: total,
-        monto_cajero: total, abierta: false)
+    def crear_cierre_caja_con_arqueo_en_ceros cajero
+      create_cierre_caja(cajero: cajero, arqueo: build_arqueo, total: 0)
+    end
 
-      cierre_caja.arqueos << arqueo
+    private
+
+    def build_arqueo total=0
+      Arqueo.new(monto_sistema: total, monto_cajero: total)
+    end
+
+    def create_cierre_caja options
+      cajero = options.fetch(:cajero)
+      total  = options.fetch(:total)
+      arqueo = options.fetch(:arqueo)
+      CierreCaja.create(cajero: cajero, monto_sistema: total,
+                        monto_cajero: total, abierta: false, arqueos: [arqueo])
     end
   end
 end

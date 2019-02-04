@@ -41,7 +41,7 @@ class Cajero < Usuario
   end
 
   def ultimo_cierre_caja
-    cierre_cajas.last
+    cierre_cajas.where(created_at: rango_fecha).last
   end
 
   private
@@ -51,7 +51,7 @@ class Cajero < Usuario
   end
 
   def arqueos_actuales
-    arqueos.where(arqueos: { created_at: rango_fecha })
+    arqueos.where(created_at: rango_fecha)
   end
 
   def rango_fecha
