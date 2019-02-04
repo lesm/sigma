@@ -9,6 +9,8 @@ class Contribuyente < ApplicationRecord
     VALID_LENGTH_RFC_SAT_PERSONA_FISICA
   ].freeze
 
+  attr_accessor :import_skip
+
   include Direccionable
   has_one :cajero
   has_many :facturas
@@ -16,7 +18,7 @@ class Contribuyente < ApplicationRecord
   has_and_belongs_to_many :cuentas, -> { distinct }
 
   validates :nombre_o_razon_social, presence: true
-  validates :concepto_ids, presence: true, on: :create
+  validates :concepto_ids, presence: true, on: :create, unless: :import_skip
   validates :rfc, uniqueness: true, unless: :rfc_generico?, allow_blank: true
   validates :rfc, rfc_format: { force_homoclave: true }, if: :rfc_present_and_rfc_is_not_10_digits_length?
 
