@@ -1,14 +1,11 @@
 $("#form_modal").html("<%= j render 'contribuyentes/form_modal', contribuyente: @contribuyente %>")
 
 <%- if @contribuyente.valid? %>
-  if ($("#new_cajero").length == 1) {
-    $("#cajero_contribuyente_id").html("<%= j options_for_select(contribuyente_ids) %>")
-    $("#cajero_contribuyente_id").val("<%= @contribuyente.id %>").trigger("change")
-  } else {
-    $("select[id$='_cuenta_ids'").attr("disabled", false)
-    $("select[id$='_contribuyente_id']").html("<%= j options_for_select(Contribuyente.all) %>")
-    $("select[id$='_contribuyente_id']").val("<%= @contribuyente %>").trigger("change")
-  }
+  $("select[id$='_contribuyente_id']").html("<%= j options_for_select(contribuyente_for_select(@contribuyente)) %>")
+  $("select[id$='_contribuyente_id']").val("<%= @contribuyente.id %>").trigger("change")
+
+  $("select[id$='_cuenta_ids'").attr("disabled", false)
+
   $("#contribuyente_nuevo").modal("hide")
   swal(
     { 

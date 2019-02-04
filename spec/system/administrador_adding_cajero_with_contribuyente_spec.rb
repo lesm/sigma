@@ -20,7 +20,6 @@ RSpec.describe "Administrador Adding Cajero", type: :system do
       admin_debe_de_ver_contribuyente_registrado_correctamente
       cuando_admin_da_click_en_el_boton_ok
       contribuyente_select_debe_ser_actualizado
-      admin_debe_poder_seleccionar_el_nuevo_contribuyente_agregado
       el_input_nombre_debe_ser_actualizado
       cuando_admin_da_click_en_boton_crear_cajero
       admin_debe_ver_cajero_creado_correctamente
@@ -84,11 +83,7 @@ RSpec.describe "Administrador Adding Cajero", type: :system do
 
   def contribuyente_select_debe_ser_actualizado
     sleep 0.3
-    expect(page.all("select#cajero_contribuyente_id option").map(&:text)).to include "Nicolás Maquiavelo"
-  end
-
-  def admin_debe_poder_seleccionar_el_nuevo_contribuyente_agregado
-    select "Nicolás Maquiavelo", from: "cajero_contribuyente_id"
+    expect(page).to have_select("cajero_contribuyente_id", selected: "Nicolás Maquiavelo")
   end
 
   def el_input_nombre_debe_ser_actualizado

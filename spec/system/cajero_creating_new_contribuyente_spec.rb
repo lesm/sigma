@@ -73,7 +73,7 @@ RSpec.describe "Cajero Creating a New Contribuyente", type: :system do
 
   def contribuyente_select_debe_ser_actualizado
     sleep 0.3
-    expect(page.all("select#cuenta_form_contribuyente_id option").map(&:text)).to include "Nicolás Maquiavelo"
+    expect(page).to have_select("cuenta_form_contribuyente_id", selected: "Nicolás Maquiavelo")
   end
 
   def cuentas_por_cobrar_select_debe_ser_enable

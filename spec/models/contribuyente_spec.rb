@@ -77,7 +77,7 @@ RSpec.describe Contribuyente, type: :model do
     end
   end
 
-  describe ".persona_fisica" do
+  describe ".personas_fisicas" do
     let(:persona_fisica) do
       create :contribuyente, :con_direccion,
         rfc: nil, persona_fisica: true
@@ -89,12 +89,12 @@ RSpec.describe Contribuyente, type: :model do
 
     it "when persona_fisica is true" do
       [persona_fisica, not_persona_fisica]
-      expect(Contribuyente.persona_fisica).to eq [persona_fisica]
+      expect(Contribuyente.personas_fisicas).to eq [persona_fisica]
     end
 
     it "when persona_fisica is false" do
       not_persona_fisica
-      expect(Contribuyente.persona_fisica).to eq []
+      expect(Contribuyente.personas_fisicas).to eq []
     end
   end
 

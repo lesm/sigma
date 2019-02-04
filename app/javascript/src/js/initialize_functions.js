@@ -51,6 +51,26 @@ function startSelect2Multiple() {
 function startSelect2WithLink() {
   $(".select2.with-link").select2({
     width: '100%',
+    ajax: {
+      url: `${window.location.origin}/contribuyentes.json`,
+      data: function (params) {
+        var query = {
+          search: params.term,
+          page: params.page || 1
+        }
+        return query;
+      },
+      processResults: function (data, params) {
+        params.page = params.page || 1;
+        return {
+          results: data.results,
+          pagination: {
+            more: (params.page * 10) < data.count_filtered
+          }
+        }
+      },
+      delay: 150
+    },
     escapeMarkup: function (markup) { return markup; },
     language: {
       noResults() {

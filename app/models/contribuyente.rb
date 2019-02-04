@@ -34,7 +34,7 @@ class Contribuyente < ApplicationRecord
 
   after_save :update_nombre_cajero, if: :cajero_present?
 
-  scope :persona_fisica, -> { where(persona_fisica: true) }
+  scope :personas_fisicas, -> { where(persona_fisica: true) }
 
   def self.search search
     where("concat_ws(' ', nombre_o_razon_social, primer_apellido, segundo_apellido, rfc) ILIKE ?", "%#{search&.squish}%")
@@ -47,9 +47,15 @@ class Contribuyente < ApplicationRecord
   def to_s
     rfc.present? ? "#{nombre_completo} - #{rfc}" : nombre_completo
   end
+  alias_method :text, :to_s
 
   def tipo
     persona_fisica? ? "Persona Física" : "Persona Moral"
+  end
+
+  def as_json(options={})
+    super(only: [:id],
+          methods: [:text])
   end
 
   private
