@@ -61,7 +61,7 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
 
       it "A CierreCaja must be automatico 'true'" do
         task.execute
-        expect(cajero.cierre_cajas.first.automatico).to eq true
+        expect(cajero.cierre_cajas.first).to be_automatico
       end
 
       it "HistorialCaja fecha_cierre must be updated" do
@@ -111,7 +111,7 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
 
       it "A CierreCaja must be automatico 'true'" do
         task.execute
-        expect(cajero.cierre_cajas.first.automatico).to eq true
+        expect(cajero.cierre_cajas.first).to be_automatico
       end
     end
 
@@ -130,7 +130,7 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
 
       it "CierreCaja must be automatico 'true'" do
         task.execute
-        expect(cajero.cierre_cajas.first.automatico).to eq true
+        expect(cajero.cierre_cajas.first).to be_automatico
       end
 
       it "Caja must be open" do
