@@ -43,8 +43,8 @@ module ApplicationHelper
     Cuenta.all.map { |c| [c, c.id] }
   end
 
-  def contribuyente_ids
-    Contribuyente.all.map { |c| [c, c.id] }
+  def contribuyente_for_select contribuyente
+    [[contribuyente, contribuyente.id]]
   end
 
   def cuenta_codigos

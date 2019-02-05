@@ -9,6 +9,8 @@ class Contribuyente < ApplicationRecord
     VALID_LENGTH_RFC_SAT_PERSONA_FISICA
   ].freeze
 
+  attr_accessor :import_skip
+
   include Direccionable
   has_one :cajero
   has_many :facturas
@@ -16,7 +18,7 @@ class Contribuyente < ApplicationRecord
   has_and_belongs_to_many :cuentas, -> { distinct }
 
   validates :nombre_o_razon_social, presence: true
-  validates :concepto_ids, presence: true, on: :create
+  validates :concepto_ids, presence: true, on: :create, unless: :import_skip
   validates :rfc, uniqueness: true, unless: :rfc_generico?, allow_blank: true
   validates :rfc, rfc_format: { force_homoclave: true }, if: :rfc_present_and_rfc_is_not_10_digits_length?
 
@@ -32,7 +34,7 @@ class Contribuyente < ApplicationRecord
 
   after_save :update_nombre_cajero, if: :cajero_present?
 
-  scope :persona_fisica, -> { where(persona_fisica: true) }
+  scope :personas_fisicas, -> { where(persona_fisica: true) }
 
   def self.search search
     where("concat_ws(' ', nombre_o_razon_social, primer_apellido, segundo_apellido, rfc) ILIKE ?", "%#{search&.squish}%")
@@ -45,9 +47,15 @@ class Contribuyente < ApplicationRecord
   def to_s
     rfc.present? ? "#{nombre_completo} - #{rfc}" : nombre_completo
   end
+  alias_method :text, :to_s
 
   def tipo
     persona_fisica? ? "Persona Física" : "Persona Moral"
+  end
+
+  def as_json(options={})
+    super(only: [:id],
+          methods: [:text])
   end
 
   private

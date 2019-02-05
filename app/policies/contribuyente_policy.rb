@@ -1,8 +1,13 @@
 class ContribuyentePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      raise Pundit::NotAuthorizedError, "Usuario sin permisos." unless user.cajero?
-      scope.all
+      if user.admin?
+        scope.personas_fisicas
+      elsif user.cajero?
+        scope.all
+      else
+        raise Pundit::NotAuthorizedError, "Usuario sin permisos."
+      end
     end
   end
 

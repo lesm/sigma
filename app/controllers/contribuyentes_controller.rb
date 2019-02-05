@@ -6,6 +6,10 @@ class ContribuyentesController < ApplicationController
   # GET /contribuyentes.json
   def index
     @contribuyentes = policy_scope(Contribuyente).search(params[:search]).page(params[:page])
+    respond_to do |format|
+      format.html {}
+      format.json { render json: { results: @contribuyentes, count_filtered: @contribuyentes.total_count } }
+    end
   end
 
   # GET /contribuyentes/1

@@ -25,6 +25,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.4'
 gem 'numbers_and_words', '~> 0.11.5'
 gem 'unicorn'
+gem 'activerecord-import', require: false
 
 gem 'fm_layout', github: "LogicalBricks/fm_layout", branch: 'cfdi_3_3'
 

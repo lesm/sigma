@@ -20,6 +20,7 @@ RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
       cuando_da_click_en_el_link_siguiente
       cajero_debe_ver_la_leyenda_pagar_recibo_a_nombre_de
       cuando_cajero_da_click_en_el_link_regresar
+      cajero_debe_tener_el_contribuyente_seleccionado
       cajero_debe_tener_el_concepto_110102_sorteos_seleccionado
 
       cuando_cajero_ingresa_un_texto_en_el_input_cuentas_por_cobrar
@@ -76,6 +77,10 @@ RSpec.describe "Cajero Selecting And Creating Cuentas", type: :system do
 
   def cajero_debe_ver_la_leyenda_pagar_recibo_a_nombre_de
     expect(page).to have_content "Pagar recibo a nombre de: #{@contribuyente}"
+  end
+
+  def cajero_debe_tener_el_contribuyente_seleccionado
+    expect(page).to have_select("cuenta_form_contribuyente_id", selected: @contribuyente.to_s)
   end
 
   def cuando_cajero_da_click_en_el_link_regresar
