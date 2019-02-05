@@ -28,7 +28,7 @@ namespace :liberar_cajas do
     end
 
     def cerrar_cierre_caja cajero
-      cajero.ultimo_cierre_caja.update_column(:abierta, false)
+      cajero.ultimo_cierre_caja.update_columns(abierta: false, automatico: true)
     end
 
     def crear_cierre_caja_con_arqueo_en_ceros cajero
@@ -46,7 +46,8 @@ namespace :liberar_cajas do
       total  = options.fetch(:total)
       arqueo = options.fetch(:arqueo)
       CierreCaja.create(cajero: cajero, monto_sistema: total,
-                        monto_cajero: total, abierta: false, arqueos: [arqueo])
+                        monto_cajero: total, abierta: false,
+                        automatico: true, arqueos: [arqueo])
     end
   end
 end

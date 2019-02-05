@@ -4,6 +4,7 @@ FactoryBot.define do
     monto_cajero { "9.99" }
     observacion { "MyText" }
     abierta { true }
+    automatico { false }
     cajero { nil }
   end
 

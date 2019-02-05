@@ -59,6 +59,11 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
         expect(cajero.cierre_cajas.first.arqueos.count).to eq 1
       end
 
+      it "A CierreCaja must be automatico 'true'" do
+        task.execute
+        expect(cajero.cierre_cajas.first.automatico).to eq true
+      end
+
       it "HistorialCaja fecha_cierre must be updated" do
         task.execute
         expect(caja.historial_cajas.last.fecha_cierre).to_not be_nil
@@ -103,6 +108,11 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
         expect(cajero.cierre_cajas.count).to eq 1
         expect(cajero.arqueos.count).to eq 1
       end
+
+      it "A CierreCaja must be automatico 'true'" do
+        task.execute
+        expect(cajero.cierre_cajas.first.automatico).to eq true
+      end
     end
 
     context "when Cajero needs to create Arqueos and CierreCaja in 0" do
@@ -116,6 +126,11 @@ RSpec.describe "rake liberar_cajas:ocupadas", type: :task do
         task.execute
         expect(caja.cajero.cierre_cajas.first.monto_sistema).to eq 0
         expect(caja.cajero.cierre_cajas.first.monto_cajero).to eq 0
+      end
+
+      it "CierreCaja must be automatico 'true'" do
+        task.execute
+        expect(cajero.cierre_cajas.first.automatico).to eq true
       end
 
       it "Caja must be open" do
