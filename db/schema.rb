@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_222310) do
+ActiveRecord::Schema.define(version: 2019_02_05_140411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_01_31_222310) do
     t.boolean "abierta", default: true
     t.decimal "monto_cajero", default: "0.0"
     t.bigint "cajero_id"
+    t.boolean "automatico", default: false
     t.index ["cajero_id"], name: "index_cierre_cajas_on_cajero_id"
   end
 

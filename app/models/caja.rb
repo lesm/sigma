@@ -1,11 +1,13 @@
 class Caja < ApplicationRecord
   belongs_to :cajero, optional: true
   has_many :comprobantes
+  has_many :historial_cajas
   validates :nombre, :numero, presence: true
   validates :nombre, :numero, uniqueness: true
   validates :numero, numericality: { greater_than_or_equal_to: 1 }
 
   scope :disponibles, -> { where(disponible: true) }
+  scope :no_disponibles, -> { where(disponible: false) }
 
   def self.disponibles?
     Caja.disponibles.count > 0

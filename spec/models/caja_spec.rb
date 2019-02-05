@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Caja, type: :model do
-  it { should have_many(:comprobantes) }
   it { should belong_to(:cajero) }
+  it { should have_many(:comprobantes) }
+  it { should have_many(:historial_cajas) }
 
   it { should validate_presence_of(:numero) }
   it { should validate_uniqueness_of :numero }
@@ -31,6 +32,21 @@ RSpec.describe Caja, type: :model do
       historial_caja
       caja.update_historial_caja!
       expect(historial_caja.reload.fecha_cierre).to_not be_nil
+    end
+  end
+
+  describe ".no_disponibles" do
+    let(:cajas_disponibles) { create_list :caja, 2, disponible: true }
+    let(:cajas_no_disponibles) { create_list :caja, 2, disponible: false }
+
+    it "must be 2" do
+      cajas_no_disponibles
+      expect(Caja.no_disponibles).to eq cajas_no_disponibles
+    end
+
+    it "must be empty" do
+      cajas_disponibles
+      expect(Caja.no_disponibles).to be_empty
     end
   end
 

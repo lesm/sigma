@@ -7,6 +7,26 @@ RSpec.describe CierreCaja, type: :model do
   it { should validate_presence_of(:monto_cajero) }
   it { should validate_presence_of(:cajero) }
 
+  describe ".abiertas" do
+    let(:cajero) { create :cajero, :con_contribuyente }
+    let(:cierre_cajas_abiertas) do
+      create_list :cierre_caja, 5, :with_arqueo,
+        cajero: cajero, abierta: true
+    end
+    let!(:cierre_cajas_cerradas) do
+      create_list :cierre_caja, 5, :with_arqueo,
+        cajero: cajero, abierta: false
+    end
+
+    it "most be 5" do
+      expect(CierreCaja.abiertas).to eq cierre_cajas_abiertas
+    end
+
+    it "most be 0" do
+      expect(CierreCaja.abiertas).to be_empty
+    end
+  end
+
   describe "#monto_adeudo" do
     let(:cajero) { create :cajero, :con_contribuyente }
     let(:arqueo) do
