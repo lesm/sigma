@@ -107,6 +107,7 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    chronic (0.10.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -337,6 +338,8 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
     wicked (1.3.3)
       railties (>= 3.0.7)
     wicked_pdf (1.1.0)
@@ -392,9 +395,10 @@ DEPENDENCIES
   unicorn
   web-console (>= 3.3.0)
   webpacker (~> 3.5, >= 3.5.5)
+  whenever
   wicked
   wicked_pdf
   wkhtmltopdf-binary (~> 0.12.4)
 
 BUNDLED WITH
-   1.17.1
+   1.17.3
