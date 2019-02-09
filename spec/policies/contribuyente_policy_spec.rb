@@ -25,7 +25,7 @@ RSpec.describe ContribuyentePolicy do
 
     context "with admin" do
       let(:policy_scope) { ContribuyentePolicy::Scope.new(admin, Contribuyente).resolve }
-      it "responds all 'contribuyentes morales'" do
+      it "responds only contribuyentes 'personas_fisicas'" do
         expect(policy_scope.count).to eq 4
       end
     end
