@@ -20,8 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 set :output, {
-  error: "/home/deployer/apps/sigma/shared/log/error_whenever.log",
-  standard: "/home/deployer/apps/sigma/shared/log/standard_whenever.log",
+  error: "#{Whenever.path}/shared/log/error_whenever.log"
 }
 
 every :day, at: '6:00 pm' do

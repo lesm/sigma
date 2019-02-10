@@ -16,7 +16,7 @@ namespace :liberar_cajas do
           crear_cierre_caja_con_arqueo_en_ceros(cajero)
         end
         caja.abrir!
-        puts "Se libero la caja #{caja}"
+        Rails.logger.debug "WHENEVER: Se libero caja #{caja} - #{cajero}"
       end
     end
 
