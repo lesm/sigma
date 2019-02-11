@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     get :asignar_cuentas, on: :collection
   end
   resources :arqueos, except: [:edit, :update, :destroy]
+  resources :activar_certificados, only: [:new, :create]
   root 'pages#index'
 end
