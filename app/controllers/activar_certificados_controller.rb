@@ -1,10 +1,11 @@
 class ActivarCertificadosController < ApplicationController
   def new
+    @activar_certificado = ActivarCertificado.new
   end
 
   def create
-    @certificado = ActivarCertificado.new(certificado_params)
-    if @certificado.save
+    @activar_certificado = ActivarCertificado.new(certificado_params)
+    if @activar_certificado.save
       flash.notice = "Certificado activado correctamente."
       redirect_to root_path
     else
