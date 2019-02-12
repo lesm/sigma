@@ -17,7 +17,7 @@ class ActivarCertificado
   end
 
   def valida_extension attr, regex
-    unless send(attr) && send(attr).original_filename =~ regex
+    unless send(attr).present? && send(attr).original_filename =~ regex
       errors.add(attr, "La extensión del archivo es incorrecta")
     end
   end
