@@ -23,7 +23,7 @@ RSpec.describe "Administradores", type: :request do
   end
 
   describe "GET /administradores/new" do
-    it "return a success response" do
+    it "returns a success response" do
       get new_administrador_path
       expect(response).to be_successful
     end
