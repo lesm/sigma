@@ -9,7 +9,7 @@ module Features
     def dado_que_hay_un_contribuyente_y_un_emisor
       @contribuyente = create :contribuyente, nombre_o_razon_social: "Carlos", primer_apellido: "José",
         segundo_apellido: "Pérez", rfc: "AAAA111111AAZ"
-      create :emisor, :con_direccion
+      create :emisor, :con_direccion, rfc: "TCM970625MB1"
     end
 
     def dado_que_hay_un_cajero_logueado_con_una_caja
@@ -98,7 +98,7 @@ module Features
     end
 
     def dado_que_hay_un_emisor_registrado
-      create :emisor, :con_direccion
+      create :emisor, :con_direccion, rfc: "TCM970625MB1"
     end
 
     def cuando_admin_da_click_en_link_cajeros

@@ -28,8 +28,8 @@ RSpec.describe "Administrador uploading a certificate", type: :system do
       end
     end
 
-    xfeature "with invalid password" do
-      scenario "shows message 'La contraseña es incorrecta'" do
+    feature "when invalid certificate process" do
+      scenario "shows message from FmTimbradoCfdi response", :vcr do
         when_admin_uploads_a_valid_certificate
         when_admin_uploads_a_valid_key
         when_admin_enters_an_invalid_password
@@ -40,7 +40,7 @@ RSpec.describe "Administrador uploading a certificate", type: :system do
   end
 
   feature "when certificate, llave and password are correct" do
-    scenario "admin can navigate through the system" do
+    scenario "admin can navigate through the system", :vcr do
       given_admin_visit_new_activar_certificado_path
       when_admin_uploads_a_valid_certificate
       when_admin_uploads_a_valid_key
@@ -63,7 +63,7 @@ RSpec.describe "Administrador uploading a certificate", type: :system do
   end
 
   def when_admin_enters_a_valid_password
-    fill_in "Contraseña", with: "1234578a"
+    fill_in "Contraseña", with: "12345678a"
   end
 
   def when_admin_click_submit_button
@@ -84,5 +84,13 @@ RSpec.describe "Administrador uploading a certificate", type: :system do
 
   def then_admin_must_see_a_message_certificate_was_upload_correctly
     expect(page).to have_content("Certificado activado correctamente.")
+  end
+
+  def when_admin_enters_an_invalid_password
+    fill_in "Contraseña", with: "invalid password"
+  end
+
+  def then_admin_must_see_an_invalid_password_message
+    expect(page).to have_content("Contraseña de la clave privada invalida.")
   end
 end
