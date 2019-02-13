@@ -6,7 +6,7 @@ RSpec.describe "ActivarCertificados", type: :request do
       rfc: "TCM970625MB1",
       certificado: Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/certificado.cer')),
       llave: Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/llave.key')),
-      password: "1qaz2wx"
+      password: "12345678a"
     }
   end
 
@@ -32,13 +32,13 @@ RSpec.describe "ActivarCertificados", type: :request do
 
   describe "POST /activar_certificados" do
     context "with valid params" do
-      it "display a successfully message" do
+      it "display a successfully message", :vcr do
         post activar_certificados_path, params: { activar_certificado: valid_attributes }
         expect(flash.notice).to eq "Certificado activado correctamente."
         expect(flash.alert).to be_nil
       end
 
-      it "redirects to root_path" do
+      it "redirects to root_path", :vcr do
         post activar_certificados_path, params: { activar_certificado: valid_attributes }
         expect(response).to redirect_to(root_path)
       end
