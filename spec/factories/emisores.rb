@@ -8,6 +8,7 @@ FactoryBot.define do
     regimen_fiscal { "MyString" }
     registro_patronal { "MyString" }
     eslogan { "MyString" }
+    con_certificado { true }
 
     trait :con_direccion do
       before(:create) do |emisor|
