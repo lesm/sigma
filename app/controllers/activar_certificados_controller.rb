@@ -9,7 +9,7 @@ class ActivarCertificadosController < ApplicationController
       flash.notice = "Certificado activado correctamente."
       redirect_to root_path
     else
-      flash.alert = "El certificado no válido."
+      flash.alert = "El certificado no válido. #{@activar_certificado.errors_fm_timbrado_cfdi}".strip
       render :new
     end
   end
