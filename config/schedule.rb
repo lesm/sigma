@@ -20,7 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 set :output, {
-  error: "#{Whenever.path}/shared/log/error_whenever.log"
+  error: "#{Whenever.path}/log/error_whenever.log"
 }
 
 every :day, at: '6:00 pm' do
