@@ -42,6 +42,8 @@ group :development, :test do
   gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'bullet'
+  gem 'vcr', '~> 4.0'
+  gem 'webmock'
 end
 
 group :development do
