@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, {
+  error: "#{Whenever.path}/log/error_whenever.log"
+}
+
 every :day, at: '6:00 pm' do
   rake "liberar_cajas:ocupadas"
 end

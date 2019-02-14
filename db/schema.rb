@@ -251,6 +251,24 @@ ActiveRecord::Schema.define(version: 2019_02_13_203323) do
     t.index ["cajero_id"], name: "index_ingreso_por_clasificares_on_cajero_id"
   end
 
+  create_table "timbres", force: :cascade do |t|
+    t.string "version"
+    t.string "no_certificado_sat"
+    t.string "no_certificado"
+    t.string "fecha_timbrado"
+    t.string "uuid"
+    t.string "sello_sat"
+    t.string "sello_cfd"
+    t.string "fecha_comprobante"
+    t.string "serie"
+    t.string "rfc_provedor_certificacion"
+    t.string "folio"
+    t.bigint "comprobante_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comprobante_id"], name: "index_timbres_on_comprobante_id"
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "username", null: false
@@ -293,5 +311,6 @@ ActiveRecord::Schema.define(version: 2019_02_13_203323) do
   add_foreign_key "historial_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "ingreso_por_clasificares", "arqueos"
   add_foreign_key "ingreso_por_clasificares", "usuarios", column: "cajero_id"
+  add_foreign_key "timbres", "comprobantes"
   add_foreign_key "usuarios", "contribuyentes"
 end

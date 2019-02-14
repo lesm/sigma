@@ -7,6 +7,7 @@ RSpec.describe Comprobante, type: :model do
   it { should belong_to :contribuyente }
   it { should belong_to :emisor }
 
+  it { should have_one :timbre }
   it { should have_many(:conceptos).dependent(:destroy) }
   it { should accept_nested_attributes_for :conceptos }
 

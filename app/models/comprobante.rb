@@ -23,6 +23,7 @@ class Comprobante < ApplicationRecord
   belongs_to :emisor
   belongs_to :cajero
   belongs_to :arqueo, optional: true
+  has_one :timbre
   has_many :conceptos, dependent: :destroy
   accepts_nested_attributes_for :conceptos
 
