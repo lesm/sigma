@@ -40,7 +40,7 @@ RSpec.describe Comprobante, type: :model do
     end
 
     context "procesando state" do
-      describe "procesando -> con_respuesta_valida if respuesta_valida?" do
+      describe "procesando -> con_respuesta_valida" do
         it "aasm_state == 'con_respuesta_valida'", :vcr do
           comprobante.continuar_timbrando!
           comprobante.continuar_timbrando!
@@ -48,7 +48,7 @@ RSpec.describe Comprobante, type: :model do
         end
       end
 
-      describe "procesando -> con_respuesta_invalida if respuesta_invalida?" do
+      describe "procesando -> con_respuesta_invalida" do
         let(:emisor) { create :emisor }
         let(:comprobante) { create :recibo, :para_timbrar, emisor: emisor }
 
@@ -60,23 +60,81 @@ RSpec.describe Comprobante, type: :model do
       end
     end
 
-    xcontext "con_respuesta_valida state" do
-      describe "con_respuesta_valida -> con_timbre if crea_timbre?" do
+    context "con_respuesta_valida state" do
+      describe "con_respuesta_valida -> con_timbre" do
+        before :each do
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+        end
+
+        it "aasm_state == 'con_timbre'", :vcr do
+          expect(comprobante).to be_con_timbre
+        end
+
+        it "comprobante must have one timbre relationship", :vcr do
+          expect(comprobante.timbre).to_not be_nil
+        end
       end
     end
 
-    xcontext "con_timbre state" do
-      describe "con_timbre -> con_xml if crea_xml?" do
+    context "con_timbre state" do
+      describe "con_timbre -> con_xml" do
+        before :each do
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+        end
+
+        it "aasm_state == 'con_xml'", :vcr do
+          expect(comprobante).to be_con_xml
+        end
+
+        it "comprobante xml attribute must exist", :vcr do
+          expect(comprobante.xml).to_not be_nil
+        end
       end
     end
 
-    xcontext "con_xml state" do
-      describe "con_xml -> con_cbb if crea_cbb?" do
+    context "con_xml state" do
+      before :each do
+        comprobante.continuar_timbrando!
+        comprobante.continuar_timbrando!
+        comprobante.continuar_timbrando!
+        comprobante.continuar_timbrando!
+        comprobante.continuar_timbrando!
+      end
+
+      describe "con_xml -> con_cbb" do
+        it "aasm_state == 'con_cbb'", :vcr do
+          expect(comprobante).to be_con_cbb
+        end
+
+        it "comprobante cbb attribute must exist", :vcr do
+          expect(comprobante.cbb).to_not be_nil
+        end
       end
     end
 
-    xcontext "con_cbb state" do
-      describe "con_cbb -> con_pdf if crea_pdf?" do
+    context "con_cbb state" do
+      describe "con_cbb -> con_pdf" do
+        before :each do
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+        end
+
+        it "aasm_state == 'con_pdf'", :vcr do
+          expect(comprobante).to be_con_pdf
+        end
+
+        it "comprobante pdf attribute must exist", :vcr do
+          expect(comprobante.pdf).to_not be_nil
+        end
       end
     end
 
