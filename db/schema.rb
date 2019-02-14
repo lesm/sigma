@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_10_032846) do
+ActiveRecord::Schema.define(version: 2019_02_13_203323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_02_10_032846) do
     t.datetime "updated_at", null: false
     t.bigint "caja_id"
     t.string "uso_cfdi"
+    t.string "aasm_state"
     t.index ["arqueo_id"], name: "index_comprobantes_on_arqueo_id"
     t.index ["caja_id"], name: "index_comprobantes_on_caja_id"
     t.index ["cajero_id"], name: "index_comprobantes_on_cajero_id"

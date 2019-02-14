@@ -1,0 +1,224 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://t2demo.facturacionmoderna.com/timbrado/wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Wed, 13 Feb 2019 19:16:11 GMT
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.6.31-1~dotdeb+7.1
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\"?>\n<definitions xmlns=\"http://schemas.xmlsoap.org/wsdl/\"
+        xmlns:tns=\"https://t2demo.facturacionmoderna.com/timbrado/soap\" xmlns:soap=\"http://schemas.xmlsoap.org/wsdl/soap/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap-enc=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" name=\"Timbrado_Manager\"
+        targetNamespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"><types><xsd:schema
+        targetNamespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></types><portType
+        name=\"Timbrado_ManagerPort\"><operation name=\"consultarEstatusCFDI\"><documentation>Consulta
+        Estatus de CFDI en SAT \nretorna estatus o error</documentation><input message=\"tns:consultarEstatusCFDIIn\"/><output
+        message=\"tns:consultarEstatusCFDIOut\"/></operation><operation name=\"receptorPeticionesPendientes\"><documentation>Consulta
+        Peticiones Pendientes de Aceptacion/Rechazo \nretorna lista de peticiones
+        o error</documentation><input message=\"tns:receptorPeticionesPendientesIn\"/><output
+        message=\"tns:receptorPeticionesPendientesOut\"/></operation><operation name=\"receptorAceptacionRechazo\"><documentation>Aceptar/Rechazar
+        Solicitudes de Cancelacion\nretorna estatus o error</documentation><input
+        message=\"tns:receptorAceptacionRechazoIn\"/><output message=\"tns:receptorAceptacionRechazoOut\"/></operation><operation
+        name=\"consultarRelacionados\"><documentation>Consulta Cfdis Relacionados
+        a Uuid\nretorna lista de relaciones o error</documentation><input message=\"tns:consultarRelacionadosIn\"/><output
+        message=\"tns:consultarRelacionadosOut\"/></operation><operation name=\"consultarSaldo\"><documentation>Recibe
+        la solicitud de un partner para consultar el saldo disponible seg&#xFA;n los
+        timbres contratados.</documentation><input message=\"tns:consultarSaldoIn\"/><output
+        message=\"tns:consultarSaldoOut\"/></operation><operation name=\"Auth\"><documentation>M&#xE9;todo
+        de autenticacion para el servicio de validacion de CFDI.</documentation><input
+        message=\"tns:AuthIn\"/><output message=\"tns:AuthOut\"/></operation><operation
+        name=\"validarCFDI\"><documentation>Recibe un XML de un CFDI en formato Base64
+        y realiza las validaciones requeridas por el SAT.</documentation><input message=\"tns:validarCFDIIn\"/><output
+        message=\"tns:validarCFDIOut\"/></operation><operation name=\"verificarCFDI\"><documentation>Verifica
+        el estatus de un comprobante en los servicios del SAT. Web Service del Portal
+        https://verificacfdi.facturaelectronica.sat.gob.mx</documentation><input message=\"tns:verificarCFDIIn\"/><output
+        message=\"tns:verificarCFDIOut\"/></operation><operation name=\"requestTimbrarCFDI\"><documentation>Recibe
+        un CFDI en formato Base64 y\nretorna el complemento Timbre Fiscal Digital</documentation><input
+        message=\"tns:requestTimbrarCFDIIn\"/><output message=\"tns:requestTimbrarCFDIOut\"/></operation><operation
+        name=\"requestCancelarCFDI\"><documentation>Recibe un UUID para cancelar \nretorna
+        el estatus del UUID</documentation><input message=\"tns:requestCancelarCFDIIn\"/><output
+        message=\"tns:requestCancelarCFDIOut\"/></operation><operation name=\"activarCancelacion\"><documentation>Activar
+        Cancelacion, recibe un archivo .cer, .key y contrasenia del CSD \nretorna
+        exito o error</documentation><input message=\"tns:activarCancelacionIn\"/><output
+        message=\"tns:activarCancelacionOut\"/></operation><operation name=\"recuperarAcuse\"><documentation>Acuses
+        de Envio/Cancelacion</documentation><input message=\"tns:recuperarAcuseIn\"/><output
+        message=\"tns:recuperarAcuseOut\"/></operation></portType><binding name=\"Timbrado_ManagerBinding\"
+        type=\"tns:Timbrado_ManagerPort\"><soap:binding style=\"rpc\" transport=\"http://schemas.xmlsoap.org/soap/http\"/><operation
+        name=\"consultarEstatusCFDI\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#consultarEstatusCFDI\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"receptorPeticionesPendientes\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#receptorPeticionesPendientes\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"receptorAceptacionRechazo\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#receptorAceptacionRechazo\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"consultarRelacionados\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#consultarRelacionados\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"consultarSaldo\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#consultarSaldo\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"Auth\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#Auth\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"validarCFDI\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#validarCFDI\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"verificarCFDI\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#verificarCFDI\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"requestTimbrarCFDI\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#requestTimbrarCFDI\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"requestCancelarCFDI\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#requestCancelarCFDI\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"activarCancelacion\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#activarCancelacion\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation><operation
+        name=\"recuperarAcuse\"><soap:operation soapAction=\"https://t2demo.facturacionmoderna.com/timbrado/soap#recuperarAcuse\"/><input><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></input><output><soap:body
+        use=\"encoded\" encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        namespace=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></output></operation></binding><service
+        name=\"Timbrado_ManagerService\"><port name=\"Timbrado_ManagerPort\" binding=\"tns:Timbrado_ManagerBinding\"><soap:address
+        location=\"https://t2demo.facturacionmoderna.com/timbrado/soap\"/></port></service><message
+        name=\"consultarEstatusCFDIIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"consultarEstatusCFDIOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"receptorPeticionesPendientesIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"receptorPeticionesPendientesOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"receptorAceptacionRechazoIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"receptorAceptacionRechazoOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"consultarRelacionadosIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"consultarRelacionadosOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"consultarSaldoIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"consultarSaldoOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"AuthIn\"><part name=\"param1\" type=\"xsd:anyType\"/><part name=\"param2\"
+        type=\"xsd:anyType\"/></message><message name=\"AuthOut\"><part name=\"return\"
+        type=\"xsd:boolean\"/></message><message name=\"validarCFDIIn\"><part name=\"xml\"
+        type=\"xsd:anyType\"/></message><message name=\"validarCFDIOut\"><part name=\"return\"
+        type=\"xsd:anyType\"/></message><message name=\"verificarCFDIIn\"><part name=\"request\"
+        type=\"xsd:anyType\"/><part name=\"internal\" type=\"xsd:anyType\"/></message><message
+        name=\"verificarCFDIOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"requestTimbrarCFDIIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"requestTimbrarCFDIOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"requestCancelarCFDIIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"requestCancelarCFDIOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"activarCancelacionIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"activarCancelacionOut\"><part name=\"return\" type=\"xsd:anyType\"/></message><message
+        name=\"recuperarAcuseIn\"><part name=\"request\" type=\"xsd:anyType\"/></message><message
+        name=\"recuperarAcuseOut\"><part name=\"return\" type=\"xsd:anyType\"/></message></definitions>\n"
+    http_version: 
+  recorded_at: Wed, 13 Feb 2019 19:14:14 GMT
+- request:
+    method: post
+    uri: https://t2demo.facturacionmoderna.com/timbrado/soap
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="https://t2demo.facturacionmoderna.com/timbrado/soap" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><tns:requestTimbrarCFDI><param0><UserPass>b9ec2afa3361a59af4b4d102d3f704eabdf097d4</UserPass><UserID>UsuarioPruebasWS</UserID><emisorRFC>TCM970625MB1</emisorRFC><text2CFDI>W0NvbXByb2JhbnRlRmlzY2FsRGlnaXRhbF0NCg0KVmVyc2lvbj0zLjMNCkZl
+        Y2hhPTIwMTktMDItMTNUMDA6MDA6MDANCkZvbGlvPTENCk5vQ2VydGlmaWNh
+        ZG89DQpTdWJUb3RhbD00MDAuMDANCkRlc2N1ZW50bz0NClRvdGFsPTQwMC4w
+        MA0KU2VyaWU9QQ0KVGlwb0RlQ29tcHJvYmFudGU9SQ0KRm9ybWFQYWdvPTAx
+        DQpNZXRvZG9QYWdvPVBVRQ0KTW9uZWRhPU1YTg0KTHVnYXJFeHBlZGljaW9u
+        PTY4MzAwDQoNCltEYXRvc0FkaWNpb25hbGVzXQ0KDQp0aXBvRG9jdW1lbnRv
+        PUZhY3R1cmENCg0KW0VtaXNvcl0NCg0KUmZjPVRDTTk3MDYyNU1CMQ0KTm9t
+        YnJlPUhVQUpVQVBBTiBERSBMRcOTTg0KUmVnaW1lbkZpc2NhbD02MDMNCg0K
+        W1JlY2VwdG9yXQ0KDQpSZmM9UkFBMTExMTExQUFBDQpOb21icmU9UGVkcm8N
+        ClVzb0NGREk9UDAxDQoNCltDb25jZXB0byMxXQ0KDQpDYW50aWRhZD0xLjAN
+        CkNsYXZlUHJvZFNlcnY9OTMxNjE3MDANCkNsYXZlVW5pZGFkPUU0OA0KRGVz
+        Y3JpcGNpb249UGFnbyBkZSByaWZhcw0KVmFsb3JVbml0YXJpbz0xMDAuMDAN
+        CkltcG9ydGU9MTAwLjAwDQpEZXNjdWVudG89DQoNCltDb25jZXB0byMyXQ0K
+        DQpDYW50aWRhZD0yLjANCkNsYXZlUHJvZFNlcnY9OTMxNjE3MDANCkNsYXZl
+        VW5pZGFkPUU0OA0KRGVzY3JpcGNpb249UGFnbyBkZSBzb3J0ZW9zDQpWYWxv
+        clVuaXRhcmlvPTE1MC4wMA0KSW1wb3J0ZT0zMDAuMDANCkRlc2N1ZW50bz0N
+        Cg0K
+        </text2CFDI></param0></tns:requestTimbrarCFDI></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"https://t2demo.facturacionmoderna.com/timbrado/soap#requestTimbrarCFDI"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '1504'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Wed, 13 Feb 2019 19:16:13 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '6712'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.6.31-1~dotdeb+7.1
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://t2demo.facturacionmoderna.com/timbrado/soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:requestTimbrarCFDIResponse><return xsi:type="SOAP-ENC:Struct"><xml xsi:type="xsd:string">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGNmZGk6Q29tcHJvYmFudGUgeG1sbnM6Y2ZkaT0iaHR0cDovL3d3dy5zYXQuZ29iLm14L2NmZC8zIiB4bWxuczp4cz0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhzaTpzY2hlbWFMb2NhdGlvbj0iaHR0cDovL3d3dy5zYXQuZ29iLm14L2NmZC8zIGh0dHA6Ly93d3cuc2F0LmdvYi5teC9zaXRpb19pbnRlcm5ldC9jZmQvMy9jZmR2MzMueHNkIiBWZXJzaW9uPSIzLjMiIFNlcmllPSJBIiBGb2xpbz0iMSIgRmVjaGE9IjIwMTktMDItMTNUMDA6MDA6MDAiIFNlbGxvPSJHMC82Qnd5TlF2Vm9QN0J6QldUZlRaMkpYNzJOek83MGNGOTI3eXJoL0NwSjRiODlkaWZhb3FYODF0Y1Z1TUNqNjI5UGtQcE41U1VCanN0U0FuQWxaR1M4Znk5Ukw2ZXZZb0hrNWdkUm9rZzhpUTdDZzB1aEVGNmZNKy9DT1dRbUJkdEZ2amVxblhOOWc1VitrbjlRUWp6QjlGdkQ1NlVkSWF2RENBbmpzL2IrQnltRHVFYXRFMUMzMmZ0UzhhRG5YVVV5d201Sk5WTlRFdWpXRGMxdHEwaUgrdG1IdlVGUWtxbTZjMzc4cFFWY2ozMnBCanNYbmZ3RkZhVk1GdDczRmpyR3FxejZQVndXbmVvb2oySmJWcDkwY0xUTW9UQW81dWpUWUhMd1E5VDJVVkNBbHFNZE44T3lZVFExN0pndE1ObitTZ0RseGpiaCszRmtiaitJT2c9PSIgRm9ybWFQYWdvPSIwMSIgTm9DZXJ0aWZpY2Fkbz0iMjAwMDEwMDAwMDAzMDAwMjI3NjIiIENlcnRpZmljYWRvPSJNSUlGOERDQ0E5aWdBd0lCQWdJVU1qQXdNREV3TURBd01EQXpNREF3TWpJM05qSXdEUVlKS29aSWh2Y05BUUVMQlFBd2dnRm1NU0F3SGdZRFZRUUREQmRCTGtNdUlESWdaR1VnY0hKMVpXSmhjeWcwTURrMktURXZNQzBHQTFVRUNnd21VMlZ5ZG1samFXOGdaR1VnUVdSdGFXNXBjM1J5WVdOcHc3TnVJRlJ5YVdKMWRHRnlhV0V4T0RBMkJnTlZCQXNNTDBGa2JXbHVhWE4wY21GamFjT3piaUJrWlNCVFpXZDFjbWxrWVdRZ1pHVWdiR0VnU1c1bWIzSnRZV05wdzdOdU1Ta3dKd1lKS29aSWh2Y05BUWtCRmhwaGMybHpibVYwUUhCeWRXVmlZWE11YzJGMExtZHZZaTV0ZURFbU1DUUdBMVVFQ1F3ZFFYWXVJRWhwWkdGc1oyOGdOemNzSUVOdmJDNGdSM1ZsY25KbGNtOHhEakFNQmdOVkJCRU1CVEEyTXpBd01Rc3dDUVlEVlFRR0V3Sk5XREVaTUJjR0ExVUVDQXdRUkdsemRISnBkRzhnUm1Wa1pYSmhiREVTTUJBR0ExVUVCd3dKUTI5NWIyRmp3NkZ1TVJVd0V3WURWUVF0RXd4VFFWUTVOekEzTURGT1RqTXhJVEFmQmdrcWhraUc5dzBCQ1FJTUVsSmxjM0J2Ym5OaFlteGxPaUJCUTBSTlFUQWVGdzB4TmpFd01qRXlNRFEzTkRWYUZ3MHlNREV3TWpFeU1EUTNORFZhTUlIY01TZ3dKZ1lEVlFRREV4OUZTa2xFVHlCU1QwUlNTVWRWUlZvZ1VGVkZRa3hCSUZOQklFUkZJRU5XTVNnd0pnWURWUVFwRXg5RlNrbEVUeUJTVDBSU1NVZFZSVm9nVUZWRlFreEJJRk5CSUVSRklFTldNU2d3SmdZRFZRUUtFeDlGU2tsRVR5QlNUMFJTU1VkVlJWb2dVRlZGUWt4QklGTkJJRVJGSUVOV01TVXdJd1lEVlFRdEV4eFVRMDA1TnpBMk1qVk5RakVnTHlCSVJVZFVOell4TURBek5GTXlNUjR3SEFZRFZRUUZFeFVnTHlCSVJVZFVOell4TURBelRVUkdVazVPTURreEZUQVRCZ05WQkFzVURGQnlkV1ZpWVhOZlEwWkVTVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFLQXpDc2Vpa1pYa2F5Vml4RWw0OVhGR245MHFZNkVzVjdxYmk3TWY2d0p2Zm9FY00vYXp1QnZhZ3k5S0ZlLy9McUluZDRBNEsvSndiYlNpVmlKY0oxZTBQTE9KaE93YjhsN0h1ZS9uWHRtM2JQWktMOStRODdQQUZCODIvQ3daL3FOMVJLQUFCMUU4R3lRMDV5SW13NzFnTjdWYkkwaSs5WW0xTFRMb3RWNXZSU0lNSkhGTndjMWRkNlE0eTgyUy9DYlplRFFXSWFjQ3QvYzVBc2xMMHBTdjhGNlh6ZGZldEdiZWwzVm9pZnNBM3FORTFxL0hlUHVhL0gxT0p1cHlHTzlqS0pjT2tXRWg1cHdpYzMxRkRWRU15UmVGMlRDcVlMUEFINWxVNTI1U0pvUU9vdU9FR3V0VzJubk9rVHQ4eE9rUmQ5OUpmVEp2TS8zWTlaYjBEVmtDQXdFQUFhTWRNQnN3REFZRFZSMFRBUUgvQkFJd0FEQUxCZ05WSFE4RUJBTUNCc0F3RFFZSktvWklodmNOQVFFTEJRQURnZ0lCQUErb2tDcnNZZjJQbDZwaEZ3TEZ1b052TzR6Y0dQQ1FzUnJsODlaYkREZ2RUaEwzaUFvaTB3YkRPbDkrRWNKaUpURWZEZG84c2E2YzNZNXViZlo4em9nM1NkbGd1TCtGYjVCejdCMXNqMmhkUUZEdHZabDVna0UzdGRpZjRPU01oTFFJb2xCc3Y0NzQ2RE03ZHRPVEtjajNIaXdPNktiQlBxSUZ4ZjZCL3p5NzRHYWZnNHI2RG9pU25wMTJ2VGg1M2ZES09qS0I3RUlYOStNYnVXZnducXRnMFpNdmtuT3BZa0xDZkRKVElYRE5oZ2s2eWt3dmFhUHhpbE1NZHZKU1J1dFdCcHJLRVpTNUcyNndTTG5uSWhXNko4WG03OXo4bndRWXJHdDZUZmJqQ3ZGTjdLYkZhVjFjNmhMdjVjWGlsMmtkaXJmMENwWld2REVJMlpmUUtqMlVQMEFzN3o3ZUlsN1ZuWThsYklnL0pOQXBPaW1aK2ZMZ21pa0hzU2ZxRTk0WXpqVEIzTExJWXNhY0xBOHBPV3FtL3R3a1VrQ0ZJQzd4K1daSXlDdGx5ZWd6UWR2MUkrOTVRczUvM1JLYjlKNjVMUGx2TUpnUEhWUFJHU0lPYkRMaXNrcUdJTk5tYVVMQjNwQUJxeFA5WGtTenBQUUk0TUU5SmFjelROOS9tQUVveXByN0RCUlAyWnBlSk11c0lWdmM4OEloMkxoQmVvbnphN01pUDh1QlJWTUxTZkdVdStBbnRkZ2szQXo1cS8zUXorNEN2RWV4OXZOTDI0Yk1YU2ZNN21LK1lhbHc2TGVLdkRXNFNNdCtKSFE1ZnAzY0JWeVViV2dsbWpqU3QyZWhZRGpSMnQrZUl1eHF5eXNoeTdpSjJRbGVNMGZ1SEUwTDJHQjNDOFJ3IiBTdWJUb3RhbD0iNDAwLjAwIiBNb25lZGE9Ik1YTiIgVG90YWw9IjQwMC4wMCIgVGlwb0RlQ29tcHJvYmFudGU9IkkiIE1ldG9kb1BhZ289IlBVRSIgTHVnYXJFeHBlZGljaW9uPSI2ODMwMCI+CiAgPGNmZGk6RW1pc29yIFJmYz0iVENNOTcwNjI1TUIxIiBOb21icmU9IkhVQUpVQVBBTiBERSBMRcOTTiIgUmVnaW1lbkZpc2NhbD0iNjAzIi8+CiAgPGNmZGk6UmVjZXB0b3IgUmZjPSJSQUExMTExMTFBQUEiIE5vbWJyZT0iUGVkcm8iIFVzb0NGREk9IlAwMSIvPgogIDxjZmRpOkNvbmNlcHRvcz4KICAgIDxjZmRpOkNvbmNlcHRvIENsYXZlUHJvZFNlcnY9IjkzMTYxNzAwIiBDYW50aWRhZD0iMS4wIiBDbGF2ZVVuaWRhZD0iRTQ4IiBEZXNjcmlwY2lvbj0iUGFnbyBkZSByaWZhcyIgVmFsb3JVbml0YXJpbz0iMTAwLjAwIiBJbXBvcnRlPSIxMDAuMDAiLz4KICAgIDxjZmRpOkNvbmNlcHRvIENsYXZlUHJvZFNlcnY9IjkzMTYxNzAwIiBDYW50aWRhZD0iMi4wIiBDbGF2ZVVuaWRhZD0iRTQ4IiBEZXNjcmlwY2lvbj0iUGFnbyBkZSBzb3J0ZW9zIiBWYWxvclVuaXRhcmlvPSIxNTAuMDAiIEltcG9ydGU9IjMwMC4wMCIvPgogIDwvY2ZkaTpDb25jZXB0b3M+CiAgPGNmZGk6Q29tcGxlbWVudG8+CiAgICA8dGZkOlRpbWJyZUZpc2NhbERpZ2l0YWwgeG1sbnM6dGZkPSJodHRwOi8vd3d3LnNhdC5nb2IubXgvVGltYnJlRmlzY2FsRGlnaXRhbCIgeHNpOnNjaGVtYUxvY2F0aW9uPSJodHRwOi8vd3d3LnNhdC5nb2IubXgvVGltYnJlRmlzY2FsRGlnaXRhbCBodHRwOi8vd3d3LnNhdC5nb2IubXgvc2l0aW9faW50ZXJuZXQvY2ZkL1RpbWJyZUZpc2NhbERpZ2l0YWwvVGltYnJlRmlzY2FsRGlnaXRhbHYxMS54c2QiIFZlcnNpb249IjEuMSIgVVVJRD0iQUZBNUNFNjItMkZDMy0xMUU5LUJERDEtRDk3MjJENUNCOTVEIiBGZWNoYVRpbWJyYWRvPSIyMDE5LTAyLTEzVDEzOjE1OjEyIiBSZmNQcm92Q2VydGlmPSJGTU8xMDA3MTY4QzYiIFNlbGxvQ0ZEPSJHMC82Qnd5TlF2Vm9QN0J6QldUZlRaMkpYNzJOek83MGNGOTI3eXJoL0NwSjRiODlkaWZhb3FYODF0Y1Z1TUNqNjI5UGtQcE41U1VCanN0U0FuQWxaR1M4Znk5Ukw2ZXZZb0hrNWdkUm9rZzhpUTdDZzB1aEVGNmZNKy9DT1dRbUJkdEZ2amVxblhOOWc1VitrbjlRUWp6QjlGdkQ1NlVkSWF2RENBbmpzL2IrQnltRHVFYXRFMUMzMmZ0UzhhRG5YVVV5d201Sk5WTlRFdWpXRGMxdHEwaUgrdG1IdlVGUWtxbTZjMzc4cFFWY2ozMnBCanNYbmZ3RkZhVk1GdDczRmpyR3FxejZQVndXbmVvb2oySmJWcDkwY0xUTW9UQW81dWpUWUhMd1E5VDJVVkNBbHFNZE44T3lZVFExN0pndE1ObitTZ0RseGpiaCszRmtiaitJT2c9PSIgTm9DZXJ0aWZpY2Fkb1NBVD0iMjAwMDEwMDAwMDAzMDAwMjIzMjMiIFNlbGxvU0FUPSJIeGhWeWFtK1E5eS9SWGF0eHRUVGtXUDB3dUdrUkZyUkJnQU9rUmViWWt2eHgySDZid1RwUzU2cnpzYUhsZ3lRaWdFZ2FiZGFUNTdoUnRkVWo0YTQ1a1FRTmxKLzY2OEo3OGdTMWtyREp0dGs4eWRsM2pwV2NlNGNKd1JXN0RNQnNha3ZvbEN0UW83MnVSdzlWeXFHZEdXNW1vcGlEK0ZUdTduU09nVC9paERkbGxnSzVHQ0JwUTJKbDZHNkZOQ0t3ZFhac3hFUlBhbVhaSWxPRHhxaXgvVklzMGw0NC9QRVBack1XSXkrenFvZVl5Zy9LbTIvQm5GZFFDYnRhV2NkUWRVcGV4WDhlYVZzakZlWWNLNG5yUDFLVmthYjh6OGRnT3JsSldHZVpQcVB0Z3MrWUM0SDhYREZCSTlBS3ZhclgvT0loNU1adkN2N1JVUWsrYk0wa1E9PSIvPgogIDwvY2ZkaTpDb21wbGVtZW50bz4KPC9jZmRpOkNvbXByb2JhbnRlPgo=</xml></return></ns1:requestTimbrarCFDIResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: 
+  recorded_at: Wed, 13 Feb 2019 19:14:16 GMT
+recorded_with: VCR 4.0.0

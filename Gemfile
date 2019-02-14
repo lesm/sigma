@@ -28,6 +28,7 @@ gem 'unicorn'
 gem 'activerecord-import', require: false
 gem 'whenever', require: false
 gem 'fm_timbrado_cfdi'
+gem 'aasm'
 
 gem 'fm_layout', github: "LogicalBricks/fm_layout", branch: 'cfdi_3_3'
 

@@ -1,4 +1,6 @@
 class Comprobante < ApplicationRecord
+  include AASM
+
   FORMA_PAGO = {
     "01" => "01 - Efectivo",
     "02" => "02 - Cheque nominativo",
@@ -49,6 +51,48 @@ class Comprobante < ApplicationRecord
   scope :de_transferencia, -> { where(forma_pago: "03 - Transferencia electrónica de fondos") }
   scope :de_credito,       -> { where(forma_pago: "04 - Tarjeta de crédito") }
   scope :de_debito,        -> { where(forma_pago: "28 - Tarjeta de débito") }
+
+  aasm do
+    state :sin_timbre, initial: true
+    state :con_respuesta_valida, :procesando, :con_respuesta_invalida, :con_timbre, :con_xml
+
+    event :continuar_timbrando do
+      transitions from: :sin_timbre, to: :procesando, if: :con_peticion_valida?
+      transitions from: :procesando, to: :con_respuesta_invalida, if: :respuesta_invalida?
+      transitions from: :procesando, to: :con_respuesta_valida, if: :respuesta_valida?
+      transitions from: :con_respuesta_valida, to: :con_timbre, if: :crea_timbre?
+      transitions from: :con_timbre, to: :con_xml, if: :crea_xml?
+    end
+
+  end
+
+  def crea_timbre?
+    true
+  end
+
+  def crea_xml?
+    true
+  end
+
+  def respuesta_valida?
+    respuesta.valid?
+  end
+
+  def respuesta_invalida?
+    !respuesta_valida?
+  end
+
+  def con_peticion_valida?
+    respuesta
+  end
+
+  def respuesta
+    @respuesta ||= FmTimbradoCfdi.timbrar(emisor.rfc, fm_layout)
+  end
+
+  def fm_layout
+    FacturaLayout.new(ComprobanteLayoutPresenter.new(self)).to_s
+  end
 
   def timbrado_automatico?
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)

@@ -22,6 +22,69 @@ RSpec.describe Comprobante, type: :model do
   it { should validate_numericality_of(:total).is_greater_than(0) }
   it { should validate_numericality_of(:subtotal).is_greater_than(0) }
 
+  let(:comprobante) { create :recibo, :para_timbrar }
+
+  describe "AASM process" do
+    describe "sin_timbre initial state" do
+      it "aasm_state == 'sin_timbre'" do
+        expect(comprobante).to be_sin_timbre
+      end
+    end
+
+    describe "sin_timbre -> procesando" do
+      it "aasm_state == 'procesando'", :vcr do
+        comprobante.continuar_timbrando!
+        expect(comprobante).to be_procesando
+      end
+    end
+
+    context "procesando state" do
+      describe "procesando -> con_respuesta_valida if respuesta_valida?" do
+        it "aasm_state == 'con_respuesta_valida'", :vcr do
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          expect(comprobante).to be_con_respuesta_valida
+        end
+      end
+
+      describe "procesando -> con_respuesta_invalida if respuesta_invalida?" do
+        let(:emisor) { create :emisor }
+        let(:comprobante) { create :recibo, :para_timbrar, emisor: emisor }
+
+        it "aasm_state == 'con_respuesta_invalida'", :vcr do
+          comprobante.continuar_timbrando!
+          comprobante.continuar_timbrando!
+          expect(comprobante).to be_con_respuesta_invalida
+        end
+      end
+    end
+
+    xcontext "con_respuesta_valida state" do
+      describe "con_respuesta_valida -> con_timbre if crea_timbre?" do
+      end
+    end
+
+    xcontext "con_timbre state" do
+      describe "con_timbre -> con_xml if crea_xml?" do
+      end
+    end
+
+    xcontext "con_xml state" do
+      describe "con_xml -> con_cbb if crea_cbb?" do
+      end
+    end
+
+    xcontext "con_cbb state" do
+      describe "con_cbb -> con_pdf if crea_pdf?" do
+      end
+    end
+
+    xcontext "con_pdf state" do
+      describe "con_pdf -> cancelado if cancelacion_valida?" do
+      end
+    end
+  end
+
   describe "#uso_cfdi" do
     let(:recibo) do
       build :recibo, :para_timbrar, uso_cfdi: nil

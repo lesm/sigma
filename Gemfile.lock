@@ -8,6 +8,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.0.1)
+      concurrent-ruby (~> 1.0)
     actioncable (5.2.1.1)
       actionpack (= 5.2.1.1)
       nio4r (~> 2.0)
@@ -384,6 +386,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activerecord-import
   bootsnap (>= 1.1.0)
   bullet
