@@ -179,7 +179,7 @@ class Comprobante < ApplicationRecord
   end
 
   def pdf_fm_encode
-    respuesta.pdf.force_encoding('utf-8').encode
+    GenerarPdf.new.generar(self).force_encoding('utf-8').encode
   end
 
   def respuesta_valida?

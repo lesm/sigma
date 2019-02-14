@@ -92,7 +92,7 @@ RSpec.describe Comprobante, type: :model do
         end
 
         it "comprobante xml attribute must exist", :vcr do
-          expect(comprobante.xml).to_not be_nil
+          expect(comprobante.xml.present?).to eq true
         end
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe Comprobante, type: :model do
         end
 
         it "comprobante cbb attribute must exist", :vcr do
-          expect(comprobante.cbb).to_not be_nil
+          expect(comprobante.cbb.present?).to eq true
         end
       end
     end
@@ -133,7 +133,7 @@ RSpec.describe Comprobante, type: :model do
         end
 
         it "comprobante pdf attribute must exist", :vcr do
-          expect(comprobante.pdf).to_not be_nil
+          expect(comprobante.pdf.present?).to eq true
         end
       end
     end

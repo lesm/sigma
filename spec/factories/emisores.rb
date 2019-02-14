@@ -11,7 +11,7 @@ FactoryBot.define do
     con_certificado { true }
 
     trait :con_direccion do
-      before(:create) do |emisor|
+      after(:build) do |emisor|
         emisor.direccion = build :direccion
       end
     end
