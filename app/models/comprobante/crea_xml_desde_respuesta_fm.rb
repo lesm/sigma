@@ -1,6 +1,5 @@
 class Comprobante
   class CreaXmlDesdeRespuestaFm < TareaProcesoTimbrado
-
     def crear
       comprobante.xml = xml_file
       xml_file.unlink
@@ -14,8 +13,6 @@ class Comprobante
     end
 
     def crea_xml_file
-      require "tempfile"
-
       Tempfile.open("xml_file", Rails.root.join("tmp")) do |f|
         f.write(Nokogiri::XML(respuesta_fm.xml).to_xml)
         f.close

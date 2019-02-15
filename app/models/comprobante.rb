@@ -118,27 +118,7 @@ class Comprobante < ApplicationRecord
   end
 
   def crea_pdf?
-    self.pdf = pdf_file
-    pdf_file.unlink
-    save
-  end
-
-  def pdf_file
-    @pdf_file ||= crea_pdf_file
-  end
-
-  def crea_pdf_file
-    require "tempfile"
-
-    Tempfile.open("pdf_file", Rails.root.join("tmp")) do |f|
-      f.write(pdf_fm_encode)
-      f.close
-      f
-    end
-  end
-
-  def pdf_fm_encode
-    GenerarPdf.new.generar(self).force_encoding('utf-8').encode
+    CreaPdf.new(self, nil).crear
   end
 
   def respuesta_fm

@@ -1,6 +1,5 @@
 class Comprobante
   class CreaTimbreDesdeRespuestaFm < TareaProcesoTimbrado
-
     def crear
       Timbre.create(attributes_timbre)
       comprobante.timbre.present?

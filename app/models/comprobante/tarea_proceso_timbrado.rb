@@ -1,4 +1,6 @@
 class Comprobante::TareaProcesoTimbrado
+  require "tempfile"
+
   attr_reader :comprobante, :respuesta_fm
 
   def initialize(comprobante, respuesta_fm)

@@ -1,6 +1,5 @@
 class Comprobante
   class CreaCbbDesdeRespuestaFm < TareaProcesoTimbrado
-
     def crear
       comprobante.cbb = cbb_image
       cbb_image.unlink
@@ -14,8 +13,6 @@ class Comprobante
     end
 
     def crea_cbb_image
-      require "tempfile"
-
       Tempfile.open("cbb_image", Rails.root.join("tmp")) do |f|
         f.write(cbb_fm_encode)
         f.close
