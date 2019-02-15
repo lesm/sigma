@@ -3,7 +3,7 @@ FactoryBot.define do
     serie { "A" }
     folio { "1" }
     moneda { "MXN" }
-    tipo_comprobante { "Factura" }
+    tipo_comprobante { "I - Ingreso" }
     lugar_expedicion { "68300" }
     metodo_pago { "PUE - Pago en una sola exhibición" }
     forma_pago { "01 - Efectivo" }
