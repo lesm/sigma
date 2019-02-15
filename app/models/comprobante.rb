@@ -93,30 +93,20 @@ class Comprobante < ApplicationRecord
 
   private
 
+  def con_peticion_valida?
+    respuesta_fm
+  end
+
+  def respuesta_invalida?
+    !respuesta_valida?
+  end
+
+  def respuesta_valida?
+    respuesta_fm.valid?
+  end
+
   def crea_timbre?
-    Timbre.create(attributes_timbre)
-    timbre.present?
-  end
-
-  def attributes_timbre
-    {
-      version: fm_timbre.version,
-      no_certificado_sat: fm_timbre.no_certificado_sat,
-      no_certificado: fm_timbre.no_certificado,
-      fecha_timbrado: fm_timbre.fecha_timbrado,
-      uuid: fm_timbre.uuid,
-      sello_sat: fm_timbre.sello_sat,
-      sello_cfd: fm_timbre.sello_cfd,
-      fecha_comprobante: fm_timbre.fecha_comprobante,
-      serie: fm_timbre.serie,
-      rfc_provedor_certificacion: fm_timbre.rfc_provedor_certificacion,
-      folio: fm_timbre.folio,
-      comprobante_id: id
-    }
-  end
-
-  def fm_timbre
-    respuesta.timbre
+    CreaTimbreDesdeRespuestaFm.new(self, respuesta_fm).crear
   end
 
   def crea_xml?
@@ -132,8 +122,8 @@ class Comprobante < ApplicationRecord
   def crea_xml_file
     require "tempfile"
 
-    Tempfile.open("xml_file", "#{Rails.root}/tmp") do |f|
-      f.write(Nokogiri::XML(respuesta.xml).to_xml)
+    Tempfile.open("xml_file", Rails.root.join("tmp")) do |f|
+      f.write(Nokogiri::XML(respuesta_fm.xml).to_xml)
       f.close
       f
     end
@@ -152,7 +142,7 @@ class Comprobante < ApplicationRecord
   def crea_cbb_image
     require "tempfile"
 
-    Tempfile.open("cbb_image", "#{Rails.root}/tmp") do |f|
+    Tempfile.open("cbb_image", Rails.root.join("tmp")) do |f|
       f.write(cbb_fm_encode)
       f.close
       f
@@ -160,7 +150,7 @@ class Comprobante < ApplicationRecord
   end
 
   def cbb_fm_encode
-    respuesta.cbb.force_encoding('utf-8').encode
+    respuesta_fm.cbb.force_encoding('utf-8').encode
   end
 
   def crea_pdf?
@@ -176,7 +166,7 @@ class Comprobante < ApplicationRecord
   def crea_pdf_file
     require "tempfile"
 
-    Tempfile.open("pdf_file", "#{Rails.root}/tmp") do |f|
+    Tempfile.open("pdf_file", Rails.root.join("tmp")) do |f|
       f.write(pdf_fm_encode)
       f.close
       f
@@ -187,20 +177,8 @@ class Comprobante < ApplicationRecord
     GenerarPdf.new.generar(self).force_encoding('utf-8').encode
   end
 
-  def respuesta_valida?
-    respuesta.valid?
-  end
-
-  def respuesta_invalida?
-    !respuesta_valida?
-  end
-
-  def con_peticion_valida?
-    respuesta
-  end
-
-  def respuesta
-    @respuesta ||= FmTimbradoCfdi.timbrar(emisor.rfc, fm_layout, 'generarCBB' => true)
+  def respuesta_fm
+    @respuesta_fm ||= FmTimbradoCfdi.timbrar(emisor.rfc, fm_layout, 'generarCBB' => true)
   end
 
   def fm_layout
