@@ -22,6 +22,22 @@ RSpec.describe Comprobante, type: :model do
   it { should validate_numericality_of(:total).is_greater_than(0) }
   it { should validate_numericality_of(:subtotal).is_greater_than(0) }
 
+  describe ".sin_arqueo" do
+    let(:caja) { create :caja }
+    let(:cajero) { create :cajero, :con_contribuyente, caja: caja }
+    let(:concepto) { build :concepto, :con_cuenta, :con_datos }
+    let(:comprobante) do
+      create :comprobante,
+        :con_datos, forma_pago: "01 - Efectivo",
+        caja: cajero.caja, cajero: cajero,
+        arqueo_id: nil, conceptos: [ concepto ]
+    end
+
+    it "returns when arqueo_id is nil" do
+      expect(Comprobante.sin_arqueo).to eq [comprobante]
+    end
+  end
+
   describe "#uso_cfdi" do
     let(:recibo) do
       build :recibo, :para_timbrar, uso_cfdi: nil
