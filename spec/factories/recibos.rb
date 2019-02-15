@@ -24,6 +24,7 @@ FactoryBot.define do
     emisor { nil }
     arqueo { nil }
     type { "Recibo" }
+    factura_global { nil }
   end
 
   trait :para_nuevo_arqueo do
