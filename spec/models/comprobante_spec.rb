@@ -39,22 +39,22 @@ RSpec.describe Comprobante, type: :model do
       end
     end
 
-    context "procesando state" do
-      describe "procesando -> con_respuesta_valida" do
+    describe "procesando state" do
+      before :each do
+        2.times { comprobante.continuar_timbrando! }
+      end
+
+      context "procesando -> con_respuesta_valida" do
         it "aasm_state == 'con_respuesta_valida'", :vcr do
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
           expect(comprobante).to be_con_respuesta_valida
         end
       end
 
-      describe "procesando -> con_respuesta_invalida" do
+      context "procesando -> con_respuesta_invalida" do
         let(:emisor) { create :emisor }
         let(:comprobante) { create :recibo, :para_timbrar, emisor: emisor }
 
         it "aasm_state == 'con_respuesta_invalida'", :vcr do
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
           expect(comprobante).to be_con_respuesta_invalida
         end
       end
@@ -63,9 +63,7 @@ RSpec.describe Comprobante, type: :model do
     context "con_respuesta_valida state" do
       describe "con_respuesta_valida -> con_timbre" do
         before :each do
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
+          3.times { comprobante.continuar_timbrando! }
         end
 
         it "aasm_state == 'con_timbre'", :vcr do
@@ -81,10 +79,7 @@ RSpec.describe Comprobante, type: :model do
     context "con_timbre state" do
       describe "con_timbre -> con_xml" do
         before :each do
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
+          4.times { comprobante.continuar_timbrando! }
         end
 
         it "aasm_state == 'con_xml'", :vcr do
@@ -99,11 +94,7 @@ RSpec.describe Comprobante, type: :model do
 
     context "con_xml state" do
       before :each do
-        comprobante.continuar_timbrando!
-        comprobante.continuar_timbrando!
-        comprobante.continuar_timbrando!
-        comprobante.continuar_timbrando!
-        comprobante.continuar_timbrando!
+        5.times { comprobante.continuar_timbrando! }
       end
 
       describe "con_xml -> con_cbb" do
@@ -120,12 +111,7 @@ RSpec.describe Comprobante, type: :model do
     context "con_cbb state" do
       describe "con_cbb -> con_pdf" do
         before :each do
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
-          comprobante.continuar_timbrando!
+          6.times { comprobante.continuar_timbrando! }
         end
 
         it "aasm_state == 'con_pdf'", :vcr do
