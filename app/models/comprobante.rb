@@ -110,23 +110,7 @@ class Comprobante < ApplicationRecord
   end
 
   def crea_xml?
-    self.xml = xml_file
-    xml_file.unlink
-    save
-  end
-
-  def xml_file
-    @xml_file ||= crea_xml_file
-  end
-
-  def crea_xml_file
-    require "tempfile"
-
-    Tempfile.open("xml_file", Rails.root.join("tmp")) do |f|
-      f.write(Nokogiri::XML(respuesta_fm.xml).to_xml)
-      f.close
-      f
-    end
+    CreaXmlDesdeRespuestaFm.new(self, respuesta_fm).crear
   end
 
   def crea_cbb?
