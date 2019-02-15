@@ -1,14 +1,13 @@
 class Comprobante
   class CreaPdf < TareaProcesoTimbrado
     def crear
-      comprobante.pdf = pdf_file
-      pdf_file.unlink
-      comprobante.save
+      comprobante.pdf = file
+      super
     end
 
     private
 
-    def pdf_file
+    def file
       @pdf_file ||= crea_pdf_file
     end
 

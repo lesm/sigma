@@ -1,14 +1,13 @@
 class Comprobante
   class CreaXmlDesdeRespuestaFm < TareaProcesoTimbrado
     def crear
-      comprobante.xml = xml_file
-      xml_file.unlink
-      comprobante.save
+      comprobante.xml = file
+      super
     end
 
     private
 
-    def xml_file
+    def file
       @xml_file ||= crea_xml_file
     end
 

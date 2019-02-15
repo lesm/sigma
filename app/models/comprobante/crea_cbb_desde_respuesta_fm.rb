@@ -1,14 +1,13 @@
 class Comprobante
   class CreaCbbDesdeRespuestaFm < TareaProcesoTimbrado
     def crear
-      comprobante.cbb = cbb_image
-      cbb_image.unlink
-      comprobante.save
+      comprobante.cbb = file
+      super
     end
 
     private
 
-    def cbb_image
+    def file
       @cbb_image ||= crea_cbb_image
     end
 

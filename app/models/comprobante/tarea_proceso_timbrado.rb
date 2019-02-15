@@ -9,6 +9,11 @@ class Comprobante::TareaProcesoTimbrado
   end
 
   def crear
-    false
+    file.unlink
+    comprobante.save
+  end
+
+  def file
+    raise NotImplementedError
   end
 end
