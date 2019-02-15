@@ -57,6 +57,11 @@ class Comprobante < ApplicationRecord
   mount_uploader :cbb, CbbUploader
   mount_uploader :pdf, PdfUploader
 
+  delegate :uuid, :no_certificado_sat, :no_certificado,
+    :rfc_provedor_certificacion, :fecha_comprobante,
+    :fecha_timbrado, :sello_sat, :sello_cfd, :cadena_original,
+    to: :timbre, prefix: false, allow_nil: true
+
   aasm do
     state :sin_timbre, initial: true
     state :con_respuesta_valida, :procesando,
@@ -195,7 +200,7 @@ class Comprobante < ApplicationRecord
   end
 
   def respuesta
-    @respuesta ||= FmTimbradoCfdi.timbrar(emisor.rfc, fm_layout, 'generarCBB' => true, 'generarPDF' => true)
+    @respuesta ||= FmTimbradoCfdi.timbrar(emisor.rfc, fm_layout, 'generarCBB' => true)
   end
 
   def fm_layout

@@ -37,40 +37,52 @@
       .col-md-6
         %strong
           FOLIO FISCAL:
+        = @recibo.uuid
         %br
         %strong
           NO. DE SERIE DEL CERTIFICADO DEL SAT:
+        = @recibo.no_certificado_sat
         %br
         %strong
           NO. DE SERIE DEL CERTIFICADO DEL EMISOR:
+        = @recibo.no_certificado
         %br
         %strong
           LUGAR DE EXPEDICIÓN:
-        68120
+        = @recibo.emisor.codigo_postal
       .col-md-6
         %strong
           RFC PROVEEDOR DE CERTIFICACIÓN:
+        = @recibo.rfc_provedor_certificacion
         %br
         %strong
           FECHA Y HORA DE EMISIÓN DE CFDI:
+        = @recibo.fecha_comprobante
         %br
         %strong
           FECHA Y HORA DE CERTIFICACIÓN:
+        = @recibo.fecha_timbrado
 .col-md-12
   %hr.line-bottom
-.col-md-12.font-12
+.col-md-12.font-14
   .row
     .col-md-3
       .text-center
-        = wicked_pdf_image_tag("qr_sigma.png")
+        - if @recibo.sin_timbre?
+          = wicked_pdf_image_tag("qr_sigma.png", width: "65%")
+        - else
+          = image_tag(@recibo.cbb.path, width: "65%")
         %br
         Este documento es una representación impresa de un CFDI
-    .col-md-9
+    .col-md-9.large-text
       %strong
         SELLO DIGITAL DEL CFDI:
+      = @recibo.sello_cfd
       %br
       %strong
         SELLO DIGITAL DEL SAT:
+      = @recibo.sello_sat
       %br
       %strong
         CADENA ORIGINAL DEL COMPLEMENTO DE CERTIFICACIÓN DIGITAL DEL SAT:
+      = @recibo.cadena_original
