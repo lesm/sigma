@@ -1,0 +1,2 @@
+class FacturaGlobal < Factura
+end

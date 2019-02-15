@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_140411) do
+ActiveRecord::Schema.define(version: 2019_02_15_185610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,11 +88,13 @@ ActiveRecord::Schema.define(version: 2019_02_05_140411) do
     t.datetime "updated_at", null: false
     t.bigint "caja_id"
     t.string "uso_cfdi"
+    t.bigint "factura_global_id"
     t.index ["arqueo_id"], name: "index_comprobantes_on_arqueo_id"
     t.index ["caja_id"], name: "index_comprobantes_on_caja_id"
     t.index ["cajero_id"], name: "index_comprobantes_on_cajero_id"
     t.index ["contribuyente_id"], name: "index_comprobantes_on_contribuyente_id"
     t.index ["emisor_id"], name: "index_comprobantes_on_emisor_id"
+    t.index ["factura_global_id"], name: "index_comprobantes_on_factura_global_id"
   end
 
   create_table "conceptos", force: :cascade do |t|
@@ -249,6 +251,24 @@ ActiveRecord::Schema.define(version: 2019_02_05_140411) do
     t.index ["cajero_id"], name: "index_ingreso_por_clasificares_on_cajero_id"
   end
 
+  create_table "timbres", force: :cascade do |t|
+    t.string "version"
+    t.string "no_certificado_sat"
+    t.string "no_certificado"
+    t.string "fecha_timbrado"
+    t.string "uuid"
+    t.string "sello_sat"
+    t.string "sello_cfd"
+    t.string "fecha_comprobante"
+    t.string "serie"
+    t.string "rfc_provedor_certificacion"
+    t.string "folio"
+    t.bigint "comprobante_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comprobante_id"], name: "index_timbres_on_comprobante_id"
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "username", null: false
@@ -280,6 +300,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_140411) do
   add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "comprobantes", "arqueos"
   add_foreign_key "comprobantes", "cajas"
+  add_foreign_key "comprobantes", "comprobantes", column: "factura_global_id"
   add_foreign_key "comprobantes", "contribuyentes"
   add_foreign_key "comprobantes", "emisores"
   add_foreign_key "comprobantes", "usuarios", column: "cajero_id"
@@ -291,5 +312,6 @@ ActiveRecord::Schema.define(version: 2019_02_05_140411) do
   add_foreign_key "historial_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "ingreso_por_clasificares", "arqueos"
   add_foreign_key "ingreso_por_clasificares", "usuarios", column: "cajero_id"
+  add_foreign_key "timbres", "comprobantes"
   add_foreign_key "usuarios", "contribuyentes"
 end
