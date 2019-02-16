@@ -78,7 +78,7 @@ class RecibosController < ApplicationController
       params.require(:recibo).permit(
         :id, :serie, :folio, :moneda, :tipo_comprobante,
         :lugar_expedicion, :metodo_pago, :forma_pago, :subtotal,
-        :total, :descuento, :motivo_descuento, :fecha_emision,
+        :total, :descuento, :motivo_descuento, :fecha_emision, :uso_cfdi,
         :observaciones, :cajero_id, :contribuyente_id, :emisor_id,
         :timbrado_automatico, :caja_id,
         conceptos_attributes: [
