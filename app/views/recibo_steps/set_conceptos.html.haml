@@ -13,7 +13,7 @@
               = f.association :contribuyente, collection: find_contribuyente(@recibo.contribuyente_id), selected: @recibo.contribuyente_id, disabled: true
               = f.input :contribuyente_id, as: :hidden, input_html: { value: @recibo.contribuyente.id }
               = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
-              -#= f.input :uso_cfdi, collection: Comprobante::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
+              = f.input :uso_cfdi, collection: Comprobante::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
               = f.input :subtotal, as: :hidden
               = f.input :moneda, as: :hidden
               = f.input :tipo_comprobante, as: :hidden, input_html: { value: "I - Ingreso" }
@@ -45,10 +45,10 @@
                       Eliminar
                   = render "conceptos/concepto_fields", f: cf
           %br
-          -#= label_tag nil, class: "badge badge-warning" do
-            -#%h6
-              -#= f.check_box :timbrado_automatico
-              -#Timbrar Recibo
+          = label_tag nil, class: "badge badge-warning" do
+            %h6
+              = f.check_box :timbrado_automatico
+              Timbrar Recibo
           .btn-group.float-right
             = link_to previous_url, class: "btn btn-warning btn-sm" do
               %i.fa.fa-arrow-left
