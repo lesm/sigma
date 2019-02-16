@@ -1,0 +1,21 @@
+.row
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title
+          %i.fa.fa-list
+          Listado de Facturas Globales
+        .card-tools
+          = link_to new_factura_global_path, class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Factura Global
+      .card-body
+        %table.table.table-hover
+          %thead.text-center
+            %tr
+              %th #
+              %th Acciónes
+
+          %tbody.text-right
+            - @factura_globales.each do |fg|
+              %tr= fg.id
