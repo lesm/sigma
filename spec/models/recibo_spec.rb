@@ -12,7 +12,7 @@ RSpec.describe Recibo, type: :model do
     end
 
     context "when timbrado_automatico is false" do
-      it "a job was pushed on to the queue" do
+      it "a job was not pushed on to the queue" do
         expect { comprobante.save! }.to change(ComprobanteWorker.jobs, :size).by 0
       end
     end
