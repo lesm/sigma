@@ -51,7 +51,7 @@ FactoryBot.define do
   trait :para_timbrar do
     after :build do |recibo|
       recibo.emisor = build(:emisor, :con_direccion, rfc: "TCM970625MB1") if recibo.emisor.nil?
-      recibo.cajero = build :cajero
+      recibo.cajero = build :cajero if recibo.cajero.nil?
       recibo.caja = recibo.cajero.caja
       recibo.contribuyente = build :contribuyente, rfc: "RAA111111AAA"
       recibo.conceptos = [build(:concepto, :con_cuenta_rifas), build(:concepto, :con_cuenta_sorteos)]

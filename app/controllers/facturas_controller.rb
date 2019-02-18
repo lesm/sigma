@@ -2,7 +2,7 @@ class FacturasController < ApplicationController
   before_action :authenticate_usuario!
 
   def index
-    @facturas = Factura.all  
+    @facturas = policy_scope(Factura)
   end
 
   def show
