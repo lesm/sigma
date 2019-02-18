@@ -41,7 +41,7 @@
                   %i.fa.fa-circle-o.nav-icon
                   %p Recibos
               %li.nav-item
-                %a.nav-link{:href => "#"}
+                = link_to facturas_path, class: "nav-link #{ (controller_name == 'facturas') && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
                   %p Facturas
               %li.nav-item

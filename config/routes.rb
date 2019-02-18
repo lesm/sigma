@@ -33,5 +33,6 @@ Rails.application.routes.draw do
   end
   resources :arqueos, except: [:edit, :update, :destroy]
   resources :activar_certificados, only: [:new, :create]
+  resources :facturas, only: [:index, :show]
   root 'pages#index'
 end

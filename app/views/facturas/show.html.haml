@@ -1,0 +1,61 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle Factura
+        .card-tools
+          -#= link_to [@factura, format: "pdf"], title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
+            %i.fa.fa-print
+            Imprimir
+      .card-body
+        .row
+          .col-md-6
+            %fieldset
+              %legend
+                %i.fa.fa-archive
+                &nbsp;
+                Datos Factura
+              %table.table
+                %tbody
+                  %tr
+                    %th Serie
+                    %td= @factura.serie
+                  %tr
+                    %th Folio
+                    %td= @factura.folio
+                  %tr
+                    %th Contribuyente
+                    %td= @factura.contribuyente
+                  %tr
+                    %th Forma de Pago
+                    %td= @factura.forma_pago
+                  %tr
+                    %th Método de Pago
+                    %td= @factura.metodo_pago
+                  %tr
+                    %th Total
+                    %td
+                      %span{style: "color:green"}
+                        %strong= number_to_currency(@factura.total)
+                  %tr
+                    %th Observaciones
+                    %td= @factura.observaciones
+                  %tr
+                    %th Fecha Emisión
+                    %td= l @factura.fecha_emision, format: :short
+                  %tr
+                    %th Cajero
+                    %td= @factura.cajero
+                  %tr
+                    %th Cajero
+                    %td= @factura.caja
+          .col-md-6
+            %fieldset
+              %legend
+                %i.fa.fa-archive
+                &nbsp;
+                Datos Conceptos
+              %table.table.table-sm
+                %tbody
+                  - @factura.conceptos.each_with_index do |concepto, index|
+                    = render "conceptos/#{concepto.cuenta.formato.underscore}", concepto: concepto, color: color_name(index)
