@@ -28,7 +28,11 @@ class RecibosController < ApplicationController
 
     respond_to do |format|
       if @recibo.save
-        format.html { redirect_to @recibo, notice: 'Recibo fue creado correctamente.' }
+        if @recibo.type == "Factura"
+          format.html { redirect_to factura_path(@recibo), notice: 'Factura fue creada correctamente.' }
+        else
+          format.html { redirect_to @recibo, notice: 'Recibo fue creado correctamente.' }
+        end
         format.json { render :show, status: :created, location: @recibo }
       else
         @cuenta_params = {
