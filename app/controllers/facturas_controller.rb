@@ -8,6 +8,11 @@ class FacturasController < ApplicationController
   end
 
   def show
-    @factura = Factura.find(params[:id]) 
+    @factura = Factura.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf { send_file(@factura.pdf.path, filename: "#{@factura.uuid}.pdf", type: "application/pdf")}
+      format.xml { send_file(@factura.xml.path, filename: "#{@factura.uuid}.xml", type: "application/xml")}
+    end
   end
 end
