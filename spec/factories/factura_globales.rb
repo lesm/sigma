@@ -25,4 +25,16 @@ FactoryBot.define do
     arqueo { nil }
     type { "FacturaGlobal" }
   end
+
+  trait :con_relaciones do
+    after :build do |fg|
+      fg.emisor = build :emisor
+      fg.cajero = build :cajero
+      fg.caja = fg.cajero.caja
+      fg.contribuyente = build :contribuyente, rfc: "RAA111111AAA"
+      fg.conceptos = [build(:concepto, :con_cuenta_rifas), build(:concepto, :con_cuenta_sorteos)]
+      fg.subtotal = 400
+      fg.total = 400
+    end
+  end
 end
