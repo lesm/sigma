@@ -7,9 +7,7 @@ class FacturaGlobalesController < ApplicationController
 
   def new
     @recibos = []
-    if rango_fechas
-      @recibos = Recibo.sin_factura_global.where(created_at: rango_fechas)
-    end
+    conceptos_de_recibos_sin_factura_global if rango_fechas
 
     @factura_global_form = FacturaGlobalForm.new(
       fecha_inicial: fecha_inicial, fecha_final: fecha_final
@@ -17,6 +15,18 @@ class FacturaGlobalesController < ApplicationController
   end
 
   private
+
+  def conceptos_de_recibos_sin_factura_global
+    @conceptos = Concepto.where(comprobante_id: recibos_ids).page(params[:page])
+
+    @suma_cantidad       = @conceptos.map(&:cantidad).reduce(0,:+)
+    @suma_valor_unitario = @conceptos.map(&:valor_unitario).reduce(0,:+)
+    @suma_importe        = @conceptos.map(&:importe).reduce(0,:+)
+  end
+
+  def recibos_ids
+    Recibo.sin_factura_global.where(created_at: rango_fechas).ids
+  end
 
   def rango_fechas
     fecha_inicial.beginning_of_day..fecha_final.end_of_day
