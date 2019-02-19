@@ -98,7 +98,17 @@ class Comprobante < ApplicationRecord
   end
 
   def respuesta_invalida?
-    !respuesta_valida?
+    respuesta_fm.errors.any? ? add_errors_respuesta_fm : add_respuesta_fm
+  end
+
+  def add_errors_respuesta_fm
+    update_column(:respuesta_timbrado, respuesta_fm.errors.to_s)
+    true
+  end
+
+  def add_respuesta_fm
+    update_column(:respuesta_timbrado, respuesta_fm.raw)
+    false
   end
 
   def respuesta_valida?

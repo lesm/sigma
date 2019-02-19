@@ -48,6 +48,10 @@ RSpec.describe Comprobante, type: :model do
         it "aasm_state == 'con_respuesta_valida'", :vcr do
           expect(comprobante).to be_con_respuesta_valida
         end
+
+        it "respuesta_timbrado must have the respuesta", :vcr do
+          expect(comprobante.respuesta_timbrado).to_not be_nil
+        end
       end
 
       context "procesando -> con_respuesta_invalida" do
@@ -56,6 +60,10 @@ RSpec.describe Comprobante, type: :model do
 
         it "aasm_state == 'con_respuesta_invalida'", :vcr do
           expect(comprobante).to be_con_respuesta_invalida
+        end
+
+        it "respuesta_timbrado must have the errors", :vcr do
+          expect(comprobante.respuesta_timbrado).to match /\(FM509\) El RFC no esta asociado con sus credenciales de acceso\./
         end
       end
     end
