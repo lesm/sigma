@@ -23,9 +23,9 @@ RSpec.describe Comprobante, type: :model do
   it { should validate_numericality_of(:total).is_greater_than(0) }
   it { should validate_numericality_of(:subtotal).is_greater_than(0) }
 
-  let(:comprobante) { create :recibo, :para_timbrar }
-
   describe "AASM process" do
+    let(:comprobante) { create :recibo, :para_timbrar }
+
     describe "sin_timbre initial state" do
       it "aasm_state == 'sin_timbre'" do
         expect(comprobante).to be_sin_timbre
