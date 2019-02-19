@@ -47,7 +47,7 @@ RSpec.describe "ActivarCertificados", type: :request do
     context "with invalid params" do
       it "display a failure message" do
         post activar_certificados_path, params: { activar_certificado: invalid_attributes }
-        expect(flash.alert).to eq "El certificado no válido."
+        expect(flash.alert).to eq "El certificado no es válido."
         expect(flash.notice).to be_nil
       end
 
