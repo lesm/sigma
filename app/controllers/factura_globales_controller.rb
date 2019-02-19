@@ -2,7 +2,7 @@ class FacturaGlobalesController < ApplicationController
   before_action :authenticate_usuario!
 
   def index
-    @factura_globales = FacturaGlobal.all
+    @factura_globales = policy_scope(FacturaGlobal).all
   end
 
   def new
@@ -12,6 +12,7 @@ class FacturaGlobalesController < ApplicationController
     @factura_global_form = FacturaGlobalForm.new(
       fecha_inicial: fecha_inicial, fecha_final: fecha_final
     )
+    authorize @factura_global = FacturaGlobal.new
   end
 
   private

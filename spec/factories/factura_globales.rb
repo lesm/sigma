@@ -29,7 +29,7 @@ FactoryBot.define do
   trait :con_relaciones do
     after :build do |fg|
       fg.emisor = build :emisor
-      fg.cajero = build :cajero
+      fg.cajero = build :cajero if fg.cajero.nil?
       fg.caja = fg.cajero.caja
       fg.contribuyente = build :contribuyente, rfc: "RAA111111AAA"
       fg.conceptos = [build(:concepto, :con_cuenta_rifas), build(:concepto, :con_cuenta_sorteos)]
