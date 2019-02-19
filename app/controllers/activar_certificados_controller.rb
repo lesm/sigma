@@ -1,10 +1,15 @@
 class ActivarCertificadosController < ApplicationController
+  before_action :authenticate_usuario!
+
   def new
     @activar_certificado = ActivarCertificado.new
+    authorize @activar_certificado
   end
 
   def create
     @activar_certificado = ActivarCertificado.new(certificado_params)
+    authorize @activar_certificado
+
     if @activar_certificado.save
       flash.notice = "Certificado activado correctamente."
       redirect_to root_path
