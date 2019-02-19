@@ -9,6 +9,8 @@ class FacturasController < ApplicationController
 
   def show
     @factura = Factura.find(params[:id])
+    authorize @factura
+
     respond_to do |format|
       format.html
       format.pdf { send_file(@factura.pdf.path, filename: "#{@factura.uuid}.pdf", type: "application/pdf")}
