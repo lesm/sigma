@@ -11,6 +11,19 @@ RSpec.describe Contribuyente, type: :model do
   it { should have_many(:recibos) }
   it { should have_many(:facturas) }
 
+  describe "puede_timbrar?" do
+    let(:contribuyente) { create :contribuyente, :con_direccion }
+    it "returns true when rfc is present" do
+      expect(contribuyente).to be_puede_timbrar
+    end
+
+    it "returns false when rfc is not present" do
+      contribuyente.rfc = nil
+      contribuyente.save
+      expect(contribuyente).to_not be_puede_timbrar
+    end
+  end
+
   describe "Uniqueness" do
     let(:contribuyente) { create :contribuyente, :con_direccion }
     let(:cuenta_rifas) { create :cuenta, :rifas }
