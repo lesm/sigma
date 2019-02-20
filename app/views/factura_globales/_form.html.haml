@@ -1,9 +1,0 @@
--# frozen_string_literal: true
-= simple_form_for(@factura_global_form, url: new_factura_global_path, method: 'GET') do |f|
-  .row
-    .col-md-6
-      = f.input :fecha_inicial, as: :string, input_html: { class: "fecha-reporte" }
-    .col-md-6
-      = f.input :fecha_final, as: :string, input_html: { class: "fecha-reporte" }
-
-  = f.submit "Buscar", class: "btn btn-primary", data: { disable_with: false }

@@ -13,6 +13,22 @@ RSpec.describe "FacturaGlobales", type: :request do
     end
   end
 
+  describe "GET /factura_globales/:id" do
+    let(:factura_global) { create :factura_global, :con_relaciones }
+
+    it "returns a success response" do
+      get factura_global_path factura_global
+      expect(response).to have_http_status 200
+    end
+  end
+
+  describe "GET /factura_globales/fechas" do
+    it "returns a success response" do
+      get fechas_factura_globales_path
+      expect(response).to have_http_status 200
+    end
+  end
+
   describe "GET /factura_globales/new" do
     let(:emisor) { create :emisor, :con_direccion }
     let(:factura_global) do
@@ -26,12 +42,4 @@ RSpec.describe "FacturaGlobales", type: :request do
     end
   end
 
-  describe "GET /factura_globales/:id" do
-    let(:factura_global) { create :factura_global, :con_relaciones }
-
-    it "returns a success response" do
-      get factura_global_path factura_global
-      expect(response).to have_http_status 200
-    end
-  end
 end

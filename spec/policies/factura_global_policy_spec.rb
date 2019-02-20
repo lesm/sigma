@@ -26,13 +26,23 @@ RSpec.describe FacturaGlobalPolicy do
     end
   end
 
-  permissions :new? do
+  permissions :fechas?, :new?, :create? do
     it "allow access to cajero" do
       expect(subject).to permit(cajero, FacturaGlobal.new)
     end
 
     it "denies access to admin" do
       expect(subject).to_not permit(admin, FacturaGlobal.new)
+    end
+  end
+
+  permissions :show? do
+    it "allow access to cajero" do
+      expect(subject).to permit(cajero, factura_global)
+    end
+
+    it "denies access to admin" do
+      expect(subject).to_not permit(admin, factura_global)
     end
   end
 

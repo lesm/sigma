@@ -28,7 +28,7 @@
               = f.input :caja_id, as: :hidden, input_html: { value: current_usuario.caja.id }
               = f.input :fecha_inicio, as: :hidden, input_html: { value: @factura_global.fecha_inicio }
               = f.input :fecha_fin, as: :hidden, input_html: { value: @factura_global.fecha_fin }
-            .pull-right
+            .col-md-12
               = f.submit class: 'btn btn-primary'
 
         %table.table

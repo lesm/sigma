@@ -7,10 +7,12 @@ class FacturaGlobalesController < ApplicationController
 
   def show
     @factura_global = FacturaGlobal.find(params[:id])
+    authorize @factura_global
   end
 
   def fechas
     @factura_global = FacturaGlobal.new
+    authorize @factura_global
   end
 
   def new
@@ -24,12 +26,14 @@ class FacturaGlobalesController < ApplicationController
 
   def create
     @factura_global = FacturaGlobal.new(factura_global_params)
+    authorize @factura_global
+
     @factura_global.timbrado_automatico = true
     @factura_global.conceptos << conceptos_dup
 
     if @factura_global.save
       asignar_factura_global
-      redirect_to @factura_global
+      redirect_to @factura_global, notice: "Factura global fue creada correctamente."
     else
       render :new
     end
@@ -41,15 +45,15 @@ class FacturaGlobalesController < ApplicationController
     Recibo.where(id: recibos_ids).update_all(factura_global_id: @factura_global.id)
   end
 
-  def set_conceptos
-    @set_conceptos ||= Concepto.where(comprobante_id: recibos_ids)
+  def conceptos
+    @conceptos ||= Concepto.where(comprobante_id: recibos_ids)
   end
 
   def inicializar_variables
-    @suma_cantidad       = set_conceptos.map(&:cantidad).reduce(0,:+)
-    @suma_valor_unitario = set_conceptos.map(&:valor_unitario).reduce(0,:+)
-    @suma_importe        = set_conceptos.map(&:importe).reduce(0,:+)
-    @conceptos           = set_conceptos.page(params[:page])
+    @suma_cantidad       = conceptos.map(&:cantidad).reduce(0,:+)
+    @suma_valor_unitario = conceptos.map(&:valor_unitario).reduce(0,:+)
+    @suma_importe        = conceptos.map(&:importe).reduce(0,:+)
+    @conceptos           = conceptos.page(params[:page])
   end
 
   def recibos_ids
@@ -79,7 +83,7 @@ class FacturaGlobalesController < ApplicationController
   end
 
   def conceptos_dup
-    set_conceptos.map do |concepto|
+    conceptos.map do |concepto|
       concepto.dup.tap { |c| c.comprobante_id = nil }
     end
   end

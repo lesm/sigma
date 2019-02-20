@@ -6,7 +6,19 @@ class FacturaGlobalPolicy < ApplicationPolicy
     end
   end
 
+  def fechas?
+    create?
+  end
+
   def new?
+    create?
+  end
+
+  def create?
     user.cajero?
+  end
+
+  def show?
+    create?
   end
 end
