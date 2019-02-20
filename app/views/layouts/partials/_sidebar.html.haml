@@ -28,7 +28,7 @@
             = link_to cuentas_path, class: "nav-link #{ controller_name == 'cuentas' && 'active' }" do
               %i.fa.fa-book.nav-icon
               %p Conceptos de cobro
-          - controller_names = %w(cierre_cajas arqueos adeudos recibos ingreso_por_clasificares factura_globales)
+          - controller_names = %w(cierre_cajas arqueos adeudos recibos ingreso_por_clasificares facturas factura_globales)
           %li.nav-item.has-treeview{ class: "#{ (controller_names.include? controller_name) && 'menu-open' }" }
             = link_to "", class: "nav-link #{ (controller_names.include? controller_name) && 'active' }" do
               %i.nav-icon.fa.fa-bank
@@ -40,6 +40,10 @@
                 = link_to recibos_path, class: "nav-link #{ (controller_name == 'recibos') && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon
                   %p Recibos
+              %li.nav-item
+                = link_to facturas_path, class: "nav-link #{ (controller_name == 'facturas') && 'active' }" do
+                  %i.fa.fa-circle-o.nav-icon
+                  %p Facturas
               %li.nav-item
                 = link_to factura_globales_path, class: "nav-link #{ (controller_name == 'factura_globales') && 'active' }" do
                   %i.fa.fa-circle-o.nav-icon

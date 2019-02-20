@@ -58,6 +58,10 @@ class Contribuyente < ApplicationRecord
           methods: [:text])
   end
 
+  def puede_timbrar?
+    rfc.present?
+  end
+
   private
 
   def cajero_present?

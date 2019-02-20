@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_185610) do
     t.datetime "updated_at", null: false
     t.bigint "caja_id"
     t.string "uso_cfdi"
+    t.string "aasm_state"
     t.bigint "factura_global_id"
     t.index ["arqueo_id"], name: "index_comprobantes_on_arqueo_id"
     t.index ["caja_id"], name: "index_comprobantes_on_caja_id"
@@ -229,6 +230,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_185610) do
     t.datetime "updated_at", null: false
     t.string "escudo"
     t.string "numero_municipio"
+    t.boolean "con_certificado", default: false
   end
 
   create_table "historial_cajas", force: :cascade do |t|

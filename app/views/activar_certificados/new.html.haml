@@ -1,0 +1,15 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Subir Certificado
+      .card-body
+        = simple_form_for @activar_certificado do |f|
+          .row
+            .col-md-6
+              = f.input :certificado, as: :file
+            .col-md-6
+              = f.input :llave, as: :file
+          = f.input :password
+          = f.input :rfc, as: :hidden, input_html: { value: current_emisor.rfc }
+          = f.button :submit, "Activar", class: "btn btn-sm btn-primary pull-right"

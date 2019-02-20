@@ -29,7 +29,7 @@ tipoDocumento=Factura
 
 [Emisor]
 
-Rfc=AAA111111AAA
+Rfc=TCM970625MB1
 Nombre=HUAJUAPAN DE LEÓN
 RegimenFiscal=603
 
@@ -63,7 +63,7 @@ Descuento=
   end
 
   describe "#to_s" do
-    it "displays in layout format" do
+    it "displays in layout format", :vcr do
       expect(presenter_layout.to_s.gsub("\r", "").strip).to eq factura_layout.strip
     end
   end

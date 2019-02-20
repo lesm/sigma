@@ -34,7 +34,7 @@ class EmisoresController < ApplicationController
 
     respond_to do |format|
       if @emisor.save
-        format.html { redirect_to @emisor, notice: "Municipio fue creado correctamente." }
+        format.html { redirect_to new_activar_certificado_path, notice: "Municipio fue creado correctamente." }
         format.json { render :show, status: :created, location: @emisor }
       else
         format.html { render :new }

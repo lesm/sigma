@@ -9,7 +9,7 @@ module Features
     def dado_que_hay_un_contribuyente_y_un_emisor
       @contribuyente = create :contribuyente, nombre_o_razon_social: "Carlos", primer_apellido: "José",
         segundo_apellido: "Pérez", rfc: "AAAA111111AAZ"
-      create :emisor, :con_direccion
+      create :emisor, :con_direccion, rfc: "TCM970625MB1"
     end
 
     def dado_que_hay_un_cajero_logueado_con_una_caja
@@ -98,7 +98,7 @@ module Features
     end
 
     def dado_que_hay_un_emisor_registrado
-      create :emisor, :con_direccion
+      create :emisor, :con_direccion, rfc: "TCM970625MB1"
     end
 
     def cuando_admin_da_click_en_link_cajeros
@@ -116,6 +116,33 @@ module Features
     def dado_que_existen_dos_conceptos_de_cobro
       create :cuenta, :rifas
       create :cuenta, :sorteos
+    end
+
+    def dato_que_hay_un_contribuyente_con_la_cuenta_licencias
+      cuenta = create :cuenta, :de_licencias_y_refrendos
+      @contribuyente = create :contribuyente, :con_direccion,
+        nombre_o_razon_social: "Carlos", primer_apellido: "José",
+        segundo_apellido: "Pérez", rfc: "AAAA111111AAZ",
+        concepto_ids: [cuenta.id.to_s]
+      @contribuyente.cuentas << cuenta
+    end
+
+    def cajero_selecciona_un_contribuyente_y_el_concepto_licencias
+      cajero_selecciona_un_contribuyente
+      select "430601 - LICENCIAS Y REFRENDOS COMERCIAL", from: "cuenta_form_cuenta_ids"
+    end
+
+    def dado_que_cajero_captura_datos_de_recibo
+      select "Efectivo", from: "Forma de Pago"
+      fill_in "Cantidad", with: "2"
+      fill_in "Precio Unitario", with: "200"
+      find(:css, "input[id$='_attributes_folio']").set("12")
+      fill_in "Serie", with: "AA"
+      fill_in "Fecha de Refrendo", with: Date.current.to_s
+      fill_in "Fecha de Evento", with: Date.current.to_s
+      fill_in "Observaciones", with: "Pagando 2018 y 2019"
+      select "2018", from: "Años"
+      select "2019", from: "Años"
     end
 
   end

@@ -3685,3 +3685,8 @@ hr.line-bottom {
   font-weight: bold;
   float: left;
 }
+
+.large-text {
+  font-size: 10px;
+  word-wrap: break-word;
+}

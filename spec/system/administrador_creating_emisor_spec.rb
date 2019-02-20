@@ -26,8 +26,7 @@ RSpec.describe "Administrador creating Emisor", type: :system do
       dado_que_admin_captura_datos_para_municipio
       cuando_admin_da_click_en_boton_crear_municipio
       se_muestra_un_mensaje_de_municipio_creado_correctamente
-      cuando_admin_da_click_en_link_cajeros
-      debe_ser_redireccionado_correctamente_a_cajeros_path
+      debe_ser_redireccionado_correctamente_a_new_activar_certificado_path
     end
   end
 
@@ -69,5 +68,9 @@ RSpec.describe "Administrador creating Emisor", type: :system do
 
   def debe_ser_redireccionado_correctamente_a_cajeros_path
     expect(page).to have_current_path(cajeros_path)
+  end
+
+  def debe_ser_redireccionado_correctamente_a_new_activar_certificado_path
+    expect(current_path).to eq new_activar_certificado_path
   end
 end

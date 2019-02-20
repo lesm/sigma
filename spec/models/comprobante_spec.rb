@@ -7,6 +7,7 @@ RSpec.describe Comprobante, type: :model do
   it { should belong_to :contribuyente }
   it { should belong_to :emisor }
 
+  it { should have_one :timbre }
   it { should have_many(:conceptos).dependent(:destroy) }
   it { should accept_nested_attributes_for :conceptos }
 
@@ -35,6 +36,121 @@ RSpec.describe Comprobante, type: :model do
 
     it "returns when arqueo_id is nil" do
       expect(Comprobante.sin_arqueo).to eq [comprobante]
+    end
+  end
+
+  describe "AASM process" do
+    let(:comprobante) { create :recibo, :para_timbrar }
+
+    describe "sin_timbre initial state" do
+      it "aasm_state == 'sin_timbre'" do
+        expect(comprobante).to be_sin_timbre
+      end
+    end
+
+    describe "sin_timbre -> procesando" do
+      it "aasm_state == 'procesando'", :vcr do
+        comprobante.continuar_timbrando!
+        expect(comprobante).to be_procesando
+      end
+    end
+
+    describe "procesando state" do
+      before :each do
+        2.times { comprobante.continuar_timbrando! }
+      end
+
+      context "procesando -> con_respuesta_valida" do
+        it "aasm_state == 'con_respuesta_valida'", :vcr do
+          expect(comprobante).to be_con_respuesta_valida
+        end
+
+        it "respuesta_timbrado must have the respuesta", :vcr do
+          expect(comprobante.respuesta_timbrado).to_not be_nil
+        end
+      end
+
+      context "procesando -> con_respuesta_invalida" do
+        let(:emisor) { create :emisor }
+        let(:comprobante) { create :recibo, :para_timbrar, emisor: emisor }
+
+        it "aasm_state == 'con_respuesta_invalida'", :vcr do
+          expect(comprobante).to be_con_respuesta_invalida
+        end
+
+        it "respuesta_timbrado must have the errors", :vcr do
+          expect(comprobante.respuesta_timbrado).to match /\(FM509\) El RFC no esta asociado con sus credenciales de acceso\./
+        end
+      end
+    end
+
+    context "con_respuesta_valida state" do
+      describe "con_respuesta_valida -> con_timbre" do
+        before :each do
+          3.times { comprobante.continuar_timbrando! }
+        end
+
+        it "aasm_state == 'con_timbre'", :vcr do
+          expect(comprobante).to be_con_timbre
+        end
+
+        it "comprobante must have one timbre relationship", :vcr do
+          expect(comprobante.timbre).to_not be_nil
+        end
+      end
+    end
+
+    context "con_timbre state" do
+      describe "con_timbre -> con_xml" do
+        before :each do
+          4.times { comprobante.continuar_timbrando! }
+        end
+
+        it "aasm_state == 'con_xml'", :vcr do
+          expect(comprobante).to be_con_xml
+        end
+
+        it "comprobante xml attribute must exist", :vcr do
+          expect(comprobante.xml.present?).to eq true
+        end
+      end
+    end
+
+    context "con_xml state" do
+      before :each do
+        5.times { comprobante.continuar_timbrando! }
+      end
+
+      describe "con_xml -> con_cbb" do
+        it "aasm_state == 'con_cbb'", :vcr do
+          expect(comprobante).to be_con_cbb
+        end
+
+        it "comprobante cbb attribute must exist", :vcr do
+          expect(comprobante.cbb.present?).to eq true
+        end
+      end
+    end
+
+    context "con_cbb state" do
+      describe "con_cbb -> con_pdf" do
+        before :each do
+          6.times { comprobante.continuar_timbrando! }
+        end
+
+        it "aasm_state == 'con_pdf'", :vcr do
+          expect(comprobante).to be_con_pdf
+        end
+
+        it "comprobante pdf attribute must exist", :vcr do
+          expect(comprobante.pdf.present?).to eq true
+        end
+      end
+    end
+
+    xcontext "con_pdf state" do
+      describe "con_pdf -> cancelado if cancelacion_valida?" do
+      end
     end
   end
 
