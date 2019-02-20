@@ -28,7 +28,7 @@ FactoryBot.define do
 
   trait :con_relaciones do
     after :build do |fg|
-      fg.emisor = build :emisor
+      fg.emisor = build :emisor, :con_direccion if fg.emisor.nil?
       fg.cajero = build :cajero if fg.cajero.nil?
       fg.caja = fg.cajero.caja
       fg.contribuyente = build :contribuyente, rfc: "RAA111111AAA"

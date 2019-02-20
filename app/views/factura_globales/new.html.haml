@@ -4,6 +4,57 @@
       .card-header
         .card-title Generar Factura Global
       .card-body
-        = render 'form'
+        = simple_form_for(@factura_global) do |f|
+          .row
+            .col-md-6
+              = f.association :contribuyente, collection: [Contribuyente.first]
+              = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
+              = f.input :uso_cfdi, collection: Comprobante::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
+              = f.input :subtotal, as: :hidden
+              = f.input :moneda, as: :hidden
+              = f.input :tipo_comprobante, as: :hidden, input_html: { value: "Ingreso" }
+              = f.input :metodo_pago, as: :hidden
+              = f.input :serie, as: :hidden
+              = f.input :descuento, as: :hidden
+            .col-md-6
+              = f.input :folio, input_html: { value: Comprobante::Sugeridor.folio(current_usuario.caja) }, readonly: true
+              = f.input :fecha_emision, as: :string, input_html: { value: Time.current }
+              = f.input :total, as: :numeric, readonly: true
+              = f.input :motivo_descuento, as: :hidden
+              = f.input :observaciones, as: :hidden
+              = f.input :emisor_id, as: :hidden, input_html: { value: Emisor.first.id }
+              = f.input :lugar_expedicion, as: :hidden, input_html: { value: Emisor.first.codigo_postal }
+              = f.input :cajero_id, as: :hidden, input_html: { value: current_usuario.id }
+              = f.input :caja_id, as: :hidden, input_html: { value: current_usuario.caja.id }
+              = f.input :fecha_inicio, as: :hidden, input_html: { value: @factura_global.fecha_inicio }
+              = f.input :fecha_fin, as: :hidden, input_html: { value: @factura_global.fecha_fin }
+            .pull-right
+              = f.submit class: 'btn btn-primary'
 
-  = render 'conceptos'
+        %table.table
+          %thead
+            %tr
+              %th{ colspan: 2 }
+              %th TOTALES
+              %th.text-right= @suma_cantidad
+              %th.text-right= number_to_currency @suma_valor_unitario
+              %th.text-right= number_to_currency @suma_importe
+            %tr
+              %th C. PRODUCTO
+              %th C. UNIDAD
+              %th DESCRIPCIÓN
+              %th CANTIDAD
+              %th P. UNITARIO
+              %th IMPORTE
+          %tbody
+            - @conceptos.each do |concepto|
+              %tr
+                %td= concepto.clave
+                %td= concepto.clave_unidad
+                %td= concepto.descripcion
+                %td.text-right= concepto.cantidad
+                %td.text-right= number_to_currency concepto.valor_unitario
+                %td.text-right= number_to_currency concepto.importe
+          %tfoot
+            %tr
+              -#%td{ colspan: 6 }= paginate @conceptos

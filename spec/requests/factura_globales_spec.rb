@@ -14,8 +14,23 @@ RSpec.describe "FacturaGlobales", type: :request do
   end
 
   describe "GET /factura_globales/new" do
+    let(:emisor) { create :emisor, :con_direccion }
+    let(:factura_global) do
+      attributes_for(:factura_global, :con_relaciones, emisor_id: emisor.id)
+        .merge!(fecha_inicio: Time.current, fecha_fin: Time.current)
+    end
+
     it "returns a success response" do
-      get new_factura_global_path
+      get new_factura_global_path, params: { factura_global: factura_global }
+      expect(response).to have_http_status 200
+    end
+  end
+
+  describe "GET /factura_globales/:id" do
+    let(:factura_global) { create :factura_global, :con_relaciones }
+
+    it "returns a success response" do
+      get factura_global_path factura_global
       expect(response).to have_http_status 200
     end
   end

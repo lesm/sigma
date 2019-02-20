@@ -1,0 +1,61 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Detalle Factura Global
+        .card-tools
+          -#= link_to [@recibo, format: "pdf"], title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
+            -#%i.fa.fa-print
+            -#Imprimir
+      .card-body
+        .row
+          .col-md-6
+            %fieldset
+              %legend
+                %i.fa.fa-archive
+                &nbsp;
+                Datos Factura Global
+              %table.table
+                %tbody
+                  %tr
+                    %th Serie
+                    %td= @factura_global.serie
+                  %tr
+                    %th Folio
+                    %td= @factura_global.folio
+                  %tr
+                    %th Contribuyente
+                    %td= @factura_global.contribuyente
+                  %tr
+                    %th Forma de Pago
+                    %td= @factura_global.forma_pago
+                  %tr
+                    %th Método de Pago
+                    %td= @factura_global.metodo_pago
+                  %tr
+                    %th Total
+                    %td
+                      %span{style: "color:green"}
+                        %strong= number_to_currency(@factura_global.total)
+                  %tr
+                    %th Observaciones
+                    %td= @factura_global.observaciones
+                  %tr
+                    %th Fecha Emisión
+                    %td= l @factura_global.fecha_emision, format: :short
+                  %tr
+                    %th Cajero
+                    %td= @factura_global.cajero
+                  %tr
+                    %th Caja
+                    %td= @factura_global.caja
+          .col-md-6
+            %fieldset
+              %legend
+                %i.fa.fa-archive
+                &nbsp;
+                Datos Conceptos
+              %table.table.table-sm
+                %tbody
+                  - @factura_global.conceptos.each_with_index do |concepto, index|
+                    = render "conceptos/#{concepto.cuenta.formato.underscore}", concepto: concepto, color: color_name(index)

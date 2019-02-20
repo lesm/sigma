@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     get :asignar_cuentas, on: :collection
   end
   resources :arqueos, except: [:edit, :update, :destroy]
-  resources :factura_globales, only: [:index, :new]
+  resources :factura_globales, only: [:index, :show, :new, :create] do
+    get :fechas, on: :collection
+  end
   root 'pages#index'
 end
