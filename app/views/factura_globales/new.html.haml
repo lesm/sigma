@@ -29,7 +29,8 @@
               = f.input :fecha_inicio, as: :hidden, input_html: { value: @factura_global.fecha_inicio }
               = f.input :fecha_fin, as: :hidden, input_html: { value: @factura_global.fecha_fin }
             .col-md-12
-              = f.submit class: 'btn btn-primary'
+              = f.submit class: 'btn btn-primary pull-right'
+          %hr
 
         %table.table
           %thead
@@ -55,6 +56,5 @@
                 %td.text-right= concepto.cantidad
                 %td.text-right= number_to_currency concepto.valor_unitario
                 %td.text-right= number_to_currency concepto.importe
-          %tfoot
-            %tr
-              %td{ colspan: 6 }= paginate @conceptos
+      .row.justify-content-center
+        = paginate @conceptos
