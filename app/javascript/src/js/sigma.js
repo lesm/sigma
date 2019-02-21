@@ -1,0 +1,8 @@
+import './initialize_functions'
+import './notify_alert_confirm'
+import './arqueos/Dinero'
+import './cajeros/cajero'
+import './recibos/datos_concepto'
+import './recibos/recibo'
+import './recibos/asignar_cuentas'
+import './cuentas/asignar_formato'
