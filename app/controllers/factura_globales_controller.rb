@@ -2,7 +2,9 @@ class FacturaGlobalesController < ApplicationController
   before_action :authenticate_usuario!
 
   def index
-    @factura_globales = policy_scope(FacturaGlobal).all
+    @factura_globales = policy_scope(FacturaGlobal)
+      .order(created_at: :desc)
+      .page(params[:page])
   end
 
   def show
