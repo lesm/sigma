@@ -23,8 +23,8 @@ function actualizarTotal() {
     }
   })
 
-  $("input[id$='_subtotal']").val(suma.toFixed(1))
-  $("input[id$='_total']").val(suma.toFixed(1))
+  $("input[id$='_subtotal'].recibo").val(suma.toFixed(1))
+  $("input[id$='_total'].recibo").val(suma.toFixed(1))
 }
 
 function eliminarConcepto() {

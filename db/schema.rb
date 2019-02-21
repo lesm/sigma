@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_13_203323) do
+ActiveRecord::Schema.define(version: 2019_02_15_185610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,11 +89,13 @@ ActiveRecord::Schema.define(version: 2019_02_13_203323) do
     t.bigint "caja_id"
     t.string "uso_cfdi"
     t.string "aasm_state"
+    t.bigint "factura_global_id"
     t.index ["arqueo_id"], name: "index_comprobantes_on_arqueo_id"
     t.index ["caja_id"], name: "index_comprobantes_on_caja_id"
     t.index ["cajero_id"], name: "index_comprobantes_on_cajero_id"
     t.index ["contribuyente_id"], name: "index_comprobantes_on_contribuyente_id"
     t.index ["emisor_id"], name: "index_comprobantes_on_emisor_id"
+    t.index ["factura_global_id"], name: "index_comprobantes_on_factura_global_id"
   end
 
   create_table "conceptos", force: :cascade do |t|
@@ -300,6 +302,7 @@ ActiveRecord::Schema.define(version: 2019_02_13_203323) do
   add_foreign_key "cierre_cajas", "usuarios", column: "cajero_id"
   add_foreign_key "comprobantes", "arqueos"
   add_foreign_key "comprobantes", "cajas"
+  add_foreign_key "comprobantes", "comprobantes", column: "factura_global_id"
   add_foreign_key "comprobantes", "contribuyentes"
   add_foreign_key "comprobantes", "emisores"
   add_foreign_key "comprobantes", "usuarios", column: "cajero_id"

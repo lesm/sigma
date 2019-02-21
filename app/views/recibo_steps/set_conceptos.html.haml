@@ -15,7 +15,7 @@
               = f.input :forma_pago, collection: Comprobante::FORMA_PAGO.values, input_html: { class: "select2" }, allow_blank: false
               - if @recibo.contribuyente.puede_timbrar?
                 = f.input :uso_cfdi, collection: Comprobante::USO_CFDI.values, input_html: { class: "select2" }, allow_blank: true
-              = f.input :subtotal, as: :hidden
+              = f.input :subtotal, as: :hidden, input_html: { class: "recibo" }
               = f.input :moneda, as: :hidden
               = f.input :tipo_comprobante, as: :hidden, input_html: { value: "I - Ingreso" }
               = f.input :metodo_pago, as: :hidden
@@ -24,7 +24,7 @@
             .col-md-6
               = f.input :folio, input_html: { value: Comprobante::Sugeridor.folio(current_usuario.caja) }, readonly: true
               = f.input :fecha_emision, as: :string, input_html: { value: Time.current }
-              = f.input :total, as: :numeric, readonly: true
+              = f.input :total, as: :numeric, readonly: true, input_html: { class: "recibo" }
               = f.input :motivo_descuento, as: :hidden #por qué lo agregamos?
               = f.input :observaciones, as: :hidden #posible para borrar
               = f.input :emisor_id, as: :hidden, input_html: { value: Emisor.first.id }
