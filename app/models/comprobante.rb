@@ -35,6 +35,8 @@ class Comprobante < ApplicationRecord
   validate :valida_subtotal
   validate :valida_total
 
+  after_save :encolar_timbrado, if: :timbrado_automatico?
+
   scope :sin_arqueo,            -> { where(arqueo_id: nil) }
   scope :del_dia,               -> { where(created_at: self.rango_fecha) }
   scope :para_arqueo_actual,    -> (cajero) { sin_arqueo.where(caja_id: cajero.caja.id, cajero_id: cajero.id).del_dia }
@@ -92,6 +94,10 @@ class Comprobante < ApplicationRecord
   end
 
   private
+
+  def encolar_timbrado
+    raise NotImplementedError
+  end
 
   def con_peticion_valida?
     respuesta_fm
