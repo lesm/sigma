@@ -201,7 +201,7 @@ function actualiza_monto_cajero_input(dinero) {
 }
 
 function actualiza_total_dinero_input(dinero) {
-  $("input[id$='_total']").val(dinero.suma())
+  $("input[id$='_total'].arqueo").val(dinero.suma())
 }
 
 $(document).on("change", ".dinero", calculateAmount)

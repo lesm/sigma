@@ -1,0 +1,38 @@
+.row
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title
+          %i.fa.fa-list
+          Listado de Facturas
+        .card-tools
+          = link_to recibo_step_path(:set_cuenta), class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Recibo
+      .card-body
+        %table.table.table-hover
+          %thead.text-center
+            %tr
+              %th Folio
+              %th Contribuyente
+              %th Total
+              %th Fecha emisión
+              %th Acción
+
+          %tbody.text-right
+            - @facturas.each do |factura|
+              %tr
+                %td= factura.folio
+                %td.text-center= factura.contribuyente
+                %td
+                  %span{style: "color:green"}
+                    = number_to_currency(factura.total)
+                %td= l factura.fecha_emision, format: :emision
+                %td
+                  .btn-group
+                    -#= link_to [factura, format: "pdf"], title: "Imprimir", class: "btn btn-sm btn-danger", target: "_blank" do
+                      %i.fa.fa-print
+                    = link_to factura, title: "Ver", class: "btn btn-sm btn-info" do
+                      %i.fa.fa-eye
+      .row.justify-content-center
+        = paginate @facturas

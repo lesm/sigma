@@ -1,4 +1,6 @@
 class Comprobante < ApplicationRecord
+  include AASM
+
   FORMA_PAGO = {
     "01" => "01 - Efectivo",
     "02" => "02 - Cheque nominativo",
@@ -21,6 +23,7 @@ class Comprobante < ApplicationRecord
   belongs_to :emisor
   belongs_to :cajero
   belongs_to :arqueo, optional: true
+  has_one :timbre
   has_many :conceptos, dependent: :destroy
   accepts_nested_attributes_for :conceptos
 
@@ -31,6 +34,8 @@ class Comprobante < ApplicationRecord
   validates :uso_cfdi, presence: true, if: :timbrado_automatico?
   validate :valida_subtotal
   validate :valida_total
+
+  after_save :encolar_timbrado, if: :timbrado_automatico?
 
   scope :sin_arqueo,            -> { where(arqueo_id: nil) }
   scope :del_dia,               -> { where(created_at: self.rango_fecha) }
@@ -50,6 +55,32 @@ class Comprobante < ApplicationRecord
   scope :de_credito,       -> { where(forma_pago: "04 - Tarjeta de crédito") }
   scope :de_debito,        -> { where(forma_pago: "28 - Tarjeta de débito") }
 
+  mount_uploader :xml, XmlUploader
+  mount_uploader :cbb, CbbUploader
+  mount_uploader :pdf, PdfUploader
+
+  delegate :uuid, :no_certificado_sat, :no_certificado,
+    :rfc_provedor_certificacion, :fecha_comprobante,
+    :fecha_timbrado, :sello_sat, :sello_cfd, :cadena_original,
+    to: :timbre, prefix: false, allow_nil: true
+
+  aasm do
+    state :sin_timbre, initial: true
+    state :con_respuesta_valida, :procesando,
+      :con_respuesta_invalida, :con_timbre,
+      :con_xml, :con_cbb, :con_pdf
+
+    event :continuar_timbrando do
+      transitions from: :sin_timbre, to: :procesando, if: :con_peticion_valida?
+      transitions from: :procesando, to: :con_respuesta_invalida, if: :respuesta_invalida?
+      transitions from: :procesando, to: :con_respuesta_valida, if: :respuesta_valida?
+      transitions from: :con_respuesta_valida, to: :con_timbre, if: :crea_timbre?
+      transitions from: :con_timbre, to: :con_xml, if: :crea_xml?
+      transitions from: :con_xml, to: :con_cbb, if: :crea_cbb?
+      transitions from: :con_cbb, to: :con_pdf, if: :crea_pdf?
+    end
+  end
+
   def timbrado_automatico?
     ActiveModel::Type::Boolean.new.cast(timbrado_automatico)
   end
@@ -63,6 +94,56 @@ class Comprobante < ApplicationRecord
   end
 
   private
+
+  def encolar_timbrado
+    raise NotImplementedError
+  end
+
+  def con_peticion_valida?
+    respuesta_fm
+  end
+
+  def respuesta_invalida?
+    respuesta_fm.errors.any? ? add_errors_respuesta_fm : add_respuesta_fm
+  end
+
+  def add_errors_respuesta_fm
+    update_column(:respuesta_timbrado, respuesta_fm.errors.to_s)
+    true
+  end
+
+  def add_respuesta_fm
+    update_column(:respuesta_timbrado, respuesta_fm.raw)
+    false
+  end
+
+  def respuesta_valida?
+    respuesta_fm.valid?
+  end
+
+  def crea_timbre?
+    CreaTimbreDesdeRespuestaFm.new(self, respuesta_fm).crear
+  end
+
+  def crea_xml?
+    CreaXmlDesdeRespuestaFm.new(self, respuesta_fm).crear
+  end
+
+  def crea_cbb?
+    CreaCbbDesdeRespuestaFm.new(self, respuesta_fm).crear
+  end
+
+  def crea_pdf?
+    CreaPdf.new(self, nil).crear
+  end
+
+  def respuesta_fm
+    @respuesta_fm ||= FmTimbradoCfdi.timbrar(emisor.rfc, fm_layout, 'generarCBB' => true)
+  end
+
+  def fm_layout
+    FacturaLayout.new(ComprobanteLayoutPresenter.new(self)).to_s
+  end
 
   def valida_total
     if total_diferente_suma_importe_conceptos?

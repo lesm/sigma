@@ -118,6 +118,30 @@ RSpec.describe RecibosController, type: :controller do
         }.to change(Recibo, :count).by(1)
       end
 
+      context "when timbrado_automatico is true" do
+        let(:new_valid_attributes) do
+          valid_attributes.merge!(timbrado_automatico: true, uso_cfdi: "P01 - Por definir")
+        end
+
+        it "does not create a new Recibo" do
+          expect {
+            post :create, params: { recibo: new_valid_attributes, cuenta_ids: cuenta_ids, contribuyente_id: contribuyente.id }
+          }.to change(Recibo, :count).by(0)
+        end
+
+        it "creates a new Factura" do
+          expect {
+            post :create, params: { recibo: new_valid_attributes, cuenta_ids: cuenta_ids, contribuyente_id: contribuyente.id }
+          }.to change(Factura, :count).by(1)
+        end
+
+        it "a job was pushed on to the queue" do
+          expect {
+            post :create, params: { recibo: new_valid_attributes, cuenta_ids: cuenta_ids, contribuyente_id: contribuyente.id }
+          }.to change(ComprobanteWorker.jobs, :size).by(1)
+        end
+      end
+
       context 'Conceptos' do
         it "creates two new Conceptos" do
           expect {

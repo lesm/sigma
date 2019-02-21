@@ -1,0 +1,36 @@
+.row
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title
+          %i.fa.fa-list
+          Listado de Facturas Globales
+        .card-tools
+          = link_to fechas_factura_globales_path, class: 'btn btn-sm btn-primary' do
+            %i.fa.fa-plus
+            Agregar Factura Global
+      .card-body
+        %table.table.table-hover
+          %thead.text-center
+            %tr
+              %th Folio
+              %th Contribuyente
+              %th Total
+              %th Fecha emisión
+              %th Acción
+
+          %tbody.text-right
+            - @factura_globales.each do |fg|
+              %tr
+                %td= fg.folio
+                %td.text-center= fg.contribuyente
+                %td
+                  %span{style: "color:green"}
+                    = number_to_currency(fg.total)
+                %td= l fg.fecha_emision, format: :emision
+                %td
+                  .btn-group
+                    = link_to fg, title: "Ver", class: "btn btn-sm btn-info" do
+                      %i.fa.fa-eye
+      .row.justify-content-center
+        = paginate @factura_globales

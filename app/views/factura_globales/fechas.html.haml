@@ -1,0 +1,14 @@
+.row.justify-content-center
+  .col-md-11
+    .card.card-danger.card-outline
+      .card-header
+        .card-title Seleccionar periodo de la factura global
+      .card-body
+        = simple_form_for(@factura_global, url: new_factura_global_path, method: 'GET') do |f|
+          .row
+            .col-md-6
+              = f.input :fecha_inicio, as: :string, input_html: { class: "fecha-reporte" }
+            .col-md-6
+              = f.input :fecha_fin, as: :string, input_html: { class: "fecha-reporte" }
+
+          = f.submit "Buscar", class: "btn btn-primary", data: { disable_with: false }

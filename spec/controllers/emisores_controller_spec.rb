@@ -92,7 +92,7 @@ RSpec.describe EmisoresController, type: :controller do
 
       it "redirects to the created emisor" do
         post :create, params: {emisor: valid_attributes}
-        expect(response).to redirect_to(Emisor.last)
+        expect(response).to redirect_to(new_activar_certificado_path)
       end
     end
 

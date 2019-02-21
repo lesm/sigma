@@ -27,6 +27,9 @@ gem 'numbers_and_words', '~> 0.11.5'
 gem 'unicorn'
 gem 'activerecord-import', require: false
 gem 'whenever', require: false
+gem 'fm_timbrado_cfdi'
+gem 'aasm'
+gem 'sidekiq'
 
 gem 'fm_layout', github: "LogicalBricks/fm_layout", branch: 'cfdi_3_3'
 
@@ -41,6 +44,8 @@ group :development, :test do
   gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'bullet'
+  gem 'vcr', '~> 4.0'
+  gem 'webmock'
 end
 
 group :development do
@@ -55,6 +60,7 @@ group :development do
   gem 'capistrano3-unicorn'
   gem 'capistrano-yarn'
   gem 'capistrano-rake'
+  gem 'capistrano-sidekiq'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

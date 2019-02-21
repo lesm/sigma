@@ -3,7 +3,7 @@ FactoryBot.define do
     serie { "A" }
     folio { "1" }
     moneda { "MXN" }
-    tipo_comprobante { "Factura" }
+    tipo_comprobante { "I - Ingreso" }
     lugar_expedicion { "68300" }
     metodo_pago { "PUE - Pago en una sola exhibición" }
     forma_pago { "01 - Efectivo" }
@@ -24,6 +24,7 @@ FactoryBot.define do
     emisor { nil }
     arqueo { nil }
     type { "Recibo" }
+    factura_global { nil }
   end
 
   trait :para_nuevo_arqueo do
@@ -50,10 +51,10 @@ FactoryBot.define do
 
   trait :para_timbrar do
     after :build do |recibo|
-      recibo.emisor = build :emisor
-      recibo.cajero = build :cajero
+      recibo.emisor = build(:emisor, :con_direccion, rfc: "TCM970625MB1") if recibo.emisor.nil?
+      recibo.cajero = build :cajero, :con_contribuyente if recibo.cajero.nil?
       recibo.caja = recibo.cajero.caja
-      recibo.contribuyente = build :contribuyente, rfc: "RAA111111AAA"
+      recibo.contribuyente = build :contribuyente, rfc: "RAA111111AAA" if recibo.contribuyente.nil?
       recibo.conceptos = [build(:concepto, :con_cuenta_rifas), build(:concepto, :con_cuenta_sorteos)]
       recibo.subtotal = 400
       recibo.total = 400
