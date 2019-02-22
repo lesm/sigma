@@ -17,7 +17,6 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
       cajero_es_redireccionado_a_new_factura_global_path
       dado_que_cajero_captura_datos_para_factura_global
       cuando_cajero_da_click_en_boton_crear_factura_global
-      cajero_es_redireccionado_a_factura_global_path
       cajero_debe_ver_datos_de_factura_global
       cajero_debe_ver_factura_global_creada_correctamente
     end
@@ -64,12 +63,6 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
 
     def cuando_cajero_da_click_en_boton_crear_factura_global
       click_button "Crear Factura global"
-    end
-
-    def cajero_es_redireccionado_a_factura_global_path
-      sleep 0.5
-      id = FacturaGlobal.first.id
-      expect(page).to have_current_path(/factura_globales\/#{id}/)
     end
 
     def cajero_debe_ver_datos_de_factura_global
