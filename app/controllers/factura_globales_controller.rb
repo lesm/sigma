@@ -55,9 +55,9 @@ class FacturaGlobalesController < ApplicationController
   end
 
   def inicializar_variables
-    @suma_cantidad       = conceptos.map(&:cantidad).reduce(0,:+)
-    @suma_valor_unitario = conceptos.map(&:valor_unitario).reduce(0,:+)
-    @suma_importe        = conceptos.map(&:importe).reduce(0,:+)
+    @suma_cantidad       = conceptos.sum(:cantidad)
+    @suma_valor_unitario = conceptos.sum(:valor_unitario)
+    @suma_importe        = conceptos.sum(:importe)
     @conceptos           = conceptos.page(params[:page])
   end
 
