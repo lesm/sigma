@@ -8,7 +8,10 @@ class FacturaGlobalesController < ApplicationController
   end
 
   def show
-    @factura_global = FacturaGlobal.find(params[:id])
+    @factura_global = FacturaGlobal
+      .includes(conceptos: [:cuenta, :datos_concepto])
+      .find(params[:id])
+
     authorize @factura_global
   end
 
