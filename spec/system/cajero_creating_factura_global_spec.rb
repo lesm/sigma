@@ -67,6 +67,7 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
     end
 
     def cajero_es_redireccionado_a_factura_global_path
+      sleep 0.5
       id = FacturaGlobal.first.id
       expect(page).to have_current_path(/factura_globales\/#{id}/)
     end
