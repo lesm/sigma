@@ -31,7 +31,7 @@ class FacturaGlobalesController < ApplicationController
     authorize @factura_global
 
     @factura_global.timbrado_automatico = true
-    @factura_global.conceptos << conceptos_dup
+    @factura_global.conceptos << conceptos_deep_clone
 
     if @factura_global.save
       asignar_factura_global
@@ -84,9 +84,7 @@ class FacturaGlobalesController < ApplicationController
     )
   end
 
-  def conceptos_dup
-    conceptos.map do |concepto|
-      concepto.dup.tap { |c| c.comprobante_id = nil }
-    end
+  def conceptos_deep_clone
+    conceptos.map(&:duplicar)
   end
 end

@@ -60,4 +60,16 @@ FactoryBot.define do
       recibo.total = 400
     end
   end
+
+  trait :de_predial do
+    after :build do |recibo|
+      recibo.emisor = build :emisor, :con_direccion
+      recibo.cajero = build :cajero, :con_contribuyente
+      recibo.caja = recibo.cajero.caja
+      recibo.contribuyente = build :contribuyente, :con_direccion
+      recibo.conceptos = [build(:concepto, :predial_urbano)]
+      recibo.subtotal = 500
+      recibo.total = 500
+    end
+  end
 end

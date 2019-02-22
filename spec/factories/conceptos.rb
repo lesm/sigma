@@ -46,5 +46,18 @@ FactoryBot.define do
         concepto.descripcion = "Pago de sorteos"
       end
     end
+
+    trait :predial_urbano do
+      after :build do |concepto|
+        concepto.cuenta = build :cuenta, :predial_urbano
+        concepto.clave = concepto.cuenta.clave_producto
+        concepto.clave_unidad = concepto.cuenta.clave_unidad
+        concepto.cantidad = 1
+        concepto.valor_unitario = 500
+        concepto.importe = 500
+        concepto.descripcion = "Pago de sorteos"
+        concepto.datos_concepto = build :datos_concepto, :datos_predial
+      end
+    end
   end
 end

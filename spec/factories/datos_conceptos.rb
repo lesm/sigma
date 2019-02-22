@@ -24,7 +24,7 @@ FactoryBot.define do
       numero_cuenta { "23322213" }
       ubicacion { "A lada de mi casa" }
       observaciones { "Terreno grande" }
-      years { ["2015", "2016"] }
+      years { ["2015"] }
       type { "DatosPredial" }
     end
 

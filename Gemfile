@@ -30,6 +30,7 @@ gem 'whenever', require: false
 gem 'fm_timbrado_cfdi'
 gem 'aasm'
 gem 'sidekiq'
+gem 'deep_cloneable'
 
 gem 'fm_layout', github: "LogicalBricks/fm_layout", branch: 'cfdi_3_3'
 

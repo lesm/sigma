@@ -34,6 +34,21 @@ class Concepto < ApplicationRecord
     end
   end
 
+  def duplicar
+    Duplicador.new(self).duplicar
+  end
+
+  class Duplicador
+    attr_reader :concepto
+    def initialize(concepto)
+      @concepto = concepto
+    end
+
+    def duplicar
+      concepto.deep_clone(include: :datos_concepto, except: :comprobante_id)
+    end
+  end
+
   private
 
   def cantidad_por_valor_unitario
