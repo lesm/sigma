@@ -40,11 +40,15 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
     end
 
     def cajero_selecciona_fecha_inicio
-      page.find('#factura_global_fecha_inicio').set("#{Date.current.beginning_of_day.to_date.to_s}")
+      #we need to set the date two times
+      find('#factura_global_fecha_inicio').set("#{Date.current.beginning_of_day.to_date.to_s}")
+      find('#factura_global_fecha_inicio').set("#{Date.current.beginning_of_day.to_date.to_s}")
     end
 
     def cajero_selecciona_fecha_fin
-      page.find('#factura_global_fecha_fin').set("#{Date.current.end_of_day.to_date.to_s}")
+      #we need to set the date two times
+      find('#factura_global_fecha_fin').set("#{Date.current.end_of_day.to_date.to_s}")
+      find('#factura_global_fecha_fin').set("#{Date.current.end_of_day.to_date.to_s}")
     end
 
     def cuando_cajero_da_click_en_el_boton_buscar
