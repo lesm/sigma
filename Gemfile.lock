@@ -130,6 +130,8 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
     database_cleaner (1.7.0)
+    deep_cloneable (2.4.0)
+      activerecord (>= 3.1.0, < 6)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -416,6 +418,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   database_cleaner
+  deep_cloneable
   devise
   factory_bot_rails (~> 4.8, >= 4.8.2)
   fm_layout!

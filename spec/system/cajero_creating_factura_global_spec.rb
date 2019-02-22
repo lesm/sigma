@@ -15,11 +15,11 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
       cajero_selecciona_fecha_fin
       cuando_cajero_da_click_en_el_boton_buscar
       cajero_es_redireccionado_a_new_factura_global_path
+      cajero_debe_ver_el_total_de_la_factura_global
       dado_que_cajero_captura_datos_para_factura_global
       cuando_cajero_da_click_en_boton_crear_factura_global
-      cajero_es_redireccionado_a_factura_global_path
-      cajero_debe_ver_datos_de_factura_global
       cajero_debe_ver_factura_global_creada_correctamente
+      cajero_debe_ver_datos_de_factura_global
     end
 
     def dado_que_hay_un_recibo_sin_factura_global
@@ -40,11 +40,15 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
     end
 
     def cajero_selecciona_fecha_inicio
-      page.find('#factura_global_fecha_inicio').set("2019-02-18")
+      #we need to set the date two times
+      find('#factura_global_fecha_inicio').set("#{Date.current.beginning_of_day.to_date.to_s}")
+      find('#factura_global_fecha_inicio').set("#{Date.current.beginning_of_day.to_date.to_s}")
     end
 
     def cajero_selecciona_fecha_fin
-      page.find('#factura_global_fecha_fin').set("2019-02-20")
+      #we need to set the date two times
+      find('#factura_global_fecha_fin').set("#{Date.current.end_of_day.to_date.to_s}")
+      find('#factura_global_fecha_fin').set("#{Date.current.end_of_day.to_date.to_s}")
     end
 
     def cuando_cajero_da_click_en_el_boton_buscar
@@ -54,6 +58,10 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
     def cajero_es_redireccionado_a_new_factura_global_path
       expect(page).to have_current_path(/factura_globales\/new/)
       expect(page).to have_content "Generar Factura Global"
+    end
+
+    def cajero_debe_ver_el_total_de_la_factura_global
+      expect(find_field("Total").value).to eq "400.0"
     end
 
     def dado_que_cajero_captura_datos_para_factura_global
@@ -66,19 +74,14 @@ RSpec.describe "Cajero creating a global invoice", type: :system do
       click_button "Crear Factura global"
     end
 
-    def cajero_es_redireccionado_a_factura_global_path
-      id = FacturaGlobal.first.id
-      expect(page).to have_current_path(/factura_globales\/#{id}/)
+    def cajero_debe_ver_factura_global_creada_correctamente
+      expect(page).to have_content "Factura global fue creada correctamente."
     end
 
     def cajero_debe_ver_datos_de_factura_global
       expect(page).to have_content "Detalle Factura Global"
       expect(page).to have_content "110101 - RIFAS"
       expect(page).to have_content "110102 - SORTEOS"
-    end
-
-    def cajero_debe_ver_factura_global_creada_correctamente
-      expect(page).to have_content "Factura global fue creada correctamente."
     end
   end
 end

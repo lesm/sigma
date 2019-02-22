@@ -8,7 +8,10 @@ class FacturaGlobalesController < ApplicationController
   end
 
   def show
-    @factura_global = FacturaGlobal.find(params[:id])
+    @factura_global = FacturaGlobal
+      .includes(conceptos: [:cuenta, :datos_concepto])
+      .find(params[:id])
+
     authorize @factura_global
   end
 
@@ -31,7 +34,7 @@ class FacturaGlobalesController < ApplicationController
     authorize @factura_global
 
     @factura_global.timbrado_automatico = true
-    @factura_global.conceptos << conceptos_dup
+    @factura_global.conceptos << conceptos_deep_clone
 
     if @factura_global.save
       asignar_factura_global
@@ -52,9 +55,9 @@ class FacturaGlobalesController < ApplicationController
   end
 
   def inicializar_variables
-    @suma_cantidad       = conceptos.map(&:cantidad).reduce(0,:+)
-    @suma_valor_unitario = conceptos.map(&:valor_unitario).reduce(0,:+)
-    @suma_importe        = conceptos.map(&:importe).reduce(0,:+)
+    @suma_cantidad       = conceptos.sum(:cantidad)
+    @suma_valor_unitario = conceptos.sum(:valor_unitario)
+    @suma_importe        = conceptos.sum(:importe)
     @conceptos           = conceptos.page(params[:page])
   end
 
@@ -84,9 +87,7 @@ class FacturaGlobalesController < ApplicationController
     )
   end
 
-  def conceptos_dup
-    conceptos.map do |concepto|
-      concepto.dup.tap { |c| c.comprobante_id = nil }
-    end
+  def conceptos_deep_clone
+    conceptos.map(&:duplicar)
   end
 end

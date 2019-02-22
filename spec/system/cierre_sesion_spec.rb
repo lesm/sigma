@@ -142,6 +142,7 @@ RSpec.describe "Cierre de sesión", type: :system do
   end
 
   def cajero_asigna_datos_para_arqueo
+    sleep 0.5
     fill_in "$100.00", with: 1
   end
 
