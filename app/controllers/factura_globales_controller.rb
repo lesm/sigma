@@ -11,8 +11,13 @@ class FacturaGlobalesController < ApplicationController
     @factura_global = FacturaGlobal
       .includes(conceptos: [:cuenta, :datos_concepto])
       .find(params[:id])
-
     authorize @factura_global
+
+    respond_to do |format|
+      format.html
+      format.pdf { send_file(@factura_global.pdf.path, filename: "#{@factura_global.uuid}.pdf", type: "application/pdf")}
+      format.xml { send_file(@factura_global.xml.path, filename: "#{@factura_global.uuid}.xml", type: "application/xml")}
+    end
   end
 
   def fechas

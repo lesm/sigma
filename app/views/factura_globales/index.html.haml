@@ -33,9 +33,9 @@
                     = link_to fg, title: "Ver", class: "btn btn-sm btn-info" do
                       %i.fa.fa-eye
                     - if fg.con_pdf?
-                      = link_to fg, format: "pdf", title: "Descargar PDF", class: "btn btn-sm btn-primary" do
+                      = link_to [fg, format: "pdf"], title: "Descargar PDF", class: "btn btn-sm btn-primary" do
                         %i.fa.fa-file-pdf-o
-                      = link_to fg, format: "xml", title: "Descargar XML", class: "btn btn-sm btn-danger" do
+                      = link_to [fg, format: "xml"], title: "Descargar XML", class: "btn btn-sm btn-danger" do
                         %i.fa.fa-file-code-o
       .row.justify-content-center
         = paginate @factura_globales
