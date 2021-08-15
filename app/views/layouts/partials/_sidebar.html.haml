@@ -6,7 +6,7 @@
   .sidebar
     .user-panel.mt-3.pb-3.mb-3.d-flex
       .image
-        %img.img-circle.elevation-2{:src => "#{asset_pack_path('images/sigma_avatar.png')}"}
+        %img.img-circle.elevation-2{:src => "#{asset_pack_path('media/images/sigma_avatar.png')}"}
       .info
         - if current_usuario.cajero?
           = link_to current_usuario, cajero_path(current_usuario), class: "d-block"
