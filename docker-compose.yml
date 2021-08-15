@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - sigma-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+  webpack:
+    build: .
+    command: ./bin/webpack-dev-server --inline true
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3035:3035
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - webpack
+      - chrome
+  chrome:
+    image: justinribeiro/chrome-headless
+
+volumes:
+  sigma-postgres:
