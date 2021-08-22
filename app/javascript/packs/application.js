@@ -16,6 +16,7 @@ import 'bootstrap'
 import 'pc-bootstrap4-datetimepicker'
 import 'select2'
 import '../src/js/sigma'
+import "@fortawesome/fontawesome-free/css/all"
 import '../stylesheets/application'
 
 const images = require.context('../images', true)
