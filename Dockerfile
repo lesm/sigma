@@ -21,6 +21,10 @@ RUN apt-get update && apt-get -y install \
 
 WORKDIR ./usr/src/app
 
+COPY yarn* ./
+
+RUN yarn install
+
 COPY Gemfile* ./
 
 RUN bundle install
@@ -29,4 +33,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+cmd ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
