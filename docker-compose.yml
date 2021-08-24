@@ -1,6 +1,12 @@
 version: "3.9"
 
 services:
+  chrome:
+    image: justinribeiro/chrome-headless
+
+  redis:
+    image: redis:6.2.5-alpine
+
   db:
     image: postgres
     volumes:
@@ -9,6 +15,7 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
+
   webpack:
     build: .
     command: ./bin/webpack-dev-server --inline true
@@ -16,6 +23,18 @@ services:
       - .:/usr/src/app
     ports:
       - 3035:3035
+
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+    environment:
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379
+
   web:
     build: .
     volumes:
@@ -24,12 +43,11 @@ services:
       - 3000:3000
     environment:
       DATABASE_URL: postgres://postgres:postgres@db/sigma_development
+      REDIS_URL: redis://redis:6379
     depends_on:
       - db
       - webpack
       - chrome
-  chrome:
-    image: justinribeiro/chrome-headless
 
 volumes:
   sigma-postgres:
